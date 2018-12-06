@@ -1,5 +1,9 @@
-#ifndef PROGETTO_CAR_H
-#define PROGETTO_CAR_H
+//
+// Created by alessio on 06/12/18.
+//
+
+#ifndef ALL_ULTIMO_GAS_CAR_H
+#define ALL_ULTIMO_GAS_CAR_H
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -9,7 +13,6 @@
 
 using namespace std;
 using namespace sf;
-
 
 class Car{
 
@@ -36,14 +39,9 @@ public:
     int Car_degree=0;
     float const_Acc=0.005, const_Brake=0.005;
 };
-
-
-
 class CarPlayer : public Car{
-
 protected:
     bool carUpgrade;
-
 public:
     void setSoundBehavior();
     void getSuoundBehavior();
@@ -53,10 +51,8 @@ public:
     void getUpgrade();
     void setBasetrajectory();
     bool getBasetrajectory();
-
     CarPlayer();
 };
-
 /* classe che definisce la macchina dell'utente
  */
 
@@ -64,29 +60,23 @@ class SoundBehavior : public CarPlayer{
 
 protected:
     string TypeofSound;
-
 public:
     void AlgorithmAcceleration();
     void AlgorithmBrake();
     void AlgorithmBase();
-
     SoundBehavior();
 };
-
 /* definizione della classe per il suono
  *
  */
-
 class Basetrajectory : public CarPlayer{
 
 public:
     void A_star();
 };
-
 /*
  * classe che definisce la traiettoria automatica del giocatore in caso di safety car
  */
-
 class CarBehavior : public CarPlayer{
 
 public:
@@ -95,124 +85,93 @@ public:
     void Reverse_gear();
     void GO_left();
     void GO_right();
-
     CarBehavior();
-
 };
-
 /* classe che definisce il comportamento della macchina in base all'utente
  *
  */
-
 class Motore : public CarPlayer{
-
 protected:
     int displacement;
-
 public:
     int Upgrade_Displacement();
-
     Motore();
 };
-
 /* classe motore per upgrade macchina giocatore
  *
  */
-
 class Telaio : public CarPlayer{
 
 protected:
     int weight;
-
 public:
     int Upgrade_Weight();
-
     Telaio();
 };
-
 /* classe telaio per upgrade macchina giocatore
  *
  */
-
 class Carrozzeria : public CarPlayer{
 
 protected:
     string Aerodynamics;
-
 public:
     string Upgrade_Aerodynamics();
-
     Carrozzeria();
 };
-
 class CarsCPU : public Car{
 
 public:
-
     CarsCPU();
-
     void setCpuStrategy();
     void getCpuStrategy();
-
 protected:
     string model;
 };
-
 /* classe che definisce le varie macchine del computer
  *
  */
-
 class SafetyCar : Car {
 
 protected:
     string colour2;
     void setCpuStrategy();
     void getCpuStrategy();
-
 public:
     SafetyCar();
-
 };
-
 /* classe che definisce la safety car
  *
  */
-
 class CpuStrategy{
 
 protected:
     bool OnSafetyCar;
     int Trajectory;
-
 public:
     void A_star();
     int do_trajectory();
     bool get_SafetyCar();
-
     CpuStrategy();
 };
-
 class Trajectory : public CpuStrategy{
 
 public:
     void A_star1();
-
     Trajectory();
 };
-
 class Trajectory_safetycar : public CpuStrategy{
 
 public:
     void A_star2();
-
     Trajectory_safetycar();
 };
-
 class GeneralTrajectory : public CpuStrategy{
 
 public:
     void A_star3();
-
     GeneralTrajectory();
 };
-#endif
+
+
+#endif //ALL_ULTIMO_GAS_CAR_H
