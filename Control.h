@@ -14,13 +14,13 @@ using namespace std;
 class Control {
 public:
     Control();
-    bool SetControl(int numcircuit, float y_CarPlayer, float x_CarPlayer);
+    int SetControl(int numcircuit, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
 
 protected:
 
-    bool CircuitOne_control(float y_CarPlayer, float x_CarPlayer);
-    bool CircuitTwo_control(float y_CarPlayer, float x_CarPlayer);
-    bool CircuitThree_control(float y_CarPlayer, float x_CarPlayer);
+    int CircuitOne_control(float y_CarPlayer, float x_CarPlayer);
+    int CircuitTwo_control(float y_CarPlayer, float x_CarPlayer);
+    int CircuitThree_control(float y_CarPlayer, float x_CarPlayer);
 
 };
 
