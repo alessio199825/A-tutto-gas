@@ -42,8 +42,8 @@ bool Car::setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_
 void Car::Car_Player(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, double *degreeConst, int num_circuit) {
     switch (control.SetControl(num_circuit, *y_CarPlayer, *x_CarPlayer, *degree_CarPlayer)) {
         case 0:
-            Car_PlayerAcc(degreeConst, CarPlayer_Acc, y_CarPlayer, x_CarPlayer, degree_CarPlayer);
-            Car_PlayerRet(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer);
+            Car_PlayerAcc(degreeConst, CarPlayer_Acc, y_CarPlayer, x_CarPlayer, degree_CarPlayer, num_circuit);
+            Car_PlayerRet(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer, num_circuit);
             Car_PlayerRi(degree_CarPlayer);
             Car_PlayerLe(degree_CarPlayer);
             break;
@@ -54,37 +54,69 @@ void Car::Car_Player(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degr
             Car_PlayerLe(degree_CarPlayer);
             break;
         case 2:
-            Car_PlayerRet(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer);
+            Car_PlayerRet(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer, num_circuit);
             break;
         default: break;
     }
     S_MachinePlayer->setRotation(static_cast<float>(*degree_CarPlayer + *degreeConst));
     S_MachinePlayer->setPosition(Vector2f(*x_CarPlayer, *y_CarPlayer));
 }
-void Car::Car_PlayerRet(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer) {      //retromarcia
+void Car::Car_PlayerRet(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, int num_circuit) {      //retromarcia
     if (Keyboard::isKeyPressed(Keyboard::Down))
     {
-        *x_CarPlayer = static_cast<float>(*x_CarPlayer - 0.5 * cos(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-        *y_CarPlayer = static_cast<float>(*y_CarPlayer - 0.5 * sin(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        *x_CarPlayer = static_cast<float>(*x_CarPlayer - 0.5 * cos((*Degree_CarPlayer + *degreeConst + 90) * M_PI / 180));
+        *y_CarPlayer = static_cast<float>(*y_CarPlayer - 0.5 * sin((*Degree_CarPlayer + *degreeConst + 90) * M_PI / 180));
+       /* x_tmp = static_cast<float>(*x_CarPlayer - 0.5 * cos(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        y_tmp = static_cast<float>(*y_CarPlayer - 0.5 * sin(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        switch(control.SetControl(num_circuit, x_tmp, y_tmp, *Degree_CarPlayer)){
+            case 0:
+                *x_CarPlayer=x_tmp;
+                *y_CarPlayer=y_tmp;
+                break;
+            case 1:
+                Car_PlayerRet_Out(degreeConst, Degree_CarPlayer, y_CarPlayer, x_CarPlayer);
+            break;
+            default: break;*/
+
+        }
+
     }
-}
-void Car::Car_PlayerAcc(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer) { //accelerazione seguendo con freno motore
-    if (Keyboard::isKeyPressed(Keyboard::Up))
-    {
+
+void Car::Car_PlayerAcc(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer, int num_circuit) { //accelerazione seguendo con freno motore
+    if (Keyboard::isKeyPressed(Keyboard::Up)) {
         start=1;
         if (*CarPlayer_Acc < 0.5) {
             *CarPlayer_Acc = *CarPlayer_Acc + const_Acc;
         }
         *x_CarPlayer = static_cast<float>(*x_CarPlayer + *CarPlayer_Acc * cos(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-        *y_CarPlayer = static_cast<float>(*y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        *y_CarPlayer= static_cast<float>(*y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+
+        /*cout << control.SetControl(num_circuit, static_cast<float>(x_tmp), static_cast<float>(y_tmp), *degree_CarPlayer) << endl;
+        switch (control.SetControl(num_circuit, static_cast<float>(x_tmp), static_cast<float>(y_tmp),
+                                   *degree_CarPlayer)) {
+            case 0:
+                *x_CarPlayer = x_tmp;
+                *y_CarPlayer = y_tmp;
+
+                break;
+            case 1:
+                Car_PlayerAcc_Out(degreeConst, CarPlayer_Acc, y_CarPlayer, x_CarPlayer, degree_CarPlayer);
+                break;
+            default:
+                break;
+        }*/
     }
     else {
-        if (0 < *CarPlayer_Acc && start == 1) {
+        if (0 < *CarPlayer_Acc && start==1) {
             *CarPlayer_Acc = *CarPlayer_Acc - const_Brake;
             *x_CarPlayer = static_cast<float>(*x_CarPlayer + *CarPlayer_Acc * cos(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
             *y_CarPlayer = static_cast<float>(*y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90)* M_PI) / 180));
         }
     }
+
+
+
+
 }
 void Car::Car_PlayerRi(double *degree_CarPlayer) {
     if (Keyboard::isKeyPressed(Keyboard::Right))     //incrementa l'angolo verso destra

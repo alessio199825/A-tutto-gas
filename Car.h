@@ -17,6 +17,7 @@ using namespace sf;
 class Car{
 
 protected:
+    double x_tmp, y_tmp;
     int speed;
     int clashes;
     string colour;
@@ -29,9 +30,9 @@ public:
     Control control;
     bool setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost);
     void Car_Player(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, double *degreeConst, int num_circuit);
-    void Car_PlayerAcc(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer);
+    void Car_PlayerAcc(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer, int num_circuit);
     void Car_PlayerAcc_Out(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer);
-    void Car_PlayerRet(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer);
+    void Car_PlayerRet(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, int num_circuit);
     void Car_PlayerRet_Out(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer);
     void Car_PlayerRi(double *degree_CarPlayer);
     void Car_PlayerLe(double *degree_CarPlayer);
