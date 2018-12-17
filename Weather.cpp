@@ -8,23 +8,23 @@ Weather::Weather() {
 
 }
 
-bool Weather::set_weather(int meteo, Sprite *S_rain, Texture *T_rain) {
+bool Weather::set_weather(int meteo, Sprite *S_rain, Texture *T_rain, Sprite *S_sun, Texture *T_sun) {
     switch (meteo) {
         case 1:
-            Sun();
-            break;
+            Sun(S_sun, T_sun);
+            return false;
         case 2:
             Rain(S_rain, T_rain);
             return true;
-        default:
-            break;
+        default:break;
     }
+    return false;
 
 }
 
 int Weather::Rain(Sprite *S_rain, Texture *T_rain) {
 
-    if (!T_rain[0].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Weather/pioggia.png")) {
+    if (!T_rain->loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Weather/pioggia.png")) {
         return -1;
     }
 
@@ -40,11 +40,22 @@ int Weather::Rain(Sprite *S_rain, Texture *T_rain) {
     if(y_rain==1200){
         y_rain=0;
     }
-
+    return 0;
 }
 
-int Weather::Sun() {
+int Weather::Sun(Sprite *S_sun, Texture *T_sun) {
+    if (!T_sun->loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Weather/sole.png")) {
+        return -1;
+    }
 
+    S_sun->setTexture(*T_sun);
+    S_sun->setOrigin(100,100);
+    S_sun->setPosition(0,0);
+    S_sun->setRotation(sun_degree);
+
+    sun_degree=sun_degree+1;
+
+    return 0;
 }
 
 

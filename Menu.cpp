@@ -212,12 +212,14 @@ Menu::Menu() {
 
                     window.draw(S_tilemaps);
                     window.draw(S_MachinePlayer);
-                    switch(weath.set_weather(meteo, S_rain, T_rain)) {
+                    switch(weath.set_weather(meteo, S_rain, &T_rain, &S_sun, &T_sun)) {
                         case true:
                         window.draw(S_rain[0]);
                         window.draw(S_rain[1]);
                         window.draw(S_rain[2]);
                         break;
+                        case false:
+                        window.draw(S_sun);
                         default:break;
                     }
                     window.draw(S_Pause[0]);

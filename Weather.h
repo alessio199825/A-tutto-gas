@@ -20,10 +20,10 @@ class Weather {
 public:
     Weather();
 
-    int x_rain=0, y_rain=0;
-    bool set_weather(int meteo, Sprite *S_rain, Texture *T_rain);
+    int x_rain=0, y_rain=0, sun_degree=0;
+    bool set_weather(int meteo, Sprite *S_rain, Texture *T_rain, Sprite *S_sun, Texture *T_sun);
     int Rain( Sprite *S_rain, Texture *T_rain);
-    int Sun();
+    int Sun(Sprite *S_sun, Texture *T_sun);
 
 };
 
