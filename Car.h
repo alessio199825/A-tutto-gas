@@ -20,7 +20,6 @@ protected:
     double x_tmp, y_tmp;
     int speed;
     int clashes;
-    string colour;
     float lenght;
     float width;
     int number;
