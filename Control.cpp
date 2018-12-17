@@ -10,19 +10,16 @@ Control::Control() {
 
 int Control::SetControl(int num_circuit, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer) {
 
-    x_CarPlayer= static_cast<float>(x_CarPlayer + 38 * sin((degree_CarPlayer * M_PI) / 180));
-    y_CarPlayer= static_cast<float>(y_CarPlayer - 38 * cos((degree_CarPlayer * M_PI) / 180));
-
     switch (num_circuit) {
 
         case 1:
-            return CircuitOne_control(y_CarPlayer, x_CarPlayer);
-
-        case 2:
-            return CircuitThree_control(y_CarPlayer, x_CarPlayer);
+            return CircuitOne_control(y_CarPlayer, x_CarPlayer, degree_CarPlayer);
 
         case 3:
-            return CircuitTwo_control(y_CarPlayer, x_CarPlayer);
+            return CircuitThree_control(y_CarPlayer, x_CarPlayer, degree_CarPlayer);
+
+        case 2:
+            return CircuitTwo_control(y_CarPlayer, x_CarPlayer, degree_CarPlayer);
 
         default:
             return 0;
@@ -30,10 +27,27 @@ int Control::SetControl(int num_circuit, float y_CarPlayer, float x_CarPlayer, d
     }
 }
 
-int Control::CircuitOne_control(float y_CarPlayer, float x_CarPlayer) {
+int Control::CircuitOne_control(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer) {
 
+    x_CarPlayer= static_cast<float>(x_CarPlayer + 38 * sin((degree_CarPlayer * M_PI) / 180));
+    y_CarPlayer= static_cast<float>(y_CarPlayer - 38 * cos((degree_CarPlayer * M_PI) / 180));
 
-    if(x_CarPlayer<=368 && x_CarPlayer>=4 && y_CarPlayer<=145 && y_CarPlayer>=4){
+    if(image==0){
+        CircuitOne.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Control/control.bmp");
+        image=1;
+    }
+    Red=CircuitOne.getPixel(100,230);
+    Black=CircuitOne.getPixel(290,220);
+    color=CircuitOne.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
+
+    if(color== Red){
+        return 1;
+    }
+    if(color == Black){
+        return 2;
+    }
+    return 0;
+    /*if(x_CarPlayer<=368 && x_CarPlayer>=4 && y_CarPlayer<=145 && y_CarPlayer>=4){
         if(-401.01*pow(x_CarPlayer, 2)+(1453.29*x_CarPlayer*y_CarPlayer)-(1153.02*pow(y_CarPlayer,2))+(278190.9*x_CarPlayer)+(111658.53*y_CarPlayer)<52537085.79)
             return 1;
     }
@@ -136,16 +150,48 @@ int Control::CircuitOne_control(float y_CarPlayer, float x_CarPlayer) {
     if(x_CarPlayer>=996 || x_CarPlayer<=44 || y_CarPlayer>=596 || y_CarPlayer<=4)
         return 2;
 
+    return 0;*/
+}
+
+int Control::CircuitTwo_control(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer) {
+
+    x_CarPlayer= static_cast<float>(x_CarPlayer + 38 * cos((degree_CarPlayer * M_PI) / 180));
+    y_CarPlayer= static_cast<float>(y_CarPlayer + 38 * sin((degree_CarPlayer * M_PI) / 180));
+
+    if(image2==0){
+        CircuitTwo.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Control/control2.bmp");
+        image2=1;
+    }
+    Red=CircuitTwo.getPixel(947,51);
+    Black=CircuitTwo.getPixel(1,1);
+    color=CircuitTwo.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
+
+    cout<<degree_CarPlayer<<endl;
+
+    if(color== Red){
+        return 1;
+    }
+    if(color == Black){
+        return 2;
+    }
     return 0;
 }
 
-int Control::CircuitTwo_control(float y_CarPlayer, float x_CarPlayer) {
+int Control::CircuitThree_control(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer) {
 
-    return 0;
-}
+    x_CarPlayer= static_cast<float>(x_CarPlayer - 38 * cos((degree_CarPlayer * M_PI) / 180));
+    y_CarPlayer= static_cast<float>(y_CarPlayer - 38 * sin((degree_CarPlayer * M_PI) / 180));
 
-int Control::CircuitThree_control(float y_CarPlayer, float x_CarPlayer) {
+    if(image3==0){
+        CircuitThree.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Control/control3.bmp");
+        image3=1;
+    }
+    Black=CircuitThree.getPixel(5,5);
+    color=CircuitThree.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
 
+    if(color == Black){
+        return 2;
+    }
     return 0;
 }
 
