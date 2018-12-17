@@ -1,7 +1,3 @@
-//
-// Created by alessio on 20/10/18.
-//
-
 #ifndef ALL_ULTIMO_GAS_SINGLE_RACE_H
 #define ALL_ULTIMO_GAS_SINGLE_RACE_H
 #include <SFML/Graphics.hpp>
