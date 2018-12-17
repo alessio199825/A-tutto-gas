@@ -58,6 +58,7 @@ Menu::Menu() {
                 }
                 posx=getMousePosx();
                 posy=getMousePosy();
+
                 menu_state=champion.Championship_Return(posx, posy);
                 championship_car=champion.getQualifications(posx, posy, T_championship, S_championship);
                 if(championship_car==-1) {
@@ -78,109 +79,116 @@ Menu::Menu() {
                 }
                 break;
             case 2:
-                switch(singleraceon){
-                case 0:
-                    window_error_setRace= static_cast<bool>(singlerace.setSingle_RaceState(T_singlerace, S_singlerace));
-                    if(window_error_setRace==1) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
-                    for (int i = 0; i < 10; i++) {
-                        window.draw(S_singlerace[i]);
-                    }
-                    posx=getMousePosx();
-                    posy=getMousePosy();
-                    menu_state=singlerace.getSingle_RaceReturn(posx, posy);
-                    Lap=singlerace.getSingle_RaceLap(posx, posy, T_singlerace, S_singlerace);
-                    if(Lap==1) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
-                    switch (Lap){
-                        case 3:
-                            window.draw(S_singlerace[10]);
+                switch(singleraceon) {
+                    case 0:
+                        window_error_setRace = static_cast<bool>(singlerace.setSingle_RaceState(T_singlerace,
+                                                                                                S_singlerace));
+                        if (window_error_setRace == 1) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
+                        for (int i = 0; i < 10; i++) {
+                            window.draw(S_singlerace[i]);
+                        }
+                        posx = getMousePosx();
+                        posy = getMousePosy();
+                        menu_state = singlerace.getSingle_RaceReturn(posx, posy);
+                        Lap = singlerace.getSingle_RaceLap(posx, posy, T_singlerace, S_singlerace);
+                        if (Lap == 1) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
+                        switch (Lap) {
+                            case 3:
+                                window.draw(S_singlerace[10]);
+                                break;
+                            case 5:
+                                window.draw(S_singlerace[11]);
+                                break;
+                            case 10:
+                                window.draw(S_singlerace[12]);
+                                break;
+                            default:
+                                break;
+                        }
+                        meteo = singlerace.getSingle_RaceWeather(posx, posy, T_singlerace, S_singlerace);
+                        if (meteo == -1) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
+                        switch (meteo) {
+                            case 1:
+                                window.draw(S_singlerace[13]);
+                                break;
+                            case 2:
+                                window.draw(S_singlerace[14]);
+                                break;
+                            default:
+                                break;
+                        }
+                        singleraceon = singlerace.getSingle_Raceon(posx, posy);
                         break;
-                        case 5:
-                            window.draw(S_singlerace[11]);
+                    case 1:
+                        window_error_Single = static_cast<bool>(singlerace.setSingle_RaceState2(T_singleraceon,
+                                                                                                S_singleraceon));
+                        if (window_error_Single == 1) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
+                        for (int i = 0; i < 7; i++) {
+                            window.draw(S_singleraceon[i]);
+                        }
+
+                        posx = getMousePosx();
+                        posy = getMousePosy();
+                        circuiton = singlerace.getSingle_RaceCircuit(posx, posy, T_singleraceon, S_singleraceon);
+                        if (circuiton == -1) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
+                        switch (circuiton) {
+                            case 1:
+                                window.draw(S_singleraceon[7]);
+                                break;
+                            case 2:
+                                window.draw(S_singleraceon[8]);
+                                break;
+                            case 3:
+                                window.draw(S_singleraceon[9]);
+                                break;
+                            default:
+                                break;
+                        }
+                        singleraceon = singlerace.getSingle_Raceonreturn(posx, posy);
+                        if (singleraceon != 0)
+                            singleraceon = singlerace.getSingle_LoadPage(posx, posy);
+                        x_load = 20;               //fa ripartire da 20 la macchina per il caricamento
                         break;
-                        case 10:
-                            window.draw(S_singlerace[12]);
-                        break;
-                    default:break;
-                    }
-                    Weather=singlerace.getSingle_RaceWeather(posx, posy,T_singlerace, S_singlerace);
-                    if(Weather==-1) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
-                    switch(Weather){
-                        case 1:
-                            window.draw(S_singlerace[13]);
-                            break;
-                        case 2:
-                            window.draw(S_singlerace[14]);
-                            break;
-                    default:break;
-                    }
-                    singleraceon=singlerace.getSingle_Raceon(posx, posy);
-                    break;
-                case 1:
-                    window_error_Single= static_cast<bool>(singlerace.setSingle_RaceState2(T_singleraceon, S_singleraceon));
-                    if(window_error_Single==1) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
-                    for (int i = 0; i < 7; i++) {
-                        window.draw(S_singleraceon[i]);
-                    }
+                    case 2:
+                        window_error_singlerace = singlerace.Single_LoadPage(T_singlerace, S_singlerace);
+                        if (window_error_singlerace) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
 
-                    posx=getMousePosx();
-                    posy=getMousePosy();
-                    circuiton=singlerace.getSingle_RaceCircuit(posx, posy, T_singleraceon, S_singleraceon);
-                    if(circuiton==-1) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
-                    switch (circuiton){
-                        case 1:
-                            window.draw(S_singleraceon[7]);
-                            break;
-                        case 2:
-                            window.draw(S_singleraceon[8]);
-                            break;
-                        case 3:
-                            window.draw(S_singleraceon[9]);
-                            break;
-                        default:break;
-                    }
-                    singleraceon=singlerace.getSingle_Raceonreturn(posx, posy);
-                    if(singleraceon!=0)
-                    singleraceon=singlerace.getSingle_LoadPage(posx, posy);
-                    x_load=20;               //fa ripartire da 20 la macchina per il caricamento
-                        break;
-                case 2:
-                    window_error_singlerace=singlerace.Single_LoadPage(T_singlerace, S_singlerace);
-                    if(window_error_singlerace) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
+                        load_machine_error = load_Machine();
+                        if (load_machine_error) {
+                            window.close();
+                            error.Image_Error(T_Error, S_Error);
+                        }
 
-                    load_machine_error=load_Machine();
-                    if(load_machine_error) {
-                        window.close();
-                        error.Image_Error(T_Error, S_Error);
-                    }
+                        window.draw(S_singlerace[15]);
+                        for (const auto &i : S_loadMachine)
+                            window.draw(i);
 
-                    window.draw(S_singlerace[15]);
-                    for (const auto &i : S_loadMachine)
-                        window.draw(i);
+                        if (Keyboard::isKeyPressed(Keyboard::Key::Tab)) {   //tasto per saltare il caricamento
+                            singleraceon = 3;
+                        }
 
-                    if(Keyboard::isKeyPressed(Keyboard::Key::Tab) )      //tasto per saltare il caricamento
-                        singleraceon=3;
-
-                    if(x_load>800) {
+                        if(x_load>800) {
                         control_setRace = true;
                         singleraceon = 3;
+
                     }
                     break;
                 case 3:
@@ -205,6 +213,14 @@ Menu::Menu() {
 
                     window.draw(S_tilemaps);
                     window.draw(S_MachinePlayer);
+                    switch(weath.set_weather(meteo, S_rain, T_rain)) {
+                        case true:
+                        window.draw(S_rain[0]);
+                        window.draw(S_rain[1]);
+                        window.draw(S_rain[2]);
+                        break;
+                        default:break;
+                    }
                     window.draw(S_Pause[0]);
                     window.draw(S_Pause[1]);
                     break;

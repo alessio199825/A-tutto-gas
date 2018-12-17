@@ -11,6 +11,7 @@
 #include "Error.h"
 #include "Circuit.h"
 #include "Race.h"
+#include "Weather.h"
 #include <iostream>
 
 
@@ -31,12 +32,13 @@ public:
     Error error;
     Race race;
     Car car;
-    Texture T_championship[10], T_singlerace[16], T_timetrial[10], T_setting[8], T_singleraceon[10], T_Error[2], T_loadMachine[3];
-    Sprite S_championship[10], S_singlerace[16], S_timetrial[10], S_setting[8], S_singleraceon[10], S_Error[2], S_loadMachine[3];
+    Weather weath;
+    Texture T_championship[10], T_singlerace[16], T_timetrial[10], T_setting[8], T_singleraceon[10], T_Error[2], T_loadMachine[3], T_rain[3];
+    Sprite S_rain[3], S_championship[10], S_singlerace[16], S_timetrial[10], S_setting[8], S_singleraceon[10], S_Error[2], S_loadMachine[3];
     Clock C_show;
     Texture T_tilemaps, T_Instruction[6], T_MachinePlayer, T_Pause[2], T_Flag;
     Sprite S_tilemaps, S_Instruction[6], S_MachinePlayer, S_Pause[2], S_Flag;
-    int Lap=0, Weather=0, time_circuit=0, singleraceon=0, circuiton=0, championship_car=0;
+    int Lap=0, meteo=0, time_circuit=0, singleraceon=0, circuiton=0, championship_car=0;
     int menu_state = 0;
     int Setting_control=0, control_timeTrial=0;
     int x_load=20, load_degree=0;
