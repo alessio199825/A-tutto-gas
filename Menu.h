@@ -19,6 +19,7 @@ using namespace std;
 using namespace sf;
 
 class Menu {
+
 public:
 
     Menu();

@@ -1,7 +1,6 @@
 #include "Menu.h"
 #include <iostream>
 
-
 Menu::Menu() {
 
     window.create(VideoMode(1000, 600), "All'ultimo gas");         //viene creata la finestra
