@@ -15,7 +15,6 @@ bool Race::setRace(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Spr
 
 }
 
-
 bool Race::KeyBreak(double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch) {       //tasto che richiama la finestra di pausa
 
         if (posx > 874 && posx < 978 && posy > 19 && posy < 99) {
