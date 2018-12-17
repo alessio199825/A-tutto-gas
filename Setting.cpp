@@ -1,7 +1,3 @@
-//
-// Created by alessio on 20/10/18.
-//
-
 #include "Setting.h"
 
 Setting::Setting() {
