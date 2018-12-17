@@ -1,4 +1,3 @@
-
 #ifndef PROJECT_ERROR_H
 #define PROJECT_ERROR_H
 
