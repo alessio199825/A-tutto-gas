@@ -11,5 +11,6 @@
 
 
 int main() {
-            Menu ml;
+
+    Menu ml;
 };
