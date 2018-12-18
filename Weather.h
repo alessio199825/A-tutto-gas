@@ -21,9 +21,9 @@ public:
     Weather();
 
     int x_rain=0, y_rain=0, sun_degree=0;
-    bool set_weather(int meteo, Sprite *S_rain, Texture *T_rain, Sprite *S_sun, Texture *T_sun);
-    int Rain( Sprite *S_rain, Texture *T_rain);
-    int Sun(Sprite *S_sun, Texture *T_sun);
+    bool setWeather(int meteo, Sprite *S_rain, Texture *T_rain, Sprite *S_sun, Texture *T_sun);
+    int do_Rain( Sprite *S_rain, Texture *T_rain);
+    int do_Sun(Sprite *S_sun, Texture *T_sun);
 
 };
 

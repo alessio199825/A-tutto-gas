@@ -48,7 +48,7 @@ bool Time_Trial::setTime_TrialState(Texture *T_timetrial, Sprite *S_timetrial) {
     return false;
 }
 
-int Time_Trial::getTime_TrialReturn(double &posx, double &posy) {
+int Time_Trial::getReturn(double &posx, double &posy) {
     if (posx > 25 && posx < 125 && posy > 25 && posy < 115) {
         return 0;
     }

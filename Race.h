@@ -25,7 +25,7 @@ public:
         Car car;
         Texture T_Break;
         Sprite S_Break;
-        bool setRace(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause);
+        bool setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause);
         bool KeyBreak(double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
         int Break();
         void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);

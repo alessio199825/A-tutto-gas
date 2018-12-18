@@ -16,7 +16,7 @@ public:
     Time_Trial();
 
     bool setTime_TrialState(Texture *T_timetrial, Sprite *S_timetrial);
-    int getTime_TrialReturn(double& posx, double& posy);
+    int getReturn(double& posx, double& posy);
     int getTime_Racecircuit(double& posx, double& posy, Texture *T_timetrial, Sprite *S_timetrial);
     int getTime_LoadPage(double& posx, double& posy);
     bool Timetrial_LoadPage(Texture *T_timetrial, Sprite *S_timetrial);

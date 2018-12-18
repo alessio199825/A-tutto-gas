@@ -8,16 +8,16 @@
 using namespace sf;
 
 class Error {
+
 public:
+
     Error();
 
     RenderWindow window_error;
     Event event_error;
-
-    void Image_Error(Texture *T_Error, Sprite *S_Error);
-    void Sound_Error(Texture *T_Error, Sprite *S_Error);
+    void Check_Image(Texture *T_Error, Sprite *S_Error);
+    void Check_Sound(Texture *T_Error, Sprite *S_Error);
 
 };
-
 
 #endif //PROJECT_ERROR_H

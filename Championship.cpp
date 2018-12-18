@@ -68,7 +68,7 @@ int Championship::getQualifications(double& posx, double& posy, Texture *T_champ
     }
     return chooseCar;
 }
-int Championship::Championship_Return(double &posx, double &posy) {
+int Championship::Return(double &posx, double &posy) {
     if (posx > 25 && posx < 125 && posy > 25 && posy < 115) {
         return 0;
     }

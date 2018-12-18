@@ -50,7 +50,7 @@ Menu::Menu() {
                 window_error_setCha=champion.setChampionshipState(T_championship, S_championship);
                 if(window_error_setCha==1) {
                     window.close();
-                    error.Image_Error(T_Error, S_Error);
+                    error.Check_Image(T_Error, S_Error);
                 }
                 for (int i = 0; i < 7; i++) {
                     window.draw(S_championship[i]);
@@ -58,11 +58,11 @@ Menu::Menu() {
                 posx=getMousePosx();
                 posy=getMousePosy();
 
-                menu_state=champion.Championship_Return(posx, posy);
+                menu_state=champion.Return(posx, posy);
                 championship_car=champion.getQualifications(posx, posy, T_championship, S_championship);
                 if(championship_car==-1) {
                     window.close();
-                    error.Image_Error(T_Error, S_Error);
+                    error.Check_Image(T_Error, S_Error);
                 }
                 switch (championship_car) {
                     case 1:
@@ -84,7 +84,7 @@ Menu::Menu() {
                                                                                                 S_singlerace));
                         if (window_error_setRace == 1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         for (int i = 0; i < 10; i++) {
                             window.draw(S_singlerace[i]);
@@ -95,7 +95,7 @@ Menu::Menu() {
                         Lap = singlerace.getSingle_RaceLap(posx, posy, T_singlerace, S_singlerace);
                         if (Lap == 1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         switch (Lap) {
                             case 3:
@@ -113,7 +113,7 @@ Menu::Menu() {
                         meteo = singlerace.getSingle_RaceWeather(posx, posy, T_singlerace, S_singlerace);
                         if (meteo == -1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         switch (meteo) {
                             case 1:
@@ -132,7 +132,7 @@ Menu::Menu() {
                                                                                                 S_singleraceon));
                         if (window_error_Single == 1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         for (int i = 0; i < 7; i++) {
                             window.draw(S_singleraceon[i]);
@@ -143,7 +143,7 @@ Menu::Menu() {
                         circuiton = singlerace.getSingle_RaceCircuit(posx, posy, T_singleraceon, S_singleraceon);
                         if (circuiton == -1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         switch (circuiton) {
                             case 1:
@@ -167,13 +167,13 @@ Menu::Menu() {
                         window_error_singlerace = singlerace.Single_LoadPage(T_singlerace, S_singlerace);
                         if (window_error_singlerace) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         load_machine_error = load_Machine();
                         if (load_machine_error) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         window.draw(S_singlerace[15]);
@@ -192,27 +192,27 @@ Menu::Menu() {
                     break;
                 case 3:
                     if(control_setRace) {
-                        window_error_tilemaps = race.setRace(circuiton, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause);
+                        window_error_tilemaps = race.setGame(circuiton, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause);
                         if (window_error_tilemaps) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         control_setRace=false;
                     }
 
-                    car.Car_Player(&S_MachinePlayer, &CarPlayer_Acc, &degree_CarPlayer, &y_CarPlayer, &x_CarPlayer, &degreeConst, circuiton);
+                    car.Car_Player_Movement(&S_MachinePlayer, &CarPlayer_Acc, &degree_CarPlayer, &y_CarPlayer, &x_CarPlayer, &degreeConst, circuiton);
                     posx = getMousePosx();
                     posy = getMousePosy();
 
 
                     if(race.KeyBreak(posx, posy, menu_state, circuiton, singleraceon)) {
                        window.close();
-                       error.Image_Error(T_Error, S_Error);
+                       error.Check_Image(T_Error, S_Error);
                     }
 
                     window.draw(S_tilemaps);
                     window.draw(S_MachinePlayer);
-                    switch(weath.set_weather(meteo, S_rain, &T_rain, &S_sun, &T_sun)) {
+                    switch(weath.setWeather(meteo, S_rain, &T_rain, &S_sun, &T_sun)) {
                         case true:
                         window.draw(S_rain[0]);
                         window.draw(S_rain[1]);
@@ -228,7 +228,7 @@ Menu::Menu() {
                     case 4:
                         if(singlerace.End_SingleRace(T_Flag, S_Flag)) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         window.draw(S_Flag);
                         break;
@@ -241,18 +241,18 @@ Menu::Menu() {
                         window_error_timetrial = timetrial.setTime_TrialState(T_timetrial, S_timetrial);
                         if (window_error_timetrial == 1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         for (int i = 0; i < 7; i++) {
                             window.draw(S_timetrial[i]);
                         }
                         posx = getMousePosx();
                         posy = getMousePosy();
-                        menu_state = timetrial.getTime_TrialReturn(posx, posy);
+                        menu_state = timetrial.getReturn(posx, posy);
                         time_circuit = timetrial.getTime_Racecircuit(posx, posy, T_timetrial, S_timetrial);
                         if (time_circuit == -1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         switch (time_circuit) {
@@ -275,12 +275,12 @@ Menu::Menu() {
                         window_error_Timetrial=timetrial.Timetrial_LoadPage(T_timetrial, S_timetrial);
                         if(window_error_Timetrial) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         if(load_Machine()) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         window.draw(S_timetrial[10]);
@@ -298,21 +298,21 @@ Menu::Menu() {
                         break;
                     case 2:
                         if(control_setRace) {
-                            window_error_tilemaps1 = race.setRace(time_circuit, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause);
+                            window_error_tilemaps1 = race.setGame(time_circuit, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause);
                             if (window_error_tilemaps1) {
                                 window.close();
-                                error.Image_Error(T_Error, S_Error);
+                                error.Check_Image(T_Error, S_Error);
                             }
                             control_setRace = false;
                         }
 
-                        car.Car_Player(&S_MachinePlayer, &CarPlayer_Acc, &degree_CarPlayer, &y_CarPlayer, &x_CarPlayer, &degreeConst, time_circuit);
+                        car.Car_Player_Movement(&S_MachinePlayer, &CarPlayer_Acc, &degree_CarPlayer, &y_CarPlayer, &x_CarPlayer, &degreeConst, time_circuit);
                         posx = getMousePosx();
                         posy = getMousePosy();
 
                         if(race.KeyBreak(posx, posy, menu_state, time_circuit, control_timeTrial)) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         timetrial.getTime_lap(x_CarPlayer, y_CarPlayer);
@@ -327,7 +327,7 @@ Menu::Menu() {
                     case 3:
                         if(timetrial.End_TimeTrial(T_Flag, S_Flag)) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         window.draw(S_Flag);
                         break;
@@ -340,7 +340,7 @@ Menu::Menu() {
                         window_error_setting = setting.setSettingState(T_setting, S_setting);
                         if (window_error_setting) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
                         for (int i=0;i<6;i++) {
                             window.draw(S_setting[i]);
@@ -356,7 +356,7 @@ Menu::Menu() {
                         window_error_instruction=setting.setInstruction(T_setting, S_setting);
                         if (window_error_instruction) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }else {
                             window.draw(S_setting[6]);
                             window.draw(S_setting[7]);
@@ -366,7 +366,7 @@ Menu::Menu() {
                         Control_show=setting.show_Instruction(S_Instruction, T_Instruction, &x_position, &y_position, &C_show);
                         if (Control_show == -1) {
                             window.close();
-                            error.Image_Error(T_Error, S_Error);
+                            error.Check_Image(T_Error, S_Error);
                         }
 
                         switch (Control_show){
@@ -408,14 +408,14 @@ void Menu::createMenu() {
 
     if (!T_load[0].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Load/loading.jpg")) {
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
 
     S_load[0].setTexture(T_load[0]);
 
     if (!T_load[1].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Load/caricamento.png")) {
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
 
     S_load[1].setTexture(T_load[1]);
@@ -430,7 +430,7 @@ void Menu::createMenu() {
     if (!music_loadloop) {      //musica menu
         if (!music_load.openFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Load/load.ogg")) {
                 window.close();
-                error.Sound_Error(T_Error, S_Error);
+                error.Check_Sound(T_Error, S_Error);
            }
         music_load.play();
         music_loadloop = true;
@@ -449,42 +449,42 @@ int Menu::setMenuState() {
 
     if (!T_menu[0].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/2307.jpg")) {
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
 
     S_menu[0].setTexture(T_menu[0]);
 
     if (!T_menu[1].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/titolo.png")) {       //titolo
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
     S_menu[1].setTexture(T_menu[1]);
     S_menu[1].setPosition(sf::Vector2f(220, 25));
 
     if (!T_menu[2].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/carriera.png")) {       //pulsante1
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
     S_menu[2].setTexture(T_menu[2]);
     S_menu[2].setPosition(sf::Vector2f(650, 170));
 
     if (!T_menu[3].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/gara singola.png")) {       //pulsante 2
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
     S_menu[3].setTexture(T_menu[3]);
     S_menu[3].setPosition(sf::Vector2f(650, 270));
 
     if (!T_menu[4].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/prova a tempo.png")) {      //pulsante 3
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
     S_menu[4].setTexture(T_menu[4]);
     S_menu[4].setPosition(sf::Vector2f(650, 370));
 
     if (!T_menu[5].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/impostazioni.png")) {       //pulsante 4
         window.close();
-        error.Image_Error(T_Error, S_Error);
+        error.Check_Image(T_Error, S_Error);
     }
     S_menu[5].setTexture(T_menu[5]);
     S_menu[5].setPosition(sf::Vector2f(650, 470));
@@ -492,7 +492,7 @@ int Menu::setMenuState() {
     if (!music_menuloop) {      //musica menu
         if (!music_menu.openFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Menu/F1.ogg")) {
             window.close();
-            error.Sound_Error(T_Error, S_Error);
+            error.Check_Sound(T_Error, S_Error);
         }
         music_menu.play();
         music_menuloop=true;
