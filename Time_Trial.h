@@ -27,7 +27,7 @@ public:
     Clock clock_lap;
 
 protected:
-    float *Lap_Time;
+    int *Lap_Time_Minutes, *Lap_Time_Seconds, *Lap_Time_Milliseconds, minute_const, best_Minute;
     float Middle_Time;
     int x1_Traguardo, x2_Traguardo, y1_Traguardo, y2_Traguardo, intermediate1=0, intermediate2=0, intermediate3=0;
     int circuit=0, number_of_Lap=0, control_lap=0, i=2;

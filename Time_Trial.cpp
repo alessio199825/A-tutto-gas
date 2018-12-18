@@ -5,6 +5,12 @@ Time_Trial::Time_Trial() {
 }
 
 bool Time_Trial::setTime_TrialState(Texture *T_timetrial, Sprite *S_timetrial) {
+
+    //caricamento delle immagini relative alla pagina della prova a tempo
+    //
+    //tutto è andato a buon fine se la funzione ritorna false
+    //se la funzione ritorna true si apre il pop-up di errore
+
     if (!T_timetrial[0].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Time_Trial/prova a tempo.jpg")) {
         return true;
     }
@@ -49,6 +55,9 @@ bool Time_Trial::setTime_TrialState(Texture *T_timetrial, Sprite *S_timetrial) {
 }
 
 int Time_Trial::getReturn(double &posx, double &posy) {
+
+    //definizione della posizione del tasto indietro per tornare all pagina iniziale
+
     if (posx > 25 && posx < 125 && posy > 25 && posy < 115) {
         return 0;
     }
@@ -56,6 +65,11 @@ int Time_Trial::getReturn(double &posx, double &posy) {
 }
 
 int Time_Trial::getTime_Racecircuit(double &posx, double &posy, Texture *T_timetrial, Sprite *S_timetrial) {
+
+    //creazione dei tasti per la scelta del circuito sul quale disputare la prova a tempo
+    //
+    //la funzione ritorna 1, 2, 3 a seconda del circuito scelto
+    //se la funzione dovesse ritornare -1 significa che il caricamento delle immagini non è andato a buon fine
 
     if (posx > 50 && posx < 310 && posy > 390 && posy < 585) { //tasto circuito 1
 
@@ -92,13 +106,19 @@ int Time_Trial::getTime_Racecircuit(double &posx, double &posy, Texture *T_timet
 
 int Time_Trial::getTime_LoadPage(double &posx, double &posy) {
 
-        if (posx > 600 && posx < 920 && posy > 25 && posy < 115) {             //tasto avanti
+        //definizione della posizione del tasto avanti per passare al caricamento della modalità
+
+        if (posx > 600 && posx < 920 && posy > 25 && posy < 115) {
         return 1;
     }
     return 0;
 }
 
 bool Time_Trial::Timetrial_LoadPage(Texture *T_timetrial, Sprite *S_timetrial) {
+
+    //caricamento della pagina di transizione precedente al caricamentop finale della determinata modalità di gioco
+    //
+    //se la funzione dovesse ritornare -1 significa che il caricamento delle immagini non è andato a buon fine
 
     if (!T_timetrial[10].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Time_Trial/planisfero.png")) {       //pulsante1
         return true;
@@ -109,6 +129,10 @@ bool Time_Trial::Timetrial_LoadPage(Texture *T_timetrial, Sprite *S_timetrial) {
 
 bool Time_Trial::End_TimeTrial(Texture &T_Flag, Sprite &S_Flag) {
 
+    //caricamento della bandiera a scacchi come fase di transizione dopo aver terminato la prova a tempo
+    //
+    //se la funzione dovesse ritornare -1 significa che il caricamento delle immagini non è andato a buon fine
+
     if (!T_Flag.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/race/scacchi.jpg")) {       //pulsante1
         return true;
     }
@@ -116,8 +140,14 @@ bool Time_Trial::End_TimeTrial(Texture &T_Flag, Sprite &S_Flag) {
     return false;
 }
 
-void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //opera del vetto, lo deve finire
-                                                                            //memorizza il tempo per time_trial
+void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {
+
+    //lettura del circuito scelto
+    //definizione della posizione del traguardo e di un passaggio intermedio per il controllo della completezza del giro
+    //
+    //lettura del tempo impiegato nel completare i vari giri
+    // salvataggio dei tempi in array dinamico
+
     switch(circuit) {
         case 1:
             x1_Traguardo = 140;
@@ -142,8 +172,12 @@ void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //op
 
                     if(number_of_Lap == i){
                         i++;
-                        Lap_Time= new float [number_of_Lap];
-                        Lap_Time[number_of_Lap-1]=timelap.asMilliseconds();
+                        Lap_Time_Minutes = new int [number_of_Lap];
+                        Lap_Time_Seconds = new int [number_of_Lap];
+                        minute_const= static_cast<int>(timelap.asSeconds() / 60);
+                        Lap_Time_Minutes[number_of_Lap-1]=minute_const;
+                        Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - minute_const * 60);
+                        Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - timelap.asSeconds() * 1000);
                     }
                 }
             }
@@ -174,8 +208,12 @@ void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //op
 
                     if(number_of_Lap == i){
                         i++;
-                        Lap_Time= new float [number_of_Lap];
-                        Lap_Time[number_of_Lap-1]=timelap.asMilliseconds();
+                        Lap_Time_Minutes = new int [number_of_Lap];
+                        Lap_Time_Seconds = new int [number_of_Lap];
+                        minute_const= static_cast<int>(timelap.asSeconds() / 60);
+                        Lap_Time_Minutes[number_of_Lap-1]=minute_const;
+                        Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - minute_const * 60);
+                        Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - timelap.asSeconds() * 1000);
                     }
                 }
             }
@@ -206,8 +244,12 @@ void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //op
 
                 if(number_of_Lap == i){
                     i++;
-                    Lap_Time= new float [number_of_Lap];
-                    Lap_Time[number_of_Lap-1]=timelap.asMilliseconds();
+                    Lap_Time_Minutes = new int [number_of_Lap];
+                    Lap_Time_Seconds = new int [number_of_Lap];
+                    minute_const= static_cast<int>(timelap.asSeconds() / 60);
+                    Lap_Time_Minutes[number_of_Lap-1]=minute_const;
+                    Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - minute_const * 60);
+                    Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - timelap.asSeconds() * 1000);
                 }
                 }
             }
