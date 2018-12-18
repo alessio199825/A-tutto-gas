@@ -20,12 +20,12 @@ public:
 
 protected:
 
-    int image=0, image3=0, image2=0;
-    Image CircuitOne, CircuitTwo, CircuitThree;
-    Color Red, Black, color;
-    int CircuitOne_control(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
-    int CircuitTwo_control(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
-    int CircuitThree_control(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
+    int image1=0, image2=0, image3=0;
+    Image circuit_one, circuit_two, circuit_three;
+    Color red, black, color;
+    int CircuitOne(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
+    int CircuitTwo(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
+    int CircuitThree(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
 
 };
 
