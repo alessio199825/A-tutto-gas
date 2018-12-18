@@ -26,7 +26,6 @@ protected:
     int CircuitOne(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
     int CircuitTwo(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
     int CircuitThree(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
-
 };
 
 

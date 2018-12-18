@@ -192,7 +192,7 @@ Menu::Menu() {
                     break;
                 case 3:
                     if(control_setRace) {
-                        window_error_tilemaps = race.setGame(circuiton, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause);
+                        window_error_tilemaps = race.setGame(circuiton, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause, T_CpuCar,S_CpuCar,  &x_cpu, &y_cpu);
                         if (window_error_tilemaps) {
                             window.close();
                             error.Check_Image(T_Error, S_Error);
@@ -201,6 +201,7 @@ Menu::Menu() {
                     }
 
                     car.Car_Player_Movement(&S_MachinePlayer, &CarPlayer_Acc, &degree_CarPlayer, &y_CarPlayer, &x_CarPlayer, &degreeConst, circuiton);
+                    cars_cpu.A_star(&x_cpu, &y_cpu, S_CpuCar);
                     posx = getMousePosx();
                     posy = getMousePosy();
 
@@ -212,6 +213,7 @@ Menu::Menu() {
 
                     window.draw(S_tilemaps);
                     window.draw(S_MachinePlayer);
+                    window.draw(S_CpuCar[0]);
                     switch(weath.setWeather(meteo, S_rain, &T_rain, &S_sun, &T_sun)) {
                         case true:
                         window.draw(S_rain[0]);
@@ -298,7 +300,7 @@ Menu::Menu() {
                         break;
                     case 2:
                         if(control_setRace) {
-                            window_error_tilemaps1 = race.setGame(time_circuit, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause);
+                            window_error_tilemaps1 = race.setGame(time_circuit, &S_tilemaps, &T_tilemaps, &S_MachinePlayer, &T_MachinePlayer, &x_CarPlayer, &y_CarPlayer, &degree_CarPlayer, &degreeConst, S_Pause, T_Pause, T_CpuCar, S_CpuCar, &x_cpu, &y_cpu);
                             if (window_error_tilemaps1) {
                                 window.close();
                                 error.Check_Image(T_Error, S_Error);
@@ -307,6 +309,7 @@ Menu::Menu() {
                         }
 
                         car.Car_Player_Movement(&S_MachinePlayer, &CarPlayer_Acc, &degree_CarPlayer, &y_CarPlayer, &x_CarPlayer, &degreeConst, time_circuit);
+                        cars_cpu.A_star(&x_cpu, &y_cpu, S_CpuCar);
                         posx = getMousePosx();
                         posy = getMousePosy();
 
@@ -320,6 +323,7 @@ Menu::Menu() {
 
                         window.draw(S_tilemaps);
                         window.draw(S_MachinePlayer);
+                        window.draw(S_CpuCar[0]);
                         window.draw(S_Pause[0]);
                         window.draw(S_Pause[1]);
 

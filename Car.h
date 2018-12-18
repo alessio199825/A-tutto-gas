@@ -30,9 +30,9 @@ public:
     Control control;
     bool setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost);
     void Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, double *degreeConst, int num_circuit);
-    void Accelerate(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer, int num_circuit);
+    void Accelerate(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer);
     void Accelerate_Out(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer);
-    void Do_Reverse(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, int num_circuit);
+    void Do_Reverse(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer);
     void Do_Reverse_Out(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer);
     void Turn_Right(double *degree_CarPlayer);
     void Turn_Left(double *degree_CarPlayer);

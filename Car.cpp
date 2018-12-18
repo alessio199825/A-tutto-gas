@@ -24,12 +24,12 @@ bool Car::setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_
             break;
         case 2:
             *x_CarPlayer = 462;
-            *y_CarPlayer = 14;
+            *y_CarPlayer = 44;
             *degreeConst = 270;
             break;
         case 3:
-            *x_CarPlayer = 560;
-            *y_CarPlayer = 550;
+            *x_CarPlayer = 525;
+            *y_CarPlayer = 513;
             *degreeConst = 90;
             break;
         default:
@@ -42,8 +42,8 @@ bool Car::setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_
 void Car::Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, double *degreeConst, int num_circuit) {
     switch (control.SetControl(num_circuit, *y_CarPlayer, *x_CarPlayer, *degree_CarPlayer)) {
         case 0:
-            Accelerate(degreeConst, CarPlayer_Acc, y_CarPlayer, x_CarPlayer, degree_CarPlayer, num_circuit);
-            Do_Reverse(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer, num_circuit);
+            Accelerate(degreeConst, CarPlayer_Acc, y_CarPlayer, x_CarPlayer, degree_CarPlayer);
+            Do_Reverse(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer);
             Turn_Right(degree_CarPlayer);
             Turn_Left(degree_CarPlayer);
             break;
@@ -54,14 +54,14 @@ void Car::Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, dou
             Turn_Left(degree_CarPlayer);
             break;
         case 2:
-            Do_Reverse(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer, num_circuit);
+            Do_Reverse(degreeConst, degree_CarPlayer, y_CarPlayer, x_CarPlayer);
             break;
         default: break;
     }
     S_MachinePlayer->setRotation(static_cast<float>(*degree_CarPlayer + *degreeConst));
     S_MachinePlayer->setPosition(Vector2f(*x_CarPlayer, *y_CarPlayer));
 }
-void Car::Do_Reverse(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, int num_circuit) {      //retromarcia
+void Car::Do_Reverse(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer) {      //retromarcia
     if (Keyboard::isKeyPressed(Keyboard::Down))
     {
         *x_CarPlayer = static_cast<float>(*x_CarPlayer - 0.5 * cos((*Degree_CarPlayer + *degreeConst + 90) * M_PI / 180));
@@ -82,7 +82,7 @@ void Car::Do_Reverse(double *degreeConst, double *Degree_CarPlayer, float *y_Car
 
     }
 
-void Car::Accelerate(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer, int num_circuit) { //accelerazione seguendo con freno motore
+void Car::Accelerate(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer) { //accelerazione seguendo con freno motore
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         start=1;
         if (*CarPlayer_Acc < 0.5) {
