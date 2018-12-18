@@ -125,7 +125,15 @@ void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //op
             y1_Traguardo = 300;
             y2_Traguardo = y1_Traguardo;
 
-            if(y1_Traguardo >= y_CarPlayer && x1_Traguardo <= x_CarPlayer && x2_Traguardo >= x_CarPlayer){
+            if(y_CarPlayer>=410 && x_CarPlayer>=465 && y_CarPlayer<=490 && x_CarPlayer<=470){
+                intermediate1=intermediate1+1;
+                if(intermediate1>number_of_Lap){
+                    intermediate1=number_of_Lap;
+                }
+            }
+
+            if(y1_Traguardo >= y_CarPlayer && x1_Traguardo <= x_CarPlayer && x2_Traguardo >= x_CarPlayer && intermediate1==number_of_Lap){
+
                 if(control_lap==0) {
                     number_of_Lap++;
                     control_lap++;
@@ -150,8 +158,14 @@ void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //op
             y1_Traguardo = 28;
             y2_Traguardo = 89;
 
+            if(y_CarPlayer>=430 && x_CarPlayer>=792 && y_CarPlayer<=440 && x_CarPlayer<=930){
+                intermediate2=intermediate2+1;
+                if(intermediate2>number_of_Lap){
+                    intermediate2=number_of_Lap;
+                }
+            }
 
-            if(y1_Traguardo <= y_CarPlayer && y2_Traguardo >= y_CarPlayer && x2_Traguardo <= x_CarPlayer){
+            if(y1_Traguardo <= y_CarPlayer && y2_Traguardo >= y_CarPlayer && x2_Traguardo <= x_CarPlayer && intermediate2==number_of_Lap){
                 if(control_lap==0) {
                     number_of_Lap++;
                     control_lap++;
@@ -176,7 +190,14 @@ void Time_Trial::getTime_lap(float x_CarPlayer, float y_CarPlayer) {        //op
             y1_Traguardo = 486;
             y2_Traguardo = 586;
 
-            if(y1_Traguardo <= y_CarPlayer && y2_Traguardo >= y_CarPlayer && x2_Traguardo >= x_CarPlayer){
+            if(y_CarPlayer>=179 && x_CarPlayer>=524 && y_CarPlayer<=272 && x_CarPlayer<=543){
+                intermediate3=intermediate3+1;
+                if(intermediate3>number_of_Lap){
+                    intermediate3=number_of_Lap;
+                }
+            }
+
+            if(y1_Traguardo <= y_CarPlayer && y2_Traguardo >= y_CarPlayer && x2_Traguardo >= x_CarPlayer && intermediate3==number_of_Lap){
                 if(control_lap==0) {
                     number_of_Lap++;
                     control_lap++;

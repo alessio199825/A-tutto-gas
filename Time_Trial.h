@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "Control.h"
 
 using namespace sf;
 using namespace std;
@@ -28,7 +29,7 @@ public:
 protected:
     float *Lap_Time;
     float Middle_Time;
-    int x1_Traguardo, x2_Traguardo, y1_Traguardo, y2_Traguardo;
+    int x1_Traguardo, x2_Traguardo, y1_Traguardo, y2_Traguardo, intermediate1=0, intermediate2=0, intermediate3=0;
     int circuit=0, number_of_Lap=0, control_lap=0, i=2;
 
 
