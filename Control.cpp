@@ -33,7 +33,7 @@ int Control::CircuitOne(float y_CarPlayer, float x_CarPlayer, double degree_CarP
     y_CarPlayer= static_cast<float>(y_CarPlayer - 38 * cos((degree_CarPlayer * M_PI) / 180));
 
     if(image1==0){
-        circuit_one.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Control/control.bmp");
+        circuit_one.loadFromFile("Control/control.bmp");
         image1=1;
     }
     red=circuit_one.getPixel(100,230);
@@ -56,7 +56,7 @@ int Control::CircuitTwo(float y_CarPlayer, float x_CarPlayer, double degree_CarP
     y_CarPlayer= static_cast<float>(y_CarPlayer + 38 * sin((degree_CarPlayer * M_PI) / 180));
 
     if(image2==0){
-        circuit_two.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Control/control2.bmp");
+        circuit_two.loadFromFile("Control/control2.bmp");
         image2=1;
     }
     red=circuit_two.getPixel(947,51);
@@ -78,7 +78,7 @@ int Control::CircuitThree(float y_CarPlayer, float x_CarPlayer, double degree_Ca
     y_CarPlayer= static_cast<float>(y_CarPlayer - 38 * sin((degree_CarPlayer * M_PI) / 180));
 
     if(image3==0){
-        circuit_three.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Control/control3.bmp");
+        circuit_three.loadFromFile("Control/control3.bmp");
         image3=1;
     }
     black=circuit_three.getPixel(5,5);

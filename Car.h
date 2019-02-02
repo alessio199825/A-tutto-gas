@@ -17,6 +17,7 @@ using namespace sf;
 class Car{
 
 protected:
+
     double x_tmp, y_tmp;
     int speed;
     int clashes;
@@ -25,20 +26,23 @@ protected:
     int number;
 
 public:
-    Car();
 
+    Car();
     Control control;
-    bool setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost);
-    void Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer, double *degreeConst, int num_circuit);
-    void Accelerate(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer);
-    void Accelerate_Out(double *degreeConst, float *CarPlayer_Acc, float *y_CarPlayer, float *x_CarPlayer, double *degree_CarPlayer);
-    void Do_Reverse(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer);
-    void Do_Reverse_Out(double *degreeConst, double *Degree_CarPlayer, float *y_CarPlayer, float *x_CarPlayer);
+    bool setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeCost);
+    void Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, double *degreeConst, int num_circuit);
+    void Accelerate(double *degreeConst, float *CarPlayer_Acc, double *degree_CarPlayer);
+    void Accelerate_Out(double *degreeConst, float *CarPlayer_Acc, double *degree_CarPlayer);
+    void Do_Reverse(double *degreeConst, double *Degree_CarPlayer);
+    void Do_Reverse_Out(double *degreeConst, double *Degree_CarPlayer);
     void Turn_Right(double *degree_CarPlayer);
     void Turn_Left(double *degree_CarPlayer);
+    float getY_CarPlayer() const;
+    float getX_CarPlayer() const;
+    float y_CarPlayer, x_CarPlayer;
     int Type_Race, start;
     int Car_degree=0;
-    float const_Acc=0.005, const_Brake=0.005;
+    float const_Acc=0.010, const_Brake=0.005;
 };
 class CarPlayer : public Car{
 protected:

@@ -15,15 +15,24 @@ using namespace std;
 class Championship {
 
 public:
+
     Championship();
-    bool setChampionshipState(Texture *T_championship, Sprite *S_championship);
-    int getQualifications(double& posx, double& posy, Texture *T_championship, Sprite *S_championship);
-    int Return(double& posx, double& posy);
+    bool setChampionshipState();
+    int getQualifications(double posx, double posy);
+    const Sprite getS_championship(int i) const;
+
+
+    int Return(double posx, double posy);
+
+    ~Championship();
 
 protected:
     int Ranking;
     int Qualifications;
     int chooseCar;
 
+private:
+    Texture T_championship[10];
+    Sprite S_championship[10];
 };
 #endif //ALL_ULTIMO_GAS_CHAMPIONSHIP_H

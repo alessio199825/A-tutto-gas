@@ -18,12 +18,23 @@ using namespace sf;
 class Weather {
 
 public:
+
     Weather();
 
+    bool setWeather(int meteo);
+
+    const Sprite getS_rain(int i) const;
+
+    const Sprite getS_sun() const;
+
+private:
+
     int x_rain=0, y_rain=0, sun_degree=0;
-    bool setWeather(int meteo, Sprite *S_rain, Texture *T_rain, Sprite *S_sun, Texture *T_sun);
-    int do_Rain( Sprite *S_rain, Texture *T_rain);
-    int do_Sun(Sprite *S_sun, Texture *T_sun);
+    Sprite S_rain[3], S_sun;
+    Texture T_rain, T_sun;
+
+    int do_Rain();
+    int do_Sun();
 
 };
 

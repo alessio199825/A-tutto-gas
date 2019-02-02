@@ -8,31 +8,29 @@ Weather::Weather() {
 
 }
 
-bool Weather::setWeather(int meteo, Sprite *S_rain, Texture *T_rain, Sprite *S_sun, Texture *T_sun) {
+bool Weather::setWeather(int meteo) {
     switch (meteo) {
-        case 1:
-            do_Sun(S_sun, T_sun);
-            return false;
         case 2:
-            do_Rain(S_rain, T_rain);
+            do_Rain();
             return true;
-        default:break;
+        default:
+            do_Sun();
+            break;
     }
     return false;
-
 }
 
-int Weather::do_Rain(Sprite *S_rain, Texture *T_rain) {
+int Weather::do_Rain() {
 
-    if (!T_rain->loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Weather/pioggia.png")) {
+    if (!T_rain.loadFromFile("Weather/pioggia.png")) {
         return -1;
     }
 
-    S_rain[0].setTexture(*T_rain);
+    S_rain[0].setTexture(T_rain);
     S_rain[0].setPosition(0,y_rain);
-    S_rain[1].setTexture(*T_rain);
+    S_rain[1].setTexture(T_rain);
     S_rain[1].setPosition(x_rain, y_rain-600);
-    S_rain[2].setTexture(*T_rain);
+    S_rain[2].setTexture(T_rain);
     S_rain[2].setPosition(x_rain, y_rain-1200);
 
     y_rain=y_rain+6;
@@ -43,19 +41,27 @@ int Weather::do_Rain(Sprite *S_rain, Texture *T_rain) {
     return 0;
 }
 
-int Weather::do_Sun(Sprite *S_sun, Texture *T_sun) {
-    if (!T_sun->loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Weather/sole.png")) {
+int Weather::do_Sun() {
+    if (!T_sun.loadFromFile("Weather/sole.png")) {
         return -1;
     }
 
-    S_sun->setTexture(*T_sun);
-    S_sun->setOrigin(100,100);
-    S_sun->setPosition(0,0);
-    S_sun->setRotation(sun_degree);
+    S_sun.setTexture(T_sun);
+    S_sun.setOrigin(100,100);
+    S_sun.setPosition(0,0);
+    S_sun.setRotation(sun_degree);
 
     sun_degree=sun_degree+1;
 
     return 0;
+}
+
+const Sprite Weather::getS_rain(int i) const {
+    return S_rain[i];
+}
+
+const Sprite Weather::getS_sun() const {
+    return S_sun;
 }
 
 

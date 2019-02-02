@@ -26,7 +26,6 @@ public:
 
     RenderWindow window;
     Event event;
-    Championship champion;
     Single_Race singlerace;
     Time_Trial timetrial;
     Setting setting;
@@ -35,45 +34,44 @@ public:
     Car car;
     Cars_Cpu cars_cpu;
     Weather weath;
-    Texture T_championship[10], T_singlerace[16], T_timetrial[10], T_setting[8], T_singleraceon[10], T_Error[2], T_loadMachine[3], T_rain;
-    Sprite S_rain[3], S_championship[10], S_singlerace[16], S_timetrial[10], S_setting[8], S_singleraceon[10], S_Error[2], S_loadMachine[3];
+
+    Texture T_Error[2];
+    Sprite S_Error[2];
+    double posx=0, posy=0;
+    int circuiton=0;
+
+    Texture T_loadMachine[3];
+    Sprite S_loadMachine[3];
     Clock C_show;
-    Texture T_tilemaps, T_Instruction[6], T_MachinePlayer, T_Pause[2], T_Flag, T_sun, T_CpuCar[7];
-    Sprite S_tilemaps, S_Instruction[6], S_MachinePlayer, S_Pause[2], S_Flag, S_sun, S_CpuCar[7];
+    Texture T_tilemaps, T_MachinePlayer, T_Pause[2], T_Flag, T_CpuCar[7];
+    Sprite S_tilemaps, S_MachinePlayer, S_Pause[2], S_Flag, S_CpuCar[7];
     float x_cpu=160, y_cpu=342;
-    int Lap=0, meteo=0, time_circuit=0, singleraceon=0, circuiton=0, championship_car=0;
-    int menu_state = 0;
-    int Setting_control=0, control_timeTrial=0;
-    int x_load=20, load_degree=0;
-    double posx=0, posy=0, x_position=0, y_position=150, degree_CarPlayer=0, degreeConst=0;
-    float CarPlayer_Acc=0.5, y_CarPlayer, x_CarPlayer;
-
-
+    int time_circuit=0;
+    int Setting_control=0;
+    int load_degree=0, meteo=1;
+    double x_position=0, y_position=150, degree_CarPlayer, degreeConst=0;
+    float CarPlayer_Acc=1;
+    Text X_time[3], X_time_minute;
 
     void createMenu();
     int setMenuState();
     int getChampionship();
     int getSetting();
     int getSingle_Race();
-    int getTime_Trial();
     double getMousePosx();
     double getMousePosy();
+    int getTime_Trial();
     bool load_Machine();
-
 
 protected:
 
-    int control_time=0;
+    int control_time=0, singleraceon=0, menu_state = 0, control_timeTrial=0, championship_car=0, Lap=0, x_load=20;
+    Music music_load;
+    bool control_setRace=true;
+
     int Control_show=0;
-    bool music_loadloop=false, music_menuloop=false, control_setRace=true;
-    Texture T_load[2];
-    Sprite S_load[2];
-    Texture T_menu[7];
-    Sprite S_menu[7];
-    Music music_load, music_menu;
-    bool window_error_setCha=false;
-    bool window_error_setRace=false;
-    bool window_error_Single=false;
+    bool music_loadloop=false, music_menuloop=false;
+    Music music_menu;
     bool window_error_timetrial=false;
     bool window_error_setting=false;
     bool window_error_instruction=false;
@@ -84,6 +82,10 @@ protected:
     bool Error_Font_Setting=false;
     bool load_machine_error=false, load_machine_error1=false;
     int degree_load=0;
+
+private:
+    Sprite General_Sprite[20], S_load[2], S_menu[7];
+    Texture T_load[2], T_menu[7];
 
 };
 

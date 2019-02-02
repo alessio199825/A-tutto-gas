@@ -15,7 +15,7 @@ void Error::Check_Image(Texture *T_Error, Sprite *S_Error) {
                 window_error.close();
         }
 
-        T_Error[0].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Error/warning.jpg");
+        T_Error[0].loadFromFile("Error/warning.jpg");
         S_Error[0].setTexture(T_Error[0]);
 
         window_error.clear();
@@ -34,7 +34,7 @@ void Error::Check_Sound(Texture *T_Error, Sprite *S_Error) {    //ricordarsi di 
                 window_error.close();
         }
 
-        T_Error[1].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Error/warning1.jpg");
+        T_Error[1].loadFromFile("Error/warning1.jpg");
         S_Error[1].setTexture(T_Error[1]);
 
         window_error.clear();

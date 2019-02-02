@@ -5,17 +5,21 @@ Race::Race() {
 
 }
 
-bool Race::setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause,Texture *T_CpuCar, Sprite *S_CpuCar,  float *x_cpu, float *y_cpu) {
+bool Race::setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause,Texture *T_CpuCar, Sprite *S_CpuCar,  float *x_cpu, float *y_cpu) {
+
     if (circuit.setTileMaps(num_circuit, S_tilemaps, T_tilemaps, S_Pause, T_Pause)){
         return true;
     }
-
-    if(car.setMachinePlayer(num_circuit, S_MachinePlayer, T_MachinePlayer, x_CarPlayer, y_CarPlayer, degree_CarPlayer, degreeCost)){
+    if(car.setMachinePlayer(num_circuit, S_MachinePlayer, T_MachinePlayer, degree_CarPlayer, degreeCost)){
         return true;
     }
+
     if(cars_cpu.createMachine(T_CpuCar, S_CpuCar, x_cpu, y_cpu)){
         return true;
     }
+
+    X_tmp=car.getX_CarPlayer();
+    Y_tmp=car.getY_CarPlayer();
 
     return false;
 
@@ -49,7 +53,7 @@ int Race::Break() {        //crea la finestra di pausa
                     window_Break.close();
             }
 
-            if (!T_Break.loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/race/break.png")) {
+            if (!T_Break.loadFromFile("race/break.png")) {
                 return 0;
             }
 
@@ -129,6 +133,14 @@ int Race::getTime_trial() {
 
 int Race::getSingle_race() {
     return 0;
+}
+
+float Race::getX_tmp() const {
+    return X_tmp;
+}
+
+float Race::getY_tmp() const {
+    return Y_tmp;
 }
 
 

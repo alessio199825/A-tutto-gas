@@ -11,6 +11,30 @@ using namespace sf;
 class Single_Race {
 
 
+
+
+public:
+    Single_Race();
+
+    ~Single_Race();
+
+    bool setSingle_RaceState();
+    int getSingle_RaceReturn(double posx, double posy);
+    int getSingle_RaceLap(double posx, double posy);
+    int getSingle_RaceWeather(double posx, double posy);
+    bool setSingle_RaceState2();
+    int getSingle_Raceon(double posx, double posy);
+    int getSingle_Raceonreturn(double posx, double posy);
+    int getSingle_RaceCircuit(double posx, double posy);
+    int getSingle_LoadPage(double posx, double posy);
+    bool Single_LoadPage();
+    bool End_SingleRace(Texture &T_Flag, Sprite &S_Flag);
+
+    const Sprite getS_singlerace(int i) const;
+
+    const Sprite getS_singleraceon(int i) const;
+
+
 protected:
     int order;
     int circuit;
@@ -21,20 +45,9 @@ protected:
     Time time_return1, time_return;
     Clock C_return;
 
-public:
-    Single_Race();
-    int setSingle_RaceState(Texture *T_singlerace, Sprite *S_singlerace);
-    int getSingle_RaceReturn(double& posx, double& posy);
-    int getSingle_RaceLap(double& posx, double& posy, Texture *T_singlerace, Sprite *S_singlerace);
-    int getSingle_RaceWeather(double& posx, double& posy, Texture *T_singlerace, Sprite *S_singlerace);
-    int setSingle_RaceState2(Texture *T_singleraceon, Sprite *S_singleraceon);
-    int getSingle_Raceon(double& posx, double& posy);
-    int getSingle_Raceonreturn(double& posx, double& posy);
-    int getSingle_RaceCircuit(double& posx, double& posy, Texture *T_singlerace, Sprite *S_singlerace);
-    int getSingle_LoadPage(double& posx, double& posy);
-    bool Single_LoadPage(Texture *T_singlerace, Sprite *S_singlerace);
-    bool End_SingleRace(Texture &T_Flag, Sprite &S_Flag);
-
+private:
+    Texture T_singlerace[16], T_singleraceon[10];
+    Sprite S_singlerace[16], S_singleraceon[10];
 
 };
 

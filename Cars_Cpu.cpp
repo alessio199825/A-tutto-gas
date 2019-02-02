@@ -10,7 +10,7 @@ Cars_Cpu::Cars_Cpu() {
 
 bool Cars_Cpu::createMachine(Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, float *y_cpu) {
 
-    if (!T_CpuCar[0].loadFromFile("/home/alessio/Scrivania/Progetto Esame Programmazione/All_ultimo gas/Cars_Cpu/macchina4_trasparenza.png")) {
+    if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina4_trasparenza.png")) {
         return true;
     }
 

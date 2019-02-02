@@ -27,7 +27,7 @@ public:
         Cars_Cpu cars_cpu;
         Texture T_Break;
         Sprite S_Break;
-        bool setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, float *x_CarPlayer, float *y_CarPlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause, Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, float *y_cpu);
+        bool setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause, Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, float *y_cpu);
         bool KeyBreak(double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
         int Break();
         void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);
@@ -37,7 +37,14 @@ public:
         int getTime_trial();
         int getSingle_race();
 
+    float getX_tmp() const;
+
+    float getY_tmp() const;
+
     Race();
+
+private:
+    float X_tmp, Y_tmp;
 };
 
 class Qualifications{

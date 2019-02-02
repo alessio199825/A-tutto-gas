@@ -18,7 +18,7 @@ public:
     Control();
     int SetControl(int numcircuit, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
 
-protected:
+private:
 
     int image1=0, image2=0, image3=0;
     Image circuit_one, circuit_two, circuit_three;
