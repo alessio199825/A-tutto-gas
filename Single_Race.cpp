@@ -4,7 +4,7 @@
 Single_Race::Single_Race() = default;
 
 
-bool Single_Race::setSingle_RaceState() {
+bool Single_Race::setSingle_RaceState(RenderWindow &window) {
 
         time_return1=C_return.getElapsedTime();
         if (!T_singlerace[0].loadFromFile("Single_Race/gara singola.png")) {
@@ -69,10 +69,14 @@ bool Single_Race::setSingle_RaceState() {
         if(time_return1.asSeconds()-time_return.asSeconds()>0.5)
         SingleRace_ControlReturn=true;
 
+        for (int i = 0; i < 10; i++) {
+                window.draw(S_singlerace[i]);
+        }
+
         return false;
 }
 
-int Single_Race::getSingle_RaceLap(double posx, double posy) {
+int Single_Race::getSingle_RaceLap(double posx, double posy, RenderWindow &window) {
 
         if (posx > 50 && posx < 139 && posy > 300 && posy < 384) {      //tasto 3 giri
 
@@ -104,6 +108,20 @@ int Single_Race::getSingle_RaceLap(double posx, double posy) {
                 giri=10;
 
         }
+
+        switch (giri) {
+                case 3:
+                        window.draw(S_singlerace[10]);
+                break;
+                case 5:
+                        window.draw(S_singlerace[11]);
+                break;
+                case 10:
+                        window.draw(S_singlerace[12]);
+                break;
+                default:
+                        break;
+        }
         return giri;
 }
 
@@ -114,7 +132,7 @@ int Single_Race::getSingle_RaceReturn(double posx, double posy) {
         return 2;
 }
 
-int Single_Race::getSingle_RaceWeather(double posx, double posy) {
+int Single_Race::getSingle_RaceWeather(double posx, double posy, RenderWindow &window) {
         if (posx > 389 && posx < 475 && posy > 420 && posy < 509) {     //tasto sole
 
                 if (!T_singlerace[13].loadFromFile("Single_Race/soleon.jpg")) {       //sole modificato
@@ -134,10 +152,21 @@ int Single_Race::getSingle_RaceWeather(double posx, double posy) {
                 S_singlerace[14].setPosition(sf::Vector2f(495, 420));
                 tempo=2;
         }
+
+        switch (tempo) {
+                case 1:
+                        window.draw(S_singlerace[13]);
+                break;
+                case 2:
+                        window.draw(S_singlerace[14]);
+                break;
+                default:
+                        break;
+        }
         return tempo;
 }
 
-bool Single_Race::setSingle_RaceState2() {
+bool Single_Race::setSingle_RaceState2(RenderWindow &window) {
 
         if (!T_singleraceon[0].loadFromFile("Single_Race/gara singola.png")) {
                 return true;
@@ -179,6 +208,10 @@ bool Single_Race::setSingle_RaceState2() {
         }
         S_singleraceon[6].setTexture(T_singleraceon[6]);
         S_singleraceon[6].setPosition(sf::Vector2f(650, 390));
+
+        for (int i = 0; i < 7; i++) {
+                window.draw(S_singleraceon[i]);
+        }
         return false;
 }
 
@@ -199,7 +232,7 @@ int Single_Race::getSingle_Raceonreturn(double posx, double posy) {
         return 1;
 }
 
-int Single_Race::getSingle_RaceCircuit(double posx, double posy) {
+int Single_Race::getSingle_RaceCircuit(double posx, double posy, RenderWindow &window) {
         if (posx > 50 && posx < 310 && posy > 390 && posy < 585) { //tasto circuito 1
 
                 if (!T_singleraceon[7].loadFromFile("Single_Race/circuit2on.jpg")) {       //circuito 1 modificato
@@ -233,16 +266,33 @@ int Single_Race::getSingle_RaceCircuit(double posx, double posy) {
 
                 circuitrace=3;
         }
+
+    switch (circuitrace) {
+        case 1:
+            window.draw(S_singleraceon[7]);
+            break;
+        case 2:
+            window.draw(S_singleraceon[8]);
+            break;
+        case 3:
+            window.draw(S_singleraceon[9]);
+            break;
+        default:
+            break;
+    }
         return circuitrace;
 
 }
 
-bool Single_Race::Single_LoadPage() {
+bool Single_Race::Single_LoadPage(RenderWindow &window) {
 
         if (!T_singlerace[15].loadFromFile("Single_Race/planisfero.png")) {       //pulsante1
                 return true;
         }
         S_singlerace[15].setTexture(T_singlerace[15]);
+
+        window.draw(S_singlerace[15]);
+
         return false;
 }
 
@@ -254,12 +304,15 @@ int Single_Race::getSingle_LoadPage(double posx, double posy) {
         return 1;
 }
 
-bool Single_Race::End_SingleRace(Texture &T_Flag, Sprite &S_Flag) {
+bool Single_Race::End_SingleRace(RenderWindow &window) {
 
         if (!T_Flag.loadFromFile("race/scacchi.jpg")) {       //pulsante1
                 return true;
         }
         S_Flag.setTexture(T_Flag);
+
+        window.draw(S_Flag);
+
         return false;
 }
 

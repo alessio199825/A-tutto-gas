@@ -17,8 +17,8 @@ class Championship {
 public:
 
     Championship();
-    bool setChampionshipState();
-    int getQualifications(double posx, double posy);
+    bool setChampionshipState(RenderWindow &window);
+    int getQualifications(double posx, double posy, RenderWindow &window);
     const Sprite getS_championship(int i) const;
 
 

@@ -15,10 +15,19 @@ using namespace sf;
 class Cars_Cpu {
 
 public:
+
     Cars_Cpu();
 
-    bool createMachine(Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, float *y_cpu);
-    void A_star(float *x_cpu, float *y_cpu, Sprite *S_CpuCar);
+    bool createMachine(RenderWindow &window);
+    void A_star(RenderWindow &window);
+
+
+private:
+
+    Texture T_CpuCar[7];
+    Sprite S_CpuCar[7];
+    float x_cpu=160, y_cpu=342;
+
 };
 
 

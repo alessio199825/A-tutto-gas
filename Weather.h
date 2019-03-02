@@ -21,11 +21,13 @@ public:
 
     Weather();
 
-    bool setWeather(int meteo);
+    bool setWeather(int meteo, RenderWindow &window);
 
     const Sprite getS_rain(int i) const;
 
     const Sprite getS_sun() const;
+
+    int do_Sun(RenderWindow &window);
 
 private:
 
@@ -33,8 +35,8 @@ private:
     Sprite S_rain[3], S_sun;
     Texture T_rain, T_sun;
 
-    int do_Rain();
-    int do_Sun();
+    int do_Rain(RenderWindow &window);
+
 
 };
 

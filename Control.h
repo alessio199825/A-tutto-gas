@@ -17,6 +17,7 @@ class Control {
 public:
     Control();
     int SetControl(int numcircuit, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
+    int SetControlReverse(int numcircuit, float y_CarPlayer, float x_CarPlayer);
 
 private:
 
@@ -26,6 +27,10 @@ private:
     int CircuitOne(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
     int CircuitTwo(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
     int CircuitThree(float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
+    int CircuitOneReverse(float y_CarPlayer, float x_CarPlayer);
+    int CircuitTwoReverse(float y_CarPlayer, float x_CarPlayer);
+    int CircuitThreeReverse(float y_CarPlayer, float x_CarPlayer);
+
 };
 
 

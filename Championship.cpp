@@ -3,7 +3,7 @@
 //
 #include "Championship.h"
 
-bool Championship::setChampionshipState()  {
+bool Championship::setChampionshipState(RenderWindow &window)  {
     if (!T_championship[0].loadFromFile("Championship/90390.jpg")) {
         return true;
     }
@@ -38,9 +38,15 @@ bool Championship::setChampionshipState()  {
     }
     S_championship[6].setTexture(T_championship[6]);
     S_championship[6].setPosition(sf::Vector2f(885, 270));
+
+
+    for (int i = 0; i < 7; i++) {
+        window.draw(S_championship[i]);
+    }
     return false;
+
 }
-int Championship::getQualifications(double posx, double posy) {
+int Championship::getQualifications(double posx, double posy, RenderWindow &window) {
     if (posx > 650 && posx < 735 && posy > 270 && posy < 452) {     //tasto macchina1
         if (!T_championship[7].loadFromFile("Championship/macchina1on.jpg")) {       //circuito 1 modificato
             return -1;
@@ -65,6 +71,20 @@ int Championship::getQualifications(double posx, double posy) {
         S_championship[9].setPosition(sf::Vector2f(885, 270));
         chooseCar=3;
     }
+    switch (chooseCar) {
+        case 1:
+            window.draw(S_championship[7]);
+            break;
+        case 2:
+            window.draw(S_championship[8]);
+            break;
+        case 3:
+            window.draw(S_championship[9]);
+            break;
+        default:
+            break;
+    }
+
     return chooseCar;
 }
 

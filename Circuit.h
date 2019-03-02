@@ -14,9 +14,13 @@ class Circuit {
 public:
     Circuit();
 
-    bool setTileMaps(int circuiton, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_Pause, Texture *T_Pause);
+    bool setTileMaps(RenderWindow &window, int circuiton);
+
+    const Sprite getS_Pause(int i) const;
+
     int getTileMaps();
     int getTile();
+    const Sprite getS_tilemaps() const;
     virtual ~Circuit();
 
 protected:
@@ -26,6 +30,13 @@ protected:
     string name;
     float record_lap;
     int number_race;
+
+private:
+
+    Texture T_Pause[2];
+    Sprite S_Pause[2];
+    Sprite S_tilemaps;
+    Texture T_tilemaps;
 };
 
 #endif //PROGETTO_CIRCUIT_H

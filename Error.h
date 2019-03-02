@@ -15,8 +15,15 @@ public:
 
     RenderWindow window_error;
     Event event_error;
-    void Check_Image(Texture *T_Error, Sprite *S_Error);
-    void Check_Sound(Texture *T_Error, Sprite *S_Error);
+    void Check_Image();
+    void Check_Sound();
+
+    const Sprite *getS_Error() const;
+
+private:
+    Texture T_Error[2];
+    Sprite S_Error[2];
+
 
 };
 

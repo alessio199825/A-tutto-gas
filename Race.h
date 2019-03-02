@@ -22,12 +22,9 @@ public:
 
         RenderWindow window_Break;
         Event event_Break;
-        Circuit circuit;
-        Car car;
-        Cars_Cpu cars_cpu;
         Texture T_Break;
         Sprite S_Break;
-        bool setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause, Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, float *y_cpu);
+        bool setGame(RenderWindow &window, Circuit &circuit, Car &car, Cars_Cpu &cars_cpu, int num_circuit);
         bool KeyBreak(double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
         int Break();
         void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);
@@ -45,6 +42,7 @@ public:
 
 private:
     float X_tmp, Y_tmp;
+
 };
 
 class Qualifications{

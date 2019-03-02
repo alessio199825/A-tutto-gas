@@ -5,7 +5,7 @@ Error::Error()
 
 }
 
-void Error::Check_Image(Texture *T_Error, Sprite *S_Error) {
+void Error::Check_Image() {
 
     window_error.create(VideoMode(500, 300), "Errore"); //creazione di un pop-up che avverte di un problema nel caricamento di un immagine
     while (window_error.isOpen()) {
@@ -24,7 +24,7 @@ void Error::Check_Image(Texture *T_Error, Sprite *S_Error) {
     }
 }
 
-void Error::Check_Sound(Texture *T_Error, Sprite *S_Error) {    //ricordarsi di cambiare l'immagine, è la stessa dell'image error
+void Error::Check_Sound() {    //ricordarsi di cambiare l'immagine, è la stessa dell'image error
 
     window_error.create(VideoMode(500, 300), "Errore");     //creazione di un pop-up che avverte di un problema nel caricamento di un suono
     while (window_error.isOpen()) {
@@ -41,4 +41,8 @@ void Error::Check_Sound(Texture *T_Error, Sprite *S_Error) {    //ricordarsi di 
         window_error.draw(S_Error[1]);
         window_error.display();
     }
+}
+
+const Sprite *Error::getS_Error() const {
+    return S_Error;
 }

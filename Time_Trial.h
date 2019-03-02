@@ -19,15 +19,15 @@ public:
 
     Car car;
 
-    bool setTime_TrialState();
+    bool setTime_TrialState(RenderWindow &window);
     int getReturn(double& posx, double& posy);
-    int getTime_Racecircuit(double posx, double posy);
+    int getTime_Racecircuit(double posx, double posy, RenderWindow &window);
     int getTime_LoadPage(double posx, double posy);
-    bool Timetrial_LoadPage();
-    bool End_TimeTrial(Texture &T_Flag, Sprite &S_Flag);
-    bool getTime_lap(Text *X_time, Text *X_time_minute);
-    bool print_TimeLap(Text *X_time);
-    bool print_TimeMinute(Text *X_time_minute);
+    bool Timetrial_LoadPage(RenderWindow &window);
+    bool End_TimeTrial(RenderWindow &window);
+    bool getTime_lap(RenderWindow &window);
+    bool print_TimeLap(RenderWindow &window);
+    bool print_TimeMinute(RenderWindow &window);
 
     const Sprite getS_timetrial(int i) const;
 
@@ -45,8 +45,9 @@ protected:
 private:
 
     float X_tmp, Y_tmp;
-    Texture T_timetrial[11];
-    Sprite S_timetrial[11];
+    Texture T_timetrial[11], T_Flag;
+    Sprite S_timetrial[11], S_Flag;
+    Text X_time[3], X_time_minute;
 
 
 };

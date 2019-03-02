@@ -18,17 +18,17 @@ public:
 
     ~Single_Race();
 
-    bool setSingle_RaceState();
+    bool setSingle_RaceState(RenderWindow &window);
     int getSingle_RaceReturn(double posx, double posy);
-    int getSingle_RaceLap(double posx, double posy);
-    int getSingle_RaceWeather(double posx, double posy);
-    bool setSingle_RaceState2();
+    int getSingle_RaceLap(double posx, double posy, RenderWindow &window);
+    int getSingle_RaceWeather(double posx, double posy, RenderWindow &window);
+    bool setSingle_RaceState2(RenderWindow &window);
     int getSingle_Raceon(double posx, double posy);
     int getSingle_Raceonreturn(double posx, double posy);
-    int getSingle_RaceCircuit(double posx, double posy);
+    int getSingle_RaceCircuit(double posx, double posy, RenderWindow &window);
     int getSingle_LoadPage(double posx, double posy);
-    bool Single_LoadPage();
-    bool End_SingleRace(Texture &T_Flag, Sprite &S_Flag);
+    bool Single_LoadPage(RenderWindow &window);
+    bool End_SingleRace(RenderWindow &window);
 
     const Sprite getS_singlerace(int i) const;
 
@@ -46,8 +46,8 @@ protected:
     Clock C_return;
 
 private:
-    Texture T_singlerace[16], T_singleraceon[10];
-    Sprite S_singlerace[16], S_singleraceon[10];
+    Texture T_singlerace[16], T_singleraceon[10], T_Flag;
+    Sprite S_singlerace[16], S_singleraceon[10], S_Flag;
 
 };
 

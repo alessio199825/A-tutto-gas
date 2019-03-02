@@ -31,27 +31,17 @@ public:
     Setting setting;
     Error error;
     Race race;
+    Circuit circuit;
     Car car;
     Cars_Cpu cars_cpu;
     Weather weath;
 
-    Texture T_Error[2];
-    Sprite S_Error[2];
     double posx=0, posy=0;
     int circuiton=0;
-
-    Texture T_loadMachine[3];
-    Sprite S_loadMachine[3];
-    Clock C_show;
-    Texture T_tilemaps, T_MachinePlayer, T_Pause[2], T_Flag, T_CpuCar[7];
-    Sprite S_tilemaps, S_MachinePlayer, S_Pause[2], S_Flag, S_CpuCar[7];
-    float x_cpu=160, y_cpu=342;
     int time_circuit=0;
     int Setting_control=0;
     int load_degree=0, meteo=1;
-    double x_position=0, y_position=150, degree_CarPlayer, degreeConst=0;
-    float CarPlayer_Acc=1;
-    Text X_time[3], X_time_minute;
+    bool control_C;
 
     void createMenu();
     int setMenuState();
@@ -66,12 +56,9 @@ public:
 protected:
 
     int control_time=0, singleraceon=0, menu_state = 0, control_timeTrial=0, championship_car=0, Lap=0, x_load=20;
-    Music music_load;
     bool control_setRace=true;
 
     int Control_show=0;
-    bool music_loadloop=false, music_menuloop=false;
-    Music music_menu;
     bool window_error_timetrial=false;
     bool window_error_setting=false;
     bool window_error_instruction=false;
@@ -84,8 +71,12 @@ protected:
     int degree_load=0;
 
 private:
-    Sprite General_Sprite[20], S_load[2], S_menu[7];
-    Texture T_load[2], T_menu[7];
+
+    bool music_menuloop=false, music_loadloop=false;
+    Music music_load;
+    Music music_menu;
+    Sprite S_load[2], S_menu[7],S_loadMachine[3];
+    Texture T_load[2], T_menu[7],T_loadMachine[3];
 
 };
 

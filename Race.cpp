@@ -5,16 +5,15 @@ Race::Race() {
 
 }
 
-bool Race::setGame(int num_circuit, Sprite *S_tilemaps, Texture *T_tilemaps, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeCost, Sprite *S_Pause, Texture *T_Pause,Texture *T_CpuCar, Sprite *S_CpuCar,  float *x_cpu, float *y_cpu) {
+bool Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Cars_Cpu &cars_cpu, int num_circuit) {
 
-    if (circuit.setTileMaps(num_circuit, S_tilemaps, T_tilemaps, S_Pause, T_Pause)){
+    if(circuit.setTileMaps(window, num_circuit)){
         return true;
     }
-    if(car.setMachinePlayer(num_circuit, S_MachinePlayer, T_MachinePlayer, degree_CarPlayer, degreeCost)){
+    if(car.setMachinePlayer(window, num_circuit)){
         return true;
     }
-
-    if(cars_cpu.createMachine(T_CpuCar, S_CpuCar, x_cpu, y_cpu)){
+    if(cars_cpu.createMachine(window)){
         return true;
     }
 
@@ -142,5 +141,6 @@ float Race::getX_tmp() const {
 float Race::getY_tmp() const {
     return Y_tmp;
 }
+
 
 

@@ -14,27 +14,31 @@ class Setting {
 
 public:
     Setting();
-    bool setSettingState();
+    bool setSettingState(RenderWindow &window);
     int getSettingPage(double& posx, double& posy);
     int getInstructions(double& posx, double& posy);
-    bool setInstruction();
+    bool setInstruction(RenderWindow &window);
     int get_Instruction_Return(double& posx, double& posy);
-    int show_Instruction(double *x_position, double *y_position, Clock *C_show);
-    const Sprite getS_setting(int i) const;
+    int show_Instruction();
+    void draw_Instruction(RenderWindow &window);
 
-    const Sprite getS_Instruction(int i) const;
+    void setControl_C(bool control_C);
+
 
 protected:
-    bool Instruction_ControlReturn=true;
-    Clock C_returnIn;
-    Time time_returnIn1, time_returnIn, Time_show;
     string controls;
     string Awards;
     string record;
 
 private:
+
+    bool Instruction_ControlReturn=true, control_C;
+    Clock C_returnIn, C_show;
+    Time time_returnIn1, time_returnIn, Time_show;
+    double x_position=0, y_position=150;
     Texture T_setting[8], T_Instruction[6];
     Sprite S_setting[8], S_Instruction[6];
+    int ControlShow;
 };
 
 

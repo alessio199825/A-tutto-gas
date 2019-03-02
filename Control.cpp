@@ -90,4 +90,62 @@ int Control::CircuitThree(float y_CarPlayer, float x_CarPlayer, double degree_Ca
     return 0;
 }
 
+int Control::SetControlReverse(int numcircuit, float y_CarPlayer, float x_CarPlayer) {
+
+    switch(numcircuit) {
+
+        case 1:
+            return CircuitOneReverse(y_CarPlayer, x_CarPlayer);
+
+        case 2:
+            return CircuitTwoReverse(y_CarPlayer, x_CarPlayer);
+
+        case 3:
+            return CircuitThreeReverse(y_CarPlayer, x_CarPlayer);
+        default:return 0;
+    }
+
+}
+
+int Control::CircuitOneReverse(float y_CarPlayer, float x_CarPlayer) {
+
+    red=circuit_one.getPixel(100,230);
+    black=circuit_one.getPixel(290,220);
+    color=circuit_one.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
+
+    if(color== red){
+        return 1;
+    }
+    if(color == black){
+        return 2;
+    }
+    return 0;
+}
+
+int Control::CircuitTwoReverse(float y_CarPlayer, float x_CarPlayer) {
+
+    red=circuit_two.getPixel(947,51);
+    black=circuit_two.getPixel(1,1);
+    color=circuit_two.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
+
+    if(color == red){
+        return 1;
+    }
+    if(color == black){
+        return 2;
+    }
+    return 0;
+}
+
+int Control::CircuitThreeReverse(float y_CarPlayer, float x_CarPlayer) {
+
+    black=circuit_three.getPixel(5,5);
+    color=circuit_three.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
+
+    if(color == black){
+        return 2;
+    }
+    return 0;
+}
+
 

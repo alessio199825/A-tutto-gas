@@ -4,7 +4,7 @@ Time_Trial::Time_Trial() {
 
 }
 
-bool Time_Trial::setTime_TrialState() {
+bool Time_Trial::setTime_TrialState(RenderWindow &window) {
 
     //caricamento delle immagini relative alla pagina della prova a tempo
     //
@@ -51,6 +51,11 @@ bool Time_Trial::setTime_TrialState() {
     }
     S_timetrial[6].setTexture(T_timetrial[6]);
     S_timetrial[6].setPosition(sf::Vector2f(650, 390));
+
+    for (int i = 0; i < 7; i++) {
+        window.draw(S_timetrial[i]);
+    }
+
     return false;
 }
 
@@ -64,7 +69,7 @@ int Time_Trial::getReturn(double &posx, double &posy) {
     return 3;
 }
 
-int Time_Trial::getTime_Racecircuit(double posx, double posy) {
+int Time_Trial::getTime_Racecircuit(double posx, double posy, RenderWindow &window) {
 
     //creazione dei tasti per la scelta del circuito sul quale disputare la prova a tempo
     //
@@ -100,6 +105,19 @@ int Time_Trial::getTime_Racecircuit(double posx, double posy) {
         S_timetrial[9].setPosition(sf::Vector2f(650, 390));
         circuit = 3;
     }
+    switch (circuit) {
+        case 1:
+            window.draw(S_timetrial[7]);
+            break;
+        case 2:
+            window.draw(S_timetrial[8]);
+            break;
+        case 3:
+            window.draw(S_timetrial[9]);
+            break;
+        default:
+            break;
+    }
     return circuit;
 }
 
@@ -114,7 +132,7 @@ int Time_Trial::getTime_LoadPage(double posx, double posy) {
     return 0;
 }
 
-bool Time_Trial::Timetrial_LoadPage() {
+bool Time_Trial::Timetrial_LoadPage(RenderWindow &window) {
 
     //caricamento della pagina di transizione precedente al caricamento finale della determinata modalità di gioco
     //
@@ -124,10 +142,13 @@ bool Time_Trial::Timetrial_LoadPage() {
         return true;
     }
     S_timetrial[10].setTexture(T_timetrial[10]);
+
+    window.draw(S_timetrial[10]);
+
     return false;
 }
 
-bool Time_Trial::End_TimeTrial(Texture &T_Flag, Sprite &S_Flag) {
+bool Time_Trial::End_TimeTrial(RenderWindow &window) {
 
     //caricamento della bandiera a scacchi come fase di transizione dopo aver terminato la prova a tempo
     //
@@ -137,10 +158,13 @@ bool Time_Trial::End_TimeTrial(Texture &T_Flag, Sprite &S_Flag) {
         return true;
     }
     S_Flag.setTexture(T_Flag);
+
+    window.draw(S_Flag);
+
     return false;
 }
 
-bool Time_Trial::getTime_lap(Text *X_time,Text *X_time_minute) {
+bool Time_Trial::getTime_lap(RenderWindow &window) {
 
     //lettura del circuito scelto
     //definizione della posizione del traguardo e di un passaggio intermedio per il controllo della completezza del giro
@@ -177,13 +201,13 @@ bool Time_Trial::getTime_lap(Text *X_time,Text *X_time_minute) {
                       /*  Lap_Time_Minutes = new int [number_of_Lap];
                         Lap_Time_Seconds = new int [number_of_Lap];
                         Lap_Time_Milliseconds = new int [number_of_Lap];*/
-                        minute_const= (timelap.asMilliseconds()) / (1000*60);
+                        minute_const = (timelap.asMilliseconds()) / (1000*60);
                         Lap_Time_Minutes[number_of_Lap-1]=minute_const;
                         Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - (Lap_Time_Minutes[number_of_Lap - 1] * 60));
                         Lap_Time_Milliseconds[number_of_Lap-1]=(timelap.asMilliseconds() - (Lap_Time_Seconds[number_of_Lap-1] * 1000));
 
-                        print_TimeMinute(X_time_minute);
-                        return print_TimeLap(X_time);
+
+                        return true;
                     }
                 }
             }
@@ -220,16 +244,9 @@ bool Time_Trial::getTime_lap(Text *X_time,Text *X_time_minute) {
                         Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - (minute_const * 60));
                         Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - (Lap_Time_Seconds[number_of_Lap-1] * 1000));
                         minute_const= static_cast<int>(timelap.asSeconds() / 60);
-
-                        if(Lap_Time_Seconds[number_of_Lap-1]>=60){
-                            minute_const=1;
-                        }
-                        else minute_const=0;
-
                         Lap_Time_Minutes[number_of_Lap-1]=minute_const;
 
-                        print_TimeMinute(X_time_minute);
-                        return print_TimeLap(X_time);
+                        return true;
                     }
                 }
             }
@@ -268,8 +285,7 @@ bool Time_Trial::getTime_lap(Text *X_time,Text *X_time_minute) {
                     Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - (minute_const * 60));
                     Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - (timelap.asSeconds() * 1000));
 
-                    print_TimeMinute(X_time_minute);
-                    return print_TimeLap(X_time);
+                    return true;
                 }
                 }
             }
@@ -283,14 +299,12 @@ bool Time_Trial::getTime_lap(Text *X_time,Text *X_time_minute) {
     return false;
 }
 
-bool Time_Trial::print_TimeLap(Text *X_time) {
+bool Time_Trial::print_TimeLap(RenderWindow &window) {
 
     if(!F_time.loadFromFile("Font/Open 24 Display St.ttf")){
         return true;
     }
-    cout << Lap_Time_Minutes[number_of_Lap-1]<< endl;
-    cout<<Lap_Time_Seconds[number_of_Lap-1]<< endl;
-    cout<<Lap_Time_Milliseconds[number_of_Lap-1]<<endl;
+
     X_time[1].setFont(F_time);
     X_time[1].setCharacterSize(36);
     X_time[1].setFillColor(Color::Red);
@@ -302,18 +316,24 @@ bool Time_Trial::print_TimeLap(Text *X_time) {
     X_time[1].setPosition(450, 300);
     X_time[2].setPosition(500, 300);
 
+    while(number_of_Lap==k-1) {
+        window.draw(X_time[1]);
+        window.draw(X_time[2]);
+    }
+
     return false;
 }
 
-bool Time_Trial::print_TimeMinute(Text *X_time_minute) {
+bool Time_Trial::print_TimeMinute(RenderWindow &window) {
     if(!F_time.loadFromFile("Font/Open 24 Display St.ttf")){
         return true;
     }
-    X_time_minute->setFont(F_time);
-    X_time_minute->setCharacterSize(36);
-    X_time_minute->setFillColor(Color::Red);
-    X_time_minute->setString("ciao");
-    X_time_minute->setPosition(200, 300);
+    X_time_minute.setFont(F_time);
+    X_time_minute.setCharacterSize(36);
+    X_time_minute.setFillColor(Color::Red);
+    X_time_minute.setString(to_string(Lap_Time_Minutes[number_of_Lap-1]));
+    X_time_minute.setPosition(200, 300);
+    window.draw(X_time_minute);
 
     return false;
 }

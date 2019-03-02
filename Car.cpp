@@ -10,69 +10,83 @@
 Car::Car() {
 }
 
-bool Car::setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeConst) {
-    if (!T_MachinePlayer->loadFromFile("race/macchina6.png")) {
+bool Car::setMachinePlayer(RenderWindow &window, int num_circuit) {
+    if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
         return true;
     }
 
-    S_MachinePlayer->setTexture(*T_MachinePlayer);
-    S_MachinePlayer->setOrigin(9.5, 0);
-    *degree_CarPlayer=0;
+    S_MachinePlayer.setTexture(T_MachinePlayer);
+    S_MachinePlayer.setOrigin(9.5, 0);
+    degree_CarPlayer=0;
     switch(num_circuit) {
         case 1:
             x_CarPlayer = 160;
             y_CarPlayer = 312;
-            *degreeConst = 180;
+            degreeConst = 180;
             break;
         case 2:
-            cout<<"ciao"<<endl;
             x_CarPlayer = 462;
             y_CarPlayer = 44;
-            *degreeConst = 270;
+            degreeConst = 270;
             break;
         case 3:
             x_CarPlayer = 525;
             y_CarPlayer = 513;
-            *degreeConst = 90;
+            degreeConst = 90;
             break;
         default:
             break;
     }
 
-    S_MachinePlayer->setPosition(Vector2f(x_CarPlayer, y_CarPlayer));
-    S_MachinePlayer->setRotation(static_cast<float>(*degree_CarPlayer + *degreeConst));
+    S_MachinePlayer.setPosition(Vector2f(x_CarPlayer, y_CarPlayer));
+    S_MachinePlayer.setRotation(static_cast<float>(degree_CarPlayer + degreeConst));
+    window.draw(S_MachinePlayer);
     return false;
 }
-void Car::Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, double *degreeConst, int num_circuit) {
+void Car::Car_Player_Movement(RenderWindow &window, int num_circuit) {
 
-    switch (control.SetControl(num_circuit, y_CarPlayer, x_CarPlayer, *degree_CarPlayer)) {
+    switch (control.SetControl(num_circuit, y_CarPlayer, x_CarPlayer, degree_CarPlayer)) {
 
         case 0:
-            Accelerate(degreeConst, CarPlayer_Acc, degree_CarPlayer);
-            Do_Reverse(degreeConst, degree_CarPlayer);
-            Turn_Right(degree_CarPlayer);
-            Turn_Left(degree_CarPlayer);
+            Accelerate();
+            Turn_Right();
+            Turn_Left();
             break;
         case 1:
-            Accelerate_Out(degreeConst, CarPlayer_Acc, degree_CarPlayer);
-            Do_Reverse_Out(degreeConst, degree_CarPlayer);
-            Turn_Right(degree_CarPlayer);
-            Turn_Left(degree_CarPlayer);
+            Accelerate_Out();
+            Turn_Right();
+            Turn_Left();
             break;
         case 2:
-            Do_Reverse(degreeConst, degree_CarPlayer);
+            Do_Reverse();
             break;
         default: break;
     }
-    S_MachinePlayer->setRotation(static_cast<float>(*degree_CarPlayer + *degreeConst));
 
-    S_MachinePlayer->setPosition(Vector2f(x_CarPlayer, y_CarPlayer));
+    switch (control.SetControlReverse(num_circuit, y_CarPlayer, x_CarPlayer)){
+        case 0:
+            Do_Reverse();
+            break;
+        case 1:
+            Accelerate_Out();
+            Do_Reverse_Out();
+            break;
+        case 2:
+            Accelerate();
+            break;
+        default:break;
+
+    }
+    S_MachinePlayer.setRotation(static_cast<float>(degree_CarPlayer + degreeConst));
+    S_MachinePlayer.setPosition(Vector2f(x_CarPlayer, y_CarPlayer));
+    window.draw(S_MachinePlayer);
+
 }
-void Car::Do_Reverse(double *degreeConst, double *Degree_CarPlayer) {      //retromarcia
+void Car::Do_Reverse() {      //retromarcia
     if (Keyboard::isKeyPressed(Keyboard::Down))
     {
-        x_CarPlayer = static_cast<float>(x_CarPlayer - 0.5 * cos((*Degree_CarPlayer + *degreeConst + 90) * M_PI / 180));
-        y_CarPlayer = static_cast<float>(y_CarPlayer - 0.5 * sin((*Degree_CarPlayer + *degreeConst + 90) * M_PI / 180));
+        x_CarPlayer = static_cast<float>(x_CarPlayer - 0.5 * cos((degree_CarPlayer + degreeConst + 90) * M_PI / 180));
+        y_CarPlayer = static_cast<float>(y_CarPlayer - 0.5 * sin((degree_CarPlayer + degreeConst + 90) * M_PI / 180));
        /* x_tmp = static_cast<float>(*x_CarPlayer - 0.5 * cos(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
         y_tmp = static_cast<float>(*y_CarPlayer - 0.5 * sin(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
         switch(control.SetControl(num_circuit, x_tmp, y_tmp, *Degree_CarPlayer)){
@@ -89,14 +103,14 @@ void Car::Do_Reverse(double *degreeConst, double *Degree_CarPlayer) {      //ret
 
     }
 
-void Car::Accelerate(double *degreeConst, float *CarPlayer_Acc, double *degree_CarPlayer) { //accelerazione seguendo con freno motore
+void Car::Accelerate() { //accelerazione seguendo con freno motore
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         start=1;
-        if (*CarPlayer_Acc < 1) {
-            *CarPlayer_Acc = *CarPlayer_Acc + const_Acc;
+        if (CarPlayer_Acc < 1) {
+            CarPlayer_Acc = CarPlayer_Acc + const_Acc;
         }
-        x_CarPlayer = static_cast<float>(x_CarPlayer + *CarPlayer_Acc * cos(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-        y_CarPlayer= static_cast<float>(y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
+        y_CarPlayer= static_cast<float>(y_CarPlayer + CarPlayer_Acc * sin(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
 
         /*cout << control.SetControl(num_circuit, static_cast<float>(x_tmp), static_cast<float>(y_tmp), *degree_CarPlayer) << endl;
         switch (control.SetControl(num_circuit, static_cast<float>(x_tmp), static_cast<float>(y_tmp),
@@ -114,10 +128,10 @@ void Car::Accelerate(double *degreeConst, float *CarPlayer_Acc, double *degree_C
         }*/
     }
     else {
-        if (0 < *CarPlayer_Acc && start==1) {
-            *CarPlayer_Acc = *CarPlayer_Acc - const_Brake;
-            x_CarPlayer = static_cast<float>(x_CarPlayer + *CarPlayer_Acc * cos(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-            y_CarPlayer = static_cast<float>(y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90)* M_PI) / 180));
+        if (0 < CarPlayer_Acc && start==1) {
+            CarPlayer_Acc = CarPlayer_Acc - const_Brake;
+            x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
+            y_CarPlayer = static_cast<float>(y_CarPlayer + CarPlayer_Acc * sin(((degree_CarPlayer + degreeConst + 90)* M_PI) / 180));
         }
     }
 
@@ -125,35 +139,35 @@ void Car::Accelerate(double *degreeConst, float *CarPlayer_Acc, double *degree_C
 
 
 }
-void Car::Turn_Right(double *degree_CarPlayer) {
+void Car::Turn_Right() {
     if (Keyboard::isKeyPressed(Keyboard::Right))     //incrementa l'angolo verso destra
-        *degree_CarPlayer = *degree_CarPlayer + 1;
+        degree_CarPlayer = degree_CarPlayer + 1;
 }
-void Car::Turn_Left(double *degree_CarPlayer) {
+void Car::Turn_Left() {
     if (Keyboard::isKeyPressed(Keyboard::Left))      //decrementa l'angolo verso sinistra
-        *degree_CarPlayer = *degree_CarPlayer - 1;
+        degree_CarPlayer = degree_CarPlayer - 1;
 }
-void Car::Accelerate_Out(double *degreeConst, float *CarPlayer_Acc, double *degree_CarPlayer) {
+void Car::Accelerate_Out() {
     if (Keyboard::isKeyPressed(Keyboard::Up))
     {
         start=1;
-        *CarPlayer_Acc = 0.1;
-        x_CarPlayer = static_cast<float>(x_CarPlayer + *CarPlayer_Acc * cos(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-        y_CarPlayer = static_cast<float>(y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        CarPlayer_Acc = 0.1;
+        x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
+        y_CarPlayer = static_cast<float>(y_CarPlayer + CarPlayer_Acc * sin(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
     }
     else {
-        if (0 < *CarPlayer_Acc && start == 1) {
-            *CarPlayer_Acc = *CarPlayer_Acc - const_Brake;
-            x_CarPlayer = static_cast<float>(x_CarPlayer + *CarPlayer_Acc * cos(((*degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-            y_CarPlayer = static_cast<float>(y_CarPlayer + *CarPlayer_Acc * sin(((*degree_CarPlayer + *degreeConst + 90)* M_PI) / 180));
+        if (0 < CarPlayer_Acc && start == 1) {
+            CarPlayer_Acc = CarPlayer_Acc - const_Brake;
+            x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
+            y_CarPlayer = static_cast<float>(y_CarPlayer + CarPlayer_Acc * sin(((degree_CarPlayer + degreeConst + 90)* M_PI) / 180));
         }
     }
 }
-void Car::Do_Reverse_Out(double *degreeConst, double *Degree_CarPlayer) {
+void Car::Do_Reverse_Out() {
     if (Keyboard::isKeyPressed(Keyboard::Down))
     {
-        x_CarPlayer = static_cast<float>(x_CarPlayer - 0.1 * cos(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
-        y_CarPlayer = static_cast<float>(y_CarPlayer - 0.1 * sin(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));
+        x_CarPlayer = static_cast<float>(x_CarPlayer - 0.1 * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
+        y_CarPlayer = static_cast<float>(y_CarPlayer - 0.1 * sin(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
     }
 }
 
@@ -165,6 +179,8 @@ float Car::getX_CarPlayer() const {
     return x_CarPlayer;
 }
 
+
+/*
 void CarPlayer::setSoundBehavior() {
 }
 void CarPlayer::getSuoundBehavior() {
@@ -183,30 +199,20 @@ void CarPlayer::setBasetrajectory() {
 bool CarPlayer::getBasetrajectory() {
     return false;
 }
-CarPlayer::CarPlayer() {
-}
-void CarBehavior::Accelerates() {
-}
-void CarBehavior::Restrains() {
-}
-void CarBehavior::Reverse_gear() {
-}
-void CarBehavior::GO_left() {
-}
-void CarBehavior::GO_right() {
-}
-SoundBehavior::SoundBehavior() {
+*/
+
+/*SoundBehavior::SoundBehavior() {
 }
 void SoundBehavior::AlgorithmAcceleration() {
 }
 void SoundBehavior::AlgorithmBrake() {
 }
 void SoundBehavior::AlgorithmBase() {
-}
+}*/
+/*
 void Basetrajectory::A_star() {
 }
-CarBehavior::CarBehavior() {
-}
+
 int Motore::Upgrade_Displacement() {
     return 0;
 }
@@ -222,12 +228,7 @@ string Carrozzeria::Upgrade_Aerodynamics() {
 }
 Carrozzeria::Carrozzeria() {
 }
-void CarsCPU::setCpuStrategy() {
-}
-void CarsCPU::getCpuStrategy() {
-}
-CarsCPU::CarsCPU() {
-}
+
 void SafetyCar::setCpuStrategy() {
 }
 void SafetyCar::getCpuStrategy() {
@@ -256,3 +257,4 @@ void GeneralTrajectory::A_star3() {
 }
 GeneralTrajectory::GeneralTrajectory() {
 }
+*/

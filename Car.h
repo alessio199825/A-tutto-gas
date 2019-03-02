@@ -29,21 +29,33 @@ public:
 
     Car();
     Control control;
-    bool setMachinePlayer(int num_circuit, Sprite *S_MachinePlayer, Texture *T_MachinePlayer, double *degree_CarPlayer, double *degreeCost);
-    void Car_Player_Movement(Sprite *S_MachinePlayer, float *CarPlayer_Acc, double *degree_CarPlayer, double *degreeConst, int num_circuit);
-    void Accelerate(double *degreeConst, float *CarPlayer_Acc, double *degree_CarPlayer);
-    void Accelerate_Out(double *degreeConst, float *CarPlayer_Acc, double *degree_CarPlayer);
-    void Do_Reverse(double *degreeConst, double *Degree_CarPlayer);
-    void Do_Reverse_Out(double *degreeConst, double *Degree_CarPlayer);
-    void Turn_Right(double *degree_CarPlayer);
-    void Turn_Left(double *degree_CarPlayer);
+    bool setMachinePlayer(RenderWindow &window, int num_circuit);
+    void Car_Player_Movement(RenderWindow &window, int num_circuit);
+    void Accelerate();
+    void Accelerate_Out();
+    void Do_Reverse();
+    void Do_Reverse_Out();
+    void Turn_Right();
+    void Turn_Left();
     float getY_CarPlayer() const;
     float getX_CarPlayer() const;
+
+    double degree_CarPlayer;
     float y_CarPlayer, x_CarPlayer;
     int Type_Race, start;
     int Car_degree=0;
     float const_Acc=0.010, const_Brake=0.005;
+
+
+private:
+
+    float CarPlayer_Acc=1;
+    Sprite S_MachinePlayer;
+    Texture T_MachinePlayer;
+    double degreeConst;
+
 };
+/*
 class CarPlayer : public Car{
 protected:
     bool carUpgrade;
@@ -58,10 +70,13 @@ public:
     bool getBasetrajectory();
     CarPlayer();
 };
+*/
 /* classe che definisce la macchina dell'utente
- */
+ *//*
 
-class SoundBehavior : public CarPlayer{
+
+*/
+/*class SoundBehavior : public CarPlayer{
 
 protected:
     string TypeofSound;
@@ -71,30 +86,22 @@ public:
     void AlgorithmBase();
     SoundBehavior();
 };
+*//*
+*/
 /* definizione della classe per il suono
  *
- */
+ *//*
+
 class Basetrajectory : public CarPlayer{
 
 public:
     void A_star();
 };
+*/
 /*
  * classe che definisce la traiettoria automatica del giocatore in caso di safety car
- */
-class CarBehavior : public CarPlayer{
+ *//*
 
-public:
-    void Accelerates();
-    void Restrains();
-    void Reverse_gear();
-    void GO_left();
-    void GO_right();
-    CarBehavior();
-};
-/* classe che definisce il comportamento della macchina in base all'utente
- *
- */
 class Motore : public CarPlayer{
 protected:
     int displacement;
@@ -102,9 +109,11 @@ public:
     int Upgrade_Displacement();
     Motore();
 };
+*/
 /* classe motore per upgrade macchina giocatore
- *
- */
+
+ *//*
+
 class Telaio : public CarPlayer{
 
 protected:
@@ -113,9 +122,11 @@ public:
     int Upgrade_Weight();
     Telaio();
 };
+*/
 /* classe telaio per upgrade macchina giocatore
  *
- */
+ *//*
+
 class Carrozzeria : public CarPlayer{
 
 protected:
@@ -124,18 +135,8 @@ public:
     string Upgrade_Aerodynamics();
     Carrozzeria();
 };
-class CarsCPU : public Car{
 
-public:
-    CarsCPU();
-    void setCpuStrategy();
-    void getCpuStrategy();
-protected:
-    string model;
-};
-/* classe che definisce le varie macchine del computer
- *
- */
+
 class SafetyCar : Car {
 
 protected:
@@ -145,9 +146,11 @@ protected:
 public:
     SafetyCar();
 };
+*/
 /* classe che definisce la safety car
  *
- */
+ *//*
+
 class CpuStrategy{
 
 protected:
@@ -178,5 +181,6 @@ public:
     GeneralTrajectory();
 };
 
-
+*/
 #endif //ALL_ULTIMO_GAS_CAR_H
+

@@ -4,7 +4,7 @@ Setting::Setting() {
 
 }
 
-bool Setting::setSettingState() {
+bool Setting::setSettingState(RenderWindow &window) {
 
     time_returnIn1=C_returnIn.getElapsedTime();
     if (!T_setting[0].loadFromFile("Setting/impo.jpg")) {
@@ -43,6 +43,10 @@ bool Setting::setSettingState() {
     S_setting[5].setPosition(sf::Vector2f(675, 470));
     if(time_returnIn1.asSeconds()-time_returnIn.asSeconds()>0.5)
     Instruction_ControlReturn=true;
+
+    for(int i=0; i<6; i++)
+    window.draw(S_setting[i]);
+
     return false;
 }
 
@@ -61,7 +65,7 @@ int Setting::getInstructions(double &posx, double &posy) {
     return 0;
 }
 
-bool Setting::setInstruction() {
+bool Setting::setInstruction(RenderWindow &window) {
     if (!T_setting[6].loadFromFile("Setting/frecce.png")) {
         return true;
     }
@@ -72,6 +76,10 @@ bool Setting::setInstruction() {
     }
     S_setting[7].setTexture(T_setting[7]);
     S_setting[7].setPosition(sf::Vector2f(25, 25));
+
+    window.draw(S_setting[6]);
+    window.draw(S_setting[7]);
+
     return false;
 }
 
@@ -85,10 +93,15 @@ int Setting::get_Instruction_Return(double &posx, double &posy) {
     return 1;
 }
 
-int Setting::show_Instruction(double *x_position, double *y_position, Clock *C_show) {
+int Setting::show_Instruction() {
 
-
-    Time_show=C_show->getElapsedTime();
+    if(control_C) {
+        C_show.restart();
+        x_position=0;
+        y_position=150;
+        control_C = false;
+    }
+    Time_show=C_show.getElapsedTime();
     if (!T_Instruction[0].loadFromFile("Setting/istru1.png")) {       //pulsante1
         return -1;
     }
@@ -117,53 +130,83 @@ int Setting::show_Instruction(double *x_position, double *y_position, Clock *C_s
         return -1;
     }
     S_Instruction[4].setTexture(T_Instruction[4]);
-    S_Instruction[4].setPosition(sf::Vector2f(static_cast<float>(*x_position), static_cast<float>(*y_position)));
+    S_Instruction[4].setPosition(sf::Vector2f(static_cast<float>(x_position), static_cast<float>(y_position)));
 
     if (!T_Instruction[5].loadFromFile("Setting/f1racestars1.png")) {       //pulsante1
         return -1;
     }
     S_Instruction[5].setTexture(T_Instruction[5]);
-    S_Instruction[5].setPosition(sf::Vector2f(static_cast<float>(*x_position), static_cast<float>( *y_position)));
+    S_Instruction[5].setPosition(sf::Vector2f(static_cast<float>(x_position), static_cast<float>( y_position)));
 
 
     if(Time_show.asSeconds()<6 && Time_show.asSeconds()>1){
+        ControlShow=0;
         return 0;
     }
-    else if(*y_position<=320 && Time_show.asSeconds()>6){
-        *y_position=*y_position+15;
+    else if(y_position<=320 && Time_show.asSeconds()>6){
+        y_position=y_position+15;
     }
 
     if(Time_show.asSeconds()>10 && Time_show.asSeconds()<14){
+        ControlShow=2;
         return 2;
     }
-    else if(*x_position<=432 && Time_show.asSeconds()>14){
-        *x_position=*x_position+40*0.5;
-        *y_position=*y_position+40*0.1;
+    else if(x_position<=432 && Time_show.asSeconds()>14){
+        x_position=x_position+40*0.5;
+        y_position=y_position+40*0.1;
     }
 
     if(Time_show.asSeconds()>20 && Time_show.asSeconds()<24){
+        ControlShow=3;
         return 3;
     }
-    else if(*x_position<=860 && Time_show.asSeconds()>24){
-        *x_position=*x_position+40*0.5;
-        *y_position=*y_position-40*0.1;
+    else if(x_position<=860 && Time_show.asSeconds()>24){
+        x_position=x_position+40*0.5;
+        y_position=y_position-40*0.1;
     }
 
-    if(*x_position>=860){
+    if(x_position>=860){
+        ControlShow=4;
         return 4;
     }
-    else
+    else {
+        ControlShow = 1;
         return 1;
+    }
 
 }
 
-const Sprite Setting::getS_setting(int i) const {
-    return S_setting[i];
+
+void Setting::draw_Instruction(RenderWindow &window) {
+
+    switch (ControlShow){
+        case 0:
+            window.draw(S_Instruction[0]);
+            window.draw(S_Instruction[4]);
+            break;
+        case 1:
+            window.draw(S_Instruction[4]);
+            break;
+        case 2:
+            window.draw(S_Instruction[1]);
+            window.draw(S_Instruction[4]);
+            break;
+        case 3:
+            window.draw(S_Instruction[2]);
+            window.draw(S_Instruction[4]);
+            break;
+        case 4:
+            window.draw(S_Instruction[3]);
+            window.draw(S_Instruction[5]);
+        default: break;
+    }
+
 }
 
-const Sprite Setting::getS_Instruction(int i) const {
-    return S_Instruction[i];
+void Setting::setControl_C(bool control_C) {
+    Setting::control_C = control_C;
 }
+
 
 
 

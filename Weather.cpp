@@ -8,19 +8,19 @@ Weather::Weather() {
 
 }
 
-bool Weather::setWeather(int meteo) {
+bool Weather::setWeather(int meteo, RenderWindow &window) {
     switch (meteo) {
         case 2:
-            do_Rain();
+            do_Rain(window);
             return true;
         default:
-            do_Sun();
+            do_Sun(window);
             break;
     }
     return false;
 }
 
-int Weather::do_Rain() {
+int Weather::do_Rain(RenderWindow &window) {
 
     if (!T_rain.loadFromFile("Weather/pioggia.png")) {
         return -1;
@@ -38,10 +38,13 @@ int Weather::do_Rain() {
     if(y_rain==1200){
         y_rain=0;
     }
+    window.draw(S_rain[0]);
+    window.draw(S_rain[1]);
+    window.draw(S_rain[2]);
     return 0;
 }
 
-int Weather::do_Sun() {
+int Weather::do_Sun(RenderWindow &window) {
     if (!T_sun.loadFromFile("Weather/sole.png")) {
         return -1;
     }
@@ -52,6 +55,8 @@ int Weather::do_Sun() {
     S_sun.setRotation(sun_degree);
 
     sun_degree=sun_degree+1;
+
+    window.draw(S_sun);
 
     return 0;
 }

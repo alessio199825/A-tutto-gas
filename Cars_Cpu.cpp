@@ -8,7 +8,7 @@ Cars_Cpu::Cars_Cpu() {
 
 }
 
-bool Cars_Cpu::createMachine(Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, float *y_cpu) {
+bool Cars_Cpu::createMachine(RenderWindow &window) {
 
     if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina4_trasparenza.png")) {
         return true;
@@ -16,16 +16,21 @@ bool Cars_Cpu::createMachine(Texture *T_CpuCar, Sprite *S_CpuCar, float *x_cpu, 
 
     S_CpuCar[0].setTexture(T_CpuCar[0]);
     S_CpuCar[0].setOrigin(9.5, 0);
-    S_CpuCar[0].setPosition(Vector2f(*x_cpu, *y_cpu));
+    S_CpuCar[0].setPosition(Vector2f(x_cpu, y_cpu));
+    for(int i=0; i<1; i++)
+        window.draw(S_CpuCar[i]);
 
     return false;
 }
 
-void Cars_Cpu::A_star(float *x_cpu, float *y_cpu, Sprite *S_CpuCar) {
+void Cars_Cpu::A_star(RenderWindow &window) {
 
-    if(*y_cpu<600 && *x_cpu >10 && *y_cpu >0 && *x_cpu<1000){
-        *y_cpu=*y_cpu-0.1;
+    if(y_cpu<600 && x_cpu >10 && y_cpu >0 && x_cpu<1000){
+        y_cpu=y_cpu-0.1;
     }
 
-    S_CpuCar[0].setPosition(Vector2f(*x_cpu, *y_cpu));
+    S_CpuCar[0].setPosition(Vector2f(x_cpu, y_cpu));
+    for(int i=0; i<1; i++)
+        window.draw(S_CpuCar[i]);
 }
+
