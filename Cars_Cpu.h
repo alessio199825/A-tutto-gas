@@ -8,6 +8,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "Error.h"
 
 using namespace std;
 using namespace sf;
@@ -18,15 +19,14 @@ public:
 
     Cars_Cpu();
 
-    bool createMachine(RenderWindow &window);
+    void createMachine(RenderWindow &window, Error &error);
     void A_star(RenderWindow &window);
-
 
 private:
 
+    float x_cpu=160, y_cpu=342;
     Texture T_CpuCar[7];
     Sprite S_CpuCar[7];
-    float x_cpu=160, y_cpu=342;
 
 };
 

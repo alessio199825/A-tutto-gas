@@ -19,6 +19,7 @@ Menu::Menu() {
 
         if(time_load.asSeconds()>24 || control_time==2){       //consente di saltare il caricamento dopo 24 secondi oppure dopo aver premuto il tasto tab
             control_time=2;
+            song.stop_Load();
         }
         else{
             control_time=1;
@@ -33,14 +34,17 @@ Menu::Menu() {
                 switch (control_time) {
                     case 1:
                         createMenu();                       //crea il menu di caricamento
+                        song.music_Load(window, error);
                         break;
                     case 2:
-                        music_load.stop();
                         setMenuState();
                         getChampionship();
                         getSingle_Race();
                         getSetting();
                         getTime_Trial();
+
+                        song.music_Menu(window, error);
+
                         singleraceon=0;
                         control_timeTrial=0;
                         control_setRace=true;
@@ -50,21 +54,13 @@ Menu::Menu() {
                 break;
             case 1: {
 
-                if (champion.setChampionshipState(window)) {
-                    window.close();
-                    error.Check_Image();
-                }
+                champion.setChampionshipState(window, error);
 
                 posx = getMousePosx();
                 posy = getMousePosy();
 
                 menu_state = champion.Return(posx, posy);
-                championship_car = champion.getQualifications(posx, posy, window);
-
-                if (championship_car == -1) {
-                    window.close();
-                    error.Check_Image();
-                }
+                championship_car = champion.getQualifications(posx, posy, window, error);
 
                 break;
             }
@@ -74,45 +70,25 @@ Menu::Menu() {
                 switch (singleraceon) {
                     case 0:
 
-                        if (singlerace.setSingle_RaceState(window)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        singlerace.setSingle_RaceState(window, error);
 
                         posx = getMousePosx();
                         posy = getMousePosy();
                         menu_state = singlerace.getSingle_RaceReturn(posx, posy);
-                        Lap = singlerace.getSingle_RaceLap(posx, posy, window);
+                        Lap = singlerace.getSingle_RaceLap(posx, posy, window, error);
 
-                        if (Lap == 1) {
-                            window.close();
-                            error.Check_Image();
-                        }
-
-                        meteo = singlerace.getSingle_RaceWeather(posx, posy, window);
-
-                        if (meteo == -1) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        meteo = singlerace.getSingle_RaceWeather(posx, posy, window, error);
 
                         singleraceon = singlerace.getSingle_Raceon(posx, posy);
                         break;
                     case 1:
 
-                        if (singlerace.setSingle_RaceState2(window)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        singlerace.setSingle_RaceState2(window, error);
+
 
                         posx = getMousePosx();
                         posy = getMousePosy();
-                        circuiton = singlerace.getSingle_RaceCircuit(posx, posy, window);
-
-                        if (circuiton == -1) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        circuiton = singlerace.getSingle_RaceCircuit(posx, posy, window, error);
 
                         singleraceon = singlerace.getSingle_Raceonreturn(posx, posy);
 
@@ -122,27 +98,21 @@ Menu::Menu() {
                         break;
 
                     case 2:
-                        window_error_singlerace = singlerace.Single_LoadPage(window);
 
-                        if (window_error_singlerace) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        traffic_light.setControl_light(true);
 
-                        load_machine_error = load_Machine();
+                        singlerace.Single_LoadPage(window, error);
 
-                        if (load_machine_error) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        load_Machine();
 
-                        singlerace.Single_LoadPage(window);
+                        singlerace.Single_LoadPage(window, error);
 
                         for (const auto &i : S_loadMachine)
                             window.draw(i);
 
                         if (Keyboard::isKeyPressed(Keyboard::Key::Tab)) {   //tasto per saltare il caricamento
                             singleraceon = 3;
+                            control_setRace = true;
                         }
 
                         if (x_load > 800) {
@@ -151,40 +121,42 @@ Menu::Menu() {
                         }
                         break;
                     case 3:
+
+                        song.stop_Menu();
+
+                        window.draw(circuit.getS_tilemaps());
+
+
                         if (control_setRace) {
-                            window_error_tilemaps = race.setGame(window, circuit, car, cars_cpu, circuiton);
+
+                            race.setGame(window, circuit, car, error, cars_cpu, circuiton);
+
                             car.x_CarPlayer=race.getX_tmp();
                             car.y_CarPlayer=race.getY_tmp();
 
-                            if (window_error_tilemaps) {
-                                window.close();
-                                error.Check_Image();
-                            }
+                        }
+
+                        window.draw(circuit.getS_Pause(0));
+                        window.draw(circuit.getS_Pause(1));
+
+                        if(traffic_light.Light_On(window, error)) {
+                            car.Car_Player_Movement(window, error, circuiton);
+                            cars_cpu.A_star(window);
                             control_setRace = false;
                         }
 
-                        window.draw(circuit.getS_tilemaps());
-                        window.draw(circuit.getS_Pause(0));
-                        window.draw(circuit.getS_Pause(1));
-                        car.Car_Player_Movement(window, circuiton);
-                        cars_cpu.A_star(window);
                         posx = getMousePosx();
                         posy = getMousePosy();
 
+                        race.KeyBreak(window, error, posx, posy, menu_state, circuiton, singleraceon);
 
-                        if (race.KeyBreak(posx, posy, menu_state, circuiton, singleraceon)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        weath.setWeather(meteo, window, error);
 
-
-                        weath.setWeather(meteo, window);
                         break;
                     case 4:
-                        if (singlerace.End_SingleRace(window)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+
+                        singlerace.End_SingleRace(window, error);
+
                         break;
                     default:
                         break;
@@ -195,38 +167,22 @@ Menu::Menu() {
             case 3:
                 switch (control_timeTrial) {
                     case 0:
-                        window_error_timetrial = timetrial.setTime_TrialState(window);
 
-                        if (window_error_timetrial == 1) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        timetrial.setTime_TrialState(window, error);
 
                         posx = getMousePosx();
                         posy = getMousePosy();
                         menu_state = timetrial.getReturn(posx, posy);
-                        time_circuit = timetrial.getTime_Racecircuit(posx, posy, window);
-
-                        if (time_circuit == -1) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        time_circuit = timetrial.getTime_Racecircuit(posx, posy, window, error);
 
                         control_timeTrial=timetrial.getTime_LoadPage(posx, posy);
                         x_load=0;               //fa ripartire da 20 la macchina per il caricamento
                         break;
                     case 1:
-                        window_error_Timetrial=timetrial.Timetrial_LoadPage(window);
 
-                        if(window_error_Timetrial) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        timetrial.Timetrial_LoadPage(window, error);
 
-                        if(load_Machine()) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        load_Machine();
 
                         for (const auto &i : S_loadMachine)
                             window.draw(i);
@@ -241,57 +197,44 @@ Menu::Menu() {
                         }
                         break;
                     case 2:
-                        music_menu.stop();
+
+                        song.stop_Menu();
                         if(control_setRace) {
-                            window_error_tilemaps1 = race.setGame(window, circuit, car, cars_cpu, time_circuit);
+
+                            race.setGame(window, circuit, car, error, cars_cpu, time_circuit);
 
                             car.x_CarPlayer=race.getX_tmp();
                             car.y_CarPlayer=race.getY_tmp();
 
-                            if (window_error_tilemaps1) {
-                                window.close();
-                                error.Check_Image();
-                            }
                             control_setRace = false;
                         }
 
                         window.draw(circuit.getS_tilemaps());
                         window.draw(circuit.getS_Pause(0));
                         window.draw(circuit.getS_Pause(1));
-                        car.Car_Player_Movement(window, time_circuit);
+                        car.Car_Player_Movement(window, error, time_circuit);
                         cars_cpu.A_star(window);
                         posx = getMousePosx();
                         posy = getMousePosy();
 
-                        if(race.KeyBreak(posx, posy, menu_state, time_circuit, control_timeTrial)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        race.KeyBreak(window, error, posx, posy, menu_state, time_circuit, control_timeTrial);
 
                         meteo=1;
 
-                        switch(weath.setWeather(meteo, window)) {
-                            case false:
-                                weath.do_Sun(window);
-                            default:break;
-                        }
-
-                        if(timetrial.getTime_lap(window)){
-                            window.close();
-                            error.Check_Image();
-                        }
+                        weath.setWeather(meteo, window, error);
 
                         timetrial.getTime_lap(window);
-                        timetrial.print_TimeLap(window);
-                        timetrial.print_TimeMinute(window);
+
+                        timetrial.getTime_lap(window);
+                        timetrial.print_TimeLap(window, error);
+                        timetrial.print_TimeMinute(window, error);
 
 
                         break;
                     case 3:
-                        if(timetrial.End_TimeTrial(window)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+
+                        timetrial.End_TimeTrial(window, error);
+
                         break;
                     default: break;
                 }
@@ -299,10 +242,7 @@ Menu::Menu() {
             case 4:
                 switch(Setting_control) {
                     case 0:
-                        if (setting.setSettingState(window)) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        setting.setSettingState(window, error);
 
                         posx = getMousePosx();
                         posy = getMousePosy();
@@ -314,21 +254,12 @@ Menu::Menu() {
 
                         break;
                     case 1:
-                        window_error_instruction=setting.setInstruction(window);
-
-                        if (window_error_instruction) {
-                            window.close();
-                            error.Check_Image();
-                        }
+                        setting.setInstruction(window, error);
 
                         posx = getMousePosx();
                         posy = getMousePosy();
-                        Control_show=setting.show_Instruction();
+                        setting.show_Instruction(window, error);
 
-                        if (Control_show == -1) {
-                            window.close();
-                            error.Check_Image();
-                        }
                         setting.draw_Instruction(window);
                         Setting_control=setting.get_Instruction_Return(posx, posy);
                         break;
@@ -346,35 +277,27 @@ Menu::Menu() {
 
 void Menu::createMenu() {
 
-    if (!T_load[0].loadFromFile("Load/loading.jpg")) {
+    try {
+        if (!T_load[0].loadFromFile("Load/loading.jpg"))
+            throw "impossibile caricare Texture";
+
+        S_load[0].setTexture(T_load[0]);
+
+        if (!T_load[1].loadFromFile("Load/caricamento.png"))
+            throw "impossibile caricare Texture";
+
+        S_load[1].setTexture(T_load[1]);
+    }
+    catch(...){
         window.close();
         error.Check_Image();
     }
 
-    S_load[0].setTexture(T_load[0]);
-
-    if (!T_load[1].loadFromFile("Load/caricamento.png")) {
-        window.close();
-        error.Check_Image();
-    }
-
-    S_load[1].setTexture(T_load[1]);
-
-    S_load[1].setTexture(T_load[1]);
     S_load[1].setPosition(sf::Vector2f(240, 350));
     S_load[1].setOrigin(sf::Vector2f(50, 50));
     S_load[1].setRotation(degree_load);
     degree_load=degree_load+25;
 
-    if (!music_menuloop) {              //musica menu
-        if (!music_menu.openFromFile("Menu/F1.ogg")) {
-            window.close();
-            error.Check_Sound();
-        }
-    }
-    music_menu.play();
-    music_menuloop = true;
-    music_menu.setLoop(true);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab) ) {      //tasto per saltare il caricamento
         control_time=2;
@@ -387,59 +310,46 @@ void Menu::createMenu() {
 
 int Menu::setMenuState() {
 
-    if (!T_menu[0].loadFromFile("Menu/2307.jpg")) {
+    try {
+        if (!T_menu[0].loadFromFile("Menu/2307.jpg"))
+            throw "impossibile caricare Texture";
+
+        S_menu[0].setTexture(T_menu[0]);
+
+        if (!T_menu[1].loadFromFile("Menu/titolo.png"))
+            throw "impossibile caricare Texture";
+
+        S_menu[1].setTexture(T_menu[1]);
+        S_menu[1].setPosition(sf::Vector2f(220, 25));
+
+        if (!T_menu[2].loadFromFile("Menu/carriera.png"))
+            throw "impossibile caricare Texture";
+
+        S_menu[2].setTexture(T_menu[2]);
+        S_menu[2].setPosition(sf::Vector2f(650, 170));
+
+        if (!T_menu[3].loadFromFile("Menu/gara singola.png"))
+            throw "impossibile caricare Texture";
+
+        S_menu[3].setTexture(T_menu[3]);
+        S_menu[3].setPosition(sf::Vector2f(650, 270));
+
+        if (!T_menu[4].loadFromFile("Menu/prova a tempo.png"))
+            throw "impossibile caricare Texture";
+
+        S_menu[4].setTexture(T_menu[4]);
+        S_menu[4].setPosition(sf::Vector2f(650, 370));
+
+        if (!T_menu[5].loadFromFile("Menu/impostazioni.png"))
+            throw "impossibile caricare Texture";
+
+        S_menu[5].setTexture(T_menu[5]);
+        S_menu[5].setPosition(sf::Vector2f(650, 470));
+    }
+    catch(...){
         window.close();
         error.Check_Image();
     }
-
-    S_menu[0].setTexture(T_menu[0]);
-
-    if (!T_menu[1].loadFromFile("Menu/titolo.png")) {       //titolo
-        window.close();
-        error.Check_Image();
-    }
-    S_menu[1].setTexture(T_menu[1]);
-    S_menu[1].setPosition(sf::Vector2f(220, 25));
-
-    if (!T_menu[2].loadFromFile("Menu/carriera.png")) {       //pulsante1
-        window.close();
-        error.Check_Image();
-    }
-    S_menu[2].setTexture(T_menu[2]);
-    S_menu[2].setPosition(sf::Vector2f(650, 170));
-
-    if (!T_menu[3].loadFromFile("Menu/gara singola.png")) {       //pulsante 2
-        window.close();
-        error.Check_Image();
-    }
-    S_menu[3].setTexture(T_menu[3]);
-    S_menu[3].setPosition(sf::Vector2f(650, 270));
-
-    if (!T_menu[4].loadFromFile("Menu/prova a tempo.png")) {      //pulsante 3
-        window.close();
-        error.Check_Image();
-    }
-    S_menu[4].setTexture(T_menu[4]);
-    S_menu[4].setPosition(sf::Vector2f(650, 370));
-
-    if (!T_menu[5].loadFromFile("Menu/impostazioni.png")) {       //pulsante 4
-        window.close();
-        error.Check_Image();
-    }
-    S_menu[5].setTexture(T_menu[5]);
-    S_menu[5].setPosition(sf::Vector2f(650, 470));
-
-    if (!music_loadloop) {      //musica menu
-        if (!music_load.openFromFile("Load/load.ogg")) {
-            window.close();
-            error.Check_Sound();
-            return -1;
-        }
-    }
-
-        music_load.play();
-        music_loadloop = true;
-
 
     window.draw(S_menu[0]);
     window.draw(S_menu[1]);
@@ -511,38 +421,41 @@ double Menu::getMousePosy() {
     return posy;
 }
 
-bool Menu::load_Machine() {
-    if(!T_loadMachine[0].loadFromFile("Load/fone.png"))
-    {
-        return true;
+void Menu::load_Machine() {
+
+    try {
+        if (!T_loadMachine[0].loadFromFile("Load/fone.png")) {
+            throw "impossibile caricare Texture";
+        }
+        S_loadMachine[0].setTexture(T_loadMachine[0]);
+        S_loadMachine[0].setPosition(Vector2f(x_load, 387));
+
+        if (!T_loadMachine[1].loadFromFile("Load/ruotona.png")) {
+            throw "impossibile caricare Texture";
+        }
+        S_loadMachine[1].setTexture(T_loadMachine[1]);
+        S_loadMachine[1].setPosition(Vector2f(x_load + 22, 462));
+
+        S_loadMachine[1].setOrigin(13, 13);
+        S_loadMachine[1].setRotation(load_degree);
+
+        if (!T_loadMachine[2].loadFromFile("Load/ruotona.png")) {
+            throw "impossibile caricare Texture";
+        }
+        S_loadMachine[2].setTexture(T_loadMachine[2]);
+        S_loadMachine[2].setPosition(Vector2f(x_load + 144, 462));
+
+        S_loadMachine[2].setOrigin(13, 13);
+        S_loadMachine[2].setRotation(load_degree);
     }
-    S_loadMachine[0].setTexture(T_loadMachine[0]);
-    S_loadMachine[0].setPosition(Vector2f(x_load,387));
-
-    if(!T_loadMachine[1].loadFromFile("Load/ruotona.png"))
-    {
-        return true;
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
-    S_loadMachine[1].setTexture(T_loadMachine[1]);
-    S_loadMachine[1].setPosition(Vector2f(x_load+22,462));
-
-    S_loadMachine[1].setOrigin(13,13);
-    S_loadMachine[1].setRotation(load_degree);
-
-    if(!T_loadMachine[2].loadFromFile("Load/ruotona.png"))
-    {
-        return true;
-    }
-    S_loadMachine[2].setTexture(T_loadMachine[2]);
-    S_loadMachine[2].setPosition(Vector2f(x_load+144,462));
-
-    S_loadMachine[2].setOrigin(13,13);
-    S_loadMachine[2].setRotation(load_degree);
 
     x_load=x_load+8;
     load_degree=load_degree+35;
 
-    return false;
 }
 
 

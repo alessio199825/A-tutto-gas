@@ -4,64 +4,62 @@ Time_Trial::Time_Trial() {
 
 }
 
-bool Time_Trial::setTime_TrialState(RenderWindow &window) {
+void Time_Trial::setTime_TrialState(RenderWindow &window, Error &error) {
 
-    //caricamento delle immagini relative alla pagina della prova a tempo
-    //
-    //tutto è andato a buon fine se la funzione ritorna false
-    //se la funzione ritorna true si apre il pop-up di errore
+    try {
+        if (!T_timetrial[0].loadFromFile("Time_Trial/prova a tempo.jpg")) {
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[0].setTexture(T_timetrial[0]);
 
-    if (!T_timetrial[0].loadFromFile("Time_Trial/prova a tempo.jpg")) {
-        return true;
+        if (!T_timetrial[1].loadFromFile("Time_Trial/indietro.jpg")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[1].setTexture(T_timetrial[1]);
+        S_timetrial[1].setPosition(sf::Vector2f(25, 25));
+
+        if (!T_timetrial[2].loadFromFile("Time_Trial/seleziona circuito.png")) {       //seleziona circuito
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[2].setTexture(T_timetrial[2]);
+        S_timetrial[2].setPosition(sf::Vector2f(50, 290));
+
+        if (!T_timetrial[3].loadFromFile("Time_Trial/avanti1.png")) {       //scritta avanti
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[3].setTexture(T_timetrial[3]);
+        S_timetrial[3].setPosition(sf::Vector2f(600, 25));
+
+        if (!T_timetrial[4].loadFromFile("Time_Trial/circuit2.jpg")) {       //circuito 1
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[4].setTexture(T_timetrial[4]);
+        S_timetrial[4].setPosition(sf::Vector2f(50, 390));
+
+        if (!T_timetrial[5].loadFromFile("Time_Trial/circuit1-1.jpg")) {       //circuito 2
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[5].setTexture(T_timetrial[5]);
+        S_timetrial[5].setPosition(sf::Vector2f(350, 390));
+
+        if (!T_timetrial[6].loadFromFile("Time_Trial/circuit3-1.jpg")) {       //circuito 3
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[6].setTexture(T_timetrial[6]);
+        S_timetrial[6].setPosition(sf::Vector2f(650, 390));
     }
-    S_timetrial[0].setTexture(T_timetrial[0]);
-
-    if (!T_timetrial[1].loadFromFile("Time_Trial/indietro.jpg")) {       //pulsante1
-        return true;
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
-    S_timetrial[1].setTexture(T_timetrial[1]);
-    S_timetrial[1].setPosition(sf::Vector2f(25, 25));
-
-    if (!T_timetrial[2].loadFromFile("Time_Trial/seleziona circuito.png")) {       //seleziona circuito
-        return true;
-    }
-    S_timetrial[2].setTexture(T_timetrial[2]);
-    S_timetrial[2].setPosition(sf::Vector2f(50, 290));
-
-    if (!T_timetrial[3].loadFromFile("Time_Trial/avanti1.png")) {       //scritta avanti
-        return true;
-    }
-    S_timetrial[3].setTexture(T_timetrial[3]);
-    S_timetrial[3].setPosition(sf::Vector2f(600, 25));
-
-    if (!T_timetrial[4].loadFromFile("Time_Trial/circuit2.jpg")) {       //circuito 1
-        return true;
-    }
-    S_timetrial[4].setTexture(T_timetrial[4]);
-    S_timetrial[4].setPosition(sf::Vector2f(50, 390));
-
-    if (!T_timetrial[5].loadFromFile("Time_Trial/circuit1-1.jpg")) {       //circuito 2
-        return true;
-    }
-    S_timetrial[5].setTexture(T_timetrial[5]);
-    S_timetrial[5].setPosition(sf::Vector2f(350, 390));
-
-    if (!T_timetrial[6].loadFromFile("Time_Trial/circuit3-1.jpg")) {       //circuito 3
-         return true;
-    }
-    S_timetrial[6].setTexture(T_timetrial[6]);
-    S_timetrial[6].setPosition(sf::Vector2f(650, 390));
 
     for (int i = 0; i < 7; i++) {
         window.draw(S_timetrial[i]);
     }
 
-    return false;
 }
 
 int Time_Trial::getReturn(double &posx, double &posy) {
-
-    //definizione della posizione del tasto indietro per tornare all pagina iniziale
 
     if (posx > 25 && posx < 125 && posy > 25 && posy < 115) {
         return 0;
@@ -69,42 +67,44 @@ int Time_Trial::getReturn(double &posx, double &posy) {
     return 3;
 }
 
-int Time_Trial::getTime_Racecircuit(double posx, double posy, RenderWindow &window) {
+int Time_Trial::getTime_Racecircuit(double posx, double posy, RenderWindow &window, Error &error) {
 
-    //creazione dei tasti per la scelta del circuito sul quale disputare la prova a tempo
-    //
-    //la funzione ritorna 1, 2, 3 a seconda del circuito scelto
-    //se la funzione dovesse ritornare -1 significa che il caricamento delle immagini non è andato a buon fine
+    try {
+        if (posx > 50 && posx < 310 && posy > 390 && posy < 585) { //tasto circuito 1
 
-    if (posx > 50 && posx < 310 && posy > 390 && posy < 585) { //tasto circuito 1
-
-        if (!T_timetrial[7].loadFromFile("Time_Trial/circuit2on.jpg")) {       //circuito 1 modificato
-            return -1;
+            if (!T_timetrial[7].loadFromFile("Time_Trial/circuit2on.jpg")) {       //circuito 1 modificato
+                throw "impossibile caricare Texture";
+            }
+            S_timetrial[7].setTexture(T_timetrial[7]);
+            S_timetrial[7].setPosition(sf::Vector2f(50, 390));
+            circuit = 1;
         }
-        S_timetrial[7].setTexture(T_timetrial[7]);
-        S_timetrial[7].setPosition(sf::Vector2f(50, 390));
-        circuit = 1;
+
+        if (posx > 350 && posx < 610 && posy > 390 && posy < 585) {     //tasto circuito 2
+
+            if (!T_timetrial[8].loadFromFile("Time_Trial/circuit1on.jpg")) {
+                throw "impossibile caricare Texture";
+            }
+            S_timetrial[8].setTexture(T_timetrial[8]);
+            S_timetrial[8].setPosition(sf::Vector2f(350, 390));
+            circuit = 2;
+        }
+
+        if (posx > 650 && posx < 910 && posy > 390 && posy < 585) {     //tasto circuito 3
+
+            if (!T_timetrial[9].loadFromFile("Time_Trial/circuit3on.jpg")) {
+                throw "impossibile caricare Texture";
+            }
+            S_timetrial[9].setTexture(T_timetrial[9]);
+            S_timetrial[9].setPosition(sf::Vector2f(650, 390));
+            circuit = 3;
+        }
+    }
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
 
-    if (posx > 350 && posx < 610 && posy > 390 && posy < 585) {     //tasto circuito 2
-
-        if (!T_timetrial[8].loadFromFile("Time_Trial/circuit1on.jpg")) {
-            return -1;
-        }
-        S_timetrial[8].setTexture(T_timetrial[8]);
-        S_timetrial[8].setPosition(sf::Vector2f(350, 390));
-        circuit = 2;
-    }
-
-    if (posx > 650 && posx < 910 && posy > 390 && posy < 585) {     //tasto circuito 3
-
-        if (!T_timetrial[9].loadFromFile("Time_Trial/circuit3on.jpg")) {
-            return -1;
-        }
-        S_timetrial[9].setTexture(T_timetrial[9]);
-        S_timetrial[9].setPosition(sf::Vector2f(650, 390));
-        circuit = 3;
-    }
     switch (circuit) {
         case 1:
             window.draw(S_timetrial[7]);
@@ -124,47 +124,47 @@ int Time_Trial::getTime_Racecircuit(double posx, double posy, RenderWindow &wind
 
 int Time_Trial::getTime_LoadPage(double posx, double posy) {
 
-        //definizione della posizione del tasto avanti per passare al caricamento della modalità
-
         if (posx > 600 && posx < 920 && posy > 25 && posy < 115) {
         return 1;
     }
     return 0;
 }
 
-bool Time_Trial::Timetrial_LoadPage(RenderWindow &window) {
+void Time_Trial::Timetrial_LoadPage(RenderWindow &window, Error &error) {
 
-    //caricamento della pagina di transizione precedente al caricamento finale della determinata modalità di gioco
-    //
-    //se la funzione dovesse ritornare -1 significa che il caricamento delle immagini non è andato a buon fine
-
-    if (!T_timetrial[10].loadFromFile("Time_Trial/planisfero.png")) {       //pulsante1
-        return true;
+    try {
+        if (!T_timetrial[10].loadFromFile("Time_Trial/planisfero.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_timetrial[10].setTexture(T_timetrial[10]);
     }
-    S_timetrial[10].setTexture(T_timetrial[10]);
+    catch(...){
+        window.close();
+        error.Check_Image();
+    }
 
     window.draw(S_timetrial[10]);
 
-    return false;
 }
 
-bool Time_Trial::End_TimeTrial(RenderWindow &window) {
+void Time_Trial::End_TimeTrial(RenderWindow &window, Error &error) {
 
-    //caricamento della bandiera a scacchi come fase di transizione dopo aver terminato la prova a tempo
-    //
-    //se la funzione dovesse ritornare -1 significa che il caricamento delle immagini non è andato a buon fine
-
-    if (!T_Flag.loadFromFile("race/scacchi.jpg")) {       //pulsante1
-        return true;
+    try {
+        if (!T_Flag.loadFromFile("race/scacchi.jpg")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Flag.setTexture(T_Flag);
     }
-    S_Flag.setTexture(T_Flag);
+    catch(...){
+        window.close();
+        error.Check_Image();
+    }
 
     window.draw(S_Flag);
 
-    return false;
 }
 
-bool Time_Trial::getTime_lap(RenderWindow &window) {
+void Time_Trial::getTime_lap(RenderWindow &window) {
 
     //lettura del circuito scelto
     //definizione della posizione del traguardo e di un passaggio intermedio per il controllo della completezza del giro
@@ -206,8 +206,6 @@ bool Time_Trial::getTime_lap(RenderWindow &window) {
                         Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - (Lap_Time_Minutes[number_of_Lap - 1] * 60));
                         Lap_Time_Milliseconds[number_of_Lap-1]=(timelap.asMilliseconds() - (Lap_Time_Seconds[number_of_Lap-1] * 1000));
 
-
-                        return true;
                     }
                 }
             }
@@ -246,7 +244,6 @@ bool Time_Trial::getTime_lap(RenderWindow &window) {
                         minute_const= static_cast<int>(timelap.asSeconds() / 60);
                         Lap_Time_Minutes[number_of_Lap-1]=minute_const;
 
-                        return true;
                     }
                 }
             }
@@ -285,7 +282,6 @@ bool Time_Trial::getTime_lap(RenderWindow &window) {
                     Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - (minute_const * 60));
                     Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - (timelap.asSeconds() * 1000));
 
-                    return true;
                 }
                 }
             }
@@ -296,13 +292,18 @@ bool Time_Trial::getTime_lap(RenderWindow &window) {
         default:
             break;
     }
-    return false;
 }
 
-bool Time_Trial::print_TimeLap(RenderWindow &window) {
+void Time_Trial::print_TimeLap(RenderWindow &window, Error& error) {
 
-    if(!F_time.loadFromFile("Font/Open 24 Display St.ttf")){
-        return true;
+    try {
+        if (!F_time.loadFromFile("Font/Open 24 Display St.ttf")) {
+            throw "impossibile caricare Texture";
+        }
+    }
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
 
     X_time[1].setFont(F_time);
@@ -321,13 +322,20 @@ bool Time_Trial::print_TimeLap(RenderWindow &window) {
         window.draw(X_time[2]);
     }
 
-    return false;
 }
 
-bool Time_Trial::print_TimeMinute(RenderWindow &window) {
-    if(!F_time.loadFromFile("Font/Open 24 Display St.ttf")){
-        return true;
+void Time_Trial::print_TimeMinute(RenderWindow &window, Error &error) {
+
+    try {
+        if (!F_time.loadFromFile("Font/Open 24 Display St.ttf")) {
+            throw "impossibile caricare Texture";
+        }
     }
+    catch(...){
+        window.close();
+        error.Check_Image();
+    }
+
     X_time_minute.setFont(F_time);
     X_time_minute.setCharacterSize(36);
     X_time_minute.setFillColor(Color::Red);
@@ -335,10 +343,5 @@ bool Time_Trial::print_TimeMinute(RenderWindow &window) {
     X_time_minute.setPosition(200, 300);
     window.draw(X_time_minute);
 
-    return false;
-}
-
-const Sprite Time_Trial::getS_timetrial(int i) const {
-    return S_timetrial[i];
 }
 

@@ -8,10 +8,16 @@ Cars_Cpu::Cars_Cpu() {
 
 }
 
-bool Cars_Cpu::createMachine(RenderWindow &window) {
+void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
-    if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina4_trasparenza.png")) {
-        return true;
+    try {
+        if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina4_trasparenza.png")) {
+            throw "impossibile caricare Texture";
+        }
+    }
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
 
     S_CpuCar[0].setTexture(T_CpuCar[0]);
@@ -20,7 +26,6 @@ bool Cars_Cpu::createMachine(RenderWindow &window) {
     for(int i=0; i<1; i++)
         window.draw(S_CpuCar[i]);
 
-    return false;
 }
 
 void Cars_Cpu::A_star(RenderWindow &window) {

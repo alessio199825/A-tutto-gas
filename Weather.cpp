@@ -8,22 +8,26 @@ Weather::Weather() {
 
 }
 
-bool Weather::setWeather(int meteo, RenderWindow &window) {
+void Weather::setWeather(int meteo, RenderWindow &window, Error &error) {
     switch (meteo) {
         case 2:
-            do_Rain(window);
-            return true;
+            do_Rain(window, error);
         default:
-            do_Sun(window);
+            do_Sun(window, error);
             break;
     }
-    return false;
 }
 
-int Weather::do_Rain(RenderWindow &window) {
+void Weather::do_Rain(RenderWindow &window, Error &error) {
 
-    if (!T_rain.loadFromFile("Weather/pioggia.png")) {
-        return -1;
+    try {
+        if (!T_rain.loadFromFile("Weather/pioggia.png")) {
+            throw "impossibile caricare Texture";
+        }
+    }
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
 
     S_rain[0].setTexture(T_rain);
@@ -41,12 +45,18 @@ int Weather::do_Rain(RenderWindow &window) {
     window.draw(S_rain[0]);
     window.draw(S_rain[1]);
     window.draw(S_rain[2]);
-    return 0;
 }
 
-int Weather::do_Sun(RenderWindow &window) {
-    if (!T_sun.loadFromFile("Weather/sole.png")) {
-        return -1;
+void Weather::do_Sun(RenderWindow &window, Error &error) {
+
+    try {
+        if (!T_sun.loadFromFile("Weather/sole.png")) {
+            throw "impossibile caricare Texture";
+        }
+    }
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
 
     S_sun.setTexture(T_sun);
@@ -58,15 +68,6 @@ int Weather::do_Sun(RenderWindow &window) {
 
     window.draw(S_sun);
 
-    return 0;
-}
-
-const Sprite Weather::getS_rain(int i) const {
-    return S_rain[i];
-}
-
-const Sprite Weather::getS_sun() const {
-    return S_sun;
 }
 
 

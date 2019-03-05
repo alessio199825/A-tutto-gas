@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Control.h"
+#include "Error.h"
 #include <string>
 
 using namespace std;
@@ -16,45 +17,37 @@ using namespace sf;
 
 class Car{
 
-protected:
-
-    double x_tmp, y_tmp;
-    int speed;
-    int clashes;
-    float lenght;
-    float width;
-    int number;
-
 public:
 
     Car();
+
     Control control;
-    bool setMachinePlayer(RenderWindow &window, int num_circuit);
-    void Car_Player_Movement(RenderWindow &window, int num_circuit);
+
+    void setMachinePlayer(RenderWindow &window, int num_circuit, Error &error);
+    void Car_Player_Movement(RenderWindow &window, Error &error, int num_circuit);
+    float getY_CarPlayer() const;
+    float getX_CarPlayer() const;
+
+    float y_CarPlayer, x_CarPlayer;
+
+
+private:
+
+    int start;
+    float CarPlayer_Acc=1, const_Acc=0.010, const_Brake=0.005;
+    double degreeConst, degree_CarPlayer;
+    Sprite S_MachinePlayer;
+    Texture T_MachinePlayer;
+
     void Accelerate();
     void Accelerate_Out();
     void Do_Reverse();
     void Do_Reverse_Out();
     void Turn_Right();
     void Turn_Left();
-    float getY_CarPlayer() const;
-    float getX_CarPlayer() const;
-
-    double degree_CarPlayer;
-    float y_CarPlayer, x_CarPlayer;
-    int Type_Race, start;
-    int Car_degree=0;
-    float const_Acc=0.010, const_Brake=0.005;
-
-
-private:
-
-    float CarPlayer_Acc=1;
-    Sprite S_MachinePlayer;
-    Texture T_MachinePlayer;
-    double degreeConst;
 
 };
+
 /*
 class CarPlayer : public Car{
 protected:

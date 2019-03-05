@@ -10,9 +10,16 @@
 Car::Car() {
 }
 
-bool Car::setMachinePlayer(RenderWindow &window, int num_circuit) {
-    if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
-        return true;
+void Car::setMachinePlayer(RenderWindow &window, int num_circuit, Error &error) {
+
+    try {
+        if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
+            throw "impossibile caricare Texture";
+        }
+    }
+    catch(...){
+        window.close();
+        error.Check_Image();
     }
 
     S_MachinePlayer.setTexture(T_MachinePlayer);
@@ -41,11 +48,11 @@ bool Car::setMachinePlayer(RenderWindow &window, int num_circuit) {
     S_MachinePlayer.setPosition(Vector2f(x_CarPlayer, y_CarPlayer));
     S_MachinePlayer.setRotation(static_cast<float>(degree_CarPlayer + degreeConst));
     window.draw(S_MachinePlayer);
-    return false;
 }
-void Car::Car_Player_Movement(RenderWindow &window, int num_circuit) {
 
-    switch (control.SetControl(num_circuit, y_CarPlayer, x_CarPlayer, degree_CarPlayer)) {
+void Car::Car_Player_Movement(RenderWindow &window, Error &error, int num_circuit) {
+
+    switch (control.SetControl(window, error, num_circuit, y_CarPlayer, x_CarPlayer, degree_CarPlayer)) {
 
         case 0:
             Accelerate();
@@ -85,6 +92,7 @@ void Car::Car_Player_Movement(RenderWindow &window, int num_circuit) {
 void Car::Do_Reverse() {      //retromarcia
     if (Keyboard::isKeyPressed(Keyboard::Down))
     {
+        CarPlayer_Acc=0;
         x_CarPlayer = static_cast<float>(x_CarPlayer - 0.5 * cos((degree_CarPlayer + degreeConst + 90) * M_PI / 180));
         y_CarPlayer = static_cast<float>(y_CarPlayer - 0.5 * sin((degree_CarPlayer + degreeConst + 90) * M_PI / 180));
        /* x_tmp = static_cast<float>(*x_CarPlayer - 0.5 * cos(((*Degree_CarPlayer + *degreeConst + 90) * M_PI) / 180));

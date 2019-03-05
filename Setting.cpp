@@ -4,50 +4,56 @@ Setting::Setting() {
 
 }
 
-bool Setting::setSettingState(RenderWindow &window) {
+void Setting::setSettingState(RenderWindow &window, Error &error) {
 
-    time_returnIn1=C_returnIn.getElapsedTime();
-    if (!T_setting[0].loadFromFile("Setting/impo.jpg")) {
-        return true;
-    }
-    S_setting[0].setTexture(T_setting[0]);
+    try {
+        time_returnIn1 = C_returnIn.getElapsedTime();
+        if (!T_setting[0].loadFromFile("Setting/impo.jpg")) {
+            throw "impossibile caricare Texture";
+        }
+        S_setting[0].setTexture(T_setting[0]);
 
-    if (!T_setting[1].loadFromFile("Setting/indietro.jpg")) {       //pulsante1
-        return true;
-    }
-    S_setting[1].setTexture(T_setting[1]);
-    S_setting[1].setPosition(sf::Vector2f(25, 25));
+        if (!T_setting[1].loadFromFile("Setting/indietro.jpg")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_setting[1].setTexture(T_setting[1]);
+        S_setting[1].setPosition(sf::Vector2f(25, 25));
 
-    if (!T_setting[2].loadFromFile("Setting/impostazioni.png")) {       //pulsante1
-        return true;
-    }
-    S_setting[2].setTexture(T_setting[2]);
-    S_setting[2].setPosition(sf::Vector2f(220, 25));
+        if (!T_setting[2].loadFromFile("Setting/impostazioni.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_setting[2].setTexture(T_setting[2]);
+        S_setting[2].setPosition(sf::Vector2f(220, 25));
 
-    if (!T_setting[3].loadFromFile("Setting/istruzioni.png")) {       //pulsante2
-        return true;
-    }
-    S_setting[3].setTexture(T_setting[3]);
-    S_setting[3].setPosition(sf::Vector2f(25, 470));
+        if (!T_setting[3].loadFromFile("Setting/istruzioni.png")) {       //pulsante2
+            throw "impossibile caricare Texture";
+        }
+        S_setting[3].setTexture(T_setting[3]);
+        S_setting[3].setPosition(sf::Vector2f(25, 470));
 
-    if (!T_setting[4].loadFromFile("Setting/record.png")) {       //pulsante3
-        return true;
-    }
-    S_setting[4].setTexture(T_setting[4]);
-    S_setting[4].setPosition(sf::Vector2f(350, 470));
+        if (!T_setting[4].loadFromFile("Setting/record.png")) {       //pulsante3
+            throw "impossibile caricare Texture";
+        }
+        S_setting[4].setTexture(T_setting[4]);
+        S_setting[4].setPosition(sf::Vector2f(350, 470));
 
-    if (!T_setting[5].loadFromFile("Setting/riconoscimenti.png")) {       //pulsante4
-        return true;
+        if (!T_setting[5].loadFromFile("Setting/riconoscimenti.png")) {       //pulsante4
+            throw "impossibile caricare Texture";
+        }
+        S_setting[5].setTexture(T_setting[5]);
+        S_setting[5].setPosition(sf::Vector2f(675, 470));
     }
-    S_setting[5].setTexture(T_setting[5]);
-    S_setting[5].setPosition(sf::Vector2f(675, 470));
+    catch(...){
+        window.close();
+        error.Check_Image();
+    }
+
     if(time_returnIn1.asSeconds()-time_returnIn.asSeconds()>0.5)
     Instruction_ControlReturn=true;
 
     for(int i=0; i<6; i++)
     window.draw(S_setting[i]);
 
-    return false;
 }
 
 int Setting::getSettingPage(double &posx, double &posy) {       //tasto indietro
@@ -65,22 +71,28 @@ int Setting::getInstructions(double &posx, double &posy) {
     return 0;
 }
 
-bool Setting::setInstruction(RenderWindow &window) {
-    if (!T_setting[6].loadFromFile("Setting/frecce.png")) {
-        return true;
-    }
-    S_setting[6].setTexture(T_setting[6]);
+void Setting::setInstruction(RenderWindow &window, Error &error) {
 
-    if (!T_setting[7].loadFromFile("Setting/indietro.jpg")) {       //pulsante1
-        return true;
+    try {
+        if (!T_setting[6].loadFromFile("Setting/frecce.png")) {
+            throw "impossibile caricare Texture";
+        }
+        S_setting[6].setTexture(T_setting[6]);
+
+        if (!T_setting[7].loadFromFile("Setting/indietro.jpg")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_setting[7].setTexture(T_setting[7]);
+        S_setting[7].setPosition(sf::Vector2f(25, 25));
     }
-    S_setting[7].setTexture(T_setting[7]);
-    S_setting[7].setPosition(sf::Vector2f(25, 25));
+    catch(...){
+        window.close();
+        error.Check_Image();
+    }
 
     window.draw(S_setting[6]);
     window.draw(S_setting[7]);
 
-    return false;
 }
 
 int Setting::get_Instruction_Return(double &posx, double &posy) {
@@ -93,7 +105,7 @@ int Setting::get_Instruction_Return(double &posx, double &posy) {
     return 1;
 }
 
-int Setting::show_Instruction() {
+int Setting::show_Instruction(RenderWindow &window, Error &error) {
 
     if(control_C) {
         C_show.restart();
@@ -102,42 +114,47 @@ int Setting::show_Instruction() {
         control_C = false;
     }
     Time_show=C_show.getElapsedTime();
-    if (!T_Instruction[0].loadFromFile("Setting/istru1.png")) {       //pulsante1
-        return -1;
-    }
-    S_Instruction[0].setTexture(T_Instruction[0]);
-    S_Instruction[0].setPosition(sf::Vector2f(50, -20));
+    try {
+        if (!T_Instruction[0].loadFromFile("Setting/istru1.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Instruction[0].setTexture(T_Instruction[0]);
+        S_Instruction[0].setPosition(sf::Vector2f(50, -20));
 
-    if (!T_Instruction[1].loadFromFile("Setting/istru2.png")) {       //pulsante1
-        return -1;
-    }
-    S_Instruction[1].setTexture(T_Instruction[1]);
-    S_Instruction[1].setPosition(sf::Vector2f(0, 80));
+        if (!T_Instruction[1].loadFromFile("Setting/istru2.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Instruction[1].setTexture(T_Instruction[1]);
+        S_Instruction[1].setPosition(sf::Vector2f(0, 80));
 
-    if (!T_Instruction[2].loadFromFile("Setting/istru3.png")) {       //pulsante1
-        return -1;
-    }
-    S_Instruction[2].setTexture(T_Instruction[2]);
-    S_Instruction[2].setPosition(sf::Vector2f(530, 250));
+        if (!T_Instruction[2].loadFromFile("Setting/istru3.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Instruction[2].setTexture(T_Instruction[2]);
+        S_Instruction[2].setPosition(sf::Vector2f(530, 250));
 
-    if (!T_Instruction[3].loadFromFile("Setting/istru4.png")) {       //pulsante1
-        return -1;
-    }
-    S_Instruction[3].setTexture(T_Instruction[3]);
-    S_Instruction[3].setPosition(sf::Vector2f(550, 80));
+        if (!T_Instruction[3].loadFromFile("Setting/istru4.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Instruction[3].setTexture(T_Instruction[3]);
+        S_Instruction[3].setPosition(sf::Vector2f(550, 80));
 
-    if (!T_Instruction[4].loadFromFile("Setting/f1racestars.png")) {       //pulsante1
-        return -1;
-    }
-    S_Instruction[4].setTexture(T_Instruction[4]);
-    S_Instruction[4].setPosition(sf::Vector2f(static_cast<float>(x_position), static_cast<float>(y_position)));
+        if (!T_Instruction[4].loadFromFile("Setting/f1racestars.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Instruction[4].setTexture(T_Instruction[4]);
+        S_Instruction[4].setPosition(sf::Vector2f(static_cast<float>(x_position), static_cast<float>(y_position)));
 
-    if (!T_Instruction[5].loadFromFile("Setting/f1racestars1.png")) {       //pulsante1
-        return -1;
+        if (!T_Instruction[5].loadFromFile("Setting/f1racestars1.png")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Instruction[5].setTexture(T_Instruction[5]);
+        S_Instruction[5].setPosition(sf::Vector2f(static_cast<float>(x_position), static_cast<float>( y_position)));
     }
-    S_Instruction[5].setTexture(T_Instruction[5]);
-    S_Instruction[5].setPosition(sf::Vector2f(static_cast<float>(x_position), static_cast<float>( y_position)));
-
+    catch(...){
+        window.close();
+        error.Check_Image();
+    }
 
     if(Time_show.asSeconds()<6 && Time_show.asSeconds()>1){
         ControlShow=0;

@@ -13,50 +13,27 @@ using namespace sf;
 
 class Race{
 
-protected:
-        int loop=0;
-        int Starter_order;
-        int Final_order;
-
 public:
 
-        RenderWindow window_Break;
-        Event event_Break;
-        Texture T_Break;
-        Sprite S_Break;
-        bool setGame(RenderWindow &window, Circuit &circuit, Car &car, Cars_Cpu &cars_cpu, int num_circuit);
-        bool KeyBreak(double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
-        int Break();
-        void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);
-        void DO_race (int);
-        void setRaceState (int);
-        int getChampionship();
-        int getTime_trial();
-        int getSingle_race();
+    RenderWindow window_Break;
+    Event event_Break;
+    Texture T_Break;
+    Sprite S_Break;
 
+    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int num_circuit);
+    void KeyBreak(RenderWindow &window, Error &error, double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
     float getX_tmp() const;
-
     float getY_tmp() const;
 
     Race();
 
 private:
+
+    int loop=0;
     float X_tmp, Y_tmp;
 
-};
-
-class Qualifications{
-
-protected:
-    int order;
-    int Race;
-
-public:
-    bool Do_qualifications();
-    void setQualificationsState(int);
-    int getRace();
-
-    Qualifications();
+    void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);
+    int Break(RenderWindow &window, Error &error);
 
 };
 

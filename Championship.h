@@ -8,6 +8,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "Error.h"
 
 using namespace sf;
 using namespace std;
@@ -17,22 +18,18 @@ class Championship {
 public:
 
     Championship();
-    bool setChampionshipState(RenderWindow &window);
-    int getQualifications(double posx, double posy, RenderWindow &window);
-    const Sprite getS_championship(int i) const;
-
-
+    void setChampionshipState(RenderWindow &window, Error &error);
+    int getQualifications(double posx, double posy, RenderWindow &window, Error &error);
     int Return(double posx, double posy);
 
     ~Championship();
 
-protected:
-    int Ranking;
-    int Qualifications;
-    int chooseCar;
 
 private:
+
+    int chooseCar;
     Texture T_championship[10];
     Sprite S_championship[10];
+
 };
 #endif //ALL_ULTIMO_GAS_CHAMPIONSHIP_H

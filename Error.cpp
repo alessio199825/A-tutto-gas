@@ -43,6 +43,3 @@ void Error::Check_Sound() {    //ricordarsi di cambiare l'immagine, è la stessa
     }
 }
 
-const Sprite *Error::getS_Error() const {
-    return S_Error;
-}

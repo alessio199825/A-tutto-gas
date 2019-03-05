@@ -15,15 +15,16 @@ public:
 
     RenderWindow window_error;
     Event event_error;
+
     void Check_Image();
     void Check_Sound();
 
-    const Sprite *getS_Error() const;
+    //creare un errore per il mancato caricamento di una font
 
 private:
+
     Texture T_Error[2];
     Sprite S_Error[2];
-
 
 };
 

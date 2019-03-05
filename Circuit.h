@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include <string>
 #include <iostream>
+#include "Error.h"
 
 using namespace std;
 using namespace sf;
@@ -12,24 +13,15 @@ using namespace sf;
 class Circuit {
 
 public:
+
     Circuit();
 
-    bool setTileMaps(RenderWindow &window, int circuiton);
-
+    void setTileMaps(RenderWindow &window, int circuiton, Error &error);
     const Sprite getS_Pause(int i) const;
-
-    int getTileMaps();
-    int getTile();
     const Sprite getS_tilemaps() const;
+
     virtual ~Circuit();
 
-protected:
-    int length;
-    int number_of_curves;
-    string difficult;
-    string name;
-    float record_lap;
-    int number_race;
 
 private:
 

@@ -4,48 +4,37 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "Error.h"
 
 using namespace std;
 using namespace sf;
 
 class Single_Race {
 
-
-
-
 public:
+
     Single_Race();
 
     ~Single_Race();
 
-    bool setSingle_RaceState(RenderWindow &window);
+    void setSingle_RaceState(RenderWindow &window, Error &error);
     int getSingle_RaceReturn(double posx, double posy);
-    int getSingle_RaceLap(double posx, double posy, RenderWindow &window);
-    int getSingle_RaceWeather(double posx, double posy, RenderWindow &window);
-    bool setSingle_RaceState2(RenderWindow &window);
+    int getSingle_RaceLap(double posx, double posy, RenderWindow &window, Error &error);
+    int getSingle_RaceWeather(double posx, double posy, RenderWindow &window, Error &error);
+    void setSingle_RaceState2(RenderWindow &window, Error &error);
     int getSingle_Raceon(double posx, double posy);
     int getSingle_Raceonreturn(double posx, double posy);
-    int getSingle_RaceCircuit(double posx, double posy, RenderWindow &window);
+    int getSingle_RaceCircuit(double posx, double posy, RenderWindow &window, Error &error);
     int getSingle_LoadPage(double posx, double posy);
-    bool Single_LoadPage(RenderWindow &window);
-    bool End_SingleRace(RenderWindow &window);
+    void Single_LoadPage(RenderWindow &window, Error &error);
+    void End_SingleRace(RenderWindow &window, Error &error);
 
-    const Sprite getS_singlerace(int i) const;
+private:
 
-    const Sprite getS_singleraceon(int i) const;
-
-
-protected:
-    int order;
-    int circuit;
-    int Number_Lap;
-    int giri;
-    int tempo, Sraceon, circuitrace;
+    int circuit, tempo, circuitrace, giri;
     bool SingleRace_ControlReturn=true;
     Time time_return1, time_return;
     Clock C_return;
-
-private:
     Texture T_singlerace[16], T_singleraceon[10], T_Flag;
     Sprite S_singlerace[16], S_singleraceon[10], S_Flag;
 

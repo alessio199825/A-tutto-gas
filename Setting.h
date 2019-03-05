@@ -6,6 +6,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "Error.h"
 
 using namespace sf;
 using namespace std;
@@ -13,32 +14,28 @@ using namespace std;
 class Setting {
 
 public:
+
     Setting();
-    bool setSettingState(RenderWindow &window);
+
+    void setSettingState(RenderWindow &window, Error &error);
     int getSettingPage(double& posx, double& posy);
     int getInstructions(double& posx, double& posy);
-    bool setInstruction(RenderWindow &window);
+    void setInstruction(RenderWindow &window, Error &error);
     int get_Instruction_Return(double& posx, double& posy);
-    int show_Instruction();
+    int show_Instruction(RenderWindow &window, Error &error);
     void draw_Instruction(RenderWindow &window);
-
     void setControl_C(bool control_C);
-
-
-protected:
-    string controls;
-    string Awards;
-    string record;
 
 private:
 
     bool Instruction_ControlReturn=true, control_C;
+    int ControlShow;
+    double x_position=0, y_position=150;
     Clock C_returnIn, C_show;
     Time time_returnIn1, time_returnIn, Time_show;
-    double x_position=0, y_position=150;
     Texture T_setting[8], T_Instruction[6];
     Sprite S_setting[8], S_Instruction[6];
-    int ControlShow;
+
 };
 
 

@@ -9,6 +9,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "Error.h"
 
 
 using namespace std;
@@ -21,13 +22,7 @@ public:
 
     Weather();
 
-    bool setWeather(int meteo, RenderWindow &window);
-
-    const Sprite getS_rain(int i) const;
-
-    const Sprite getS_sun() const;
-
-    int do_Sun(RenderWindow &window);
+    void setWeather(int meteo, RenderWindow &window, Error &error);
 
 private:
 
@@ -35,8 +30,8 @@ private:
     Sprite S_rain[3], S_sun;
     Texture T_rain, T_sun;
 
-    int do_Rain(RenderWindow &window);
-
+    void do_Sun(RenderWindow &window, Error &error);
+    void do_Rain(RenderWindow &window, Error &error);
 
 };
 
