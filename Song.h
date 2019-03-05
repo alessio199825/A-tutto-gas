@@ -22,6 +22,7 @@ public:
     void music_Menu(RenderWindow &window, Error &error);
     void stop_Load();
     void stop_Menu();
+    //ciao
 
 private:
     Music music_load, music_menu;
