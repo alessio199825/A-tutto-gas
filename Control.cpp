@@ -21,9 +21,7 @@ int Control::SetControl(RenderWindow &window, Error &error, int num_circuit, flo
         case 2:
             return CircuitTwo(window, error, y_CarPlayer, x_CarPlayer, degree_CarPlayer);
 
-        default:
-            return 0;
-
+        default: break;
     }
 }
 
@@ -34,7 +32,7 @@ int Control::CircuitOne(RenderWindow &window, Error &error, float y_CarPlayer, f
 
     try {
         if (image1 == 0) {
-            if(!circuit_one.loadFromFile("Control/control.bmp"))
+            if(!circuit_one.loadFromFile("Control/control1.bmp"))
                 throw "impossibile caricare Texture";
             image1 = 1;
         }
@@ -105,12 +103,18 @@ int Control::CircuitThree(RenderWindow &window, Error &error, float y_CarPlayer,
         error.Check_Image();
     }
 
+    green=circuit_three.getPixel(807,422);
     black=circuit_three.getPixel(5,5);
     color=circuit_three.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
 
     if(color == black){
         return 2;
     }
+
+    if(color == green){
+        return 1;
+    }
+
     return 0;
 }
 
@@ -126,7 +130,7 @@ int Control::SetControlReverse(int numcircuit, float y_CarPlayer, float x_CarPla
 
         case 3:
             return CircuitThreeReverse(y_CarPlayer, x_CarPlayer);
-        default:return 0;
+        default: break;
     }
 
 }
@@ -163,13 +167,16 @@ int Control::CircuitTwoReverse(float y_CarPlayer, float x_CarPlayer) {
 
 int Control::CircuitThreeReverse(float y_CarPlayer, float x_CarPlayer) {
 
-    black=circuit_three.getPixel(5,5);
     color=circuit_three.getPixel(static_cast<unsigned int>(x_CarPlayer), static_cast<unsigned int>(y_CarPlayer));
 
     if(color == black){
         return 2;
     }
+
+    if(color == green){
+        return 1;
+    }
+
     return 0;
 }
-
 

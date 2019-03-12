@@ -12,6 +12,7 @@ void Weather::setWeather(int meteo, RenderWindow &window, Error &error) {
     switch (meteo) {
         case 2:
             do_Rain(window, error);
+            break;
         default:
             do_Sun(window, error);
             break;
@@ -25,7 +26,7 @@ void Weather::do_Rain(RenderWindow &window, Error &error) {
             throw "impossibile caricare Texture";
         }
     }
-    catch(...){
+    catch (...) {
         window.close();
         error.Check_Image();
     }
@@ -54,7 +55,7 @@ void Weather::do_Sun(RenderWindow &window, Error &error) {
             throw "impossibile caricare Texture";
         }
     }
-    catch(...){
+    catch (...) {
         window.close();
         error.Check_Image();
     }

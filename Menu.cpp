@@ -43,7 +43,9 @@ Menu::Menu() {
                         getSetting();
                         getTime_Trial();
 
+                        song.stop_Race();
                         song.music_Menu(window, error);
+                        song.setLightloop(false);
 
                         singleraceon=0;
                         control_timeTrial=0;
@@ -126,10 +128,9 @@ Menu::Menu() {
 
                         window.draw(circuit.getS_tilemaps());
 
-
                         if (control_setRace) {
 
-                            race.setGame(window, circuit, car, error, cars_cpu, circuiton);
+                            race.setGame(window, circuit, car, error, cars_cpu, circuiton, menu_state);
 
                             car.x_CarPlayer=race.getX_tmp();
                             car.y_CarPlayer=race.getY_tmp();
@@ -142,20 +143,22 @@ Menu::Menu() {
                         if(traffic_light.Light_On(window, error)) {
                             car.Car_Player_Movement(window, error, circuiton);
                             cars_cpu.A_star(window);
+
+                            posx = getMousePosx();
+                            posy = getMousePosy();
+                            race.KeyBreak(window, error, song, posx, posy, menu_state, circuiton, singleraceon);
+
                             control_setRace = false;
                         }
 
-                        posx = getMousePosx();
-                        posy = getMousePosy();
-
-                        race.KeyBreak(window, error, posx, posy, menu_state, circuiton, singleraceon);
-
                         weath.setWeather(meteo, window, error);
-
+                        song.music_TrafficLight(window, error);
+                        song.MusicTime(car, window, error, time_circuit);
                         break;
                     case 4:
 
                         singlerace.End_SingleRace(window, error);
+                        song.stop_Race();
 
                         break;
                     default:
@@ -175,8 +178,8 @@ Menu::Menu() {
                         menu_state = timetrial.getReturn(posx, posy);
                         time_circuit = timetrial.getTime_Racecircuit(posx, posy, window, error);
 
-                        control_timeTrial=timetrial.getTime_LoadPage(posx, posy);
-                        x_load=0;               //fa ripartire da 20 la macchina per il caricamento
+                        control_timeTrial = timetrial.getTime_LoadPage(posx, posy);
+                        x_load = 0;               //fa ripartire da 20 la macchina per il caricamento
                         break;
                     case 1:
 
@@ -187,10 +190,12 @@ Menu::Menu() {
                         for (const auto &i : S_loadMachine)
                             window.draw(i);
 
-                        if(Keyboard::isKeyPressed(Keyboard::Key::Tab) )      //tasto per saltare il caricamento
-                            control_timeTrial=2;
+                        if (Keyboard::isKeyPressed(Keyboard::Key::Tab)) {    //tasto per saltare il caricamento
+                            control_setRace = true;
+                            control_timeTrial = 2;
+                        }
 
-                        if(x_load>800) {
+                        if (x_load > 800) {
                             control_setRace = true;
                             control_timeTrial = 2;
 
@@ -199,12 +204,12 @@ Menu::Menu() {
                     case 2:
 
                         song.stop_Menu();
-                        if(control_setRace) {
+                        if (control_setRace) {
 
-                            race.setGame(window, circuit, car, error, cars_cpu, time_circuit);
+                            race.setGame(window, circuit, car, error, cars_cpu, time_circuit, menu_state);
 
-                            car.x_CarPlayer=race.getX_tmp();
-                            car.y_CarPlayer=race.getY_tmp();
+                            car.x_CarPlayer = race.getX_tmp();
+                            car.y_CarPlayer = race.getY_tmp();
 
                             control_setRace = false;
                         }
@@ -217,9 +222,9 @@ Menu::Menu() {
                         posx = getMousePosx();
                         posy = getMousePosy();
 
-                        race.KeyBreak(window, error, posx, posy, menu_state, time_circuit, control_timeTrial);
+                        race.KeyBreak(window, error, song, posx, posy, menu_state, time_circuit, control_timeTrial);
 
-                        meteo=1;
+                        meteo = 1;
 
                         weath.setWeather(meteo, window, error);
 
@@ -228,12 +233,13 @@ Menu::Menu() {
                         timetrial.getTime_lap(window);
                         timetrial.print_TimeLap(window, error);
                         timetrial.print_TimeMinute(window, error);
-
+                        song.MusicTime(car, window, error, time_circuit);
 
                         break;
                     case 3:
 
                         timetrial.End_TimeTrial(window, error);
+                        song.stop_Race();
 
                         break;
                     default: break;

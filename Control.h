@@ -25,9 +25,9 @@ public:
 
 private:
 
-    int image1=0, image2=0, image3=0;
+    int image1=0, image2=0, image3=0, a=0;
     Image circuit_one, circuit_two, circuit_three;
-    Color red, black, color;
+    Color red, black, green, color;
 
     int CircuitOne(RenderWindow &window, Error &error, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);
     int CircuitTwo(RenderWindow &window, Error &error, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer);

@@ -10,8 +10,18 @@ Traffic_Light::Traffic_Light() {
 
 bool Traffic_Light::Light_On(RenderWindow &window, Error &error) {
 
-    if(light_time.asSeconds() > 7)
+
+    if(control_light){
+        light_clock.restart();
+        control_light=false;
+    }
+
+    light_time= light_clock.getElapsedTime();
+
+    if(light_time.asSeconds() > 7){
+        song.setTraffic_light(false);
         return true;
+    }
 
     try {
         if (!T_Light[0].loadFromFile("Semaforo/semaforospento.png")) {
@@ -62,13 +72,6 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error) {
         window.close();
         error.Check_Image();
     }
-
-    if(control_light){
-        light_clock.restart();
-        control_light=false;
-    }
-
-    light_time= light_clock.getElapsedTime();
 
     if(light_time.asSeconds()<2)
         window.draw(S_Light[0]);

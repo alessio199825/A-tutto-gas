@@ -5,11 +5,11 @@ Race::Race() {
 
 }
 
-void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int num_circuit) {
+void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int num_circuit,int menu_state) {
 
     circuit.setTileMaps(window, num_circuit, error);
 
-    car.setMachinePlayer(window, num_circuit, error);
+    car.setMachinePlayer(window, num_circuit, error, menu_state);
 
     cars_cpu.createMachine(window, error);
 
@@ -18,20 +18,21 @@ void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &erro
 
 }
 
-void Race::KeyBreak(RenderWindow &window, Error &error, double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch) {       //tasto che richiama la finestra di pausa
+void Race::KeyBreak(RenderWindow &window, Error &error, Song &song, double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch) {       //tasto che richiama la finestra di pausa
 
         if (posx > 874 && posx < 978 && posy > 19 && posy < 99) {
-            if(Break(window, error)==2)
-                    menu_state=0;
+            song.pause_Race();
+            if(Break(window, error, song)==2) {
+                menu_state = 0;
+            }
         }
-
         End_Game(num_circuit, posx, posy, stateSwitch);
 }
 
-int Race::Break(RenderWindow &window, Error &error) {        //crea la finestra di pausa
+int Race::Break(RenderWindow &window, Error &error, Song &song) {        //crea la finestra di pausa
     while(loop==0) {
         window_Break.create(VideoMode(500, 300), "Pause");
-        while (window_Break.isOpen()) {
+                while (window_Break.isOpen()) {
             while (window_Break.pollEvent(event_Break)) {
                 if (event_Break.type == Event::Closed)
                     window_Break.close();
@@ -53,6 +54,7 @@ int Race::Break(RenderWindow &window, Error &error) {        //crea la finestra 
                 if (Mouse::getPosition(window_Break).x > 118 && Mouse::getPosition(window_Break).x < 195
                         && Mouse::getPosition(window_Break).y > 197 && Mouse::getPosition(window_Break).y < 275) {
                     window_Break.close();
+                    song.play_Race();
                     return 1;
                 }
 

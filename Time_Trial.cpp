@@ -118,6 +118,8 @@ int Time_Trial::getTime_Racecircuit(double posx, double posy, RenderWindow &wind
         default:
             break;
     }
+    if(circuit==0)
+        circuit=3;
     return circuit;
 }
 

@@ -40,18 +40,15 @@ public:
     Song song;
 
     double posx=0, posy=0;
-    int circuiton=0;
+    int time_circuit=0, circuiton=0;
 
 private:
 
-    int control_time=0, control_timeTrial=0, Lap=0/*servira*/, Setting_control=0, time_circuit=0;
+    int control_time=0, control_timeTrial=0, Lap=0/*servira*/, Setting_control=0;
     int load_degree=0, singleraceon=0, menu_state = 0, championship_car=0/*servira*/, degree_load=0, x_load=20, meteo=1;
 
     bool control_setRace=true;
-    bool music_menuloop=false;
-    bool music_loadloop=false;
 
-    Music music_load, music_menu;
     Sprite S_load[2], S_menu[7],S_loadMachine[3];
     Texture T_load[2], T_menu[7],T_loadMachine[3];
 

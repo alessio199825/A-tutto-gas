@@ -10,6 +10,7 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include "Error.h"
+#include "Song.h"
 
 using namespace sf;
 using namespace std;
@@ -18,6 +19,8 @@ class Traffic_Light {
 
 public:
     Traffic_Light();
+
+    Song song;
 
     bool Light_On(RenderWindow &window, Error &error);
 

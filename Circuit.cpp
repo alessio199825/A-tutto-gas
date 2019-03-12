@@ -16,17 +16,19 @@ void Circuit::setTileMaps(RenderWindow &window, int CircuitOn, Error &error) {
                 S_Pause[0].setPosition(910, 510);
                 break;
             case 2:
-                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_MEDIO.png")) {       //3 giri modificato
+                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_MEDIO.jpg")) {       //3 giri modificato
                     throw "impossibile caricare Texture";
                 }
                 S_Pause[0].setPosition(20, 510);
                 break;
-            default:
-                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_DIFFICILE.png")) {       //3 giri modificato
+            case 3:
+                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_DIFFICILE.jpg")) {       //3 giri modificato
                     throw "impossibile caricare Texture";
                 }
                 S_Pause[0].setPosition(910, 120);
                 break;
+            default: break;
+
         }
         if (!T_Pause[1].loadFromFile("race/pausa.png")) {
             throw "impossibile caricare Texture";

@@ -5,6 +5,7 @@
 #include "Circuit.h"
 #include "Car.h"
 #include "Cars_Cpu.h"
+#include "Song.h"
 #include <iostream>
 #include <cstring>
 
@@ -19,9 +20,10 @@ public:
     Event event_Break;
     Texture T_Break;
     Sprite S_Break;
+    Song song;
 
-    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int num_circuit);
-    void KeyBreak(RenderWindow &window, Error &error, double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
+    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int num_circuit, int menu_state);
+    void KeyBreak(RenderWindow &window, Error &error, Song &song, double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
     float getX_tmp() const;
     float getY_tmp() const;
 
@@ -33,7 +35,7 @@ private:
     float X_tmp, Y_tmp;
 
     void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);
-    int Break(RenderWindow &window, Error &error);
+    int Break(RenderWindow &window, Error &error, Song &song);
 
 };
 
