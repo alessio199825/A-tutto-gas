@@ -10,7 +10,7 @@
 Car::Car() {
 }
 
-void Car::setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, int Type_race) {
+void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, int Type_race) {
 
     try {
         if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
@@ -18,8 +18,7 @@ void Car::setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, 
         }
     }
     catch(...){
-        window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     S_MachinePlayer.setTexture(T_MachinePlayer);
@@ -27,7 +26,7 @@ void Car::setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, 
     degree_CarPlayer=0;
     switch(Type_race) {
         case 2:
-            switch (num_circuit) {
+            switch (circuitrace) {
                 case 1:
                     x_CarPlayer = 160;
                     y_CarPlayer = 312;
@@ -48,7 +47,7 @@ void Car::setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, 
             }
             break;
         case 3:
-            switch (num_circuit) {
+            switch (circuitrace) {
                 case 1:
                     x_CarPlayer = 105;
                     y_CarPlayer = 302;
@@ -74,9 +73,8 @@ void Car::setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, 
     window.draw(S_MachinePlayer);
 }
 
-void Car::Car_Player_Movement(RenderWindow &window, Error &error, int num_circuit) {
-
-    switch (control.SetControl(window, error, num_circuit, y_CarPlayer, x_CarPlayer, degree_CarPlayer)) {
+void Car::Car_Player_Movement(RenderWindow &window, Error &error, int circuitrace) {
+    switch (control.SetControl(window, error, circuitrace, y_CarPlayer, x_CarPlayer, degree_CarPlayer)) {
 
         case 0:
             Accelerate();
@@ -98,7 +96,7 @@ void Car::Car_Player_Movement(RenderWindow &window, Error &error, int num_circui
     }
 
     if (Reverse == 0 || Reverse == 1)
-    switch (control.SetControlReverse(num_circuit, y_CarPlayer, x_CarPlayer)){
+    switch (control.SetControlReverse(circuitrace, y_CarPlayer, x_CarPlayer)){
         case 0:
             Do_Reverse();
             break;
@@ -130,7 +128,7 @@ void Car::Do_Reverse() {      //retromarcia
 void Car::Accelerate() { //accelerazione seguendo con freno motore
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         start=1;
-        if (CarPlayer_Acc < 1) {
+        if (CarPlayer_Acc < 0.5) {
             CarPlayer_Acc = CarPlayer_Acc + const_Acc;
         }
         x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
@@ -161,7 +159,7 @@ void Car::Accelerate_Out() {
     if (Keyboard::isKeyPressed(Keyboard::Up))
     {
         start=1;
-        CarPlayer_Acc = 0.1;
+        CarPlayer_Acc = 0.05;
         x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
         y_CarPlayer = static_cast<float>(y_CarPlayer + CarPlayer_Acc * sin(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
     }

@@ -16,7 +16,7 @@ public:
 
     Circuit();
 
-    void setTileMaps(RenderWindow &window, int circuiton, Error &error);
+    void setTileMaps(int circuitrace, Error &error, RenderWindow &window);
     const Sprite getS_Pause(int i) const;
     const Sprite getS_tilemaps() const;
 

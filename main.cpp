@@ -1,8 +1,7 @@
 #include <iostream>
-#include "Race.h"
+#include "Menu_Loop.h"
 #include "Menu.h"
-#include "Circuit.h"
-#include "Car.h"
+#include "Error.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
@@ -12,5 +11,8 @@
 
 int main() {
 
-    Menu ml;
+    //Menu ml;
+    Menu_Loop menu_Loop;
+    Error error;
+    menu_Loop.generateWindow(error);
 };

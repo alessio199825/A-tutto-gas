@@ -39,7 +39,7 @@ int Control::CircuitOne(RenderWindow &window, Error &error, float y_CarPlayer, f
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     red=circuit_one.getPixel(100,230);
@@ -70,7 +70,7 @@ int Control::CircuitTwo(RenderWindow &window, Error &error, float y_CarPlayer, f
     }
     catch(...) {
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     red=circuit_two.getPixel(947,51);
@@ -100,7 +100,7 @@ int Control::CircuitThree(RenderWindow &window, Error &error, float y_CarPlayer,
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     green=circuit_three.getPixel(807,422);

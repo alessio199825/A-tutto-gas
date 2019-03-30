@@ -24,7 +24,7 @@ public:
     Control control;
 
     void setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, int Type_race);
-    void Car_Player_Movement(RenderWindow &window, Error &error, int num_circuit);
+    void Car_Player_Movement(RenderWindow &window, Error &error, int circuitrace);
     float getY_CarPlayer() const;
     float getX_CarPlayer() const;
 
@@ -34,7 +34,7 @@ public:
 private:
 
     int start, Reverse;
-    float CarPlayer_Acc=1, const_Acc=0.010, const_Brake=0.005;
+    float CarPlayer_Acc=0.5, const_Acc=0.010, const_Brake=0.005;
     double degreeConst, degree_CarPlayer;
     Sprite S_MachinePlayer;
     Texture T_MachinePlayer;

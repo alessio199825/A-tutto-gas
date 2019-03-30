@@ -8,6 +8,7 @@
 #include "Song.h"
 #include <iostream>
 #include <cstring>
+#include "Menu_State.h"
 
 using namespace std;
 using namespace sf;
@@ -22,20 +23,24 @@ public:
     Sprite S_Break;
     Song song;
 
-    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int num_circuit, int menu_state);
-    void KeyBreak(RenderWindow &window, Error &error, Song &song, double& posx, double& posy, int &menu_state, int num_circuit, int &stateSwitch);
+    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int Type_race,
+                 int circuitrace);
+    void KeyBreak(RenderWindow &window, Error &error, Song &song, double &posx, double &posy, int &pageIndex,
+                      bool &pageChanged, int circuitrace);
     float getX_tmp() const;
     float getY_tmp() const;
 
     Race();
+
 
 private:
 
     int loop=0;
     float X_tmp, Y_tmp;
 
-    void End_Game(int num_circuit, double& posx, double& posy, int &stateSwitch);
+    void End_Game(double &posx, double &posy, int &stateSwitch, int circuitrace);
     int Break(RenderWindow &window, Error &error, Song &song);
+
 
 };
 

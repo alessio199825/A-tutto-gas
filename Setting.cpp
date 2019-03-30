@@ -45,7 +45,7 @@ void Setting::setSettingState(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     if(time_returnIn1.asSeconds()-time_returnIn.asSeconds()>0.5)
@@ -87,7 +87,7 @@ void Setting::setInstruction(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     window.draw(S_setting[6]);
@@ -153,7 +153,7 @@ int Setting::show_Instruction(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     if(Time_show.asSeconds()<6 && Time_show.asSeconds()>1){

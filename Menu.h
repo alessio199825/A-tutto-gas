@@ -25,6 +25,8 @@ public:
 
     Menu();
 
+    void GoRace();
+
     RenderWindow window;
     Event event;
     Single_Race singlerace;

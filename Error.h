@@ -16,7 +16,7 @@ public:
     RenderWindow window_error;
     Event event_error;
 
-    void Check_Image();
+    void Check_Image(RenderWindow &window);
     void Check_Sound();
 
     //creare un errore per il mancato caricamento di una font

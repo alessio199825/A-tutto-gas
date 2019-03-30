@@ -17,7 +17,7 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     S_CpuCar[0].setTexture(T_CpuCar[0]);

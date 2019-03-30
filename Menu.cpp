@@ -19,7 +19,6 @@ Menu::Menu() {
 
         if(time_load.asSeconds()>24 || control_time==2){       //consente di saltare il caricamento dopo 24 secondi oppure dopo aver premuto il tasto tab
             control_time=2;
-            song.stop_Load();
         }
         else{
             control_time=1;
@@ -101,8 +100,6 @@ Menu::Menu() {
 
                     case 2:
 
-                        traffic_light.setControl_light(true);
-
                         singlerace.Single_LoadPage(window, error);
 
                         load_Machine();
@@ -124,13 +121,15 @@ Menu::Menu() {
                         break;
                     case 3:
 
+                        traffic_light.setControl_light(true);
+
                         song.stop_Menu();
 
                         window.draw(circuit.getS_tilemaps());
 
                         if (control_setRace) {
 
-                            race.setGame(window, circuit, car, error, cars_cpu, circuiton, menu_state);
+                            race.setGame(window, circuit, car, error, cars_cpu, menu_state, 0);
 
                             car.x_CarPlayer=race.getX_tmp();
                             car.y_CarPlayer=race.getY_tmp();
@@ -140,13 +139,14 @@ Menu::Menu() {
                         window.draw(circuit.getS_Pause(0));
                         window.draw(circuit.getS_Pause(1));
 
-                        if(traffic_light.Light_On(window, error)) {
+                        if(traffic_light.Light_On(window, error, 0)) {
                             car.Car_Player_Movement(window, error, circuiton);
                             cars_cpu.A_star(window);
 
                             posx = getMousePosx();
                             posy = getMousePosy();
-                            race.KeyBreak(window, error, song, posx, posy, menu_state, circuiton, singleraceon);
+                            //race.KeyBreak(window, error, song, posx, posy, menu_state, circuiton,
+//                                          singleraceon, <#initializer#>);
 
                             control_setRace = false;
                         }
@@ -206,7 +206,7 @@ Menu::Menu() {
                         song.stop_Menu();
                         if (control_setRace) {
 
-                            race.setGame(window, circuit, car, error, cars_cpu, time_circuit, menu_state);
+                            race.setGame(window, circuit, car, error, cars_cpu, menu_state, 0);
 
                             car.x_CarPlayer = race.getX_tmp();
                             car.y_CarPlayer = race.getY_tmp();
@@ -222,7 +222,8 @@ Menu::Menu() {
                         posx = getMousePosx();
                         posy = getMousePosy();
 
-                        race.KeyBreak(window, error, song, posx, posy, menu_state, time_circuit, control_timeTrial);
+//                        race.KeyBreak(window, error, song, posx, posy, menu_state, time_circuit,
+                                    //  control_timeTrial, <#initializer#>);
 
                         meteo = 1;
 
@@ -234,7 +235,6 @@ Menu::Menu() {
                         timetrial.print_TimeLap(window, error);
                         timetrial.print_TimeMinute(window, error);
                         song.MusicTime(car, window, error, time_circuit);
-
                         break;
                     case 3:
 
@@ -296,7 +296,7 @@ void Menu::createMenu() {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     S_load[1].setPosition(sf::Vector2f(240, 350));
@@ -316,7 +316,7 @@ void Menu::createMenu() {
 
 int Menu::setMenuState() {
 
-    try {
+    try {                                                   //fatto
         if (!T_menu[0].loadFromFile("Menu/2307.jpg"))
             throw "impossibile caricare Texture";
 
@@ -354,8 +354,8 @@ int Menu::setMenuState() {
     }
     catch(...){
         window.close();
-        error.Check_Image();
-    }
+        error.Check_Image(window);
+    }                                               //fatto;
 
     window.draw(S_menu[0]);
     window.draw(S_menu[1]);
@@ -412,7 +412,7 @@ int Menu::getTime_Trial() {
     return 0;
 }
 
-double Menu::getMousePosx() {
+double Menu::getMousePosx() {               //fatto
 
     if(Mouse::isButtonPressed(Mouse::Left) ) {
         posx=Mouse::getPosition(window).x;
@@ -425,7 +425,7 @@ double Menu::getMousePosy() {
         posy = Mouse::getPosition(window).y;
     }
     return posy;
-}
+}                                           //fatto;
 
 void Menu::load_Machine() {
 
@@ -456,11 +456,50 @@ void Menu::load_Machine() {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     x_load=x_load+8;
     load_degree=load_degree+35;
+
+}
+
+void Menu::GoRace() {
+
+
+    traffic_light.setControl_light(true);
+
+    song.stop_Menu();
+
+    window.draw(circuit.getS_tilemaps());
+
+    if (control_setRace) {
+
+        race.setGame(window, circuit, car, error, cars_cpu, menu_state, 0);
+
+        car.x_CarPlayer=race.getX_tmp();
+        car.y_CarPlayer=race.getY_tmp();
+
+    }
+
+    window.draw(circuit.getS_Pause(0));
+    window.draw(circuit.getS_Pause(1));
+
+    if(traffic_light.Light_On(window, error, 0)) {
+        car.Car_Player_Movement(window, error, circuiton);
+        cars_cpu.A_star(window);
+
+        posx = getMousePosx();
+        posy = getMousePosy();
+        //race.KeyBreak(window, error, song, posx, posy, menu_state, circuiton,
+//                                          singleraceon, <#initializer#>);
+
+        control_setRace = false;
+    }
+
+    weath.setWeather(meteo, window, error);
+    song.music_TrafficLight(window, error);
+    song.MusicTime(car, window, error, time_circuit);
 
 }
 

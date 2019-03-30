@@ -22,7 +22,7 @@ public:
 
     Song song;
 
-    bool Light_On(RenderWindow &window, Error &error);
+    bool Light_On(RenderWindow &window, Error &error, int Type_race);
 
     void setControl_light(bool control_light);
 
@@ -31,7 +31,7 @@ private:
     Sprite S_Light[6];
     Clock light_clock;
     Time light_time;
-    bool control_light=true;
+    bool control_light=true, control_trafficlight;
 };
 
 

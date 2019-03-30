@@ -26,11 +26,6 @@ void Song::music_Load(RenderWindow &window, Error &error) {
     loadloop = true;
 }
 
-void Song::stop_Load() {
-    music_load.stop();
-    loadloop=false;
-}
-
 void Song::music_Menu(RenderWindow &window, Error &error) {
 
     if (!menuloop) {
@@ -65,20 +60,13 @@ void Song::music_Race(RenderWindow &window, Error &error) {
             error.Check_Sound();
         }
         music_race.play();
-        if(!traffic_light) {
+        if(traffic_light) {
             music_race.setPlayingOffset(seconds(6.f));
-            music_race.setVolume(50.f);
         }
-        else
-            music_race.setVolume(100.f);
     }
     raceloop = true;
     music_race.setLoop(true);
 
-}
-
-void Song::play_Race() {
-    music_race.play();
 }
 
 void Song::stop_Race() {
@@ -86,10 +74,12 @@ void Song::stop_Race() {
     raceloop = false;
 }
 
-void Song::pause_Race() {
-    music_race.pause();
-    lightloop = true;
-};
+void Song::pause_Race(bool Select_Pause) {
+    if(Select_Pause)
+        music_race.pause();
+    if(!Select_Pause)
+        music_race.play();
+}
 
 
 void Song::music_TrafficLight(RenderWindow &window, Error &error) {
@@ -112,41 +102,6 @@ void Song::setLightloop(bool lightloop) {
     Song::lightloop = lightloop;
 }
 
-void Song::music_TeamRadio(RenderWindow &window, Error &error) {
-    pause_Race();
-    if (!teamradioloop) {
-        try {
-            if (!music_teamradio[0].openFromFile("Music/teamradio1.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[1].openFromFile("Music/teamradio2.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[2].openFromFile("Music/teamradio3.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[3].openFromFile("Music/teamradio4.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[4].openFromFile("Music/teamradio5.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[5].openFromFile("Music/teamradio6.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[6].openFromFile("Music/teamradio7.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[7].openFromFile("Music/teamradio8.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[8].openFromFile("Music/teamradio9.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[9].openFromFile("Music/teamradio10.ogg"))
-                throw "impossibile caricare Music";
-            if (!music_teamradio[10].openFromFile("Music/teamradio11.ogg"))
-                throw "impossibile caricare Music";
-        }
-        catch(...){
-            window.close();
-            error.Check_Sound();
-        }
-
-    }
-    teamradioloop = true;
-}
 
 void Song::music_Box(RenderWindow &window, Error &error) {
     if (!boxloop) {
@@ -212,3 +167,98 @@ void Song::stop_Box() {
 void Song::setTraffic_light(bool traffic_light) {
     Song::traffic_light = traffic_light;
 }
+
+void Song::Music_Radio(RenderWindow &window, Error &error) {
+
+    srand(time(NULL));                  //potrebbe essere utile richiamarlo solo una volta e inibirne il funzionamento
+    timeRadio = clockRadio.getElapsedTime();
+    if (timeRadio.asSeconds() > 15) {
+        SelectRadio = (rand() % 19) + 1;
+        try {
+
+            if (SelectRadio <= 9) {
+                switch (SelectRadio % 3) {
+                    case 0:
+                        if (!M_teamRadio.openFromFile("Music/teamradio9.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 4.50;
+                        break;
+                    case 1:
+                        if (!M_teamRadio.openFromFile("Music/teamradio2.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 4;
+                        break;
+                    case 2:
+                        if (!M_teamRadio.openFromFile("Music/teamradio11.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 3.50;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (SelectRadio > 9 || SelectRadio <= 17) {
+                switch (SelectRadio / 2) {
+                    case 5:
+                        if (!M_teamRadio.openFromFile("Music/teamradio1.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 5.50;
+                        break;
+                    case 6:
+                        if (!M_teamRadio.openFromFile("Music/teamradio5.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 3.50;
+                        break;
+                    case 7:
+                        if (!M_teamRadio.openFromFile("Music/teamradio6.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 5;
+                        break;
+                    case 8:
+                        if (!M_teamRadio.openFromFile("Music/teamradio7.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 7;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (SelectRadio > 17) {
+                switch (SelectRadio % 2) {
+                    case 0:
+                        if (!M_teamRadio.openFromFile("Music/teamradio3.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 11;
+                        break;
+                    case 1:
+                        if (!M_teamRadio.openFromFile("Music/teamradio8.ogg"))
+                            throw "impossibile caricare music";
+                        Radio_Seconds = 9.50;
+                        break;
+                }
+            }
+        }
+        catch (...) {
+            window.close();
+            error.Check_Sound();
+        }
+        clockRadio.restart();
+        timeRadio = clockRadio.getElapsedTime();
+        pause_Race(true);
+        M_teamRadio.play();
+    }
+
+    if (timeRadio.asSeconds() > Radio_Seconds) {
+        pause_Race(false);
+        Radio_Seconds=20;
+    }
+
+}
+
+void Song::Music_RadioPause(bool controlRadio) {
+    if(controlRadio)
+        M_teamRadio.pause();
+    if(!controlRadio)
+        M_teamRadio.play();
+}
+

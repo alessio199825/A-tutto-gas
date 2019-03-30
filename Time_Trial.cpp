@@ -50,7 +50,7 @@ void Time_Trial::setTime_TrialState(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     for (int i = 0; i < 7; i++) {
@@ -102,7 +102,7 @@ int Time_Trial::getTime_Racecircuit(double posx, double posy, RenderWindow &wind
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     switch (circuit) {
@@ -142,7 +142,7 @@ void Time_Trial::Timetrial_LoadPage(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     window.draw(S_timetrial[10]);
@@ -159,7 +159,7 @@ void Time_Trial::End_TimeTrial(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     window.draw(S_Flag);
@@ -207,7 +207,6 @@ void Time_Trial::getTime_lap(RenderWindow &window) {
                         Lap_Time_Minutes[number_of_Lap-1]=minute_const;
                         Lap_Time_Seconds[number_of_Lap-1]= static_cast<int>(timelap.asSeconds() - (Lap_Time_Minutes[number_of_Lap - 1] * 60));
                         Lap_Time_Milliseconds[number_of_Lap-1]=(timelap.asMilliseconds() - (Lap_Time_Seconds[number_of_Lap-1] * 1000));
-
                     }
                 }
             }
@@ -245,7 +244,6 @@ void Time_Trial::getTime_lap(RenderWindow &window) {
                         Lap_Time_Milliseconds[number_of_Lap-1]= static_cast<int>(timelap.asMilliseconds() - (Lap_Time_Seconds[number_of_Lap-1] * 1000));
                         minute_const= static_cast<int>(timelap.asSeconds() / 60);
                         Lap_Time_Minutes[number_of_Lap-1]=minute_const;
-
                     }
                 }
             }
@@ -305,7 +303,7 @@ void Time_Trial::print_TimeLap(RenderWindow &window, Error& error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     X_time[1].setFont(F_time);
@@ -335,7 +333,7 @@ void Time_Trial::print_TimeMinute(RenderWindow &window, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     X_time_minute.setFont(F_time);

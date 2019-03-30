@@ -70,7 +70,7 @@ void Single_Race::setSingle_RaceState(RenderWindow &window, Error &error) {
         }
         catch(...) {
         window.close();
-        error.Check_Image();
+            error.Check_Image(window);
         }
 
         if(time_return1.asSeconds()-time_return.asSeconds()>0.5)
@@ -118,7 +118,7 @@ int Single_Race::getSingle_RaceLap(double posx, double posy, RenderWindow &windo
         }
         catch(...){
             window.close();
-            error.Check_Image();
+            error.Check_Image(window);
         }
 
         switch (giri) {
@@ -169,7 +169,7 @@ int Single_Race::getSingle_RaceWeather(double posx, double posy, RenderWindow &w
         }
         catch(...){
             window.close();
-            error.Check_Image();
+            error.Check_Image(window);
         }
 
         switch (tempo) {
@@ -231,7 +231,7 @@ void Single_Race::setSingle_RaceState2(RenderWindow &window, Error &error) {
         }
         catch(...){
             window.close();
-            error.Check_Image();
+            error.Check_Image(window);
         }
 
         for (int i = 0; i < 7; i++) {
@@ -295,7 +295,7 @@ int Single_Race::getSingle_RaceCircuit(double posx, double posy, RenderWindow &w
         }
         catch(...){
             window.close();
-            error.Check_Image();
+            error.Check_Image(window);
         }
 
         switch (circuitrace) {
@@ -317,7 +317,7 @@ int Single_Race::getSingle_RaceCircuit(double posx, double posy, RenderWindow &w
 
 }
 
-void Single_Race::Single_LoadPage(RenderWindow &window, Error &error) {
+void Single_Race::Single_LoadPage(RenderWindow &window, Error &error) {                  //fatto
 
         try {
             if (!T_singlerace[15].loadFromFile("Single_Race/planisfero.png")) {       //pulsante1
@@ -327,7 +327,7 @@ void Single_Race::Single_LoadPage(RenderWindow &window, Error &error) {
         }
         catch(...){
             window.close();
-            error.Check_Image();
+            error.Check_Image(window);
         }
 
         window.draw(S_singlerace[15]);
@@ -352,7 +352,7 @@ void Single_Race::End_SingleRace(RenderWindow &window, Error &error) {
         }
         catch(...){
             window.close();
-            error.Check_Image();
+            error.Check_Image(window);
         }
 
         window.draw(S_Flag);

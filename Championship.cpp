@@ -43,7 +43,7 @@ void Championship::setChampionshipState(RenderWindow &window, Error &error)  {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     for (int i = 0; i < 7; i++) {
@@ -82,7 +82,7 @@ int Championship::getQualifications(double posx, double posy, RenderWindow &wind
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     switch (chooseCar) {

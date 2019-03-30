@@ -22,14 +22,15 @@ public:
 
     Weather();
 
-    void setWeather(int meteo, RenderWindow &window, Error &error);
+    void setWeather(bool meteo, RenderWindow &window, Error &error);
 
 private:
 
-    int x_rain=0, y_rain=0, sun_degree=0;
+    int x_rain=0, y_rain=0;
+    float sun_degree=0;
     Sprite S_rain[3], S_sun;
     Texture T_rain, T_sun;
-    bool control_rain=true, control_sun=true;
+    bool control_rain, control_sun;
 
     void do_Sun(RenderWindow &window, Error &error);
     void do_Rain(RenderWindow &window, Error &error);

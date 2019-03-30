@@ -8,6 +8,7 @@
 #include "Control.h"
 #include "Car.h"
 #include "Error.h"
+#include "Song.h"
 
 using namespace sf;
 using namespace std;
@@ -20,6 +21,7 @@ public:
     Time_Trial();
 
     Car car;
+    Song song;
 
     Time timelap;
     Clock clock_lap;

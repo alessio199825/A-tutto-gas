@@ -1,6 +1,6 @@
 #include "Circuit.h"
 Circuit::Circuit() {}
-void Circuit::setTileMaps(RenderWindow &window, int CircuitOn, Error &error) {
+void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
 
     try {
         if (!T_Pause[0].loadFromFile("race/termina.png")) {
@@ -8,7 +8,7 @@ void Circuit::setTileMaps(RenderWindow &window, int CircuitOn, Error &error) {
         }
 
         S_Pause[0].setTexture(T_Pause[0]);
-        switch (CircuitOn) {
+        switch (circuitrace) {
             case 1:
                 if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_BASE.jpg")) {       //3 giri modificato
                     throw "impossibile caricare Texture";
@@ -36,7 +36,7 @@ void Circuit::setTileMaps(RenderWindow &window, int CircuitOn, Error &error) {
     }
     catch(...){
         window.close();
-        error.Check_Image();
+        error.Check_Image(window);
     }
 
     S_Pause[1].setTexture(T_Pause[1]);

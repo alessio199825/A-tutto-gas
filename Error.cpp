@@ -5,7 +5,7 @@ Error::Error()
 
 }
 
-void Error::Check_Image() {
+void Error::Check_Image(RenderWindow &window) {
 
     window_error.create(VideoMode(500, 300), "Errore"); //creazione di un pop-up che avverte di un problema nel caricamento di un immagine
     while (window_error.isOpen()) {
@@ -18,6 +18,7 @@ void Error::Check_Image() {
         T_Error[0].loadFromFile("Error/warning.jpg");
         S_Error[0].setTexture(T_Error[0]);
 
+        window.close();
         window_error.clear();
         window_error.draw(S_Error[0]);
         window_error.display();
