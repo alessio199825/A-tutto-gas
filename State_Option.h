@@ -21,7 +21,7 @@ public:
 
     bool getState();
 
-    void changeSate(RenderWindow &window, Error &error);
+    void changeState(RenderWindow &window, Error &error);
 
     void draw(RenderWindow &window);
 

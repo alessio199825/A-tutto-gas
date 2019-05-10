@@ -56,7 +56,9 @@ public:
 private:
 
     int circuitrace, Type_race;
-    bool control_setRace=true, meteo;
+    bool control_setRace=true, meteo, flag=false;
+    Texture T_Flag;
+    Sprite S_Flag;
 };
 
 

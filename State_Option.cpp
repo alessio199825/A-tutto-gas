@@ -15,7 +15,7 @@ State_Option::State_Option(Menu_State *gContext) {
     menu_State=gContext;
 }
 
-void State_Option::changeSate(RenderWindow &window, Error &error) {
+void State_Option::changeState(RenderWindow &window, Error &error) {
     if (menu_State){
 
         Menu_State* gContext = menu_State->getNewPage(window, error);

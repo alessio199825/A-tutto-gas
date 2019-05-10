@@ -5,6 +5,7 @@
 #include "Menu_Loop.h"
 
 Menu_Loop::Menu_Loop() {
+
     window.create(VideoMode(1000,600), "All'ultimo gas");
 }
 
@@ -28,12 +29,11 @@ void Menu_Loop::generateWindow(Error &error) {
 
             Index = state_option.getActivities(event, window);
 
-
         }
 
         if(state_option.getState()){
 
-            state_option.changeSate(window, error);
+            state_option.changeState(window, error);
 
         }
 

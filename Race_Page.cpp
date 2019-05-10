@@ -59,8 +59,13 @@ void Race_Page::draw(RenderWindow &window) {
     weath.setWeather(meteo, window, error);
     song.MusicTime(car, window, error, circuitrace);
     if(Type_race==2){
-        //song.pause_Race(true);
         song.Music_Radio(window, error);
+    }
+
+    if(flag){
+        window.draw(S_Flag);
+        song.stop_Race();
+        song.Music_RadioPause(true);
     }
 
 }
@@ -84,10 +89,38 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
 
     }
 
+    switch(circuitrace){
+        case 1:
+            if (posx > 910 && posx < 980 && posy > 510 && posy < 580)
+                flag=true;
+            break;
+        case 2:
+            if (posx > 20 && posx < 90 && posy > 510 && posy < 580)
+                flag=true;
+            break;
+        case 3:
+            if (posx > 910 && posx < 980 && posy > 120 && posy < 190)
+                flag=true;
+            break;
+        default: false;
+    }
+
+
     return -1;
 }
 
 void Race_Page::setWindow(Error &error, RenderWindow &window) {
+
+    try {
+        if (!T_Flag.loadFromFile("race/scacchi.jpg")) {       //pulsante1
+            throw "impossibile caricare Texture";
+        }
+        S_Flag.setTexture(T_Flag);
+    }
+    catch(...){
+        window.close();
+        error.Check_Image(window);
+    }
 
 }
 
