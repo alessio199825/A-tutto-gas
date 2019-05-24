@@ -47,7 +47,6 @@ public:
 
     void setNode(int node);
 
-
 };
 
 class A_Star{

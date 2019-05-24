@@ -703,7 +703,6 @@ private: // methods
         FreeNode(m_Goal);
     }
 
-
     // This call is made by the search class when the search ends. A lot of nodes may be
     // created that are still present when the search ends. They will be deleted by this
     // routine once the search ends

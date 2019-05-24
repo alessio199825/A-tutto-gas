@@ -14,7 +14,6 @@ public:
     void LoadControlMap(RenderWindow &window, Error &error, int numcircuit);
     int GetCostNode(int x, int y);
 
-
 private:
     bool map=false, example=false;
     Image ControlMap, ExampleColor;

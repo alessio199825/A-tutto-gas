@@ -53,7 +53,6 @@ void Cars_Cpu::setPos() {
         S_CpuCar[0].setPosition(posCar[index++]);
 }
 
-
 void Cars_Cpu::setCar(int x,int y) {
 
     posCar.emplace_back(x,y);       //    posCar.push_back(Vector2f(x,y));

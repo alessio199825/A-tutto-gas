@@ -26,7 +26,6 @@ public:
     float getY_cpu() const;
 
     void setX_cpu(float x_cpu);
-
     void setY_cpu(float y_cpu);
 
     void setCar(int x,int y);

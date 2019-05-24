@@ -4,7 +4,6 @@
 
 #include "A_Star.h"
 
-
 // Definitions
 
 bool MapSearchNode::IsSameState( MapSearchNode &rhs )

@@ -54,7 +54,6 @@ void Race_Page::draw(RenderWindow &window) {
 
         control_cpu.LoadControlMap(window, error, circuitrace);
 
-        //cout<<done<<endl;
         a_star.astar();
 
         cars_cpu.createMachine(window, error);

@@ -245,5 +245,4 @@ private: // data
 
 };
 
-
 #endif //ALL_ULTIMO_GAS_FSA_H

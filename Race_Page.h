@@ -59,8 +59,6 @@ public:
 
     int x_CpuCar, y_CpuCar;
 
-
-
 private:
 
     int circuitrace, Type_race;
