@@ -179,4 +179,3 @@ int Control::CircuitThreeReverse(float y_CarPlayer, float x_CarPlayer) {
 
     return 0;
 }
-

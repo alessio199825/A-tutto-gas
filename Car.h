@@ -87,7 +87,7 @@ public:
 class Basetrajectory : public CarPlayer{
 
 public:
-    void A_star();
+    void MapSearchNode();
 };
 */
 /*
@@ -149,7 +149,7 @@ protected:
     bool OnSafetyCar;
     int Trajectory;
 public:
-    void A_star();
+    void MapSearchNode();
     int do_trajectory();
     bool get_SafetyCar();
     CpuStrategy();

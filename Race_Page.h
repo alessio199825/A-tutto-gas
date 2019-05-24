@@ -9,7 +9,6 @@
 #include <SFML/Audio.hpp>
 #include "Menu_State.h"
 #include "Error.h"
-#include "Menu_State.h"
 #include "Car.h"
 #include "Traffic_Light.h"
 #include "Race.h"
@@ -17,6 +16,9 @@
 #include "Song.h"
 #include "Cars_Cpu.h"
 #include "Weather.h"
+#include "Control_Cpu.h"
+#include "A_Star.h"
+
 
 using namespace sf;
 
@@ -33,10 +35,13 @@ public:
     Cars_Cpu cars_cpu;
     Song song;
     Error error;
+    Control_Cpu control_cpu;
     Car car;
     Race race;
     Traffic_Light traffic_light;
     Circuit circuit;
+    A_Star a_star;
+    MapSearchNode mapsearchnode;
 
     double getMousePosX(RenderWindow &window);
 
@@ -52,6 +57,9 @@ public:
 
     double posx, posy;
 
+    int x_CpuCar, y_CpuCar;
+
+
 
 private:
 
@@ -59,6 +67,8 @@ private:
     bool control_setRace=true, meteo, flag=false;
     Texture T_Flag;
     Sprite S_Flag;
+    Time timesCpu;
+    Clock clockCpu;
 };
 
 

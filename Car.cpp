@@ -59,7 +59,7 @@ void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, 
                     degreeConst = 270;
                     break;
                 case 3:
-                    x_CarPlayer = 810;      //da modificare dopo una modifica della bitmap, rimuovere i box dalla zona nera
+                    x_CarPlayer = 810;
                     y_CarPlayer = 440;
                     degreeConst = 60;
                     break;
@@ -218,7 +218,7 @@ void SoundBehavior::AlgorithmBrake() {
 void SoundBehavior::AlgorithmBase() {
 }*/
 /*
-void Basetrajectory::A_star() {
+void Basetrajectory::MapSearchNode() {
 }
 
 int Motore::Upgrade_Displacement() {
@@ -243,7 +243,7 @@ void SafetyCar::getCpuStrategy() {
 }
 SafetyCar::SafetyCar() {
 }
-void CpuStrategy::A_star() {
+void CpuStrategy::MapSearchNode() {
 }
 int CpuStrategy::do_trajectory() {
     return 0;

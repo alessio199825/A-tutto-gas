@@ -34,7 +34,8 @@ void Race_Page::draw(RenderWindow &window) {
     window.draw(circuit.getS_tilemaps());
 
     if (control_setRace) {
-    race.setGame(window, circuit, car, error, cars_cpu, Type_race, circuitrace);
+
+        race.setGame(window, circuit, car, error, cars_cpu, Type_race, circuitrace);
 
         car.x_CarPlayer=race.getX_tmp();
         car.y_CarPlayer=race.getY_tmp();
@@ -45,13 +46,34 @@ void Race_Page::draw(RenderWindow &window) {
     window.draw(circuit.getS_Pause(1));
 
     if(traffic_light.Light_On(window, error, Type_race)) {
-    car.Car_Player_Movement(window, error, circuitrace);
-        cars_cpu.A_star(window);
+
+        car.Car_Player_Movement(window, error, circuitrace);
 
         posx = getMousePosX(window);
         posy = getMousePosY(window);
-    race.KeyBreak(window, error, song, posx, posy, pageIndex,
-                  pageChanged, circuitrace);
+
+        control_cpu.LoadControlMap(window, error, circuitrace);
+
+        //cout<<done<<endl;
+        a_star.astar();
+
+        cars_cpu.createMachine(window, error);
+
+        //timesCpu=clockCpu.getElapsedTime();
+
+        if(timesCpu.asSeconds()>1){
+
+            x_CpuCar=mapsearchnode.getX();
+            y_CpuCar=mapsearchnode.getY();
+
+        //cout<<y_CpuCar<<endl;
+        //cout<<x_CpuCar<<endl;
+
+            clockCpu.restart();
+
+        }
+
+        race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged, circuitrace);
 
         control_setRace = false;
    }

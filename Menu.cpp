@@ -141,7 +141,6 @@ Menu::Menu() {
 
                         if(traffic_light.Light_On(window, error, 0)) {
                             car.Car_Player_Movement(window, error, circuiton);
-                            cars_cpu.A_star(window);
 
                             posx = getMousePosx();
                             posy = getMousePosy();
@@ -218,7 +217,6 @@ Menu::Menu() {
                         window.draw(circuit.getS_Pause(0));
                         window.draw(circuit.getS_Pause(1));
                         car.Car_Player_Movement(window, error, time_circuit);
-                        cars_cpu.A_star(window);
                         posx = getMousePosx();
                         posy = getMousePosy();
 
@@ -487,7 +485,6 @@ void Menu::GoRace() {
 
     if(traffic_light.Light_On(window, error, 0)) {
         car.Car_Player_Movement(window, error, circuiton);
-        cars_cpu.A_star(window);
 
         posx = getMousePosx();
         posy = getMousePosy();
