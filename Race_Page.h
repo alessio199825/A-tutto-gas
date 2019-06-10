@@ -41,7 +41,6 @@ public:
     Traffic_Light traffic_light;
     Circuit circuit;
     A_Star a_star;
-    MapSearchNode mapsearchnode;
 
     double getMousePosX(RenderWindow &window);
 
@@ -65,8 +64,6 @@ private:
     bool control_setRace=true, meteo, flag=false;
     Texture T_Flag;
     Sprite S_Flag;
-    Time timesCpu;
-    Clock clockCpu;
 };
 
 

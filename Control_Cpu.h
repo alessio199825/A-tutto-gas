@@ -17,7 +17,7 @@ public:
 private:
     bool map=false, example=false;
     Image ControlMap, ExampleColor;
-    Color Rosso, Nero, Giallo, Colore;
+    Color Nero, Giallo, Colore;
 };
 
 

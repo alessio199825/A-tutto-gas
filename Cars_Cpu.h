@@ -20,6 +20,8 @@ public:
 
     Cars_Cpu();
 
+    Cars_Cpu(float x, float y) { x_cpu=x; y_cpu=y;}
+
     void createMachine(RenderWindow &window, Error &error);
     void moveCar(int x_CpuCar, int y_CpuCar);
     float getX_cpu() const;

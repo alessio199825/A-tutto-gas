@@ -35,11 +35,10 @@ void Race_Page::draw(RenderWindow &window) {
 
     if (control_setRace) {
 
-        race.setGame(window, circuit, car, error, cars_cpu, Type_race, circuitrace);
+        race.setGame(window, circuit, car, error, Type_race, circuitrace);
 
         car.x_CarPlayer=race.getX_tmp();
         car.y_CarPlayer=race.getY_tmp();
-
     }
 
     window.draw(circuit.getS_Pause(0));
@@ -52,30 +51,22 @@ void Race_Page::draw(RenderWindow &window) {
         posx = getMousePosX(window);
         posy = getMousePosY(window);
 
-        control_cpu.LoadControlMap(window, error, circuitrace);
-
-        a_star.astar();
-
-        cars_cpu.createMachine(window, error);
-
-        //timesCpu=clockCpu.getElapsedTime();
-
-        if(timesCpu.asSeconds()>1){
-
-            x_CpuCar=mapsearchnode.getX();
-            y_CpuCar=mapsearchnode.getY();
-
-        //cout<<y_CpuCar<<endl;
-        //cout<<x_CpuCar<<endl;
-
-            clockCpu.restart();
-
+        if(Type_race==2) {
+            control_cpu.LoadControlMap(window, error, circuitrace);
+            a_star.astar();
+            x_CpuCar=a_star.getX();
+            y_CpuCar=a_star.getY();
+            cars_cpu.moveCar(x_CpuCar, y_CpuCar);
+            cars_cpu.drawCpu(window);
         }
 
         race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged, circuitrace);
-
         control_setRace = false;
-   }
+
+    }
+    else if(Type_race==2) {
+        cars_cpu.createMachine(window, error);
+    }
 
     weath.setWeather(meteo, window, error);
     song.MusicTime(car, window, error, circuitrace);

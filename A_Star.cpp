@@ -18,9 +18,9 @@ void MapSearchNode::PrintNodeInfo()
 {
 
     char str[100];
-    sprintf( str, "Node position : (%d,%d)\n", x,y );
+        sprintf( str, "Node position : (%d,%d)\n", x,y );
 
-    cout << str;
+//    cout << str;
 }
 
 // Here's the heuristic function that estimates the distance from a Node
@@ -56,9 +56,7 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
     MapSearchNode NewNode;
 
     // push each possible move except allowing the search to go backwards
-    //
-    //
-    ////TODO ERRORE NEL SETTAGGIO DELLA VARIBILE "NODE" CHE TRAMITE LA FUNZIONE SET CHIAMATA CON IL COSTRUTTORE DI MAPSEARCHNODE ASSEGNA UN VALORE NON COPRRISPONDENTE
+
 
     switch(node){
 
@@ -127,8 +125,11 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
             }
             break;
         default:break;
-
     }
+
+    cout<< x << endl;
+
+    control_node=true;
 
     return true;
 }
@@ -169,25 +170,46 @@ void MapSearchNode::setNode(int node) {
     MapSearchNode::node = node;
 }
 
+int MapSearchNode::getNode() const {
+    return node;
+}
+
 A_Star::A_Star() {
 
 }
 
-int A_Star::astar()
-{
-    if(!done) {
+int A_Star::astar() {
+    if (!done) {
 
-        x_start[0]=160;
-        y_start[0]=342;
+        if (ChangeStart) {
+            x_start[0] = 161;
+            y_start[0] = 342;
 
-        x_end[0]=164;
-        y_end[0]=305;
+            x_end[0] = 397;
+            y_end[0] = 69;
 
-        x_end[1]=168;
-        y_end[1]=262;
+            x_end[1] = 908;
+            y_end[1] = 359;
 
-        x_end[2]=174;
-        y_end[2]=209;
+            x_end[2] = 873;
+            y_end[2] = 397;
+
+            x_end[3] = 628;
+            y_end[3] = 341;
+
+            x_end[4] = 401;
+            y_end[4] = 397;
+
+            x_end[5] = 590;
+            y_end[5] = 493;
+
+            x_end[6] = 274;
+            y_end[6] = 533;
+
+            x_end[7] = 218;
+            y_end[7] = 342;
+            ChangeStart = false;
+        }
 
         // "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
 
@@ -207,29 +229,29 @@ int A_Star::astar()
 
         while (SearchCount < NumSearches) {
 
+            cout << "ciao" << endl;
             // Create a start state
             MapSearchNode nodeStart;
             nodeStart.x = x_start[vector_start];
             nodeStart.y = y_start[vector_start];
 
             // Define the goal state
-            MapSearchNode nodeEnd;
             nodeEnd.x = x_end[vector_end];
             nodeEnd.y = y_end[vector_end];
 
-            if(nodeStart.x >= nodeEnd.x && nodeStart.y >= nodeEnd.y){           //N-O
+            if (nodeStart.x >= nodeEnd.x && nodeStart.y >= nodeEnd.y) {           //N-O
                 nodeStart.setNode(1);
             }
 
-            if(nodeStart.x <= nodeEnd.x && nodeStart.y >= nodeEnd.y){           //N-E
+            if (nodeStart.x <= nodeEnd.x && nodeStart.y >= nodeEnd.y) {           //N-E
                 nodeStart.setNode(2);
             }
 
-            if(nodeStart.x <= nodeEnd.x && nodeStart.y <= nodeEnd.y){         //S-E
+            if (nodeStart.x <= nodeEnd.x && nodeStart.y <= nodeEnd.y) {         //S-E
                 nodeStart.setNode(3);
             }
 
-            if(nodeStart.x >= nodeEnd.x && nodeStart.y <= nodeEnd.y){        //S-O
+            if (nodeStart.x >= nodeEnd.x && nodeStart.y <= nodeEnd.y) {        //S-O
                 nodeStart.setNode(4);
             }
 
@@ -245,9 +267,9 @@ int A_Star::astar()
 
                 SearchSteps++;
 
+
 #if DEBUG_LISTS
 
-                //cout << "Steps:" << SearchSteps << "\n";
 
                 int len = 0;
 
@@ -279,66 +301,87 @@ int A_Star::astar()
                 //cout << "Closed list has " << len << " nodes\n";
 
 #endif
+                if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING) {
 
-            } while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
+                    x_tmp = nodeStart.x;
+                    y_tmp = nodeStart.y;
 
-            if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
-                //cout << "Search found goal state\n";
+                    x_start[vector_start] = x_tmp;
+                    y_start[vector_start] = y_tmp;
 
-                MapSearchNode *node = astarsearch.GetSolutionStart();
-
-                done = true;
-
-                if(vector_start<2) {
-                    vector_start++;
-
-                    x_start[vector_start] = x_end[vector_end];
-                    y_start[vector_start] = y_end[vector_end];
-
-                    vector_end++;
-
-                    done=false;
                 }
+                }while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
 
-#if DISPLAY_SOLUTION
-                cout << "Displaying solution\n";
-#endif
-                int steps = 0;
+                if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
+                    //cout << "Search found goal state\n";
 
-                node->PrintNodeInfo();
-                for (;;) {
-                    node = astarsearch.GetSolutionNext();
+                    MapSearchNode *node = astarsearch.GetSolutionStart();
 
-                    if (!node) {
-                        break;
+                    done = true;
+
+                    if (vector_start < 7) {
+                        vector_start++;
+
+                        if (vector_start == 7) {
+                            ChangeStart = true;
+                            vector_end = 0;
+                        }
+
+                        x_start[vector_start] = x_end[vector_end];
+                        y_start[vector_start] = y_end[vector_end];
+
+                        vector_end++;
+
+                        done = false;
                     }
 
+#if DISPLAY_SOLUTION
+                    cout << "Displaying solution\n";
+#endif
+                    int steps = 0;
+
                     node->PrintNodeInfo();
-                    steps++;
+                    for (;;) {
+                        node = astarsearch.GetSolutionNext();
 
-                };
+                        if (!node) {
+                            break;
+                        }
+
+                        node->PrintNodeInfo();
+                        steps++;
+
+                    };
 
 
-                //cout << "Solution steps " << steps << endl;
+                    //cout << "Solution steps " << steps << endl;
 
-                // Once you're done with the solution you can free the nodes up
-                astarsearch.FreeSolutionNodes();
+                    // Once you're done with the solution you can free the nodes up
+                    astarsearch.FreeSolutionNodes();
 
 
-            } else if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_FAILED) {
-                //cout << "Search terminated. Did not find goal state\n";
+                } else if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_FAILED) {
+                    //cout << "Search terminated. Did not find goal state\n";
 
+                }
+
+                // Display the number of loops the search went through
+                //cout << "SearchSteps : " << SearchSteps << "\n";
+
+                SearchCount++;
+
+                astarsearch.EnsureMemoryFreed();
             }
 
-            // Display the number of loops the search went through
-            //cout << "SearchSteps : " << SearchSteps << "\n";
-
-            SearchCount++;
-
-            astarsearch.EnsureMemoryFreed();
+            return 0;
         }
-
-        return 0;
     }
+
+
+int A_Star::getX() {
+    return x_tmp;
 }
 
+int A_Star::getY() {
+    return y_tmp;
+}

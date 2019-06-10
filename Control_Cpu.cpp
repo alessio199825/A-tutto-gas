@@ -55,20 +55,15 @@ int Control_Cpu::GetCostNode(int x, int y) {
             if (!ExampleColor.loadFromFile("Control/controllo_astar1.bmp")) {
                 throw "impossibile caricare Texture";
             }
-
             map = true;
-
         }
 
-    Rosso = ExampleColor.getPixel(80, 90);
     Nero=ExampleColor.getPixel(290, 270);
-    Giallo=ExampleColor.getPixel(153, 270);
+    Giallo=ExampleColor.getPixel(954, 241);
     Colore=ControlMap.getPixel(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
 
-    if(Colore==Nero||Colore==Rosso)
+    if(Colore==Nero)
         return 9;
-    else if(Colore==Giallo)
-        return 2;
     else
         return 1;
 }

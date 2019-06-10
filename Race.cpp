@@ -5,13 +5,10 @@ Race::Race() {
 
 }
 
-void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, Cars_Cpu &cars_cpu, int Type_race,
-                   int circuitrace) {
+void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, int Type_race, int circuitrace) {
     circuit.setTileMaps(circuitrace, error, window);
 
     car.setMachinePlayer(window, circuitrace, error, Type_race);
-
-    cars_cpu.createMachine(window, error);
 
     X_tmp=car.getX_CarPlayer();
     Y_tmp=car.getY_CarPlayer();

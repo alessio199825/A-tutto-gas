@@ -33,11 +33,12 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
 }
 
-void Cars_Cpu::moveCar(int x_CpuCar, int y_CpuCar) {        //gestire bene setCar e move Car che forse fanno la stessa cosa
+void Cars_Cpu::moveCar(int x, int y) {        //gestire bene setCar e move Car che forse fanno la stessa cosa
 
-    S_CpuCar[0].setPosition(Vector2f(x_CpuCar, y_CpuCar));
-    x_cpu=x_CpuCar;
-    y_cpu=y_CpuCar;
+    x_cpu=x;
+    y_cpu=y;
+    S_CpuCar[0].setPosition(x_cpu,y_cpu);
+
 }
 
 float Cars_Cpu::getX_cpu() const {
@@ -49,12 +50,19 @@ float Cars_Cpu::getY_cpu() const {
 }
 
 void Cars_Cpu::setPos() {
-    if(index!=posCar.size())
+
+    //cout<<index<<endl;
+    //cout<<posCar.size()<<endl;
+
+    if(index!=posCar.size()) {
         S_CpuCar[0].setPosition(posCar[index++]);
+    }
+    const Vector2f &ciao=S_CpuCar[0].getPosition();
 }
 
 void Cars_Cpu::setCar(int x,int y) {
 
+    //cout<<y<<endl;
     posCar.emplace_back(x,y);       //    posCar.push_back(Vector2f(x,y));
 }
 

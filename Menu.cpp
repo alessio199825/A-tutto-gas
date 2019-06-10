@@ -129,7 +129,7 @@ Menu::Menu() {
 
                         if (control_setRace) {
 
-                            race.setGame(window, circuit, car, error, cars_cpu, menu_state, 0);
+                            race.setGame(window, circuit, car, error, menu_state, 0);
 
                             car.x_CarPlayer=race.getX_tmp();
                             car.y_CarPlayer=race.getY_tmp();
@@ -205,7 +205,7 @@ Menu::Menu() {
                         song.stop_Menu();
                         if (control_setRace) {
 
-                            race.setGame(window, circuit, car, error, cars_cpu, menu_state, 0);
+                            race.setGame(window, circuit, car, error, menu_state, 0);
 
                             car.x_CarPlayer = race.getX_tmp();
                             car.y_CarPlayer = race.getY_tmp();
@@ -473,7 +473,7 @@ void Menu::GoRace() {
 
     if (control_setRace) {
 
-        race.setGame(window, circuit, car, error, cars_cpu, menu_state, 0);
+        race.setGame(window, circuit, car, error, menu_state, 0);
 
         car.x_CarPlayer=race.getX_tmp();
         car.y_CarPlayer=race.getY_tmp();
