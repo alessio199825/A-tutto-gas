@@ -156,7 +156,7 @@ void Championship_Page::setWindow(Error &error, RenderWindow &window) {
     }
 
     tilemaps.CreateMap1();
-    //cout<<tilemaps.TileNumber(10, 3)<<endl;
+    cout<<tilemaps.TileNumber(2, 9)<<endl;
 }
 
 Menu_State *Championship_Page::getNewPage(RenderWindow &window, Error &error) {

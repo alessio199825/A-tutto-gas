@@ -7,26 +7,26 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 using namespace std;
 using namespace sf;
 
-class Tilemaps : public Drawable, public Transformable
-{
+class Tilemaps {
+
 public:
 
-    bool CreateMap1();
-    bool CreateMap2();
-    bool CreateMap3();
-    //int TileNumber(int i, int j);
+    Tilemaps();
+
+    void CreateMap1();
+    void CreateMap2();
+    void CreateMap3();
+    int TileNumber(int i, int j);
 
 private:
 
-    bool load(Vector2u tileSize, const int* level);
-    virtual void draw(RenderTarget& target, RenderStates states) const;
-    VertexArray m_vertices;
-    int width=50, height=30;
-    //const int *tiles;
+    fstream mapLevel1;
+    vector <vector <int>> lineTiles;
 
 };
 
