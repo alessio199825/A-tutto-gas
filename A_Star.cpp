@@ -155,7 +155,7 @@ int MapSearchNode::GetMap( int x, int y )
         return 9;
     }
 
-    return control_cpu.GetCostNode(x,y);
+    return 1;
 }
 
 int MapSearchNode::getX() const {

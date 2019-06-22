@@ -10,7 +10,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
-#include "Control_Cpu.h"
 #include "Cars_Cpu.h"
 
 #define DEBUG_LISTS 0
@@ -25,8 +24,6 @@ public:
     int y;
 
     int node;
-
-    Control_Cpu control_cpu;
 
     MapSearchNode() { x = y = 0; }
     MapSearchNode( int px, int py , int nodex) { x=px; y=py; node=nodex;}

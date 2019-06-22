@@ -52,7 +52,7 @@ void Race_Page::draw(RenderWindow &window) {
         posy = getMousePosY(window);
 
         if(Type_race==2) {
-            control_cpu.LoadControlMap(window, error, circuitrace);
+
             a_star.astar();
             x_CpuCar=a_star.getX();
             y_CpuCar=a_star.getY();

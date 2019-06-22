@@ -70,7 +70,7 @@ void Tilemaps::CreateMap3() {
 }
 
 int Tilemaps::TileNumber(int i, int j) {
-    return lineTiles[i%20][j%20];
+    return lineTiles[i/20][j/20];
 }
 
 Tilemaps::Tilemaps() {

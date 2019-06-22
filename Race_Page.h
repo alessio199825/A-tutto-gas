@@ -16,7 +16,6 @@
 #include "Song.h"
 #include "Cars_Cpu.h"
 #include "Weather.h"
-#include "Control_Cpu.h"
 #include "A_Star.h"
 
 
@@ -35,7 +34,6 @@ public:
     Cars_Cpu cars_cpu;
     Song song;
     Error error;
-    Control_Cpu control_cpu;
     Car car;
     Race race;
     Traffic_Light traffic_light;
