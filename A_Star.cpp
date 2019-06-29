@@ -15,17 +15,17 @@ int A_Star::astar() {
             x_start[0] = 161;
             y_start[0] = 342;
 
-            x_end[0] = 397;
-            y_end[0] = 69;
+            x_end[0] = 381;
+            y_end[0] = 62;
 
-            x_end[1] = 908;
-            y_end[1] = 359;
+            x_end[1] = 901;
+            y_end[1] = 342;
 
-            x_end[2] = 873;
-            y_end[2] = 397;
+            x_end[2] = 861;
+            y_end[2] = 382;
 
-            x_end[3] = 628;
-            y_end[3] = 341;
+            x_end[3] = 621;
+            y_end[3] = 342;
 
             x_end[4] = 401;
             y_end[4] = 397;
@@ -59,7 +59,6 @@ int A_Star::astar() {
 
         while (SearchCount < NumSearches) {
 
-            cout << "ciao" << endl;
             // Create a start state
             MapSearchNode nodeStart;
             nodeStart.x = x_start[vector_start];
@@ -147,12 +146,13 @@ int A_Star::astar() {
 
                     MapSearchNode *node = astarsearch.GetSolutionStart();
 
+                    cout<<"ciao"<<endl;
                     done = true;
 
-                    if (vector_start < 7) {
+                    if (vector_start < 3) {
                         vector_start++;
 
-                        if (vector_start == 7) {
+                        if (vector_start == 3) {
                             ChangeStart = true;
                             vector_end = 0;
                         }

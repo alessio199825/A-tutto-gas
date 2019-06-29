@@ -8,13 +8,13 @@
 
 void Tilemaps::CreateMap() {
 
-    ifstream OpenFile("Control/circuitNum");
+        ifstream OpenFile("Control/circuitNum");
 
         OpenFile.get(numCircuit);
 
-    OpenFile.close();
+        OpenFile.close();
 
-        switch(numCircuit) {
+        switch (numCircuit) {
             case '1':
                 mapLevel.open("Control/level1.txt");
                 break;
@@ -47,7 +47,7 @@ void Tilemaps::CreateMap() {
 }
 
 int Tilemaps::TileNumber(int i, int j) {
-    return lineTiles[i/20][j/20];
+    return lineTiles[j/20][i/20];
 }
 
 Tilemaps::Tilemaps() {

@@ -20,7 +20,7 @@ void MapSearchNode::PrintNodeInfo()
     char str[100];
     sprintf( str, "Node position : (%d,%d)\n", x,y );
 
-//    cout << str;
+    cout << str;
 }
 
 // Here's the heuristic function that estimates the distance from a Node
@@ -61,73 +61,74 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
     switch(node){
 
         case 1:                                                     // arrivo in alto a sinistra
-            if ((GetMap(x - 1, y) < 9)
-                && !((parent_x == x - 1) && (parent_y == y))
+            if ((GetMap(x - 20, y) < 9)
+                && !((parent_x == x - 20) && (parent_y == y))
                     ) {
-                NewNode = MapSearchNode(x - 1, y, 1);
+                NewNode = MapSearchNode(x - 20, y, 1);
                 astarsearch->AddSuccessor(NewNode);
             }
 
-            if ((GetMap(x, y - 1) < 9)
-                && !((parent_x == x) && (parent_y == y - 1))
+            if ((GetMap(x, y - 20) < 9)
+                && !((parent_x == x) && (parent_y == y - 20))
                     ) {
-                NewNode = MapSearchNode(x, y - 1, 1);
+                NewNode = MapSearchNode(x, y - 20, 1);
                 astarsearch->AddSuccessor(NewNode);
             }
             break;
 
-        case 2:                                                 // arrivo in alto a destra
-            if ((GetMap(x + 1, y) < 9)
-                && !((parent_x == x + 1) && (parent_y == y))
+        case 2:                                 // arrivo in alto a destra
+
+            if ((GetMap(x + 20, y) < 9)
+                && !((parent_x == x + 20) && (parent_y == y))
                     ) {
-                NewNode = MapSearchNode(x + 1, y, 2);
+                NewNode = MapSearchNode(x + 20, y, 2);
                 astarsearch->AddSuccessor(NewNode);
             }
 
-            if ((GetMap(x, y - 1) < 9)
-                && !((parent_x == x) && (parent_y == y - 1))
+            if ((GetMap(x, y - 20) < 9)
+                && !((parent_x == x) && (parent_y == y - 20))
                     ) {
-                NewNode = MapSearchNode(x, y - 1, 2);
+
+                NewNode = MapSearchNode(x, y - 20, 2);
                 astarsearch->AddSuccessor(NewNode);
             }
             break;
 
         case 3:                                                     // arrivo in basso a destra
-            if ((GetMap(x + 1, y) < 9)
-                && !((parent_x == x + 1) && (parent_y == y))
+            if ((GetMap(x + 20, y) < 9)
+                && !((parent_x == x + 20) && (parent_y == y))
                     ) {
-                NewNode = MapSearchNode(x + 1, y, 3);
+                NewNode = MapSearchNode(x + 20, y, 3);
                 astarsearch->AddSuccessor(NewNode);
             }
 
-            if ((GetMap(x, y + 1) < 9)
-                && !((parent_x == x) && (parent_y == y + 1))
+            if ((GetMap(x, y + 20) < 9)
+                && !((parent_x == x) && (parent_y == y + 20))
                     ) {
-                NewNode = MapSearchNode(x, y + 1, 3);
+                NewNode = MapSearchNode(x, y + 20, 3);
                 astarsearch->AddSuccessor(NewNode);
             }
             break;
 
         case 4:                                                     // arrivo in basso a sinistra
-            if ((GetMap(x, y + 1) < 9)
-                && !((parent_x == x) && (parent_y == y + 1))
+            if ((GetMap(x, y + 20) < 9)
+                && !((parent_x == x) && (parent_y == y + 20))
                     ) {
-                NewNode = MapSearchNode(x, y + 1, 4);
+                NewNode = MapSearchNode(x, y + 20, 4);
                 astarsearch->AddSuccessor(NewNode);
             }
 
-            if ((GetMap(x - 1, y) < 9)
-                && !((parent_x == x - 1) && (parent_y == y))
+            if ((GetMap(x - 20, y) < 9)
+                && !((parent_x == x - 20) && (parent_y == y))
                     ) {
-                NewNode = MapSearchNode(x - 1, y, 4);
+                NewNode = MapSearchNode(x - 20, y, 4);
                 astarsearch->AddSuccessor(NewNode);
 
             }
             break;
         default:break;
     }
-
-    cout<< x << endl;
+    cout<<x<<endl;
 
     control_node=true;
 
@@ -155,10 +156,14 @@ int MapSearchNode::GetMap( int x, int y )
         return 9;
     }
 
-    //tilemaps.createMap();
 
-    return 0; //tilemaps.TileNumber( x, y );
+    Tilemaps tilemaps;
+
+    tilemaps.CreateMap();
+
+    return tilemaps.TileNumber( x, y);
 }
+
 
 int MapSearchNode::getX() const {
     return x;
