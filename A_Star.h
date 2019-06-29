@@ -11,42 +11,12 @@
 #include <stdio.h>
 #include <math.h>
 #include "Cars_Cpu.h"
+#include "MapSearchNode.h"
 
 #define DEBUG_LISTS 0
 #define DEBUG_LIST_LENGTHS_ONLY 0
 
 using namespace std;
-
-class MapSearchNode
-{
-public:
-    int x;	 // the (x,y) positions of the node
-    int y;
-
-    int node;
-
-    MapSearchNode() { x = y = 0; }
-    MapSearchNode( int px, int py , int nodex) { x=px; y=py; node=nodex;}
-
-    float GoalDistanceEstimate( MapSearchNode &nodeGoal );
-    bool IsGoal( MapSearchNode &nodeGoal );
-    bool GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapSearchNode *parent_node);
-    float GetCost( MapSearchNode &successor );
-    bool IsSameState( MapSearchNode &rhs );
-    bool control_node = false;
-
-    void PrintNodeInfo();
-    int GetMap(int x, int y);
-
-    int getX() const;
-
-    int getY() const;
-
-    void setNode(int node);
-
-    int getNode() const;
-
-};
 
 class A_Star{
 

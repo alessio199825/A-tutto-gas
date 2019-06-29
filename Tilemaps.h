@@ -18,14 +18,15 @@ public:
 
     Tilemaps();
 
-    void CreateMap1();
-    void CreateMap2();
-    void CreateMap3();
+    void CreateMap();
     int TileNumber(int i, int j);
+
+    virtual ~Tilemaps();
 
 private:
 
-    fstream mapLevel1;
+    char numCircuit;
+    fstream mapLevel;
     vector <vector <int>> lineTiles;
 
 };

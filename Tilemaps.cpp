@@ -6,67 +6,44 @@
 #include <sstream>
 #include "Tilemaps.h"
 
-void Tilemaps::CreateMap1() {
+void Tilemaps::CreateMap() {
 
-    mapLevel1.open("Control/level1.txt");
+    ifstream OpenFile("Control/circuitNum");
 
-    int i=0;
-    string line;
-    vector <int> Tile;
-    while(getline(mapLevel1,line)) {
+        OpenFile.get(numCircuit);
 
-        istringstream iss(line);
-        while(iss>>i) {
+    OpenFile.close();
 
-            Tile.push_back(i);
+        switch(numCircuit) {
+            case '1':
+                mapLevel.open("Control/level1.txt");
+                break;
+            case '2':
+                mapLevel.open("Control/level1.txt");
+                break;
+            case '3':
+                mapLevel.open("Control/level1.txt");
+                break;
+            default:
+                break;
         }
 
-        lineTiles.push_back(Tile);
-        Tile.clear();
-    }
-    mapLevel1.close();
-}
 
-void Tilemaps::CreateMap2() {
+        int i = 0;
+        string line;
+        vector<int> Tile;
+        while (getline(mapLevel, line)) {
 
-    mapLevel1.open("Control/level1.txt");       //da cambiare il nome del file di testo
+            istringstream iss(line);
+            while (iss >> i) {
 
-    int i=0;
-    string line;
-    vector <int> Tile;
-    while(getline(mapLevel1,line)) {
+                Tile.push_back(i);
+            }
 
-        istringstream iss(line);
-        while(iss>>i) {
-
-            Tile.push_back(i);
+            lineTiles.push_back(Tile);
+            Tile.clear();
         }
-
-        lineTiles.push_back(Tile);
-        Tile.clear();
-    }
-    mapLevel1.close();
-}
-
-void Tilemaps::CreateMap3() {
-
-    mapLevel1.open("Control/level1.txt");       //da cambiare il nome del file di testo
-
-    int i=0;
-    string line;
-    vector <int> Tile;
-    while(getline(mapLevel1,line)) {
-
-        istringstream iss(line);
-        while(iss>>i) {
-
-            Tile.push_back(i);
-        }
-
-        lineTiles.push_back(Tile);
-        Tile.clear();
-    }
-    mapLevel1.close();
+        mapLevel.close();
 }
 
 int Tilemaps::TileNumber(int i, int j) {
@@ -75,4 +52,8 @@ int Tilemaps::TileNumber(int i, int j) {
 
 Tilemaps::Tilemaps() {
     
+}
+
+Tilemaps::~Tilemaps() {
+
 }

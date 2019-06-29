@@ -17,6 +17,7 @@
 #include "Cars_Cpu.h"
 #include "Weather.h"
 #include "A_Star.h"
+#include <fstream>
 
 
 using namespace sf;
@@ -29,6 +30,8 @@ public:
     Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, bool weath);
 
     ~Race_Page();
+
+    Race_Page();
 
     Weather weath;
     Cars_Cpu cars_cpu;
@@ -58,10 +61,13 @@ public:
 
 private:
 
-    int circuitrace, Type_race;
+    int Type_race;
     bool control_setRace=true, meteo, flag=false;
     Texture T_Flag;
     Sprite S_Flag;
+    int circuitrace;
+    void SaveCircuit();
+
 };
 
 

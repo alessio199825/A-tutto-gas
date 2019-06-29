@@ -313,6 +313,7 @@ int Single_Race::getSingle_RaceCircuit(double posx, double posy, RenderWindow &w
         }
         if(circuitrace==0)
             circuitrace=3;
+
         return circuitrace;
 
 }

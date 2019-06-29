@@ -10,7 +10,6 @@ Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Ra
     circuitrace=num_circuit;
     Type_race=Race_type;
     meteo=weath;
-
 }
 
 Race_Page::~Race_Page() {
@@ -53,6 +52,7 @@ void Race_Page::draw(RenderWindow &window) {
 
         if(Type_race==2) {
 
+            SaveCircuit();
             a_star.astar();
             x_CpuCar=a_star.getX();
             y_CpuCar=a_star.getY();
@@ -159,6 +159,19 @@ double Race_Page::getMousePosY(RenderWindow &window) {
     }
     return posy;
 }
+
+Race_Page::Race_Page() {
+
+}
+
+void Race_Page::SaveCircuit() {
+
+    ofstream f("Control/circuitNum");
+    f<<circuitrace<<endl;
+    f.close();
+}
+
+
 
 
 

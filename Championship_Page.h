@@ -11,7 +11,6 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include "Error.h"
-#include "Tilemaps.h"
 
 using namespace sf;
 using namespace std;
@@ -20,7 +19,6 @@ class Championship_Page : public Menu_State{
 
 public:
 
-    Tilemaps tilemaps;
 
     Championship_Page(RenderWindow &window, Error &error);
 
