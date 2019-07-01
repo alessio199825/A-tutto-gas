@@ -156,7 +156,6 @@ int MapSearchNode::GetMap( int x, int y )
         return 9;
     }
 
-
     Tilemaps tilemaps;
 
     tilemaps.CreateMap();

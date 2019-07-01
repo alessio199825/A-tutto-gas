@@ -166,7 +166,7 @@ Race_Page::Race_Page() {
 
 void Race_Page::SaveCircuit() {
 
-    ofstream f("Control/circuitNum");
+    ofstream f("Control/circuitNum.txt");
     f<<circuitrace<<endl;
     f.close();
 }

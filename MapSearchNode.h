@@ -38,8 +38,6 @@ public:
     void setNode(int node);
 
     int getNode() const;
-
-
 };
 
 #endif //ALL_ULTIMO_GAS_MAPSEARCHNODE_H
