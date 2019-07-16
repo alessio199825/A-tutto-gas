@@ -36,7 +36,7 @@ private:
     Texture T_timetrial[10];
     Sprite S_timetrial[10];
     int circuitrace, Type_race;
-    bool meteo;
+    bool meteo, giri=0;
 
 };
 

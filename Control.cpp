@@ -23,6 +23,8 @@ int Control::SetControl(RenderWindow &window, Error &error, int num_circuit, flo
 
         default: break;
     }
+
+    return -1;
 }
 
 int Control::CircuitOne(RenderWindow &window, Error &error, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer) {

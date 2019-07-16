@@ -170,7 +170,7 @@ Menu_State *TimeTrial_Page::getNewPage(RenderWindow &window, Error &error) {
         case 0:
             return new Menu_Game(window, error);
         case 9:
-            return new Load_Page(window, error, circuitrace, Type_race, meteo);
+            return new Load_Page(window, error, circuitrace, Type_race, meteo, giri);
         default:break;
     }
 }

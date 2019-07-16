@@ -19,6 +19,7 @@ class Championship_Page : public Menu_State{
 
 public:
 
+
     Championship_Page(RenderWindow &window, Error &error);
 
     ~Championship_Page();

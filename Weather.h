@@ -22,7 +22,7 @@ public:
 
     Weather();
 
-    void setWeather(bool meteo, RenderWindow &window, Error &error);
+    void setWeather(int meteo, RenderWindow &window, Error &error);
 
 private:
 

@@ -6,10 +6,11 @@
 #include "SingleRace_Page.h"
 #include "Load_Page.h"
 
-SingleRace_Page2::SingleRace_Page2(RenderWindow &window, Error &error, bool weath) {
+SingleRace_Page2::SingleRace_Page2(RenderWindow &window, Error &error, int weath, int lap) {
 
     setWindow(error, window);
     meteo=weath;
+    giri=lap;
     circuitrace=0;
 }
 
@@ -179,7 +180,7 @@ Menu_State *SingleRace_Page2::getNewPage(RenderWindow &window, Error &error) {
         case 2:
             return new SingleRace_Page(window, error);
         case 9:
-            return new Load_Page(window, error, circuitrace, Type_race, meteo);
+            return new Load_Page(window, error, circuitrace, Type_race, meteo, giri);
         default:break;
     }
 }

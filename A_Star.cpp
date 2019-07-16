@@ -4,176 +4,6 @@
 
 #include "A_Star.h"
 
-// Definitions
-
-bool MapSearchNode::IsSameState( MapSearchNode &rhs )
-{
-
-    // same state in a maze search is simply when (x,y) are the same
-    return (x == rhs.x) && (y == rhs.y);
-
-}
-
-void MapSearchNode::PrintNodeInfo()
-{
-
-    char str[100];
-        sprintf( str, "Node position : (%d,%d)\n", x,y );
-
-//    cout << str;
-}
-
-// Here's the heuristic function that estimates the distance from a Node
-// to the Goal.
-
-float MapSearchNode::GoalDistanceEstimate( MapSearchNode &nodeGoal )
-{
-    return abs(x - nodeGoal.x) + abs(y - nodeGoal.y);
-}
-
-bool MapSearchNode::IsGoal( MapSearchNode &nodeGoal )
-{
-
-    return (x == nodeGoal.x) && (y == nodeGoal.y);
-
-}
-
-// This generates the successors to the given Node. It uses a helper function called
-// AddSuccessor to give the successors to the AStar class. The A* specific initialisation
-// is done for each node internally, so here you just set the state information that
-// is specific to the application
-bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapSearchNode *parent_node)
-{
-    int parent_x = -1;
-    int parent_y = -1;
-
-    if( parent_node )
-    {
-        parent_x = parent_node->x;
-        parent_y = parent_node->y;
-    }
-
-    MapSearchNode NewNode;
-
-    // push each possible move except allowing the search to go backwards
-
-
-    switch(node){
-
-        case 1:                                                     // arrivo in alto a sinistra
-            if ((GetMap(x - 1, y) < 9)
-                && !((parent_x == x - 1) && (parent_y == y))
-                    ) {
-                NewNode = MapSearchNode(x - 1, y, 1);
-                astarsearch->AddSuccessor(NewNode);
-            }
-
-            if ((GetMap(x, y - 1) < 9)
-                && !((parent_x == x) && (parent_y == y - 1))
-                    ) {
-                NewNode = MapSearchNode(x, y - 1, 1);
-                astarsearch->AddSuccessor(NewNode);
-            }
-            break;
-
-            case 2:                                                 // arrivo in alto a destra
-                if ((GetMap(x + 1, y) < 9)
-                    && !((parent_x == x + 1) && (parent_y == y))
-                        ) {
-                    NewNode = MapSearchNode(x + 1, y, 2);
-                    astarsearch->AddSuccessor(NewNode);
-                }
-
-            if ((GetMap(x, y - 1) < 9)
-                && !((parent_x == x) && (parent_y == y - 1))
-                    ) {
-                NewNode = MapSearchNode(x, y - 1, 2);
-                astarsearch->AddSuccessor(NewNode);
-            }
-            break;
-
-        case 3:                                                     // arrivo in basso a destra
-            if ((GetMap(x + 1, y) < 9)
-                && !((parent_x == x + 1) && (parent_y == y))
-                    ) {
-                NewNode = MapSearchNode(x + 1, y, 3);
-                astarsearch->AddSuccessor(NewNode);
-            }
-
-            if ((GetMap(x, y + 1) < 9)
-                && !((parent_x == x) && (parent_y == y + 1))
-                    ) {
-                NewNode = MapSearchNode(x, y + 1, 3);
-                astarsearch->AddSuccessor(NewNode);
-            }
-            break;
-
-        case 4:                                                     // arrivo in basso a sinistra
-            if ((GetMap(x, y + 1) < 9)
-                && !((parent_x == x) && (parent_y == y + 1))
-                    ) {
-                NewNode = MapSearchNode(x, y + 1, 4);
-                astarsearch->AddSuccessor(NewNode);
-            }
-
-            if ((GetMap(x - 1, y) < 9)
-                && !((parent_x == x - 1) && (parent_y == y))
-                    ) {
-                NewNode = MapSearchNode(x - 1, y, 4);
-                astarsearch->AddSuccessor(NewNode);
-
-            }
-            break;
-        default:break;
-    }
-
-    cout<< x << endl;
-
-    control_node=true;
-
-    return true;
-}
-
-// given this node, what does it cost to move to successor. In the case
-// of our map the answer is the map terrain value at this node since that is
-// conceptually where we're moving
-
-float MapSearchNode::GetCost( MapSearchNode &successor )
-{
-    return (float) GetMap( x, y );
-
-}
-
-int MapSearchNode::GetMap( int x, int y )
-{
-    if( x < 0 ||
-        x >= 1000 ||
-        y < 0 ||
-        y >= 600
-            )
-    {
-        return 9;
-    }
-
-    return control_cpu.GetCostNode(x,y);
-}
-
-int MapSearchNode::getX() const {
-    return x;
-}
-
-int MapSearchNode::getY() const {
-    return y;
-}
-
-void MapSearchNode::setNode(int node) {
-    MapSearchNode::node = node;
-}
-
-int MapSearchNode::getNode() const {
-    return node;
-}
-
 A_Star::A_Star() {
 
 }
@@ -182,32 +12,34 @@ int A_Star::astar() {
     if (!done) {
 
         if (ChangeStart) {
-            x_start[0] = 161;
-            y_start[0] = 342;
 
-            x_end[0] = 397;
-            y_end[0] = 69;
+            x_start[0] = 162;
+            y_start[0] = 368;
 
-            x_end[1] = 908;
-            y_end[1] = 359;
+            x_end[1] = 382;
+            y_end[1] = 68;
 
-            x_end[2] = 873;
-            y_end[2] = 397;
+            x_end[2] = 942;
+            y_end[2] = 388;
 
-            x_end[3] = 628;
-            y_end[3] = 341;
+            x_end[3] = 782;
+            y_end[3] = 388;
 
-            x_end[4] = 401;
-            y_end[4] = 397;
+            x_end[4] = 502;
+            y_end[4] = 328;
 
-            x_end[5] = 590;
-            y_end[5] = 493;
+            x_end[5] = 482;
+            y_end[5] = 448;
 
-            x_end[6] = 274;
-            y_end[6] = 533;
+            x_end[6] = 182;
+            y_end[6] = 508;
 
-            x_end[7] = 218;
-            y_end[7] = 342;
+            x_end[7] = 182;
+            y_end[7] = 368;
+
+            x_end[8] = 382;
+            y_end[8] = 68;
+
             ChangeStart = false;
         }
 
@@ -229,31 +61,15 @@ int A_Star::astar() {
 
         while (SearchCount < NumSearches) {
 
-            cout << "ciao" << endl;
             // Create a start state
             MapSearchNode nodeStart;
             nodeStart.x = x_start[vector_start];
             nodeStart.y = y_start[vector_start];
 
             // Define the goal state
+
             nodeEnd.x = x_end[vector_end];
             nodeEnd.y = y_end[vector_end];
-
-            if (nodeStart.x >= nodeEnd.x && nodeStart.y >= nodeEnd.y) {           //N-O
-                nodeStart.setNode(1);
-            }
-
-            if (nodeStart.x <= nodeEnd.x && nodeStart.y >= nodeEnd.y) {           //N-E
-                nodeStart.setNode(2);
-            }
-
-            if (nodeStart.x <= nodeEnd.x && nodeStart.y <= nodeEnd.y) {         //S-E
-                nodeStart.setNode(3);
-            }
-
-            if (nodeStart.x >= nodeEnd.x && nodeStart.y <= nodeEnd.y) {        //S-O
-                nodeStart.setNode(4);
-            }
 
             // Set Start and goal states
 
@@ -301,16 +117,8 @@ int A_Star::astar() {
                 //cout << "Closed list has " << len << " nodes\n";
 
 #endif
-                if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING) {
-
-                    x_tmp = nodeStart.x;
-                    y_tmp = nodeStart.y;
-
-                    x_start[vector_start] = x_tmp;
-                    y_start[vector_start] = y_tmp;
-
-                }
-                }while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
+            }
+                while (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SEARCHING);
 
                 if (SearchState == AStarSearch<MapSearchNode>::SEARCH_STATE_SUCCEEDED) {
                     //cout << "Search found goal state\n";
@@ -321,11 +129,6 @@ int A_Star::astar() {
 
                     if (vector_start < 7) {
                         vector_start++;
-
-                        if (vector_start == 7) {
-                            ChangeStart = true;
-                            vector_end = 0;
-                        }
 
                         x_start[vector_start] = x_end[vector_end];
                         y_start[vector_start] = y_end[vector_end];
@@ -341,16 +144,26 @@ int A_Star::astar() {
                     int steps = 0;
 
                     node->PrintNodeInfo();
+
+                    x_trajectory[trajectory_dim]=node->x;
+                    y_trajectory[trajectory_dim]=node->y;
+
                     for (;;) {
+
+                        trajectory_dim++;
+
                         node = astarsearch.GetSolutionNext();
 
                         if (!node) {
                             break;
                         }
 
-                        node->PrintNodeInfo();
-                        steps++;
+                        x_trajectory[trajectory_dim]=node->x;
+                        y_trajectory[trajectory_dim]=node->y;
 
+                        node->PrintNodeInfo();
+
+                        steps++;
                     };
 
 
@@ -375,13 +188,23 @@ int A_Star::astar() {
 
             return 0;
         }
+
+        return 0;
     }
 
 
-int A_Star::getX() {
-    return x_tmp;
+int A_Star::getX_trajectory(int i) {
+    return x_trajectory[i];
 }
 
-int A_Star::getY() {
-    return y_tmp;
+int A_Star::getY_trajectory(int i) {
+    return y_trajectory[i];
 }
+
+int A_Star::getTrajectory_dim() const {
+    return trajectory_dim;
+}
+
+
+
+

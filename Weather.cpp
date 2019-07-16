@@ -11,9 +11,9 @@ Weather::Weather() {
 
 }
 
-void Weather::setWeather(bool meteo, RenderWindow &window, Error &error) {
+void Weather::setWeather(int meteo, RenderWindow &window, Error &error) {
     switch (meteo) {
-        case false:
+        case 1:
             do_Rain(window, error);
             break;
         default:

@@ -5,12 +5,12 @@
 #include "Race_Page.h"
 #include "Menu_Game.h"
 
-Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, bool weath) {
+Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap) {
     setWindow(error, window);
     circuitrace=num_circuit;
     Type_race=Race_type;
     meteo=weath;
-
+    giri=lap;
 }
 
 Race_Page::~Race_Page() {
@@ -51,13 +51,16 @@ void Race_Page::draw(RenderWindow &window) {
         posx = getMousePosX(window);
         posy = getMousePosY(window);
 
+        /*timetrial.getTime_lap(window);
+        timetrial.print_TimeLap(window, error);
+        timetrial.print_TimeMinute(window, error);
+*/
+
         if(Type_race==2) {
-            control_cpu.LoadControlMap(window, error, circuitrace);
-            a_star.astar();
-            x_CpuCar=a_star.getX();
-            y_CpuCar=a_star.getY();
-            cars_cpu.moveCar(x_CpuCar, y_CpuCar);
+
+            cars_cpu.moveCar();
             cars_cpu.drawCpu(window);
+
         }
 
         race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged, circuitrace);
@@ -65,8 +68,12 @@ void Race_Page::draw(RenderWindow &window) {
 
     }
     else if(Type_race==2) {
+        flag = car.End_Race(giri);
+        SaveCircuit();
         cars_cpu.createMachine(window, error);
     }
+
+    flag=car.End_Race(giri);
 
     weath.setWeather(meteo, window, error);
     song.MusicTime(car, window, error, circuitrace);
@@ -90,7 +97,8 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
             switch (event.key.code) {
 
                 case Keyboard::Escape:                      //con il tasto esc viene chiuso il programma
-                    window.close();
+                song.stop_Race();
+                window.close();
                     break;
                 default:
                     break;
@@ -101,20 +109,27 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
 
     }
 
-    switch(circuitrace){
+    switch(circuitrace) {
         case 1:
-            if (posx > 910 && posx < 980 && posy > 510 && posy < 580)
-                flag=true;
+            if (posx > 910 && posx < 980 && posy > 510 && posy < 580) {
+
+                flag = true;
+            }
+
             break;
         case 2:
-            if (posx > 20 && posx < 90 && posy > 510 && posy < 580)
-                flag=true;
+            if (posx > 20 && posx < 90 && posy > 510 && posy < 580){
+
+                flag = true;
+            }
             break;
         case 3:
-            if (posx > 910 && posx < 980 && posy > 120 && posy < 190)
-                flag=true;
+            if (posx > 910 && posx < 980 && posy > 120 && posy < 190){
+
+                flag = true;
+            }
             break;
-        default: false;
+        default: break;
     }
 
 
@@ -144,6 +159,8 @@ Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
         default:break;
     }
 
+return 0;
+
 }
 
 double Race_Page::getMousePosX(RenderWindow &window) {
@@ -159,6 +176,19 @@ double Race_Page::getMousePosY(RenderWindow &window) {
     }
     return posy;
 }
+
+Race_Page::Race_Page() {
+
+}
+
+void Race_Page::SaveCircuit() {
+
+    ofstream f("Control/circuitNum.txt");
+    f<<circuitrace<<endl;
+    f.close();
+}
+
+
 
 
 

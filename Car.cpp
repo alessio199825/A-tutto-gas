@@ -187,82 +187,28 @@ float Car::getX_CarPlayer() const {
     return x_CarPlayer;
 }
 
+bool Car::End_Race(int giri) {
+    if(giri != 3 && giri != 5 && giri != 10){
+        giri = 3;
+    }
 
-/*
-void CarPlayer::setSoundBehavior() {
-}
-void CarPlayer::getSuoundBehavior() {
-}
-bool CarPlayer::getCarBehavior() {
+    if(done){
+        return true;
+    }
+    if(y_CarPlayer >= 410 && x_CarPlayer >= 465 && y_CarPlayer <= 490 && x_CarPlayer <= 470){
+        intermediate = intermediate + 1;
+        if(intermediate > lap){
+            intermediate = lap;
+        }
+    }
+
+    if(y_CarPlayer >= 255 && y_CarPlayer <= 269 && x_CarPlayer >=143 && x_CarPlayer <= 236 && lap == intermediate){
+        lap++;
+        if(lap==giri+1){
+            done=true;
+            return true;
+        }
+    }
+
     return false;
 }
-void CarPlayer::setUpgrade() {
-}
-void CarPlayer::setCarBehavior() {
-}
-void CarPlayer::getUpgrade() {
-}
-void CarPlayer::setBasetrajectory() {
-}
-bool CarPlayer::getBasetrajectory() {
-    return false;
-}
-*/
-
-/*SoundBehavior::SoundBehavior() {
-}
-void SoundBehavior::AlgorithmAcceleration() {
-}
-void SoundBehavior::AlgorithmBrake() {
-}
-void SoundBehavior::AlgorithmBase() {
-}*/
-/*
-void Basetrajectory::MapSearchNode() {
-}
-
-int Motore::Upgrade_Displacement() {
-    return 0;
-}
-Motore::Motore() {
-}
-int Telaio::Upgrade_Weight() {
-    return 0;
-}
-Telaio::Telaio() {
-}
-string Carrozzeria::Upgrade_Aerodynamics() {
-    return std::__cxx11::string();
-}
-Carrozzeria::Carrozzeria() {
-}
-
-void SafetyCar::setCpuStrategy() {
-}
-void SafetyCar::getCpuStrategy() {
-}
-SafetyCar::SafetyCar() {
-}
-void CpuStrategy::MapSearchNode() {
-}
-int CpuStrategy::do_trajectory() {
-    return 0;
-}
-bool CpuStrategy::get_SafetyCar() {
-    return false;
-}
-CpuStrategy::CpuStrategy() {
-}
-void Trajectory::A_star1() {
-}
-Trajectory::Trajectory() {
-}
-void Trajectory_safetycar::A_star2() {
-}
-Trajectory_safetycar::Trajectory_safetycar() {
-}
-void GeneralTrajectory::A_star3() {
-}
-GeneralTrajectory::GeneralTrajectory() {
-}
-*/

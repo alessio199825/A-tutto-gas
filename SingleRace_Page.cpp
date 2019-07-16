@@ -37,10 +37,10 @@ void SingleRace_Page::draw(RenderWindow &window) {
     }
 
     switch(weath){
-        case true:
+        case 0:
             window.draw(S_singlerace[13]);
             break;
-        case false:
+        case 1:
             window.draw(S_singlerace[14]);
             break;
         default:break;
@@ -86,12 +86,12 @@ int SingleRace_Page::getActivities(Event event, RenderWindow &window) {
 
             if (Mouse::getPosition(window).x > 389 && Mouse::getPosition(window).x < 475 &&
                 Mouse::getPosition(window).y > 420 && Mouse::getPosition(window).y < 509) {
-                weath = true;
+                weath = 0;
             }
 
             if (Mouse::getPosition(window).x > 495 && Mouse::getPosition(window).x < 581 &&
                 Mouse::getPosition(window).y > 420 && Mouse::getPosition(window).y < 509) {
-                weath = false;
+                weath = 1;
             }
 
 
@@ -222,8 +222,10 @@ Menu_State *SingleRace_Page::getNewPage(RenderWindow &window, Error &error) {
         case 0:
             return new Menu_Game(window, error);
         case 3:
-            return new SingleRace_Page2(window, error, weath);
+            return new SingleRace_Page2(window, error, weath, lap);
         default:break;
     }
+
+    return 0;
 
 }

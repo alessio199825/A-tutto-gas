@@ -37,7 +37,7 @@ private:
     Texture T_singlerace[15];
     Sprite S_singlerace[15];
     int lap;
-    bool weath;
+    int weath;
 
 };
 

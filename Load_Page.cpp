@@ -4,12 +4,13 @@
 
 #include "Load_Page.h"
 
-Load_Page::Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, bool meteo) {
+Load_Page::Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int meteo, int giri) {
     x_Tyre=20;
     setWindow(error, window);
     num_circuit=circuitrace;
     Race_type=Type_race;
     weath=meteo;
+    lap=giri;
     if(num_circuit==0){
         num_circuit=3;
     }
@@ -110,7 +111,9 @@ void Load_Page::setWindow(Error &error, RenderWindow &window) {
 Menu_State *Load_Page::getNewPage(RenderWindow &window, Error &error) {
 
     if(start_Race){
-        return new Race_Page(window, error, num_circuit, Race_type, weath);
+        return new Race_Page(window, error, num_circuit, Race_type, weath, lap);
     }
+
+    return 0;
 
 }

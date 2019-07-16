@@ -4,6 +4,7 @@
 
 #include "Championship_Page.h"
 #include "Menu_Game.h"
+#include "Tilemaps.h"
 
 Championship_Page::Championship_Page(RenderWindow &window, Error &error) {
 
@@ -154,7 +155,6 @@ void Championship_Page::setWindow(Error &error, RenderWindow &window) {
     catch(...) {
         error.Check_Image(window);
     }
-
 }
 
 Menu_State *Championship_Page::getNewPage(RenderWindow &window, Error &error) {

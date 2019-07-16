@@ -31,7 +31,7 @@ public:
 
 private:
 
-    int circuit, tempo, circuitrace, giri;
+    int circuit, tempo, giri, circuitrace;
     bool SingleRace_ControlReturn=true;
     Time time_return1, time_return;
     Clock C_return;

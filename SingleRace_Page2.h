@@ -20,7 +20,7 @@ class SingleRace_Page2 : public Menu_State {
 
 public:
 
-    SingleRace_Page2(RenderWindow &window, Error &error, bool weath);
+    SingleRace_Page2(RenderWindow &window, Error &error, int weath, int lap);
 
     ~SingleRace_Page2();
 
@@ -37,7 +37,7 @@ private:
     Texture T_singleraceon[10];
     Sprite S_singleraceon[10];
     int circuitrace, Type_race;
-    bool meteo;
+    int meteo, giri;
 };
 
 

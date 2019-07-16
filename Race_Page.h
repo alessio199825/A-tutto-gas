@@ -16,31 +16,33 @@
 #include "Song.h"
 #include "Cars_Cpu.h"
 #include "Weather.h"
-#include "Control_Cpu.h"
-#include "A_Star.h"
+#include "Time_Trial.h"
+#include <fstream>
+#include <iostream>
 
 
 using namespace sf;
+using namespace std;
 
 
 class Race_Page : public Menu_State{
 
 public:
 
-    Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, bool weath);
+    Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap);
 
     ~Race_Page();
+
+    Race_Page();
 
     Weather weath;
     Cars_Cpu cars_cpu;
     Song song;
     Error error;
-    Control_Cpu control_cpu;
     Car car;
     Race race;
     Traffic_Light traffic_light;
     Circuit circuit;
-    A_Star a_star;
 
     double getMousePosX(RenderWindow &window);
 
@@ -56,14 +58,29 @@ public:
 
     double posx, posy;
 
-    int x_CpuCar, y_CpuCar;
+    int x_CpuCar=162, y_CpuCar=368;
+
+
 
 private:
 
-    int circuitrace, Type_race;
-    bool control_setRace=true, meteo, flag=false;
+    void SaveCircuit();
+
+    int Type_race;
+    int circuitrace;
+    bool control_setRace=true, flag=false, assignament=true;
+    int meteo, giri;
+
+    //int *X_CPU = new int [dim_trajectory];
+    //int *Y_CPU = new int [dim_trajectory];
+
     Texture T_Flag;
     Sprite S_Flag;
+
+
+
+
+
 };
 
 
