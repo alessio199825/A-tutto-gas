@@ -22,7 +22,7 @@ class A_Star{
 public:
 
     A_Star();
-    int astar();
+    int astar(int x_cpu, int y_cpu);
     int getX_trajectory(int i);
     int getY_trajectory(int i);
     int getTrajectory_dim() const;

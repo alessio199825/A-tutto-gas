@@ -8,13 +8,13 @@ A_Star::A_Star() {
 
 }
 
-int A_Star::astar() {
+int A_Star::astar(int x_cpu, int y_cpu) {
     if (!done) {
 
         if (ChangeStart) {
 
-            x_start[0] = 162;
-            y_start[0] = 368;
+            x_start[0] = x_cpu;
+            y_start[0] = y_cpu;
 
             x_end[1] = 382;
             y_end[1] = 68;

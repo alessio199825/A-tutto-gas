@@ -21,15 +21,12 @@ public:
 
     Cars_Cpu();
 
-    Cars_Cpu(float x, float y) { x_cpu=x; y_cpu=y;}
+    Cars_Cpu(int x, int y) { x_cpu=x; y_cpu=y;}
 
     A_Star a_star;
 
     void createMachine(RenderWindow &window, Error &error);
     void moveCar();
-
-    void setX_cpu(float x_cpu);
-    void setY_cpu(float y_cpu);
 
     void setCar(int x,int y);
     void drawCpu(RenderWindow &window);
@@ -40,7 +37,7 @@ private:
 
 
 
-    float x_cpu=162, y_cpu=368;
+    int x_cpu=162, y_cpu=368;
     float degreeCPU=0;
     Texture T_CpuCar[7];
     Sprite S_CpuCar[7];

@@ -31,7 +31,7 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
     for(int i=0; i<1; i++)
         window.draw(S_CpuCar[i]);
 
-    a_star.astar();
+    a_star.astar(x_cpu, y_cpu);
 
     dim_trajectory = a_star.getTrajectory_dim();
 
@@ -243,12 +243,5 @@ const vector<Vector2f> &Cars_Cpu::getPosCar() const {
     return posCar;
 }
 
-void Cars_Cpu::setX_cpu(float x_cpu) {
-    Cars_Cpu::x_cpu = x_cpu;
-}
-
-void Cars_Cpu::setY_cpu(float y_cpu) {
-    Cars_Cpu::y_cpu = y_cpu;
-}
 
 
