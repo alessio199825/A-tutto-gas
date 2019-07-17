@@ -47,7 +47,7 @@ int Load_Page::getActivities(Event event, RenderWindow &window) {
                     window.close();
                     break;
 
-                case Keyboard::Enter:
+                case Keyboard::Tab:
                     start_Race=true;
                     pageChanged=true;
                     return -1;
