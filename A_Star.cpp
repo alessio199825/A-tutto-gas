@@ -4,17 +4,15 @@
 
 #include "A_Star.h"
 
-A_Star::A_Star() {
+A_Star::A_Star() = default;
 
-}
-
-int A_Star::astar() {
+int A_Star::astar(int x_cpu[0], int y_cpu[0]) {
     if (!done) {
 
         if (ChangeStart) {
 
-            x_start[0] = 162;
-            y_start[0] = 368;
+            x_start[0] = x_cpu[0];
+            y_start[0] = y_cpu[0];
 
             x_end[1] = 382;
             y_end[1] = 68;

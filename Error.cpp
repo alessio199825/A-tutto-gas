@@ -1,9 +1,6 @@
 #include "Error.h"
 
-Error::Error()
-{
-
-}
+Error::Error() = default;
 
 void Error::Check_Image(RenderWindow &window) {
 

@@ -17,10 +17,10 @@ void Tilemaps::CreateMap() {
                 mapLevel.open("Control/level1.txt");
                 break;
             case '2':
-                mapLevel.open("Control/level1.txt");
+                mapLevel.open("Control/level2.txt");
                 break;
             case '3':
-                mapLevel.open("Control/level1.txt");
+                mapLevel.open("Control/level3.txt");
                 break;
             default:
                 break;
@@ -49,11 +49,7 @@ int Tilemaps::TileNumber(int i, int j) {
     return lineTiles[j/20][i/20];
 }
 
-Tilemaps::~Tilemaps() {
+Tilemaps::~Tilemaps() = default;
 
-}
-
-Tilemaps::Tilemaps() {
-
-}
+Tilemaps::Tilemaps() = default;
 

@@ -19,8 +19,6 @@ void Menu_State::setState(bool change) {
     pageChanged=change;
 }
 
-Menu_State::~Menu_State() {
-
-}
+Menu_State::~Menu_State() = default;
 
 

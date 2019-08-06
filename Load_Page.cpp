@@ -17,9 +17,7 @@ Load_Page::Load_Page(RenderWindow &window, Error &error, int circuitrace, int Ty
 
 }
 
-Load_Page::~Load_Page() {
-
-}
+Load_Page::~Load_Page() = default;
 
 void Load_Page::draw(RenderWindow &window) {
 

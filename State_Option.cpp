@@ -4,11 +4,9 @@
 
 #include "State_Option.h"
 
-State_Option::State_Option() {}
+State_Option::State_Option() = default;
 
-State_Option::~State_Option() {
-
-}
+State_Option::~State_Option() = default;
 
 State_Option::State_Option(Menu_State *gContext) {
 

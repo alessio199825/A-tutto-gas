@@ -1,5 +1,7 @@
 #include "Circuit.h"
-Circuit::Circuit() {}
+
+Circuit::Circuit() = default;
+
 void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
 
     try {
@@ -47,8 +49,7 @@ void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
     window.draw(S_Pause[1]);
 }
 
-Circuit::~Circuit() {
-}
+Circuit::~Circuit() = default;
 
 const Sprite Circuit::getS_tilemaps() const {
     return S_tilemaps;

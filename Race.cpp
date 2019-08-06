@@ -1,9 +1,7 @@
 #include "Race.h"
 #include <iostream>
 
-Race::Race() {
-
-}
+Race::Race() = default;
 
 void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, int Type_race, int circuitrace) {
     circuit.setTileMaps(circuitrace, error, window);

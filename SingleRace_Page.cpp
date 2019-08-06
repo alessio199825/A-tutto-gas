@@ -13,9 +13,7 @@ SingleRace_Page::SingleRace_Page(RenderWindow &window, Error &error) {
 
 }
 
-SingleRace_Page::~SingleRace_Page() {
-
-}
+SingleRace_Page::~SingleRace_Page() = default;
 
 void SingleRace_Page::draw(RenderWindow &window) {
 

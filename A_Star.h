@@ -22,7 +22,7 @@ class A_Star{
 public:
 
     A_Star();
-    int astar();
+    int astar(int x_cpu[0], int y_cpu[0]);
     int getX_trajectory(int i);
     int getY_trajectory(int i);
     int getTrajectory_dim() const;
@@ -34,8 +34,6 @@ public:
     int vector_start=0;
     int vector_end=1;
     int trajectory_dim = 0;
-    //int *x_trajectory = new int [trajectory_dim];
-    //int *y_trajectory = new int [trajectory_dim];
     int x_trajectory[200];
     int y_trajectory[200];
 

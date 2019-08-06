@@ -13,9 +13,7 @@ LoadMenu_Page::LoadMenu_Page(RenderWindow &window, Error &error) {
 
 }
 
-LoadMenu_Page::~LoadMenu_Page() {
-
-}
+LoadMenu_Page::~LoadMenu_Page() = default;
 
 int LoadMenu_Page::getActivities(Event event, RenderWindow &window) {
 

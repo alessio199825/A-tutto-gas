@@ -14,9 +14,7 @@ TimeTrial_Page::TimeTrial_Page(RenderWindow &window, Error &error) {
 
 }
 
-TimeTrial_Page::~TimeTrial_Page() {
-
-}
+TimeTrial_Page::~TimeTrial_Page() = default;
 
 void TimeTrial_Page::draw(RenderWindow &window) {
 

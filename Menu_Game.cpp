@@ -14,9 +14,7 @@ Menu_Game::Menu_Game(RenderWindow &window, Error &error) {
 
 }
 
-Menu_Game::~Menu_Game() {
-
-}
+Menu_Game::~Menu_Game() = default;
 
 void Menu_Game::draw(RenderWindow &window) {
 

@@ -21,35 +21,35 @@ public:
 
     Cars_Cpu();
 
-    Cars_Cpu(float x, float y) { x_cpu=x; y_cpu=y;}
+    Cars_Cpu(int x, int y) { x_cpu[0]=x; y_cpu[0]=y;}
 
     A_Star a_star;
 
     void createMachine(RenderWindow &window, Error &error);
     void moveCar();
 
-    void setX_cpu(float x_cpu);
-    void setY_cpu(float y_cpu);
-
     void setCar(int x,int y);
     void drawCpu(RenderWindow &window);
     void setPos();
     const vector<Vector2f> &getPosCar() const;
 
+    void setCircuit(int circuit);
+
 private:
 
 
 
-    float x_cpu=162, y_cpu=368;
-    float degreeCPU=0;
+    int x_cpu[7], y_cpu[7];
+    int circuit;
+    float degreeCPU[7];
     Texture T_CpuCar[7];
     Sprite S_CpuCar[7];
     vector<Vector2f> posCar;
-    int dim_trajectory, dim_tmp=0, step=1;
+    int dim_trajectory[7], dim_tmp[7], step[7];
     int index=0, i=0;
     int X_CPU[200];
     int Y_CPU[200];
-    bool step2=false;
+    bool step2[7];
 
     Clock C_Step;
     Time time_Step;

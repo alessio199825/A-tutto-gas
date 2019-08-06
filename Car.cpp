@@ -7,8 +7,7 @@
 #include <iostream>
 #include <math.h>
 
-Car::Car() {
-}
+Car::Car() = default;
 
 void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, int Type_race) {
 
