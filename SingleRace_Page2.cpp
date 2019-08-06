@@ -5,6 +5,7 @@
 #include "SingleRace_Page2.h"
 #include "SingleRace_Page.h"
 #include "Load_Page.h"
+#include "Load_Exception.h"
 
 SingleRace_Page2::SingleRace_Page2(RenderWindow &window, Error &error, int weath, int lap) {
 
@@ -104,70 +105,69 @@ void SingleRace_Page2::setWindow(Error &error, RenderWindow &window) {
     try {
 
         if (!T_singleraceon[0].loadFromFile("Single_Race/gara singola.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[0].setTexture(T_singleraceon[0]);
 
         if (!T_singleraceon[1].loadFromFile("Single_Race/indietro.jpg")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[1].setTexture(T_singleraceon[1]);
         S_singleraceon[1].setPosition(sf::Vector2f(25, 25));
 
         if (!T_singleraceon[2].loadFromFile("Single_Race/seleziona circuito.png")) {       //scritta scegli circuito
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[2].setTexture(T_singleraceon[2]);
         S_singleraceon[2].setPosition(sf::Vector2f(50, 290));
 
         if (!T_singleraceon[3].loadFromFile("Single_Race/avanti.png")) {       //scritta avanti
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[3].setTexture(T_singleraceon[3]);
         S_singleraceon[3].setPosition(sf::Vector2f(600, 290));
 
         if (!T_singleraceon[4].loadFromFile("Single_Race/circuit2.jpg")) {       //circuito1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[4].setTexture(T_singleraceon[4]);
         S_singleraceon[4].setPosition(sf::Vector2f(50, 390));
 
         if (!T_singleraceon[5].loadFromFile("Single_Race/circuit1-1.jpg")) {       //circuito 2
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[5].setTexture(T_singleraceon[5]);
         S_singleraceon[5].setPosition(sf::Vector2f(350, 390));
 
         if (!T_singleraceon[6].loadFromFile("Single_Race/circuit3-1.jpg")) {       //circuito 3
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[6].setTexture(T_singleraceon[6]);
         S_singleraceon[6].setPosition(sf::Vector2f(650, 390));
 
 
         if (!T_singleraceon[7].loadFromFile("Single_Race/circuit2on.jpg")) {       //circuito 1 modificato
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_singleraceon[7].setTexture(T_singleraceon[7]);
         S_singleraceon[7].setPosition(sf::Vector2f(50, 390));
 
         if (!T_singleraceon[8].loadFromFile("Single_Race/circuit1on.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
 
         S_singleraceon[8].setTexture(T_singleraceon[8]);
         S_singleraceon[8].setPosition(sf::Vector2f(350, 390));
 
         if (!T_singleraceon[9].loadFromFile("Single_Race/circuit3on.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
 
         S_singleraceon[9].setTexture(T_singleraceon[9]);
         S_singleraceon[9].setPosition(sf::Vector2f(650, 390));
 
     }
-    catch(...){
-        //window.close();
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 

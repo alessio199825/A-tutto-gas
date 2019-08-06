@@ -3,6 +3,7 @@
 //
 
 #include "Car.h"
+#include "Load_Exception.h"
 
 #include <iostream>
 #include <math.h>
@@ -13,10 +14,10 @@ void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, 
 
     try {
         if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
     }
-    catch(const char* messaggio){
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 

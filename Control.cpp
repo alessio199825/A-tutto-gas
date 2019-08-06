@@ -3,6 +3,7 @@
 //
 
 #include "Control.h"
+#include "Load_Exception.h"
 
 Control::Control() = default;
 
@@ -33,11 +34,11 @@ int Control::CircuitOne(RenderWindow &window, Error &error, float y_CarPlayer, f
     try {
         if (image1 == 0) {
             if(!circuit_one.loadFromFile("Control/control1.bmp"))
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             image1 = 1;
         }
     }
-    catch(...){
+    catch(Load_exception e){
         window.close();
         error.Check_Image(window);
     }
@@ -64,11 +65,11 @@ int Control::CircuitTwo(RenderWindow &window, Error &error, float y_CarPlayer, f
     try {
         if (image2 == 0) {
             if (!circuit_two.loadFromFile("Control/control2.bmp"))
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             image2 = 1;
         }
     }
-    catch(...) {
+    catch(Load_exception e) {
         window.close();
         error.Check_Image(window);
     }
@@ -94,11 +95,11 @@ int Control::CircuitThree(RenderWindow &window, Error &error, float y_CarPlayer,
     try {
         if (image3 == 0) {
             if (!circuit_three.loadFromFile("Control/control3.bmp"))
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             image3 = 1;
         }
     }
-    catch(...){
+    catch(Load_exception e){
         window.close();
         error.Check_Image(window);
     }

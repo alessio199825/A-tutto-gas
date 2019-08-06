@@ -3,6 +3,7 @@
 //
 
 #include "Cars_Cpu.h"
+#include "Load_Exception.h"
 
 Cars_Cpu::Cars_Cpu()
 {
@@ -18,34 +19,34 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
     if(i==0) {
         try {
             if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina1.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
             if (!T_CpuCar[1].loadFromFile("Cars_Cpu/macchina2.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
             if (!T_CpuCar[2].loadFromFile("Cars_Cpu/macchina3.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
             if (!T_CpuCar[3].loadFromFile("Cars_Cpu/macchina4.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
             if (!T_CpuCar[4].loadFromFile("Cars_Cpu/macchina5.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
             if (!T_CpuCar[5].loadFromFile("Cars_Cpu/macchina6.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
             if (!T_CpuCar[6].loadFromFile("Cars_Cpu/macchina7.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
         }
-        catch (...) {
+        catch (Load_exception e) {
             window.close();
             error.Check_Image(window);
         }

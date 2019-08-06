@@ -4,6 +4,7 @@
 
 #include "Setting_Page.h"
 #include "Menu_Game.h"
+#include "Load_Exception.h"
 
 Setting_Page::Setting_Page(RenderWindow &window, Error &error) {
 
@@ -60,41 +61,41 @@ void Setting_Page::setWindow(Error &error, RenderWindow &window) {
 
     try {
         if (!T_setting[0].loadFromFile("Setting/impo.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_setting[0].setTexture(T_setting[0]);
 
         if (!T_setting[1].loadFromFile("Setting/indietro.jpg")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_setting[1].setTexture(T_setting[1]);
         S_setting[1].setPosition(sf::Vector2f(25, 25));
 
         if (!T_setting[2].loadFromFile("Setting/impostazioni.png")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_setting[2].setTexture(T_setting[2]);
         S_setting[2].setPosition(sf::Vector2f(220, 25));
 
         if (!T_setting[3].loadFromFile("Setting/istruzioni.png")) {       //pulsante2
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_setting[3].setTexture(T_setting[3]);
         S_setting[3].setPosition(sf::Vector2f(25, 470));
 
         if (!T_setting[4].loadFromFile("Setting/record.png")) {       //pulsante3
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_setting[4].setTexture(T_setting[4]);
         S_setting[4].setPosition(sf::Vector2f(350, 470));
 
         if (!T_setting[5].loadFromFile("Setting/riconoscimenti.png")) {       //pulsante4
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_setting[5].setTexture(T_setting[5]);
         S_setting[5].setPosition(sf::Vector2f(675, 470));
     }
-    catch(...){
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 

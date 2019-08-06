@@ -5,6 +5,7 @@
 #include "Championship_Page.h"
 #include "Menu_Game.h"
 #include "Tilemaps.h"
+#include "Load_Exception.h"
 
 Championship_Page::Championship_Page(RenderWindow &window, Error &error) {
 
@@ -92,65 +93,65 @@ void Championship_Page::setWindow(Error &error, RenderWindow &window) {
 
     try {
         if (!T_championship[0].loadFromFile("Championship/90390.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[0].setTexture(T_championship[0]);
 
         if (!T_championship[1].loadFromFile("Championship/indietro.jpg")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[1].setTexture(T_championship[1]);
         S_championship[1].setPosition(sf::Vector2f(25, 25));
 
         if (!T_championship[2].loadFromFile("Championship/titolo carriera.png")) {       //pulsante2
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[2].setTexture(T_championship[2]);
         S_championship[2].setPosition(sf::Vector2f(220, 25));
 
         if (!T_championship[3].loadFromFile("Championship/seleziona macchina.png")) {       //pulsante3
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[3].setTexture(T_championship[3]);
         S_championship[3].setPosition(sf::Vector2f(650, 170));
 
         if (!T_championship[4].loadFromFile("Championship/macchina1.jpg")) {       //pulsante4
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[4].setTexture(T_championship[4]);
         S_championship[4].setPosition(sf::Vector2f(650, 270));
 
         if (!T_championship[5].loadFromFile("Championship/macchina2.jpg")) {       //pulsante5
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[5].setTexture(T_championship[5]);
         S_championship[5].setPosition(sf::Vector2f(767.5, 270));
 
         if (!T_championship[6].loadFromFile("Championship/macchina3.jpg")) {       //pulsante6
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[6].setTexture(T_championship[6]);
         S_championship[6].setPosition(sf::Vector2f(885, 270));
 
         if (!T_championship[7].loadFromFile("Championship/macchina1on.jpg")) {       //circuito 1 modificato
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[7].setTexture(T_championship[7]);
         S_championship[7].setPosition(sf::Vector2f(650, 270));
 
-        if (!T_championship[8].loadFromFile("Championship/macchina2on.jpg")) {       //circuito 1 modificato
-            throw "impossibile caricare Texture";
+        if (!T_championship[8].loadFromFile("Championship/macchina2on.jpg")) {       //circuito 2 modificato
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[8].setTexture(T_championship[8]);
         S_championship[8].setPosition(sf::Vector2f(767.5, 270));
 
-        if (!T_championship[9].loadFromFile("Championship/macchina3on.jpg")) {       //circuito 1 modificato
-            throw "impossibile caricare Texture";
+        if (!T_championship[9].loadFromFile("Champinship/macchina3on.jpg")) {       //circuito 3 modificato
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[9].setTexture(T_championship[9]);
         S_championship[9].setPosition(sf::Vector2f(885, 270));
     }
-    catch(const char* messaggio) {
+    catch(Load_exception e) {
         error.Check_Image(window);
     }
 }

@@ -5,6 +5,7 @@
 #include "TimeTrial_Page.h"
 #include "Menu_Game.h"
 #include "Load_Page.h"
+#include "Load_Exception.h"
 
 TimeTrial_Page::TimeTrial_Page(RenderWindow &window, Error &error) {
 
@@ -99,65 +100,65 @@ void TimeTrial_Page::setWindow(Error &error, RenderWindow &window) {
 
     try {
         if (!T_timetrial[0].loadFromFile("Time_Trial/prova a tempo.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[0].setTexture(T_timetrial[0]);
 
         if (!T_timetrial[1].loadFromFile("Time_Trial/indietro.jpg")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[1].setTexture(T_timetrial[1]);
         S_timetrial[1].setPosition(sf::Vector2f(25, 25));
 
         if (!T_timetrial[2].loadFromFile("Time_Trial/seleziona circuito.png")) {       //seleziona circuito
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[2].setTexture(T_timetrial[2]);
         S_timetrial[2].setPosition(sf::Vector2f(50, 290));
 
         if (!T_timetrial[3].loadFromFile("Time_Trial/avanti1.png")) {       //scritta avanti
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[3].setTexture(T_timetrial[3]);
         S_timetrial[3].setPosition(sf::Vector2f(600, 25));
 
         if (!T_timetrial[4].loadFromFile("Time_Trial/circuit2.jpg")) {       //circuito 1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[4].setTexture(T_timetrial[4]);
         S_timetrial[4].setPosition(sf::Vector2f(50, 390));
 
         if (!T_timetrial[5].loadFromFile("Time_Trial/circuit1-1.jpg")) {       //circuito 2
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[5].setTexture(T_timetrial[5]);
         S_timetrial[5].setPosition(sf::Vector2f(350, 390));
 
         if (!T_timetrial[6].loadFromFile("Time_Trial/circuit3-1.jpg")) {       //circuito 3
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[6].setTexture(T_timetrial[6]);
         S_timetrial[6].setPosition(sf::Vector2f(650, 390));
 
         if (!T_timetrial[7].loadFromFile("Time_Trial/circuit2on.jpg")) {       //circuito 1 modificato
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[7].setTexture(T_timetrial[7]);
         S_timetrial[7].setPosition(sf::Vector2f(50, 390));
 
         if (!T_timetrial[8].loadFromFile("Time_Trial/circuit1on.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[8].setTexture(T_timetrial[8]);
         S_timetrial[8].setPosition(sf::Vector2f(350, 390));
 
         if (!T_timetrial[9].loadFromFile("Time_Trial/circuit3on.jpg")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_timetrial[9].setTexture(T_timetrial[9]);
         S_timetrial[9].setPosition(sf::Vector2f(650, 390));
     }
-    catch(...){
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 

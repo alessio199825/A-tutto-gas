@@ -3,6 +3,7 @@
 //
 
 #include "Weather.h"
+#include "Load_Exception.h"
 
 Weather::Weather() {
 
@@ -27,10 +28,10 @@ void Weather::do_Rain(RenderWindow &window, Error &error) {
     if(control_rain) {
         try {
             if (!T_rain.loadFromFile("Weather/pioggia.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
         }
-        catch (...) {
+        catch (Load_exception e) {
             window.close();
             error.Check_Image(window);
         }
@@ -59,10 +60,10 @@ void Weather::do_Sun(RenderWindow &window, Error &error) {
     if(control_sun) {
         try {
             if (!T_sun.loadFromFile("Weather/sole.png")) {
-                throw "impossibile caricare Texture";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
         }
-        catch (...) {
+        catch (Load_exception e) {
             window.close();
             error.Check_Image(window);
         }

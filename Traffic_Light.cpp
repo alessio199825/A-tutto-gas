@@ -3,6 +3,7 @@
 //
 
 #include "Traffic_Light.h"
+#include "Load_Exception.h"
 
 Traffic_Light::Traffic_Light() {
 
@@ -29,42 +30,42 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) 
         if(control_trafficlight) {
             try {
                 if (!T_Light[0].loadFromFile("Semaforo/semaforospento.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Light[0].setTexture(T_Light[0]);
                 S_Light[0].setPosition(sf::Vector2f(500, 300));
                 S_Light[0].setOrigin(sf::Vector2f(176, 108));
 
                 if (!T_Light[1].loadFromFile("Semaforo/semaforo1.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Light[1].setTexture(T_Light[1]);
                 S_Light[1].setPosition(sf::Vector2f(500, 300));
                 S_Light[1].setOrigin(sf::Vector2f(176, 108));
 
                 if (!T_Light[2].loadFromFile("Semaforo/semaforo2.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Light[2].setTexture(T_Light[2]);
                 S_Light[2].setPosition(sf::Vector2f(500, 300));
                 S_Light[2].setOrigin(sf::Vector2f(176, 108));
 
                 if (!T_Light[3].loadFromFile("Semaforo/semaforo3.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Light[3].setTexture(T_Light[3]);
                 S_Light[3].setPosition(sf::Vector2f(500, 300));
                 S_Light[3].setOrigin(sf::Vector2f(176, 108));
 
                 if (!T_Light[4].loadFromFile("Semaforo/semaforo4.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Light[4].setTexture(T_Light[4]);
                 S_Light[4].setPosition(sf::Vector2f(500, 300));
                 S_Light[4].setOrigin(sf::Vector2f(176, 108));
 
                 if (!T_Light[5].loadFromFile("Semaforo/semaforoacceso.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Light[5].setTexture(T_Light[5]);
                 S_Light[5].setPosition(sf::Vector2f(500, 300));
@@ -72,7 +73,7 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) 
 
             }
 
-            catch (...) {
+            catch (Load_exception e) {
                 window.close();
                 error.Check_Image(window);
             }

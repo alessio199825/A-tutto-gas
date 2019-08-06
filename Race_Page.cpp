@@ -4,6 +4,7 @@
 
 #include "Race_Page.h"
 #include "Menu_Game.h"
+#include "Load_Exception.h"
 
 Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap) {
     setWindow(error, window);
@@ -134,11 +135,11 @@ void Race_Page::setWindow(Error &error, RenderWindow &window) {
 
     try {
         if (!T_Flag.loadFromFile("race/scacchi.jpg")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag.setTexture(T_Flag);
     }
-    catch(...){
+    catch(Load_exception e){
         window.close();
         error.Check_Image(window);
     }

@@ -1,6 +1,5 @@
 #include "Error.h"
 
-Error::Error() = default;
 
 void Error::Check_Image(RenderWindow &window) {
 
@@ -40,4 +39,7 @@ void Error::Check_Sound() {    //ricordarsi di cambiare l'immagine, è la stessa
         window_error.display();
     }
 }
+
+Error::Error() {}
+
 

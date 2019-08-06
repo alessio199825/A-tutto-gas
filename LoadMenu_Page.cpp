@@ -4,6 +4,7 @@
 
 #include "LoadMenu_Page.h"
 #include "Menu_Game.h"
+#include "Load_Exception.h"
 
 LoadMenu_Page::LoadMenu_Page(RenderWindow &window, Error &error) {
 
@@ -55,17 +56,17 @@ void LoadMenu_Page::setWindow(Error &error, RenderWindow &window) {
 
     try{
         if (!T_load[0].loadFromFile("Load/loading.jpg"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_load[0].setTexture(T_load[0]);
 
         if (!T_load[1].loadFromFile("Load/caricamento.png"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_load[1].setTexture(T_load[1]);
     }
 
-    catch(...){
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 

@@ -3,6 +3,7 @@
 //
 
 #include "Song.h"
+#include "Load_Exception.h"
 
 Song::Song() = default;
 
@@ -11,10 +12,10 @@ void Song::music_Load(RenderWindow &window, Error &error) {
     if (!loadloop) {
         try {
             if (!music_load.openFromFile("Music/load.ogg")) {
-                throw "impossibile caricare Music";
+                throw Load_exception("Load_exception:Impossibile caricare file");
             }
         }
-        catch(...){
+        catch(Load_exception e){
             window.close();
             error.Check_Sound();
         }
@@ -29,9 +30,9 @@ void Song::music_Menu(RenderWindow &window, Error &error) {
     if (!menuloop) {
         try {
             if (!music_menu.openFromFile("Music/F1.ogg"))
-                throw "impossibile caricare Music";
+                throw Load_exception("Load_exception:Impossibile caricare file");
         }
-        catch(...){
+        catch(Load_exception e){
             window.close();
             error.Check_Sound();
         }
@@ -51,9 +52,9 @@ void Song::music_Race(RenderWindow &window, Error &error) {
     if (!raceloop) {
         try {
             if (!music_race.openFromFile("Music/musicagara1.ogg"))
-                throw "impossibile caricare Music";
+                throw Load_exception("Load_exception:Impossibile caricare file");
         }
-        catch(...){
+        catch(Load_exception e){
             window.close();
             error.Check_Sound();
         }
@@ -84,9 +85,9 @@ void Song::music_TrafficLight(RenderWindow &window, Error &error) {
     if (!lightloop) {
         try {
             if (!music_trafficlight.openFromFile("Music/semaforosuono.ogg"))
-                throw "impossibile caricare Music";
+                throw Load_exception("Load_exception:Impossibile caricare file");
         }
-        catch(...){
+        catch(Load_exception e){
             window.close();
             error.Check_Sound();
         }
@@ -105,9 +106,9 @@ void Song::music_Box(RenderWindow &window, Error &error) {
     if (!boxloop) {
         try {
             if (!music_box.openFromFile("Music/limitatore.ogg"))
-                throw "impossibile caricare Music";
+                throw Load_exception("Load_exception:Impossibile caricare file");
         }
-        catch(...){
+        catch(Load_exception e){
             window.close();
             error.Check_Sound();
         }
@@ -178,17 +179,17 @@ void Song::Music_Radio(RenderWindow &window, Error &error) {
                 switch (SelectRadio % 3) {
                     case 0:
                         if (!M_teamRadio.openFromFile("Music/teamradio9.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 4.50;
                         break;
                     case 1:
                         if (!M_teamRadio.openFromFile("Music/teamradio2.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 4;
                         break;
                     case 2:
                         if (!M_teamRadio.openFromFile("Music/teamradio11.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 3.50;
                         break;
                     default:
@@ -199,22 +200,22 @@ void Song::Music_Radio(RenderWindow &window, Error &error) {
                 switch (SelectRadio / 2) {
                     case 5:
                         if (!M_teamRadio.openFromFile("Music/teamradio1.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 5.50;
                         break;
                     case 6:
                         if (!M_teamRadio.openFromFile("Music/teamradio5.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 3.50;
                         break;
                     case 7:
                         if (!M_teamRadio.openFromFile("Music/teamradio6.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 5;
                         break;
                     case 8:
                         if (!M_teamRadio.openFromFile("Music/teamradio7.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 7;
                         break;
                     default:
@@ -225,18 +226,18 @@ void Song::Music_Radio(RenderWindow &window, Error &error) {
                 switch (SelectRadio % 2) {
                     case 0:
                         if (!M_teamRadio.openFromFile("Music/teamradio3.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 11;
                         break;
                     case 1:
                         if (!M_teamRadio.openFromFile("Music/teamradio8.ogg"))
-                            throw "impossibile caricare music";
+                            throw Load_exception("Load_exception:Impossibile caricare file");
                         Radio_Seconds = 9.50;
                         break;
                 }
             }
         }
-        catch (...) {
+        catch (Load_exception e) {
             window.close();
             error.Check_Sound();
         }

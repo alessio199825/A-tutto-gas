@@ -1,4 +1,5 @@
 #include "Race.h"
+#include "Load_Exception.h"
 #include <iostream>
 
 Race::Race() = default;
@@ -38,10 +39,10 @@ int Race::Break(RenderWindow &window, Error &error, Song &song) {        //crea 
 
             try {
                 if (!T_Break.loadFromFile("race/break.png")) {
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
             }
-            catch(...){
+            catch(Load_exception e){
                 window.close();
                 error.Check_Image(window);
             }

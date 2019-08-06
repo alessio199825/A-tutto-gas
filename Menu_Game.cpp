@@ -7,6 +7,7 @@
 #include "SingleRace_Page.h"
 #include "TimeTrial_Page.h"
 #include "Setting_Page.h"
+#include "Load_Exception.h"
 
 Menu_Game::Menu_Game(RenderWindow &window, Error &error) {
 
@@ -94,41 +95,41 @@ void Menu_Game::setWindow(Error &error, RenderWindow &window) {
     try {
 
         if (!T_menu[0].loadFromFile("Menu/2307.jpg"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_menu[0].setTexture(T_menu[0]);
 
         if (!T_menu[1].loadFromFile("Menu/titolo.png"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_menu[1].setTexture(T_menu[1]);
         S_menu[1].setPosition(sf::Vector2f(220, 25));
 
         if (!T_menu[2].loadFromFile("Menu/carriera.png"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_menu[2].setTexture(T_menu[2]);
         S_menu[2].setPosition(sf::Vector2f(650, 170));
 
         if (!T_menu[3].loadFromFile("Menu/gara singola.png"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_menu[3].setTexture(T_menu[3]);
         S_menu[3].setPosition(sf::Vector2f(650, 270));
 
         if (!T_menu[4].loadFromFile("Menu/prova a tempo.png"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_menu[4].setTexture(T_menu[4]);
         S_menu[4].setPosition(sf::Vector2f(650, 370));
 
         if (!T_menu[5].loadFromFile("Menu/impostazioni.png"))
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
 
         S_menu[5].setTexture(T_menu[5]);
         S_menu[5].setPosition(sf::Vector2f(650, 470));
     }
-    catch(...){
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 }

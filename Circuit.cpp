@@ -1,4 +1,5 @@
 #include "Circuit.h"
+#include "Load_Exception.h"
 
 Circuit::Circuit() = default;
 
@@ -6,26 +7,26 @@ void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
 
     try {
         if (!T_Pause[0].loadFromFile("race/termina.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
 
         S_Pause[0].setTexture(T_Pause[0]);
         switch (circuitrace) {
             case 1:
                 if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_BASE.jpg")) {       //3 giri modificato
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Pause[0].setPosition(910, 510);
                 break;
             case 2:
                 if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_MEDIO.jpg")) {       //3 giri modificato
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Pause[0].setPosition(20, 510);
                 break;
             case 3:
                 if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_DIFFICILE.jpg")) {       //3 giri modificato
-                    throw "impossibile caricare Texture";
+                    throw Load_exception("Load_exception:Impossibile caricare file");
                 }
                 S_Pause[0].setPosition(910, 120);
                 break;
@@ -33,10 +34,10 @@ void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
 
         }
         if (!T_Pause[1].loadFromFile("race/pausa.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
     }
-    catch(...){
+    catch(Load_exception e){
         window.close();
         error.Check_Image(window);
     }

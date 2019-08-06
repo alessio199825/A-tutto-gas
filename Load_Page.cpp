@@ -3,6 +3,7 @@
 //
 
 #include "Load_Page.h"
+#include "Load_Exception.h"
 
 Load_Page::Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int meteo, int giri) {
     x_Tyre=20;
@@ -71,18 +72,18 @@ void Load_Page::setWindow(Error &error, RenderWindow &window) {
 
     try {
         if (!T_planisphere[0].loadFromFile("Single_Race/planisfero.png")) {       //pulsante1
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_planisphere[0].setTexture(T_planisphere[0]);
 
         if (!T_planisphere[1].loadFromFile("Load/fone.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_planisphere[1].setTexture(T_planisphere[1]);
         S_planisphere[1].setPosition(Vector2f(x_Tyre, 387));
 
         if (!T_planisphere[2].loadFromFile("Load/ruotona.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_planisphere[2].setTexture(T_planisphere[2]);
         S_planisphere[2].setPosition(Vector2f(x_Tyre + 22, 462));
@@ -91,15 +92,14 @@ void Load_Page::setWindow(Error &error, RenderWindow &window) {
         S_planisphere[2].setRotation(degree_Tyre);
 
         if (!T_planisphere[3].loadFromFile("Load/ruotona.png")) {
-            throw "impossibile caricare Texture";
+            throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_planisphere[3].setTexture(T_planisphere[3]);
-
 
         S_planisphere[3].setOrigin(13, 13);
 
     }
-    catch(...){
+    catch(Load_exception e){
         error.Check_Image(window);
     }
 
