@@ -9,7 +9,7 @@
 TimeTrial_Page::TimeTrial_Page(RenderWindow &window, Error &error) {
 
     setWindow(error, window);
-    meteo=true;
+    meteo=false;
     circuitrace=0;
 
 }

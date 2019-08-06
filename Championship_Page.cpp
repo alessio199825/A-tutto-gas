@@ -152,7 +152,7 @@ void Championship_Page::setWindow(Error &error, RenderWindow &window) {
         S_championship[9].setTexture(T_championship[9]);
         S_championship[9].setPosition(sf::Vector2f(885, 270));
     }
-    catch(...) {
+    catch(const char* messaggio) {
         error.Check_Image(window);
     }
 }

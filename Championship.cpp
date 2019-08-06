@@ -3,7 +3,7 @@
 //
 #include "Championship.h"
 
-void Championship::setChampionshipState(RenderWindow &window, Error &error)  {
+void Championship::setChampionshipState(RenderWindow &window, Error &error) throw(char) {
 
     try {
         if (!T_championship[0].loadFromFile("Championship/90390.jpg")) {
@@ -41,7 +41,7 @@ void Championship::setChampionshipState(RenderWindow &window, Error &error)  {
         S_championship[6].setTexture(T_championship[6]);
         S_championship[6].setPosition(sf::Vector2f(885, 270));
     }
-    catch(...){
+    catch(const char* messaggio){
         window.close();
         error.Check_Image(window);
     }

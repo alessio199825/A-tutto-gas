@@ -43,8 +43,6 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
     dim_tmp=dim_trajectory;
 
-
-
 }
 
 void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fanno la stessa cosa

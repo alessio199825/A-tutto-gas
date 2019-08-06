@@ -17,7 +17,7 @@ void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, 
             throw "impossibile caricare Texture";
         }
     }
-    catch(...){
+    catch(const char* messaggio){
         error.Check_Image(window);
     }
 

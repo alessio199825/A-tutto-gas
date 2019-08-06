@@ -18,7 +18,7 @@ class Championship {
 public:
 
     Championship();
-    void setChampionshipState(RenderWindow &window, Error &error);
+    void setChampionshipState(RenderWindow &window, Error &error) throw(char);
     int getQualifications(double posx, double posy, RenderWindow &window, Error &error);
     int Return(double posx, double posy);
 
