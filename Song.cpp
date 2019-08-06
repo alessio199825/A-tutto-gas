@@ -4,9 +4,7 @@
 
 #include "Song.h"
 
-Song::Song() {
-
-}
+Song::Song() = default;
 
 void Song::music_Load(RenderWindow &window, Error &error) {
 

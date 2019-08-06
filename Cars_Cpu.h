@@ -21,7 +21,7 @@ public:
 
     Cars_Cpu();
 
-    Cars_Cpu(int x, int y) { x_cpu=x; y_cpu=y;}
+    Cars_Cpu(int x, int y) { x_cpu[0]=x; y_cpu[0]=y;}
 
     A_Star a_star;
 
@@ -33,11 +33,14 @@ public:
     void setPos();
     const vector<Vector2f> &getPosCar() const;
 
+    void setCircuit(int circuit);
+
 private:
 
 
 
-    int x_cpu=162, y_cpu=368;
+    int x_cpu[7], y_cpu[7];
+    int circuit;
     float degreeCPU=0;
     Texture T_CpuCar[7];
     Sprite S_CpuCar[7];

@@ -11,9 +11,7 @@ Setting_Page::Setting_Page(RenderWindow &window, Error &error) {
 
 }
 
-Setting_Page::~Setting_Page() {
-
-}
+Setting_Page::~Setting_Page() = default;
 
 void Setting_Page::draw(RenderWindow &window) {
 

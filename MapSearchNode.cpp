@@ -20,10 +20,6 @@ void MapSearchNode::PrintNodeInfo()
     char str[100];
     sprintf( str, "Node position : (%d,%d)\n", x,y );
     //cout << str;
-
-   /* ofstream T("Control/traiettoria.txt");
-    T<<x<<endl;
-    T.close();*/
 }
 
 // Here's the heuristic function that estimates the distance from a Node

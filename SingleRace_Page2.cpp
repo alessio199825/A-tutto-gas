@@ -14,9 +14,7 @@ SingleRace_Page2::SingleRace_Page2(RenderWindow &window, Error &error, int weath
     circuitrace=0;
 }
 
-SingleRace_Page2::~SingleRace_Page2() {
-
-}
+SingleRace_Page2::~SingleRace_Page2() = default;
 
 void SingleRace_Page2::draw(RenderWindow &window) {
 

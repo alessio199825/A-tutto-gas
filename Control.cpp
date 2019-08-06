@@ -4,9 +4,7 @@
 
 #include "Control.h"
 
-Control::Control() {
-
-}
+Control::Control() = default;
 
 int Control::SetControl(RenderWindow &window, Error &error, int num_circuit, float y_CarPlayer, float x_CarPlayer, double degree_CarPlayer) {
 

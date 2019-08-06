@@ -13,9 +13,7 @@ Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Ra
     giri=lap;
 }
 
-Race_Page::~Race_Page() {
-
-}
+Race_Page::~Race_Page() = default;
 
 void Race_Page::draw(RenderWindow &window) {
 
@@ -51,11 +49,6 @@ void Race_Page::draw(RenderWindow &window) {
         posx = getMousePosX(window);
         posy = getMousePosY(window);
 
-        /*timetrial.getTime_lap(window);
-        timetrial.print_TimeLap(window, error);
-        timetrial.print_TimeMinute(window, error);
-*/
-
         if(Type_race==2) {
 
             cars_cpu.moveCar();
@@ -70,6 +63,7 @@ void Race_Page::draw(RenderWindow &window) {
     else if(Type_race==2) {
         flag = car.End_Race(giri);
         SaveCircuit();
+        cars_cpu.setCircuit(circuitrace);
         cars_cpu.createMachine(window, error);
     }
 
@@ -177,9 +171,7 @@ double Race_Page::getMousePosY(RenderWindow &window) {
     return posy;
 }
 
-Race_Page::Race_Page() {
-
-}
+Race_Page::Race_Page() = default;
 
 void Race_Page::SaveCircuit() {
 

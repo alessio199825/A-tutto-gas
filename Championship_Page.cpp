@@ -12,9 +12,7 @@ Championship_Page::Championship_Page(RenderWindow &window, Error &error) {
 
 }
 
-Championship_Page::~Championship_Page() {
-
-}
+Championship_Page::~Championship_Page() = default;
 
 void Championship_Page::draw(RenderWindow &window) {
 
