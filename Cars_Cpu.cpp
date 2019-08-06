@@ -4,7 +4,14 @@
 
 #include "Cars_Cpu.h"
 
-Cars_Cpu::Cars_Cpu() = default;
+Cars_Cpu::Cars_Cpu()
+{
+    for(int i=0; i<7; i++){
+        step[i] = 1;
+        step2[i] = false;
+        dim_tmp[i] = 0;
+    }
+}
 
 void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
@@ -48,11 +55,15 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
         S_CpuCar[i].setTexture(T_CpuCar[i]);
         S_CpuCar[i].setOrigin(9.5, 0);
-        S_CpuCar[i].setRotation(180 + degreeCPU);
+        S_CpuCar[i].setRotation(180 + degreeCPU[i]);
 
     }
    switch(circuit){
         case 1:
+            for(int i=0; i<7; i++){
+                degreeCPU[i] = 0;
+            }
+
             x_cpu[0]=162;
             y_cpu[0]=368;
 
@@ -74,6 +85,17 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
             x_cpu[6]=216;
             y_cpu[6]=494;
             break;
+        case 2:
+            for(int i=0; i<7; i++){
+                degreeCPU[i] = 90;
+            }
+           break;
+        case 3:
+            for(int i=0; i<7; i++){
+                degreeCPU[i] = -90;
+            }
+            break;
+       default:break;
             }
 
     for(int i=0; i<7; i++) {
@@ -81,17 +103,17 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
         window.draw(S_CpuCar[i]);
     }
 
-    a_star.astar(&x_cpu[0], &y_cpu[0]);
+        a_star.astar(&x_cpu[0], &y_cpu[0]);
 
-    dim_trajectory = a_star.getTrajectory_dim();
+    dim_trajectory[0] = a_star.getTrajectory_dim();
 
-    for (int i = dim_tmp; i < dim_trajectory; i++) {
+    for (int i = dim_tmp[0]; i < dim_trajectory[0]; i++) {
 
         X_CPU[i] = a_star.getX_trajectory(i);
         Y_CPU[i] = a_star.getY_trajectory(i);
     }
 
-    dim_tmp=dim_trajectory;
+    dim_tmp[0] = dim_trajectory[0];
 
 
 
@@ -99,154 +121,154 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
 void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fanno la stessa cosa
 
-    if(step == 180){
-        step=28;
+    if(step[0] == 180){
+        step[0] = 28;
     }
 
-    if((X_CPU[step] != x_cpu[0] || Y_CPU[step] != y_cpu[0]) && (X_CPU[step+1] != x_cpu[0] || Y_CPU[step+1] != y_cpu[0])) {
+    if((X_CPU[step[0]] != x_cpu[0] || Y_CPU[step[0]] != y_cpu[0]) && (X_CPU[step[0]+1] != x_cpu[0] || Y_CPU[step[0]+1] != y_cpu[0])) {
 
         time_Step = C_Step.getElapsedTime();
 
         if (time_Step.asMilliseconds() > 30) {          // aggiorna la posizione della macchina ogni TOT millisecondi
 
 
-            if (Y_CPU[step] < Y_CPU[step - 1] && X_CPU[step] == X_CPU[step - 1]) {
+            if (Y_CPU[step[0]] < Y_CPU[step[0] - 1] && X_CPU[step[0]] == X_CPU[step[0] - 1]) {
 
                 y_cpu[0] = y_cpu[0] - 2;
-                step2=false;
+                step2[0] = false;
 
-                if (X_CPU[step + 1] > X_CPU[step - 1] && step+1 < dim_trajectory) {
+                if (X_CPU[step[0] + 1] > X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]) {
 
                     x_cpu[0] = x_cpu[0] + 2;
 
-                    if (degreeCPU < 45)
-                        degreeCPU = degreeCPU + 5;
+                    if (degreeCPU[0] < 45)
+                        degreeCPU[0] = degreeCPU[0] + 5;
 
-                    step2 = true;
+                    step2[0] = true;
 
                 }
 
-                else if (X_CPU[step + 1] < X_CPU[step - 1] && step+1 < dim_trajectory){
+                else if (X_CPU[step[0] + 1] < X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     x_cpu[0] = x_cpu[0] - 2;
-                    if(degreeCPU>-45)
-                        degreeCPU = degreeCPU - 5;
+                    if(degreeCPU[0] > -45)
+                        degreeCPU[0] = degreeCPU[0] - 5;
 
-                    step2=true;
+                    step2[0] = true;
 
                 }
                 else{
 
-                    if(degreeCPU >=270 && degreeCPU <360){
-                        degreeCPU = degreeCPU + 5;
+                    if(degreeCPU[0] >=270 && degreeCPU[0] <360){
+                        degreeCPU[0] = degreeCPU[0] + 5;
                     }
-                    else if(degreeCPU==360){
-                        degreeCPU=0;
+                    else if(degreeCPU[0] == 360){
+                        degreeCPU[0] = 0;
                     }
-                    else if(degreeCPU<0)
-                        degreeCPU = degreeCPU + 5;
+                    else if(degreeCPU[0] < 0)
+                        degreeCPU[0] = degreeCPU[0] + 5;
 
-                    else if(degreeCPU>0 )
-                        degreeCPU = degreeCPU - 5;
+                    else if(degreeCPU[0] > 0 )
+                        degreeCPU[0] = degreeCPU[0] - 5;
                 }
 
             }
 
-            if (Y_CPU[step] > Y_CPU[step - 1] && X_CPU[step] == X_CPU[step - 1]) {
+            if (Y_CPU[step[0]] > Y_CPU[step[0] - 1] && X_CPU[step[0]] == X_CPU[step[0] - 1]) {
 
                 y_cpu[0] = y_cpu[0] + 2;
-                step2=false;
+                step2[0] = false;
 
 
 
-                if (X_CPU[step + 1] > X_CPU[step - 1] && step+1 < dim_trajectory){
+                if (X_CPU[step[0] + 1] > X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     x_cpu[0] = x_cpu[0] + 2;
-                    if(degreeCPU>135)
-                        degreeCPU = degreeCPU - 5;
-                    step2=true;
+                    if(degreeCPU[0] > 135)
+                        degreeCPU[0] = degreeCPU[0] - 5;
+                    step2[0] = true;
 
                 }
 
-                else if (X_CPU[step + 1] < X_CPU[step - 1] && step+1 < dim_trajectory){
+                else if (X_CPU[step[0] + 1] < X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     x_cpu[0] = x_cpu[0] - 2;
-                    if(degreeCPU<225)
-                        degreeCPU = degreeCPU + 5;
-                    step2=true;
+                    if(degreeCPU[0] < 225)
+                        degreeCPU[0] = degreeCPU[0] + 5;
+                    step2[0] = true;
 
                 }
                 else{
-                    if(degreeCPU<180)
-                        degreeCPU = degreeCPU + 5;
+                    if(degreeCPU[0] < 180)
+                        degreeCPU[0] = degreeCPU[0] + 5;
 
-                    if(degreeCPU>180)
-                        degreeCPU = degreeCPU - 5;
+                    if(degreeCPU[0] > 180)
+                        degreeCPU[0] = degreeCPU[0] - 5;
                 }
 
 
             }
 
-            if (X_CPU[step] > X_CPU[step - 1] && Y_CPU[step] == Y_CPU[step - 1]){
+            if (X_CPU[step[0]] > X_CPU[step[0] - 1] && Y_CPU[step[0]] == Y_CPU[step[0] - 1]){
 
                 x_cpu[0] = x_cpu[0] + 2;
-                step2=false;
+                step2[0] = false;
 
-                if (Y_CPU[step + 1] > Y_CPU[step - 1] && step+1 < dim_trajectory){
+                if (Y_CPU[step[0] + 1] > Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     y_cpu[0] = y_cpu[0] + 2;
-                    if(degreeCPU<135)
-                        degreeCPU = degreeCPU + 5;
-                    step2=true;
+                    if(degreeCPU[0] < 135)
+                        degreeCPU[0] = degreeCPU[0] + 5;
+                    step2[0] = true;
 
                 }
 
-                else if (Y_CPU[step + 1] < Y_CPU[step - 1] && step+1 < dim_trajectory){
+                else if (Y_CPU[step[0] + 1] < Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     y_cpu[0] = y_cpu[0] - 2;
-                    if(degreeCPU>45)
-                        degreeCPU = degreeCPU - 5;
+                    if(degreeCPU[0] > 45)
+                        degreeCPU[0] = degreeCPU[0] - 5;
 
-                    step2=true;
+                    step2[0] = true;
 
                 }
                 else{
-                    if(degreeCPU<90)
-                        degreeCPU = degreeCPU + 5;
+                    if(degreeCPU[0] < 90)
+                        degreeCPU[0] = degreeCPU[0] + 5;
 
-                    if(degreeCPU>90)
-                        degreeCPU = degreeCPU - 5;
+                    if(degreeCPU[0] > 90)
+                        degreeCPU[0] = degreeCPU[0] - 5;
                 }
 
             }
 
-            if (X_CPU[step] < X_CPU[step - 1] && Y_CPU[step] == Y_CPU[step - 1]) {
+            if (X_CPU[step[0]] < X_CPU[step[0] - 1] && Y_CPU[step[0]] == Y_CPU[step[0] - 1]) {
 
                 x_cpu[0] = x_cpu[0] - 2;
-                step2=false;
+                step2[0] = false;
 
-                if (Y_CPU[step + 1] > Y_CPU[step - 1] && step+1 < dim_trajectory){
+                if (Y_CPU[step[0] + 1] > Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     y_cpu[0] = y_cpu[0] + 2;
-                    if(degreeCPU>225)
-                        degreeCPU = degreeCPU - 5;
-                    step2=true;
+                    if(degreeCPU[0] > 225)
+                        degreeCPU[0] = degreeCPU[0] - 5;
+                    step2[0] = true;
                 }
 
-                else if (Y_CPU[step + 1] < Y_CPU[step - 1] && step+1 < dim_trajectory){
+                else if (Y_CPU[step[0] + 1] < Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
 
                     y_cpu[0] = y_cpu[0] - 2;
-                    if(degreeCPU<315)
-                        degreeCPU = degreeCPU + 5;
-                    step2=true;
+                    if(degreeCPU[0] < 315)
+                        degreeCPU[0] = degreeCPU[0] + 5;
+                    step2[0] = true;
 
                 }
                 else{
-                    if(degreeCPU<270)
-                        degreeCPU = degreeCPU + 5;
+                    if(degreeCPU[0] < 270)
+                        degreeCPU[0] = degreeCPU[0] + 5;
 
-                    if(degreeCPU>270)
-                        degreeCPU = degreeCPU - 5;
+                    if(degreeCPU[0] > 270)
+                        degreeCPU[0] = degreeCPU[0] - 5;
                 }
 
             }
@@ -256,16 +278,17 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
     }
 
     else {
-        step++;
+        step[0] = step[0] + 1;
 
-        if(step2)
-            step++;
+        if(step2[0])
+            step[0] = step[0] + 1;
 
     }
 
-
-    S_CpuCar[0].setPosition(x_cpu[0],y_cpu[0]);
-    S_CpuCar[0].setRotation(180 + degreeCPU);
+    for(int i=0; i<7; i++) {
+        S_CpuCar[i].setPosition(x_cpu[i], y_cpu[i]);
+        S_CpuCar[i].setRotation(180 + degreeCPU[i]);
+    }
 
 
 }
@@ -285,8 +308,9 @@ void Cars_Cpu::setCar(int x,int y) {
 }
 
 void Cars_Cpu::drawCpu(RenderWindow &window) {
-    window.draw(S_CpuCar[0]);
-
+    for(int i=0; i<7; i++) {
+        window.draw(S_CpuCar[i]);
+    }
 }
 
 const vector<Vector2f> &Cars_Cpu::getPosCar() const {

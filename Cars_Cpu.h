@@ -41,15 +41,15 @@ private:
 
     int x_cpu[7], y_cpu[7];
     int circuit;
-    float degreeCPU=0;
+    float degreeCPU[7];
     Texture T_CpuCar[7];
     Sprite S_CpuCar[7];
     vector<Vector2f> posCar;
-    int dim_trajectory, dim_tmp=0, step=1;
+    int dim_trajectory[7], dim_tmp[7], step[7];
     int index=0, i=0;
     int X_CPU[200];
     int Y_CPU[200];
-    bool step2=false;
+    bool step2[7];
 
     Clock C_Step;
     Time time_Step;
