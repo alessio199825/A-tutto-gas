@@ -145,7 +145,7 @@ void Championship_Page::setWindow(Error &error, RenderWindow &window) {
         S_championship[8].setTexture(T_championship[8]);
         S_championship[8].setPosition(sf::Vector2f(767.5, 270));
 
-        if (!T_championship[9].loadFromFile("Champinship/macchina3on.jpg")) {       //circuito 3 modificato
+        if (!T_championship[9].loadFromFile("Championship/macchina3on.jpg")) {       //circuito 3 modificato
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_championship[9].setTexture(T_championship[9]);
