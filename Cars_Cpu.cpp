@@ -52,39 +52,33 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
         }
         i++;
     }
-    for(int i=0; i<7; i++){
 
-        S_CpuCar[i].setTexture(T_CpuCar[i]);
-        S_CpuCar[i].setOrigin(9.5, 0);
-        S_CpuCar[i].setRotation(180 + degreeCPU[i]);
-
-    }
    switch(circuit){
         case 1:
             for(int i=0; i<7; i++){
                 degreeCPU[i] = 0;
             }
 
-            x_cpu[0]=162;
-            y_cpu[0]=368;
+            x_cpu[0]=222;
+            y_cpu[0]=348;
 
-            x_cpu[1]=216;
-            y_cpu[1]=340;
+            x_cpu[1]=162;
+            y_cpu[1]=388;
 
-            x_cpu[2]=216;
-            y_cpu[2]=390;
+            x_cpu[2]=222;
+            y_cpu[2]=428;
 
             x_cpu[3]=162;
-            y_cpu[3]=418;
+            y_cpu[3]=468;
 
-            x_cpu[4]=216;
-            y_cpu[4]=444;
+            x_cpu[4]=222;
+            y_cpu[4]=508;
 
             x_cpu[5]=162;
-            y_cpu[5]=468;
+            y_cpu[5]=548;
 
-            x_cpu[6]=216;
-            y_cpu[6]=494;
+            x_cpu[6]=222;
+            y_cpu[6]=588;
             break;
         case 2:
             for(int i=0; i<7; i++){
@@ -99,194 +93,214 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
        default:break;
             }
 
+    for(int i=0; i<7; i++){
+
+        S_CpuCar[i].setTexture(T_CpuCar[i]);
+        S_CpuCar[i].setOrigin(9.5, 0);
+        S_CpuCar[i].setRotation(180 + degreeCPU[i]);
+
+    }
+
     for(int i=0; i<7; i++) {
         S_CpuCar[i].setPosition(Vector2f(x_cpu[i], y_cpu[i]));
         window.draw(S_CpuCar[i]);
     }
 
-        a_star.astar(&x_cpu[0], &y_cpu[0]);
 
-    dim_trajectory[0] = a_star.getTrajectory_dim();
 
-    for (int i = dim_tmp[0]; i < dim_trajectory[0]; i++) {
+    for(carNumber=0; carNumber<4; carNumber++) {
+        a_star.astar(carNumber);
+        dim_trajectory[carNumber] = a_star.getTrajectory_dim(carNumber);
+    }
+    for(carNumber=0; carNumber<4; carNumber++) {
 
-        X_CPU[i] = a_star.getX_trajectory(i);
-        Y_CPU[i] = a_star.getY_trajectory(i);
+        for (int i = dim_tmp[carNumber]; i < dim_trajectory[carNumber]; i++) {
+
+            X_CPU[i][carNumber] = a_star.getX_trajectory(i, carNumber);
+            Y_CPU[i][carNumber] = a_star.getY_trajectory(i, carNumber);
+
+        }
+
+        dim_tmp[carNumber] = dim_trajectory[carNumber];
     }
 
-    dim_tmp[0] = dim_trajectory[0];
 
 }
 
 void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fanno la stessa cosa
 
-    if(step[0] == 180){
-        step[0] = 28;
-    }
-
-    if((X_CPU[step[0]] != x_cpu[0] || Y_CPU[step[0]] != y_cpu[0]) && (X_CPU[step[0]+1] != x_cpu[0] || Y_CPU[step[0]+1] != y_cpu[0])) {
-
-        time_Step = C_Step.getElapsedTime();
-
-        if (time_Step.asMilliseconds() > 30) {          // aggiorna la posizione della macchina ogni TOT millisecondi
+    /*if(step[0] == 176)
+        step[0] = 24;
+    if(step[1] == 181)
+        step[1] = 25;*/
 
 
-            if (Y_CPU[step[0]] < Y_CPU[step[0] - 1] && X_CPU[step[0]] == X_CPU[step[0] - 1]) {
+    for (carNumber = 0; carNumber < 4; carNumber++ ) {
 
-                y_cpu[0] = y_cpu[0] - 2;
-                step2[0] = false;
+        cout<<step[1]<< "=" <<x_cpu[1]<<endl;
 
-                if (X_CPU[step[0] + 1] > X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]) {
+        if ((X_CPU[step[carNumber]][carNumber] != x_cpu[carNumber] || Y_CPU[step[carNumber]][carNumber] != y_cpu[carNumber]) &&
+            (X_CPU[step[carNumber] + 1][carNumber] != x_cpu[carNumber] ||
+             Y_CPU[step[carNumber] + 1][carNumber] != y_cpu[carNumber])) {
 
-                    x_cpu[0] = x_cpu[0] + 2;
+            time_Step[carNumber] = C_Step[carNumber].getElapsedTime();
 
-                    if (degreeCPU[0] < 45)
-                        degreeCPU[0] = degreeCPU[0] + 5;
+            if (time_Step[carNumber].asMilliseconds() >
+                30) {          // aggiorna la posizione della macchina ogni TOT millisecondi
 
-                    step2[0] = true;
 
-                }
+                if (Y_CPU[step[carNumber]][carNumber] < Y_CPU[step[carNumber] - 1][carNumber] &&
+                    X_CPU[step[carNumber]][carNumber] == X_CPU[step[carNumber] - 1][carNumber]) {
 
-                else if (X_CPU[step[0] + 1] < X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
+                    y_cpu[carNumber] = y_cpu[carNumber] - 2;
+                    step2[carNumber] = false;
 
-                    x_cpu[0] = x_cpu[0] - 2;
-                    if(degreeCPU[0] > -45)
-                        degreeCPU[0] = degreeCPU[0] - 5;
+                    if (X_CPU[step[carNumber] + 1][carNumber] > X_CPU[step[carNumber] - 1][carNumber] &&
+                        step[carNumber] + 1 < dim_trajectory[carNumber]) {
 
-                    step2[0] = true;
+                        x_cpu[carNumber] = x_cpu[carNumber] + 2;
 
-                }
-                else{
+                        if (degreeCPU[carNumber] < 45)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
 
-                    if(degreeCPU[0] >=270 && degreeCPU[0] <360){
-                        degreeCPU[0] = degreeCPU[0] + 5;
+                        step2[carNumber] = true;
+
+                    } else if (X_CPU[step[carNumber] + 1][carNumber] < X_CPU[step[carNumber] - 1][carNumber] &&
+                               step[carNumber] + 1 < dim_trajectory[carNumber]) {
+
+                        x_cpu[carNumber] = x_cpu[carNumber] - 2;
+                        if (degreeCPU[carNumber] > -45)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+
+                        step2[carNumber] = true;
+
+                    } else {
+
+                        if (degreeCPU[carNumber] >= 270 && degreeCPU[carNumber] < 360) {
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+                        } else if (degreeCPU[carNumber] == 360) {
+                            degreeCPU[carNumber] = 0;
+                        } else if (degreeCPU[carNumber] < 0)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+
+                        else if (degreeCPU[carNumber] > 0)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
                     }
-                    else if(degreeCPU[0] == 360){
-                        degreeCPU[0] = 0;
+
+                }
+
+                if (Y_CPU[step[carNumber]][carNumber] > Y_CPU[step[carNumber] - 1][carNumber] &&
+                    X_CPU[step[carNumber]][carNumber] == X_CPU[step[carNumber] - 1][carNumber]) {
+
+                    y_cpu[carNumber] = y_cpu[carNumber] + 2;
+                    step2[carNumber] = false;
+
+
+                    if (X_CPU[step[carNumber] + 1][carNumber] > X_CPU[step[carNumber] - 1][carNumber] &&
+                        step[carNumber] + 1 < dim_trajectory[carNumber]) {
+
+                        x_cpu[carNumber] = x_cpu[carNumber] + 2;
+                        if (degreeCPU[carNumber] > 135)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+                        step2[carNumber] = true;
+
+                    } else if (X_CPU[step[carNumber] + 1][carNumber] < X_CPU[step[carNumber] - 1][carNumber] &&
+                               step[carNumber] + 1 < dim_trajectory[carNumber]) {
+
+                        x_cpu[carNumber] = x_cpu[carNumber] - 2;
+                        if (degreeCPU[carNumber] < 225)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+                        step2[carNumber] = true;
+
+                    } else {
+                        if (degreeCPU[carNumber] < 180)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+
+                        if (degreeCPU[carNumber] > 180)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
                     }
-                    else if(degreeCPU[0] < 0)
-                        degreeCPU[0] = degreeCPU[0] + 5;
 
-                    else if(degreeCPU[0] > 0 )
-                        degreeCPU[0] = degreeCPU[0] - 5;
+
                 }
 
+                if (X_CPU[step[carNumber]][carNumber] > X_CPU[step[carNumber] - 1][carNumber] &&
+                    Y_CPU[step[carNumber]][carNumber] == Y_CPU[step[carNumber] - 1][carNumber]) {
+
+                    x_cpu[carNumber] = x_cpu[carNumber] + 2;
+                    step2[carNumber] = false;
+
+                    if (Y_CPU[step[carNumber] + 1][carNumber] > Y_CPU[step[carNumber] - 1][carNumber] &&
+                        step[carNumber] + 1 < dim_trajectory[carNumber]) {
+
+                        y_cpu[carNumber] = y_cpu[carNumber] + 2;
+                        if (degreeCPU[carNumber] < 135)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+                        step2[carNumber] = true;
+
+                    } else if (Y_CPU[step[carNumber] + 1][carNumber] < Y_CPU[step[carNumber] - 1][carNumber] &&
+                               step[carNumber] + 1 < dim_trajectory[carNumber]) {
+
+                        y_cpu[carNumber] = y_cpu[carNumber] - 2;
+                        if (degreeCPU[carNumber] > 45)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+
+                        step2[carNumber] = true;
+
+                    } else {
+                        if (degreeCPU[carNumber] < 90)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+
+                        if (degreeCPU[carNumber] > 90)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+                    }
+
+                }
+
+                if (X_CPU[step[carNumber]][carNumber] < X_CPU[step[carNumber] - 1][carNumber] &&
+                    Y_CPU[step[carNumber]][carNumber] == Y_CPU[step[carNumber] - 1][carNumber]) {
+
+
+                    x_cpu[carNumber] = x_cpu[carNumber] - 2;
+                    step2[carNumber] = false;
+
+                    if (Y_CPU[step[carNumber] + 1][carNumber] > Y_CPU[step[carNumber] - 1][carNumber] &&
+                        step[carNumber] + 1 < dim_trajectory[carNumber]) {
+                        y_cpu[carNumber] = y_cpu[carNumber] + 2;
+
+                        if (degreeCPU[carNumber] > 225)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+                        step2[carNumber] = true;
+                    } else if (Y_CPU[step[carNumber] + 1][carNumber] < Y_CPU[step[carNumber] - 1][carNumber] &&
+                               step[carNumber] + 1 < dim_trajectory[carNumber]) {
+
+                        y_cpu[carNumber] = y_cpu[carNumber] - 2;
+                        if (degreeCPU[carNumber] < 315)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+                        step2[carNumber] = true;
+
+                    } else {
+                        if (degreeCPU[carNumber] < 270)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+
+                        if (degreeCPU[carNumber] > 270)
+                            degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+                    }
+
+                }
+
+                C_Step[carNumber].restart();
             }
+        } else {
+            step[carNumber] = step[carNumber] + 1;
 
-            if (Y_CPU[step[0]] > Y_CPU[step[0] - 1] && X_CPU[step[0]] == X_CPU[step[0] - 1]) {
+            if (step2[carNumber])
+                step[carNumber] = step[carNumber] + 1;
 
-                y_cpu[0] = y_cpu[0] + 2;
-                step2[0] = false;
-
-
-
-                if (X_CPU[step[0] + 1] > X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
-
-                    x_cpu[0] = x_cpu[0] + 2;
-                    if(degreeCPU[0] > 135)
-                        degreeCPU[0] = degreeCPU[0] - 5;
-                    step2[0] = true;
-
-                }
-
-                else if (X_CPU[step[0] + 1] < X_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
-
-                    x_cpu[0] = x_cpu[0] - 2;
-                    if(degreeCPU[0] < 225)
-                        degreeCPU[0] = degreeCPU[0] + 5;
-                    step2[0] = true;
-
-                }
-                else{
-                    if(degreeCPU[0] < 180)
-                        degreeCPU[0] = degreeCPU[0] + 5;
-
-                    if(degreeCPU[0] > 180)
-                        degreeCPU[0] = degreeCPU[0] - 5;
-                }
-
-
-            }
-
-            if (X_CPU[step[0]] > X_CPU[step[0] - 1] && Y_CPU[step[0]] == Y_CPU[step[0] - 1]){
-
-                x_cpu[0] = x_cpu[0] + 2;
-                step2[0] = false;
-
-                if (Y_CPU[step[0] + 1] > Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
-
-                    y_cpu[0] = y_cpu[0] + 2;
-                    if(degreeCPU[0] < 135)
-                        degreeCPU[0] = degreeCPU[0] + 5;
-                    step2[0] = true;
-
-                }
-
-                else if (Y_CPU[step[0] + 1] < Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
-
-                    y_cpu[0] = y_cpu[0] - 2;
-                    if(degreeCPU[0] > 45)
-                        degreeCPU[0] = degreeCPU[0] - 5;
-
-                    step2[0] = true;
-
-                }
-                else{
-                    if(degreeCPU[0] < 90)
-                        degreeCPU[0] = degreeCPU[0] + 5;
-
-                    if(degreeCPU[0] > 90)
-                        degreeCPU[0] = degreeCPU[0] - 5;
-                }
-
-            }
-
-            if (X_CPU[step[0]] < X_CPU[step[0] - 1] && Y_CPU[step[0]] == Y_CPU[step[0] - 1]) {
-
-                x_cpu[0] = x_cpu[0] - 2;
-                step2[0] = false;
-
-                if (Y_CPU[step[0] + 1] > Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
-
-                    y_cpu[0] = y_cpu[0] + 2;
-                    if(degreeCPU[0] > 225)
-                        degreeCPU[0] = degreeCPU[0] - 5;
-                    step2[0] = true;
-                }
-
-                else if (Y_CPU[step[0] + 1] < Y_CPU[step[0] - 1] && step[0]+1 < dim_trajectory[0]){
-
-                    y_cpu[0] = y_cpu[0] - 2;
-                    if(degreeCPU[0] < 315)
-                        degreeCPU[0] = degreeCPU[0] + 5;
-                    step2[0] = true;
-
-                }
-                else{
-                    if(degreeCPU[0] < 270)
-                        degreeCPU[0] = degreeCPU[0] + 5;
-
-                    if(degreeCPU[0] > 270)
-                        degreeCPU[0] = degreeCPU[0] - 5;
-                }
-
-            }
-
-            C_Step.restart();
         }
-    }
 
-    else {
-        step[0] = step[0] + 1;
 
-        if(step2[0])
-            step[0] = step[0] + 1;
-
-    }
-
-    for(int i=0; i<7; i++) {
-        S_CpuCar[i].setPosition(x_cpu[i], y_cpu[i]);
-        S_CpuCar[i].setRotation(180 + degreeCPU[i]);
+        S_CpuCar[carNumber].setPosition(x_cpu[carNumber], y_cpu[carNumber]);
+        S_CpuCar[carNumber].setRotation(180 + degreeCPU[carNumber]);
     }
 
 

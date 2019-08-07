@@ -35,6 +35,8 @@ public:
 
     void setCircuit(int circuit);
 
+    int carNumber;
+
 private:
 
 
@@ -47,12 +49,12 @@ private:
     vector<Vector2f> posCar;
     int dim_trajectory[7], dim_tmp[7], step[7];
     int index=0, i=0;
-    int X_CPU[200];
-    int Y_CPU[200];
+    int X_CPU[300][7];
+    int Y_CPU[300][7];
     bool step2[7];
 
-    Clock C_Step;
-    Time time_Step;
+    Clock C_Step[7];
+    Time time_Step[7];
 
 
 };
