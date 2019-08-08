@@ -28,7 +28,7 @@ class Race_Page : public Menu_State{
 
 public:
 
-    Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap);
+    Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap, int colore_macchina);
 
     ~Race_Page();
 
@@ -57,7 +57,7 @@ public:
 
     double posx, posy;
 
-    int x_CpuCar=162, y_CpuCar=368;
+    int x_CpuCar=162, y_CpuCar=368, chooseCar;
 
 
 

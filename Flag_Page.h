@@ -19,7 +19,7 @@ class Flag_Page : public Menu_State {
 
 public:
 
-     Flag_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race);
+     Flag_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int chooseCar);
 
     ~Flag_Page();
 
@@ -37,7 +37,7 @@ private:
     Sprite S_Flag[3];
 
     double posx, posy;
-    int num_circuit, Race_type;
+    int num_circuit, Race_type, choosecar;
 
 };
 

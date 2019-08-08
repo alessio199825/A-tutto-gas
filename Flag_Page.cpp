@@ -7,10 +7,11 @@
 #include "Menu_Game.h"
 #include "Load_Page.h"
 
-Flag_Page::Flag_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race) {
+Flag_Page::Flag_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int chooseCar) {
     setWindow(error, window);
     num_circuit=circuitrace;
     Race_type=Type_race;
+    choosecar = chooseCar;
 }
 
 Flag_Page::~Flag_Page() = default;
@@ -91,7 +92,7 @@ Menu_State *Flag_Page::getNewPage(RenderWindow &window, Error &error) {     //pu
         case 0:
                 return new Menu_Game(window, error);
         case 9:
-                return new Load_Page(window, error, 1, 2, 2, 5);
+                return new Load_Page(window, error, 1, 2, 2, 5, choosecar);
         default: break;
     }
 

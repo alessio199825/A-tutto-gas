@@ -35,7 +35,7 @@ private:
 
     Texture T_timetrial[10];
     Sprite S_timetrial[10];
-    int circuitrace, Type_race;
+    int circuitrace, Type_race, chooseCar=3;
     bool meteo, giri=0;
 
 };

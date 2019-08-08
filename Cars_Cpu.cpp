@@ -18,11 +18,11 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
     if(i==0) {
         try {
-            if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina1.png")) {
+            if (!T_CpuCar[0].loadFromFile("Cars_Cpu/macchina6.png")) {
                 throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
-            if (!T_CpuCar[1].loadFromFile("Cars_Cpu/macchina2.png")) {
+            if (!T_CpuCar[1].loadFromFile("Cars_Cpu/macchina7.png")) {
                 throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
@@ -38,13 +38,6 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
                 throw Load_exception("Load_exception:Impossibile caricare file");
             }
 
-            if (!T_CpuCar[5].loadFromFile("Cars_Cpu/macchina6.png")) {
-                throw Load_exception("Load_exception:Impossibile caricare file");
-            }
-
-            if (!T_CpuCar[6].loadFromFile("Cars_Cpu/macchina7.png")) {
-                throw Load_exception("Load_exception:Impossibile caricare file");
-            }
         }
         catch (Load_exception e) {
             window.close();
