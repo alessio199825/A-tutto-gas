@@ -22,6 +22,8 @@ public:
 
     Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int meteo, int giri);
 
+    Load_Page(RenderWindow &window, Error &error);
+
     ~Load_Page();
 
     void draw(RenderWindow &window);
@@ -36,7 +38,7 @@ private:
 
     Texture T_planisphere[4];
     Sprite S_planisphere[4];
-    bool start_Race=false;
+    bool start_Race=false, Option_Race;
     int degree_Tyre=0;
     float x_Tyre=20;
     int num_circuit, Race_type, weath, lap;

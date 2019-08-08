@@ -1,28 +1,27 @@
 //
-// Created by alessio on 16/03/19.
+// Created by alessio on 08/08/19.
 //
 
-#ifndef ALL_ULTIMO_GAS_CHAMPIONSHIP_PAGE_H
-#define ALL_ULTIMO_GAS_CHAMPIONSHIP_PAGE_H
+#ifndef ALL_ULTIMO_GAS_FLAG_PAGE_H
+#define ALL_ULTIMO_GAS_FLAG_PAGE_H
 
 #include "Menu_State.h"
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
 #include "Error.h"
+#include "Song.h"
 
 using namespace sf;
 using namespace std;
 
-class Championship_Page : public Menu_State{
+class Flag_Page : public Menu_State {
 
 public:
 
+     Flag_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race);
 
-    Championship_Page(RenderWindow &window, Error &error);
-
-    ~Championship_Page();
+    ~Flag_Page();
 
     void draw(RenderWindow &window);
 
@@ -34,10 +33,13 @@ public:
 
 private:
 
-    int chooseCar, Type_race;
-    Texture T_championship[11];
-    Sprite S_championship[11];
+    Texture T_Flag[3];
+    Sprite S_Flag[3];
+
+    double posx, posy;
+    int num_circuit, Race_type;
+
 };
 
 
-#endif //ALL_ULTIMO_GAS_CHAMPIONSHIP_PAGE_H
+#endif //ALL_ULTIMO_GAS_FLAG_PAGE_H

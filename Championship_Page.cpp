@@ -6,6 +6,7 @@
 #include "Menu_Game.h"
 #include "Tilemaps.h"
 #include "Load_Exception.h"
+#include "Load_Page.h"
 
 Championship_Page::Championship_Page(RenderWindow &window, Error &error) {
 
@@ -20,6 +21,8 @@ void Championship_Page::draw(RenderWindow &window) {
     for(int i=0; i<7; i++){
         window.draw(S_championship[i]);
     }
+
+    window.draw(S_championship[10]);
 
     switch(chooseCar){
 
@@ -80,6 +83,13 @@ int Championship_Page::getActivities(Event event, RenderWindow &window) {
             if (Mouse::getPosition(window).x > 885 && Mouse::getPosition(window).x < 970 &&
                 Mouse::getPosition(window).y > 270 && Mouse::getPosition(window).y < 452) {
                 chooseCar = 3;
+            }
+
+            if (Mouse::getPosition(window).x  > 650 && Mouse::getPosition(window).x  < 970
+                && Mouse::getPosition(window).y > 485 && Mouse::getPosition(window).y < 555) {
+                pageIndex = 9;
+                pageChanged=true;
+                Type_race=1;
             }
         default:
             break;
@@ -150,6 +160,12 @@ void Championship_Page::setWindow(Error &error, RenderWindow &window) {
         }
         S_championship[9].setTexture(T_championship[9]);
         S_championship[9].setPosition(sf::Vector2f(885, 270));
+
+        if (!T_championship[10].loadFromFile("Championship/avanti.png")) {       //pulsante avanti
+            throw Load_exception("Load_exception:Impossibile caricare file");
+        }
+        S_championship[10].setTexture(T_championship[10]);
+        S_championship[10].setPosition(sf::Vector2f(650, 485));
     }
     catch(Load_exception e) {
         error.Check_Image(window);
@@ -161,6 +177,8 @@ Menu_State *Championship_Page::getNewPage(RenderWindow &window, Error &error) {
     switch(pageIndex){
         case 0:
             return new Menu_Game(window, error);
+        case 9:
+            return new Load_Page(window, error, 1, 2, 2, 3);
         default:break;
     }
 

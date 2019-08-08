@@ -5,6 +5,8 @@
 #include "Race_Page.h"
 #include "Menu_Game.h"
 #include "Load_Exception.h"
+#include "Load_Page.h"
+#include "Flag_Page.h"
 
 Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap) {
     setWindow(error, window);
@@ -76,12 +78,6 @@ void Race_Page::draw(RenderWindow &window) {
         song.Music_Radio(window, error);
     }
 
-    if(flag){
-        window.draw(S_Flag);
-        song.stop_Race();
-        song.Music_RadioPause(true);
-    }
-
 }
 
 int Race_Page::getActivities(Event event, RenderWindow &window) {
@@ -99,63 +95,65 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
                     break;
             }
             break;
+
+        case Event::MouseButtonReleased:
+            if (!control_setRace) {
+                switch (circuitrace) {
+                    case 1:
+                        if (Mouse::getPosition(window).x > 910 && Mouse::getPosition(window).x < 980 &&
+                            Mouse::getPosition(window).y > 510 && Mouse::getPosition(window).y < 580) {
+                            pageIndex = 9;
+                            pageChanged = true;
+                            song.stop_Race();
+                            song.Music_RadioPause(true);
+                        }
+                        break;
+                    case 2:
+                        if (Mouse::getPosition(window).x > 20 && Mouse::getPosition(window).x < 90 &&
+                            Mouse::getPosition(window).y > 510 && Mouse::getPosition(window).y < 580) {
+                            pageIndex = 9;
+                            pageChanged = true;
+                            song.stop_Race();
+                            song.Music_RadioPause(true);
+                        }
+                        break;
+                    case 3:
+                        if (Mouse::getPosition(window).x > 910 && Mouse::getPosition(window).x < 980 &&
+                            Mouse::getPosition(window).y > 120 && Mouse::getPosition(window).y < 190) {
+                            pageIndex = 9;
+                            pageChanged = true;
+                            song.stop_Race();
+                            song.Music_RadioPause(true);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         default:
             break;
-
     }
-
-    switch(circuitrace) {
-        case 1:
-            if (posx > 910 && posx < 980 && posy > 510 && posy < 580) {
-
-                flag = true;
-            }
-
-            break;
-        case 2:
-            if (posx > 20 && posx < 90 && posy > 510 && posy < 580){
-
-                flag = true;
-            }
-            break;
-        case 3:
-            if (posx > 910 && posx < 980 && posy > 120 && posy < 190){
-
-                flag = true;
-            }
-            break;
-        default: break;
-    }
-
 
     return -1;
 }
 
 void Race_Page::setWindow(Error &error, RenderWindow &window) {
 
-    try {
-        if (!T_Flag.loadFromFile("race/scacchi.jpg")) {       //pulsante1
-            throw Load_exception("Load_exception:Impossibile caricare file");
-        }
-        S_Flag.setTexture(T_Flag);
-    }
-    catch(Load_exception e){
-        window.close();
-        error.Check_Image(window);
-    }
+
 
 }
 
 Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
-
+    cout<<pageIndex<<endl;
     switch (pageIndex){
         case 0:
             return new Menu_Game(window, error);
-        default:break;
+        case 9:
+            return new Flag_Page(window, error, circuitrace, Type_race);
+        default:
+            return 0;
     }
-
-return 0;
-
 }
 
 double Race_Page::getMousePosX(RenderWindow &window) {

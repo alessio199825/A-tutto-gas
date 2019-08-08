@@ -5,7 +5,8 @@
 Race::Race() = default;
 
 void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, int Type_race, int circuitrace) {
-    circuit.setTileMaps(circuitrace, error, window);
+
+    circuit.setTileMaps(circuitrace, error, window, Type_race);
 
     car.setMachinePlayer(window, circuitrace, error, Type_race);
 
@@ -21,11 +22,11 @@ void Race::KeyBreak(RenderWindow &window, Error &error, Song &song, double &posx
             song.pause_Race(true);
             song.Music_RadioPause(true);
             if(Break(window, error, song)==2) {
+                cout<<"ciao"<<endl;
                 pageIndex = 0;
                 pageChanged = true;
             }
         }
-    End_Game(posx, posy, pageIndex, circuitrace);
 }
 
 int Race::Break(RenderWindow &window, Error &error, Song &song) {        //crea la finestra di pausa

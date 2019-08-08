@@ -35,7 +35,7 @@ public:
 private:
 
     int start, Reverse, lap=0, intermediate=0;
-    float CarPlayer_Acc=0.5, const_Acc=0.010, const_Brake=0.005;
+    float CarPlayer_Acc=2, const_Acc=0.1, const_Brake=0.05;
     double degreeConst, degree_CarPlayer;
     bool done=false;
     Sprite S_MachinePlayer;

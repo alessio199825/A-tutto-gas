@@ -3,36 +3,39 @@
 
 Circuit::Circuit() = default;
 
-void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
+void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window, int Type_race) {
 
     try {
-        if (!T_Pause[0].loadFromFile("race/termina.png")) {
-            throw Load_exception("Load_exception:Impossibile caricare file");
-        }
 
-        S_Pause[0].setTexture(T_Pause[0]);
-        switch (circuitrace) {
-            case 1:
-                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_BASE.jpg")) {       //3 giri modificato
-                    throw Load_exception("Load_exception:Impossibile caricare file");
-                }
-                S_Pause[0].setPosition(910, 510);
-                break;
-            case 2:
-                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_MEDIO.jpg")) {       //3 giri modificato
-                    throw Load_exception("Load_exception:Impossibile caricare file");
-                }
-                S_Pause[0].setPosition(20, 510);
-                break;
-            case 3:
-                if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_DIFFICILE.jpg")) {       //3 giri modificato
-                    throw Load_exception("Load_exception:Impossibile caricare file");
-                }
-                S_Pause[0].setPosition(910, 120);
-                break;
-            default: break;
+            if (!T_Pause[0].loadFromFile("race/termina.png")) {
+                throw Load_exception("Load_exception:Impossibile caricare file");
+            }
 
-        }
+            S_Pause[0].setTexture(T_Pause[0]);
+
+            switch (circuitrace) {
+                case 1:
+                    if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_BASE.jpg")) {       //3 giri modificato
+                        throw Load_exception("Load_exception:Impossibile caricare file");
+                    }
+                    S_Pause[0].setPosition(910, 510);
+                    break;
+                case 2:
+                    if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_MEDIO.jpg")) {       //3 giri modificato
+                        throw Load_exception("Load_exception:Impossibile caricare file");
+                    }
+                    S_Pause[0].setPosition(20, 510);
+                    break;
+                case 3:
+                    if (!T_tilemaps.loadFromFile("Single_Race/CIRCUITO_DIFFICILE.jpg")) {       //3 giri modificato
+                        throw Load_exception("Load_exception:Impossibile caricare file");
+                    }
+                    S_Pause[0].setPosition(910, 120);
+                    break;
+                default:
+                    break;
+
+            }
         if (!T_Pause[1].loadFromFile("race/pausa.png")) {
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
@@ -46,7 +49,9 @@ void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window) {
     S_Pause[1].setPosition(874, -5);
     S_tilemaps.setTexture(T_tilemaps);
     window.draw(S_tilemaps);
-    window.draw(S_Pause[0]);
+
+        window.draw(S_Pause[0]);
+
     window.draw(S_Pause[1]);
 }
 

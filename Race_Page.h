@@ -67,17 +67,12 @@ private:
 
     int Type_race;
     int circuitrace;
-    bool control_setRace=true, flag=false, assignament=true;
+    bool control_setRace=true, assignament=true;
     int meteo, giri;
+    bool flag1=false, flag=false;
 
     //int *X_CPU = new int [dim_trajectory];
     //int *Y_CPU = new int [dim_trajectory];
-
-    Texture T_Flag;
-    Sprite S_Flag;
-
-
-
 
 
 };
