@@ -21,7 +21,7 @@ Race_Page::~Race_Page() = default;
 
 void Race_Page::draw(RenderWindow &window) {
 
-    switch(Type_race) {
+    switch (Type_race) {
         case 1:
             traffic_light.setControl_light(false);
             break;
@@ -42,53 +42,49 @@ void Race_Page::draw(RenderWindow &window) {
 
         race.setGame(window, circuit, car, error, Type_race, circuitrace, chooseCar);
 
-        car.x_CarPlayer=race.getX_tmp();
-        car.y_CarPlayer=race.getY_tmp();
+        car.x_CarPlayer = race.getX_tmp();
+        car.y_CarPlayer = race.getY_tmp();
     }
-    if(Type_race!=3)
+
+    if (Type_race != 3)
         window.draw(circuit.getS_Pause(0));
 
     window.draw(circuit.getS_Pause(1));
 
-    if(traffic_light.Light_On(window, error, Type_race)) {
+    if (traffic_light.Light_On(window, error, Type_race)) {
 
         car.Car_Player_Movement(window, error, circuitrace);
 
-        if(Type_race==1 || Type_race==2) {
+        if (Type_race == 1 || Type_race == 2) {
 
-        if(Type_race==2) {
-            
             flag = car.End_Race(giri);
-            
+
             cars_cpu.moveCar();
             cars_cpu.drawCpu(window);
-
         }
 
-        race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged);
-        control_setRace = false;
+            race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged);
+            control_setRace = false;
 
-    }
-    else if(Type_race==2 || Type_race==1) {
+        } else if (Type_race == 2 || Type_race == 1) {
 
-        SaveCircuit();
-        cars_cpu.setCircuit(circuitrace);
-        cars_cpu.createMachine(window, error);
-    }
+            SaveCircuit();
+            cars_cpu.setCircuit(circuitrace);
+            cars_cpu.createMachine(window, error);
+        }
 
-    weath.setWeather(meteo, window, error);
-    song.MusicTime(car, window, error, circuitrace);
-    if(Type_race==2 || Type_race==1){
-        song.Music_Radio(window, error);
-    }
+        weath.setWeather(meteo, window, error);
+        song.MusicTime(car, window, error, circuitrace);
+        if (Type_race == 2 || Type_race == 1) {
+            song.Music_Radio(window, error);
+        }
 
-    if(flag){
-        pageIndex = 9;
-        pageChanged = true;
-        song.stop_Race();
-        song.Music_RadioPause(true);
-    }
-
+        if (flag) {
+            pageIndex = 9;
+            pageChanged = true;
+            song.stop_Race();
+            song.Music_RadioPause(true);
+        }
 
 }
 
@@ -157,7 +153,6 @@ void Race_Page::setWindow(Error &error, RenderWindow &window) {
 }
 
 Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
-    cout<<pageIndex<<endl;
     switch (pageIndex){
         case 0:
             return new Menu_Game(window, error);
