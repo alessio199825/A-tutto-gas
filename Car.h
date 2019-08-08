@@ -23,7 +23,7 @@ public:
 
     Control control;
 
-    void setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, int Type_race);
+    void setMachinePlayer(RenderWindow &window, int num_circuit, Error &error, int Type_race, int chooseCar);
     void Car_Player_Movement(RenderWindow &window, Error &error, int circuitrace);
     float getY_CarPlayer() const;
     float getX_CarPlayer() const;

@@ -10,11 +10,25 @@
 
 Car::Car() = default;
 
-void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, int Type_race) {
+void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, int Type_race, int chooseCar) {
 
     try {
-        if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
-            throw Load_exception("Load_exception:Impossibile caricare file");
+        switch (chooseCar) {
+            case 1:
+            if (!T_MachinePlayer.loadFromFile("race/macchina1.png")) {
+                throw Load_exception("Load_exception:Impossibile caricare file");
+            }
+            break;
+            case 2:
+            if (!T_MachinePlayer.loadFromFile("race/macchina6.png")) {
+                throw Load_exception("Load_exception:Impossibile caricare file");
+            }
+            break;
+            default:
+            if (!T_MachinePlayer.loadFromFile("race/macchina2.png")) {
+                throw Load_exception("Load_exception:Impossibile caricare file");
+            }
+            break;
         }
     }
     catch(Load_exception e){

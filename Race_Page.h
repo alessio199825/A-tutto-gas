@@ -28,7 +28,7 @@ class Race_Page : public Menu_State{
 
 public:
 
-    Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap);
+    Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap, int colore_macchina);
 
     ~Race_Page();
 
@@ -43,6 +43,10 @@ public:
     Traffic_Light traffic_light;
     Circuit circuit;
 
+    double getMousePosX(RenderWindow &window);
+
+    double getMousePosY(RenderWindow &window);
+
     void draw(RenderWindow &window);
 
     int getActivities(Event event, RenderWindow &window);
@@ -52,6 +56,9 @@ public:
     Menu_State *getNewPage(RenderWindow &window, Error &error);
 
     double posx, posy;
+
+    int x_CpuCar=162, y_CpuCar=368, chooseCar;
+
 
 
 private:

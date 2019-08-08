@@ -37,7 +37,7 @@ private:
     Texture T_singleraceon[10];
     Sprite S_singleraceon[10];
     int circuitrace, Type_race;
-    int meteo, giri;
+    int meteo, giri, chooseCar=3;
 };
 
 

@@ -178,7 +178,7 @@ Menu_State *SingleRace_Page2::getNewPage(RenderWindow &window, Error &error) {
         case 2:
             return new SingleRace_Page(window, error);
         case 9:
-            return new Load_Page(window, error, circuitrace, Type_race, meteo, giri);
+            return new Load_Page(window, error, circuitrace, Type_race, meteo, giri, chooseCar);
         default:break;
     }
 }

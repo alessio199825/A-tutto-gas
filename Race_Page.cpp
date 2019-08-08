@@ -8,12 +8,13 @@
 #include "Load_Page.h"
 #include "Flag_Page.h"
 
-Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap) {
+Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Race_type, int weath, int lap, int colore_macchina) {
     setWindow(error, window);
     circuitrace=num_circuit;
     Type_race=Race_type;
     meteo=weath;
     giri=lap;
+    chooseCar = colore_macchina;
 }
 
 Race_Page::~Race_Page() = default;
@@ -39,7 +40,7 @@ void Race_Page::draw(RenderWindow &window) {
 
     if (control_setRace) {
 
-        race.setGame(window, circuit, car, error, Type_race, circuitrace);
+        race.setGame(window, circuit, car, error, Type_race, circuitrace, chooseCar);
 
         car.x_CarPlayer=race.getX_tmp();
         car.y_CarPlayer=race.getY_tmp();
@@ -55,6 +56,8 @@ void Race_Page::draw(RenderWindow &window) {
 
         if(Type_race==1 || Type_race==2) {
 
+        if(Type_race==2) {
+            
             flag = car.End_Race(giri);
             
             cars_cpu.moveCar();
@@ -149,14 +152,17 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
 
 void Race_Page::setWindow(Error &error, RenderWindow &window) {
 
+
+
 }
 
 Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
+    cout<<pageIndex<<endl;
     switch (pageIndex){
         case 0:
             return new Menu_Game(window, error);
         case 9:
-            return new Flag_Page(window, error, Type_race);
+            return new Flag_Page(window, error, Type_race, chooseCar);
         default:
             return 0;
     }

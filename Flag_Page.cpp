@@ -7,9 +7,10 @@
 #include "Menu_Game.h"
 #include "Load_Page.h"
 
-Flag_Page::Flag_Page(RenderWindow &window, Error &error, int Type_race) {
+Flag_Page::Flag_Page(RenderWindow &window, Error &error, int Type_race, int chooseCar) {
     setWindow(error, window);
     Race_type=Type_race;
+    choosecar = chooseCar;
 }
 
 Flag_Page::~Flag_Page() = default;
@@ -46,6 +47,7 @@ int Flag_Page::getActivities(Event event, RenderWindow &window) {
                     pageChanged = true;
                 }
             }
+
             if (Mouse::getPosition(window).x > 708 && Mouse::getPosition(window).x < 925 &&
                     Mouse::getPosition(window).y > 25 && Mouse::getPosition(window).y < 95) {
                 pageIndex = 0;
@@ -136,7 +138,7 @@ Menu_State *Flag_Page::getNewPage(RenderWindow &window, Error &error) {     //pu
         case 0:
                 return new Menu_Game(window, error);
         case 9:
-                return new Load_Page(window, error, 1, 2, 2, 5);
+                return new Load_Page(window, error, 1, 2, 2, 5, choosecar);
         default: break;
     }
 

@@ -19,7 +19,7 @@ class Flag_Page : public Menu_State {
 
 public:
 
-     Flag_Page(RenderWindow &window, Error &error, int Type_race);
+     Flag_Page(RenderWindow &window, Error &error, int Type_race, int chooseCar);
 
     ~Flag_Page();
 
@@ -36,7 +36,7 @@ private:
     Texture T_Flag[10];
     Sprite S_Flag[10];
 
-    int Race_type;
+    int Race_type, choosecar;
 
 };
 

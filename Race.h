@@ -23,7 +23,7 @@ public:
     Sprite S_Break;
     Song song;
 
-    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, int Type_race, int circuitrace);
+    void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, int Type_race, int circuitrace, int chooseCar);
     void KeyBreak(RenderWindow &window, Error &error, Song &song, double &posx, double &posy, int &pageIndex,
                       bool &pageChanged);
     float getX_tmp() const;

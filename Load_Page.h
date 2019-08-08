@@ -20,7 +20,7 @@ class Load_Page : public Menu_State {
 
 public:
 
-    Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int meteo, int giri);
+    Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int meteo, int giri, int chooseCar);
 
     ~Load_Page();
 
@@ -39,7 +39,7 @@ private:
     bool start_Race=false, Option_Race;
     int degree_Tyre=0;
     float x_Tyre=20;
-    int num_circuit, Race_type, weath, lap;
+    int num_circuit, colore_macchina, Race_type, weath, lap;
 };
 
 
