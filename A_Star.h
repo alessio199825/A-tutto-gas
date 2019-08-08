@@ -22,26 +22,31 @@ class A_Star{
 public:
 
     A_Star();
-    int astar(int x_cpu[0], int y_cpu[0]);
-    int getX_trajectory(int i);
-    int getY_trajectory(int i);
-    int getTrajectory_dim() const;
 
+    int machine;
     int x_start[8];
     int y_start[8];
     int x_end[9];
     int y_end[9];
-    int vector_start=0;
-    int vector_end=1;
-    int trajectory_dim = 0;
-    int x_trajectory[200];
-    int y_trajectory[200];
+    int vector_start[7];
+    int vector_end[7];
+    int trajectory_dim[7];
+    int x_trajectory[300][7];
+    int y_trajectory[300][7];
+
+    int astar(int machine);
+    int getX_trajectory(int i, int machine);
+    int getY_trajectory(int i, int machine);
+    int getTrajectory_dim(int machine) const;
+
+
+
 
     MapSearchNode nodeEnd;
 
 private:
-    bool ChangeStart=true;
-    bool done=false;
+    bool ChangeStart[7];
+    bool done[7];
 
 
 

@@ -53,7 +53,9 @@ void Race_Page::draw(RenderWindow &window) {
         posy = getMousePosY(window);
 
         if(Type_race==2) {
-
+            
+            flag = car.End_Race(giri);
+            
             cars_cpu.moveCar();
             cars_cpu.drawCpu(window);
 
@@ -64,13 +66,10 @@ void Race_Page::draw(RenderWindow &window) {
 
     }
     else if(Type_race==2) {
-        flag = car.End_Race(giri);
         SaveCircuit();
         cars_cpu.setCircuit(circuitrace);
         cars_cpu.createMachine(window, error);
     }
-
-    flag=car.End_Race(giri);
 
     weath.setWeather(meteo, window, error);
     song.MusicTime(car, window, error, circuitrace);

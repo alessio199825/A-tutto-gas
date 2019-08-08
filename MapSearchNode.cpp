@@ -88,6 +88,7 @@ bool MapSearchNode::GetSuccessors( AStarSearch<MapSearchNode> *astarsearch, MapS
         NewNode = MapSearchNode( x, y+20);
         astarsearch->AddSuccessor( NewNode );
     }
+
     return true;
 
 }
