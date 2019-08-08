@@ -11,20 +11,7 @@ Load_Page::Load_Page(RenderWindow &window, Error &error, int circuitrace, int Ty
     num_circuit=circuitrace;
     Race_type=Type_race;
     weath=meteo;
-    Option_Race=false;
     lap=giri;
-    if(num_circuit==0){
-        num_circuit=3;
-    }
-
-}
-
-Load_Page::Load_Page(RenderWindow &window, Error &error) {
-    x_Tyre=20;
-    setWindow(error, window);
-    Race_type=2;
-    Option_Race=true;
-    lap=3;
     if(num_circuit==0){
         num_circuit=3;
     }

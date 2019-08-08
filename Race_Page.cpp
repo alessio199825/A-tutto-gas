@@ -21,6 +21,9 @@ Race_Page::~Race_Page() = default;
 void Race_Page::draw(RenderWindow &window) {
 
     switch(Type_race) {
+        case 1:
+            traffic_light.setControl_light(false);
+            break;
         case 2:
             traffic_light.setControl_light(false);
             break;
@@ -41,19 +44,17 @@ void Race_Page::draw(RenderWindow &window) {
         car.x_CarPlayer=race.getX_tmp();
         car.y_CarPlayer=race.getY_tmp();
     }
+    if(Type_race!=3)
+        window.draw(circuit.getS_Pause(0));
 
-    window.draw(circuit.getS_Pause(0));
     window.draw(circuit.getS_Pause(1));
 
     if(traffic_light.Light_On(window, error, Type_race)) {
 
         car.Car_Player_Movement(window, error, circuitrace);
 
-        posx = getMousePosX(window);
-        posy = getMousePosY(window);
+        if(Type_race==1 || Type_race==2) {
 
-        if(Type_race==2) {
-            
             flag = car.End_Race(giri);
             
             cars_cpu.moveCar();
@@ -61,11 +62,12 @@ void Race_Page::draw(RenderWindow &window) {
 
         }
 
-        race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged, circuitrace);
+        race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged);
         control_setRace = false;
 
     }
-    else if(Type_race==2) {
+    else if(Type_race==2 || Type_race==1) {
+
         SaveCircuit();
         cars_cpu.setCircuit(circuitrace);
         cars_cpu.createMachine(window, error);
@@ -73,9 +75,17 @@ void Race_Page::draw(RenderWindow &window) {
 
     weath.setWeather(meteo, window, error);
     song.MusicTime(car, window, error, circuitrace);
-    if(Type_race==2){
+    if(Type_race==2 || Type_race==1){
         song.Music_Radio(window, error);
     }
+
+    if(flag){
+        pageIndex = 9;
+        pageChanged = true;
+        song.stop_Race();
+        song.Music_RadioPause(true);
+    }
+
 
 }
 
@@ -96,7 +106,7 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
             break;
 
         case Event::MouseButtonReleased:
-            if (!control_setRace) {
+            if (!control_setRace && Type_race!=3) {
                 switch (circuitrace) {
                     case 1:
                         if (Mouse::getPosition(window).x > 910 && Mouse::getPosition(window).x < 980 &&
@@ -139,34 +149,17 @@ int Race_Page::getActivities(Event event, RenderWindow &window) {
 
 void Race_Page::setWindow(Error &error, RenderWindow &window) {
 
-
-
 }
 
 Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
-    cout<<pageIndex<<endl;
     switch (pageIndex){
         case 0:
             return new Menu_Game(window, error);
         case 9:
-            return new Flag_Page(window, error, circuitrace, Type_race);
+            return new Flag_Page(window, error, Type_race);
         default:
             return 0;
     }
-}
-
-double Race_Page::getMousePosX(RenderWindow &window) {
-    if(Mouse::isButtonPressed(Mouse::Left) ) {
-        posx=Mouse::getPosition(window).x;
-    }
-    return posx;
-}
-
-double Race_Page::getMousePosY(RenderWindow &window) {
-    if(Mouse::isButtonPressed(Mouse::Left) ) {
-        posy = Mouse::getPosition(window).y;
-    }
-    return posy;
 }
 
 Race_Page::Race_Page() = default;

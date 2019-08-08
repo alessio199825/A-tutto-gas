@@ -22,8 +22,6 @@ public:
 
     Load_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race, int meteo, int giri);
 
-    Load_Page(RenderWindow &window, Error &error);
-
     ~Load_Page();
 
     void draw(RenderWindow &window);

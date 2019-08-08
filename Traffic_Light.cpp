@@ -13,7 +13,7 @@ Traffic_Light::Traffic_Light() {
 
 bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) {
 
-    if(Type_race==2) {
+    if(Type_race==2 || Type_race==1) {
 
         if (control_light) {
             light_clock.restart();

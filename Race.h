@@ -25,7 +25,7 @@ public:
 
     void setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &error, int Type_race, int circuitrace);
     void KeyBreak(RenderWindow &window, Error &error, Song &song, double &posx, double &posy, int &pageIndex,
-                      bool &pageChanged, int circuitrace);
+                      bool &pageChanged);
     float getX_tmp() const;
     float getY_tmp() const;
 
@@ -37,7 +37,6 @@ private:
     int loop=0;
     float X_tmp, Y_tmp;
 
-    void End_Game(double &posx, double &posy, int &stateSwitch, int circuitrace);
     int Break(RenderWindow &window, Error &error, Song &song);
 
 

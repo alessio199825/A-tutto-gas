@@ -49,9 +49,7 @@ void Circuit::setTileMaps(int circuitrace, Error &error, RenderWindow &window, i
     S_Pause[1].setPosition(874, -5);
     S_tilemaps.setTexture(T_tilemaps);
     window.draw(S_tilemaps);
-
-        window.draw(S_Pause[0]);
-
+    window.draw(S_Pause[0]);
     window.draw(S_Pause[1]);
 }
 

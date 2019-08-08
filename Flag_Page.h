@@ -19,7 +19,7 @@ class Flag_Page : public Menu_State {
 
 public:
 
-     Flag_Page(RenderWindow &window, Error &error, int circuitrace, int Type_race);
+     Flag_Page(RenderWindow &window, Error &error, int Type_race);
 
     ~Flag_Page();
 
@@ -33,11 +33,10 @@ public:
 
 private:
 
-    Texture T_Flag[3];
-    Sprite S_Flag[3];
+    Texture T_Flag[10];
+    Sprite S_Flag[10];
 
-    double posx, posy;
-    int num_circuit, Race_type;
+    int Race_type;
 
 };
 

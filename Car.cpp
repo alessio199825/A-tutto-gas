@@ -21,6 +21,9 @@ void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, 
         error.Check_Image(window);
     }
 
+    if(Type_race==1)
+        Type_race=2;
+
     S_MachinePlayer.setTexture(T_MachinePlayer);
     S_MachinePlayer.setOrigin(9.5, 0);
     degree_CarPlayer=0;
@@ -75,7 +78,6 @@ void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, 
 
 void Car::Car_Player_Movement(RenderWindow &window, Error &error, int circuitrace) {
     switch (control.SetControl(window, error, circuitrace, y_CarPlayer, x_CarPlayer, degree_CarPlayer)) {
-
         case 0:
             Accelerate();
             Turn_Right();
@@ -113,6 +115,7 @@ void Car::Car_Player_Movement(RenderWindow &window, Error &error, int circuitrac
     S_MachinePlayer.setRotation(static_cast<float>(degree_CarPlayer + degreeConst));
     S_MachinePlayer.setPosition(Vector2f(x_CarPlayer, y_CarPlayer));
     window.draw(S_MachinePlayer);
+
 
 }
 void Car::Do_Reverse() {      //retromarcia

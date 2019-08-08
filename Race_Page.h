@@ -43,10 +43,6 @@ public:
     Traffic_Light traffic_light;
     Circuit circuit;
 
-    double getMousePosX(RenderWindow &window);
-
-    double getMousePosY(RenderWindow &window);
-
     void draw(RenderWindow &window);
 
     int getActivities(Event event, RenderWindow &window);
@@ -57,9 +53,6 @@ public:
 
     double posx, posy;
 
-    int x_CpuCar=162, y_CpuCar=368;
-
-
 
 private:
 
@@ -67,9 +60,9 @@ private:
 
     int Type_race;
     int circuitrace;
-    bool control_setRace=true, assignament=true;
+    bool control_setRace=true;
     int meteo, giri;
-    bool flag1=false, flag=false;
+    bool flag=false;
 
     //int *X_CPU = new int [dim_trajectory];
     //int *Y_CPU = new int [dim_trajectory];

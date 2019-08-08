@@ -16,15 +16,17 @@ void Race::setGame(RenderWindow &window, Circuit &circuit, Car &car, Error &erro
 }
 
 void Race::KeyBreak(RenderWindow &window, Error &error, Song &song, double &posx, double &posy, int &pageIndex,
-                    bool &pageChanged, int circuitrace) {       //tasto che richiama la finestra di pausa
+                    bool &pageChanged) {       //tasto che richiama la finestra di pausa
 
-        if (posx > 874 && posx < 978 && posy > 19 && posy < 99) {
-            song.pause_Race(true);
-            song.Music_RadioPause(true);
-            if(Break(window, error, song)==2) {
-                cout<<"ciao"<<endl;
-                pageIndex = 0;
-                pageChanged = true;
+        if(Mouse::isButtonPressed(Mouse::Left) ) {
+            if (Mouse::getPosition(window).x  > 874 && Mouse::getPosition(window).x  < 978
+                    && Mouse::getPosition(window).y  > 19 && Mouse::getPosition(window).y < 99) {
+                song.pause_Race(true);
+                song.Music_RadioPause(true);
+                if (Break(window, error, song) == 2) {
+                    pageIndex = 0;
+                    pageChanged = true;
+                }
             }
         }
 }
@@ -69,24 +71,6 @@ int Race::Break(RenderWindow &window, Error &error, Song &song) {        //crea 
             window_Break.draw(S_Break);
             window_Break.display();
         }
-    }
-}
-
-void Race::End_Game(double &posx, double &posy, int &pageIndex, int circuitrace) {       //tasto termina gara
-    switch(circuitrace){
-        case 1:
-            if (posx > 910 && posx < 980 && posy > 510 && posy < 580)
-                pageIndex++;
-        break;
-        case 2:
-            if (posx > 20 && posx < 90 && posy > 510 && posy < 580)
-                pageIndex++;
-        break;
-        case 3:
-            if (posx > 910 && posx < 980 && posy > 120 && posy < 190)
-                pageIndex++;
-        break;
-        default: break;
     }
 }
 
