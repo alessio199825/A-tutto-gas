@@ -14,7 +14,7 @@ Cars_Cpu::Cars_Cpu()
     }
 }
 
-void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
+bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
     if(i==0) {
         try {
@@ -93,7 +93,7 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
        default:break;
             }
 
-    for(int i=0; i<7; i++){
+    for(int i=0; i<5; i++){
 
         S_CpuCar[i].setTexture(T_CpuCar[i]);
         S_CpuCar[i].setOrigin(9.5, 0);
@@ -101,18 +101,18 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
     }
 
-    for(int i=0; i<7; i++) {
+    for(int i=0; i<5; i++) {
         S_CpuCar[i].setPosition(Vector2f(x_cpu[i], y_cpu[i]));
         window.draw(S_CpuCar[i]);
     }
 
 
 
-    for(carNumber=0; carNumber<4; carNumber++) {
+    for(carNumber=0; carNumber<5; carNumber++) {
         a_star.astar(carNumber);
         dim_trajectory[carNumber] = a_star.getTrajectory_dim(carNumber);
     }
-    for(carNumber=0; carNumber<4; carNumber++) {
+    for(carNumber=0; carNumber<5; carNumber++) {
 
         for (int i = dim_tmp[carNumber]; i < dim_trajectory[carNumber]; i++) {
 
@@ -124,20 +124,23 @@ void Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
         dim_tmp[carNumber] = dim_trajectory[carNumber];
     }
 
+    return dim_trajectory[3] == 185;
 
 }
 
 void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fanno la stessa cosa
 
-    /*if(step[0] == 176)
+    if(step[0] == 176)
         step[0] = 24;
     if(step[1] == 181)
-        step[1] = 25;*/
+        step[1] = 27;
+    if(step[2] == 180)
+        step[2] = 27;
+    if(step[3] == 185)
+        step[3] = 32;
 
 
-    for (carNumber = 0; carNumber < 4; carNumber++ ) {
-
-        cout<<step[1]<< "=" <<x_cpu[1]<<endl;
+    for (carNumber = 0; carNumber < 5; carNumber++ ) {
 
         if ((X_CPU[step[carNumber]][carNumber] != x_cpu[carNumber] || Y_CPU[step[carNumber]][carNumber] != y_cpu[carNumber]) &&
             (X_CPU[step[carNumber] + 1][carNumber] != x_cpu[carNumber] ||
@@ -321,7 +324,7 @@ void Cars_Cpu::setCar(int x,int y) {
 }
 
 void Cars_Cpu::drawCpu(RenderWindow &window) {
-    for(int i=0; i<7; i++) {
+    for(int i=0; i<5; i++) {
         window.draw(S_CpuCar[i]);
     }
 }

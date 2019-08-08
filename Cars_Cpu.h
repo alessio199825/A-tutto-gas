@@ -25,7 +25,7 @@ public:
 
     A_Star a_star;
 
-    void createMachine(RenderWindow &window, Error &error);
+    bool createMachine(RenderWindow &window, Error &error);
     void moveCar();
 
     void setCar(int x,int y);
