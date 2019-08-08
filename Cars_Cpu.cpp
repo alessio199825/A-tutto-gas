@@ -138,6 +138,8 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
         step[2] = 27;
     if(step[3] == 185)
         step[3] = 32;
+    if(step[4] == 184)
+        step[4] = 31;
 
 
     for (carNumber = 0; carNumber < 5; carNumber++ ) {
