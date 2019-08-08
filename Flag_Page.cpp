@@ -144,7 +144,7 @@ Menu_State *Flag_Page::getNewPage(RenderWindow &window, Error &error) {     //pu
                     return new Flag_Page(window, error, Race_type, choosecar, CircuitNum);
                 if(CircuitNum>4)
                     return new Menu_Game(window, error);
-                
+
                 return new Load_Page(window, error, CircuitNum, Race_type, 0, 3, choosecar);
         default: break;
     }

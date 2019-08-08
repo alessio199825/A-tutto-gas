@@ -145,7 +145,7 @@ void Car::Do_Reverse() {      //retromarcia
 void Car::Accelerate() { //accelerazione seguendo con freno motore
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         start=1;
-        if (CarPlayer_Acc < 0.5) {
+        if (CarPlayer_Acc < 2) {
             CarPlayer_Acc = CarPlayer_Acc + const_Acc;
         }
         x_CarPlayer = static_cast<float>(x_CarPlayer + CarPlayer_Acc * cos(((degree_CarPlayer + degreeConst + 90) * M_PI) / 180));
