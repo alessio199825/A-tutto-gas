@@ -43,10 +43,6 @@ public:
     Traffic_Light traffic_light;
     Circuit circuit;
 
-    double getMousePosX(RenderWindow &window);
-
-    double getMousePosY(RenderWindow &window);
-
     void draw(RenderWindow &window);
 
     int getActivities(Event event, RenderWindow &window);
@@ -57,7 +53,7 @@ public:
 
     double posx, posy;
 
-    int x_CpuCar=162, y_CpuCar=368, chooseCar;
+    int chooseCar;
 
 
 

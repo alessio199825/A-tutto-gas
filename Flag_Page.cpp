@@ -7,8 +7,9 @@
 #include "Menu_Game.h"
 #include "Load_Page.h"
 
-Flag_Page::Flag_Page(RenderWindow &window, Error &error, int Type_race, int chooseCar) {
+Flag_Page::Flag_Page(RenderWindow &window, Error &error, int Type_race, int chooseCar, int numcircuit) {
     setWindow(error, window);
+    CircuitNum=numcircuit;
     Race_type=Type_race;
     choosecar = chooseCar;
 }
@@ -138,7 +139,13 @@ Menu_State *Flag_Page::getNewPage(RenderWindow &window, Error &error) {     //pu
         case 0:
                 return new Menu_Game(window, error);
         case 9:
-                return new Load_Page(window, error, 1, 2, 2, 5, choosecar);
+                CircuitNum++;
+                if(CircuitNum==4)
+                    return new Flag_Page(window, error, Race_type, choosecar, CircuitNum);
+                if(CircuitNum>4)
+                    return new Menu_Game(window, error);
+                
+                return new Load_Page(window, error, CircuitNum, Race_type, 0, 3, choosecar);
         default: break;
     }
 

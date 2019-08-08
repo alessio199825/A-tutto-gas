@@ -178,7 +178,7 @@ Menu_State *Championship_Page::getNewPage(RenderWindow &window, Error &error) {
         case 0:
             return new Menu_Game(window, error);
         case 9:
-            return new Load_Page(window, error, 1, Type_race, 2, 3, chooseCar);
+            return new Load_Page(window, error, 1, Type_race, 0, 3, chooseCar);
         default:break;
     }
 

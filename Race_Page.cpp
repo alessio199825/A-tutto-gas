@@ -66,12 +66,12 @@ void Race_Page::draw(RenderWindow &window) {
             race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged);
             control_setRace = false;
 
-        } else if (Type_race == 2 || Type_race == 1) {
+    } else if (Type_race == 2 || Type_race == 1) {
 
-            SaveCircuit();
-            cars_cpu.setCircuit(circuitrace);
-            cars_cpu.createMachine(window, error);
-        }
+        SaveCircuit();
+        cars_cpu.setCircuit(circuitrace);
+        cars_cpu.createMachine(window, error);
+    }
 
         weath.setWeather(meteo, window, error);
         song.MusicTime(car, window, error, circuitrace);
@@ -157,7 +157,7 @@ Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
         case 0:
             return new Menu_Game(window, error);
         case 9:
-            return new Flag_Page(window, error, Type_race, chooseCar);
+            return new Flag_Page(window, error, Type_race, chooseCar, circuitrace);
         default:
             return 0;
     }
