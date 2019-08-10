@@ -29,6 +29,8 @@ public:
     float getX_CarPlayer() const;
     bool End_Race(int giri, int &position);
 
+    int getPos() const;
+
     float y_CarPlayer, x_CarPlayer;
 
 

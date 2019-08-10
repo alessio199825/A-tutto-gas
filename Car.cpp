@@ -232,3 +232,7 @@ bool Car::End_Race(int giri, int &position) {
     return false;
 }
 
+int Car::getPos() const {
+    return pos;
+}
+

@@ -358,6 +358,10 @@ int Cars_Cpu::getPosition(int giri, int &position) {
     return vector_position[5];
 }
 
+const int Cars_Cpu::getVector_position(int i) {
+    return vector_position[i];
+}
+
 
 
 

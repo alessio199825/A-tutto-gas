@@ -67,6 +67,7 @@ private:
     int meteo, giri;
     bool flag=false;
     int position;
+    int position_car, position_cpu[5];
 
     //int *X_CPU = new int [dim_trajectory];
     //int *Y_CPU = new int [dim_trajectory];

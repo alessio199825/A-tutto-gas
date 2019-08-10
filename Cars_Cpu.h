@@ -37,6 +37,8 @@ public:
 
     int getPosition(int giri, int &position);
 
+    const int getVector_position(int i);
+
     int carNumber, vector_position[5];
 
 private:

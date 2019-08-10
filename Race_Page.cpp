@@ -64,6 +64,12 @@ void Race_Page::draw(RenderWindow &window) {
             cars_cpu.drawCpu(window);
         }
 
+        position_car = car.getPos();
+
+        for(int i=0; i<5; i++){
+            position_cpu[i] = cars_cpu.getVector_position(i);
+        }
+
         if(position == 7){
             flag = true;
         }
@@ -163,7 +169,7 @@ Menu_State *Race_Page::getNewPage(RenderWindow &window, Error &error) {
         case 0:
             return new Menu_Game(window, error);
         case 9:
-            return new Flag_Page(window, error, Type_race, chooseCar, circuitrace);
+            return new Flag_Page(window, error, Type_race, chooseCar, circuitrace, position_car, &position_cpu[0]);
         default:
             return 0;
     }

@@ -7,7 +7,11 @@
 #include "Menu_Game.h"
 #include "Load_Page.h"
 
-Flag_Page::Flag_Page(RenderWindow &window, Error &error, int Type_race, int chooseCar, int numcircuit) {
+Flag_Page::Flag_Page(RenderWindow &window, Error &error, int Type_race, int chooseCar, int numcircuit, int position_car, int position_cpu[5]) {
+    posizione_macchina = position_car;
+    for(int i = 0; i<5; i++){
+        posizione_pc[i] = position_cpu[i];
+    }
     setWindow(error, window);
     CircuitNum=numcircuit;
     Race_type=Type_race;
@@ -65,6 +69,52 @@ int Flag_Page::getActivities(Event event, RenderWindow &window) {
 
 void Flag_Page::setWindow(Error &error, RenderWindow &window) {
 
+    switch(posizione_macchina){
+        case 1:
+            y_flag[5]=120;
+            break;
+        case 2:
+            y_flag[5]=170;
+            break;
+        case 3:
+            y_flag[5]=220;
+            break;
+        case 4:
+            y_flag[5]=270;
+            break;
+        case 5:
+            y_flag[5]=320;
+            break;
+        case 6:
+            y_flag[5]=370;
+            break;
+        default:break;
+    }
+
+    for(int i=0; i<5; i++){
+        switch(posizione_pc[i]){
+            case 1:
+                y_flag[i]=120;
+                break;
+            case 2:
+                y_flag[i]=170;
+                break;
+            case 3:
+                y_flag[i]=220;
+                break;
+            case 4:
+                y_flag[i]=270;
+                break;
+            case 5:
+                y_flag[i]=320;
+                break;
+            case 6:
+                y_flag[i]=370;
+                break;
+            default:break;
+        }
+    }
+
     try {
         if (!T_Flag[0].loadFromFile("race/scacchi.jpg")) {       //pulsante1
             throw Load_exception("Load_exception:Impossibile caricare file");
@@ -81,37 +131,37 @@ void Flag_Page::setWindow(Error &error, RenderWindow &window) {
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag[2].setTexture(T_Flag[2]);
-        S_Flag[2].setPosition(sf::Vector2f(203, 120));
+        S_Flag[2].setPosition(sf::Vector2f(203, y_flag[5]));
 
         if (!T_Flag[3].loadFromFile("race/alfonso.png")) {         //pulsante avanti
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag[3].setTexture(T_Flag[3]);
-        S_Flag[3].setPosition(sf::Vector2f(203, 170));
+        S_Flag[3].setPosition(sf::Vector2f(203, y_flag[0]));
 
         if (!T_Flag[4].loadFromFile("race/amilton.png")) {         //pulsante avanti
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag[4].setTexture(T_Flag[4]);
-        S_Flag[4].setPosition(sf::Vector2f(203, 220));
+        S_Flag[4].setPosition(sf::Vector2f(203, y_flag[1]));
 
         if (!T_Flag[5].loadFromFile("race/fettel.png")) {         //pulsante avanti
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag[5].setTexture(T_Flag[5]);
-        S_Flag[5].setPosition(sf::Vector2f(203, 270));
+        S_Flag[5].setPosition(sf::Vector2f(203, y_flag[2]));
 
         if (!T_Flag[6].loadFromFile("race/verstapen.png")) {         //pulsante avanti
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag[6].setTexture(T_Flag[6]);
-        S_Flag[6].setPosition(sf::Vector2f(203, 320));
+        S_Flag[6].setPosition(sf::Vector2f(203, y_flag[3]));
 
         if (!T_Flag[7].loadFromFile("race/ulkemberg.png")) {         //pulsante avanti
             throw Load_exception("Load_exception:Impossibile caricare file");
         }
         S_Flag[7].setTexture(T_Flag[7]);
-        S_Flag[7].setPosition(sf::Vector2f(203, 370));
+        S_Flag[7].setPosition(sf::Vector2f(203, y_flag[4]));
 
         if (!T_Flag[8].loadFromFile("race/classifica.png")) {         //pulsante avanti
             throw Load_exception("Load_exception:Impossibile caricare file");
@@ -141,7 +191,7 @@ Menu_State *Flag_Page::getNewPage(RenderWindow &window, Error &error) {     //pu
         case 9:
                 CircuitNum++;
                 if(CircuitNum==4)
-                    return new Flag_Page(window, error, Race_type, choosecar, CircuitNum);
+                    return new Flag_Page(window, error, Race_type, choosecar, CircuitNum, posizione_macchina, &posizione_pc[0]);
                 if(CircuitNum>4)
                     return new Menu_Game(window, error);
 
