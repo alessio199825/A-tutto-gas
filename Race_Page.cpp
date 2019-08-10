@@ -15,6 +15,7 @@ Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Ra
     meteo=weath;
     giri=lap;
     chooseCar = colore_macchina;
+    position=1;
 }
 
 Race_Page::~Race_Page() = default;
@@ -57,16 +58,21 @@ void Race_Page::draw(RenderWindow &window) {
 
         if (Type_race == 1 || Type_race == 2) {
 
-            flag = car.End_Race(giri);
-
+            car.End_Race(giri, position);
+            cars_cpu.getPosition(giri, position);
             cars_cpu.moveCar();
             cars_cpu.drawCpu(window);
+        }
+
+        if(position == 7){
+            flag = true;
         }
 
             race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged);
             control_setRace = false;
 
-    } else if (Type_race == 2 || Type_race == 1) {
+    }
+    else if(Type_race==2 || Type_race == 1) {
 
         SaveCircuit();
         cars_cpu.setCircuit(circuitrace);

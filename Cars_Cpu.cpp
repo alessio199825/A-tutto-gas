@@ -7,10 +7,11 @@
 
 Cars_Cpu::Cars_Cpu()
 {
-    for(int i=0; i<7; i++){
+    for(int i=0; i<5; i++){
         step[i] = 1;
         step2[i] = false;
         dim_tmp[i] = 0;
+        lap[i] = 0;
     }
 }
 
@@ -48,7 +49,7 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
    switch(circuit){
         case 1:
-            for(int i=0; i<7; i++){
+            for(int i=0; i<5; i++){
                 degreeCPU[i] = 0;
             }
 
@@ -67,19 +68,14 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
             x_cpu[4]=222;
             y_cpu[4]=508;
 
-            x_cpu[5]=162;
-            y_cpu[5]=548;
-
-            x_cpu[6]=222;
-            y_cpu[6]=588;
-            break;
+           break;
         case 2:
-            for(int i=0; i<7; i++){
+            for(int i=0; i<5; i++){
                 degreeCPU[i] = 90;
             }
            break;
         case 3:
-            for(int i=0; i<7; i++){
+            for(int i=0; i<5; i++){
                 degreeCPU[i] = -90;
             }
             break;
@@ -93,6 +89,7 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
         S_CpuCar[i].setRotation(180 + degreeCPU[i]);
 
     }
+
 
     for(int i=0; i<5; i++) {
         S_CpuCar[i].setPosition(Vector2f(x_cpu[i], y_cpu[i]));
@@ -331,6 +328,36 @@ const vector<Vector2f> &Cars_Cpu::getPosCar() const {
 void Cars_Cpu::setCircuit(int circuit) {
     Cars_Cpu::circuit = circuit;
 }
+
+
+int Cars_Cpu::getPosition(int giri, int &position) {
+
+    if(giri != 3 && giri != 5 && giri != 10){
+        giri = 3;
+    }
+
+    for(int i=0; i<5; i++){
+
+        if(y_cpu[i] >= 410 && x_cpu[i] >= 465 && y_cpu[i] <= 490 && x_cpu[i] <= 470){
+            intermediate[i] = intermediate[i] + 1;
+            if(intermediate[i] > lap[i]){
+                intermediate[i] = lap[i];
+            }
+        }
+
+        if(y_cpu[i] >= 255 && y_cpu[i] <= 269 && x_cpu[i] >=143 && x_cpu[i] <= 236 && lap[i] == intermediate[i]) {
+            lap[i] = lap[i] + 1;
+            if (lap[i] == giri + 1) {
+                vector_position[i] = position;
+                position++;
+                cout<<position<<endl;
+
+            }
+        }
+    }
+    return vector_position[5];
+}
+
 
 
 

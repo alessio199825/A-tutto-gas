@@ -27,14 +27,14 @@ public:
     void Car_Player_Movement(RenderWindow &window, Error &error, int circuitrace);
     float getY_CarPlayer() const;
     float getX_CarPlayer() const;
-    bool End_Race(int giri);
+    bool End_Race(int giri, int &position);
 
     float y_CarPlayer, x_CarPlayer;
 
 
 private:
 
-    int start, Reverse, lap=0, intermediate=0;
+    int start, Reverse, lap=0, intermediate=0, pos;
     float CarPlayer_Acc=2, const_Acc=0.1, const_Brake=0.05;
     double degreeConst, degree_CarPlayer;
     bool done=false;

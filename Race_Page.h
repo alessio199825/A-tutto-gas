@@ -66,6 +66,7 @@ private:
     bool control_setRace=true;
     int meteo, giri;
     bool flag=false;
+    int position;
 
     //int *X_CPU = new int [dim_trajectory];
     //int *Y_CPU = new int [dim_trajectory];

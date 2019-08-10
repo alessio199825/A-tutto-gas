@@ -204,7 +204,7 @@ float Car::getX_CarPlayer() const {
     return x_CarPlayer;
 }
 
-bool Car::End_Race(int giri) {
+bool Car::End_Race(int giri, int &position) {
     if(giri != 3 && giri != 5 && giri != 10){
         giri = 3;
     }
@@ -223,9 +223,12 @@ bool Car::End_Race(int giri) {
         lap++;
         if(lap==giri+1){
             done=true;
+            pos = position;
+            position++;
             return true;
         }
     }
 
     return false;
 }
+
