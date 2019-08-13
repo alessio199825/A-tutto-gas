@@ -14,69 +14,122 @@ A_Star::A_Star(){
     }
 };
 
-int A_Star::astar(int machine) {
+int A_Star::astar(int machine, int circuit) {
     if (!done[machine]) {
 
         if (ChangeStart[machine]) {
-            switch(machine){
-                case 0:
-                    x_start[0] = 222;
-                    y_start[0] = 348;
-                    break;
+            switch(circuit) {
                 case 1:
-                    x_start[0] = 162;
-                    y_start[0] = 388;
-                    break;
+                switch (machine) {
+                    case 0:
+                        x_start[0] = 222;
+                        y_start[0] = 348;
+                        break;
+                    case 1:
+                        x_start[0] = 162;
+                        y_start[0] = 388;
+                        break;
+                    case 2:
+                        x_start[0] = 222;
+                        y_start[0] = 428;
+                        break;
+                    case 3:
+                        x_start[0] = 162;
+                        y_start[0] = 468;
+                        break;
+                    case 4:
+                        x_start[0] = 222;
+                        y_start[0] = 508;
+                        break;
+                    default:
+                        break;
+                }
+
+
+                x_end[1] = 382;
+                y_end[1] = 68;
+
+                x_end[2] = 942;
+                y_end[2] = 388;
+
+                x_end[3] = 782;
+                y_end[3] = 388;
+
+                x_end[4] = 502;
+                y_end[4] = 328;
+
+                x_end[5] = 482;
+                y_end[5] = 448;
+
+                x_end[6] = 182;
+                y_end[6] = 508;
+
+                x_end[7] = 182;
+                y_end[7] = 368;
+
+                x_end[8] = 382;
+                y_end[8] = 68;
+
+                ChangeStart[machine] = false;
+                break;
+
                 case 2:
-                    x_start[0] = 222;
-                    y_start[0] = 428;
+                    switch (machine) {
+                        case 0:
+                            x_start[0] = 422;
+                            y_start[0] = 76;
+                            break;
+                        case 1:
+                            x_start[0] = 382;
+                            y_start[0] = 36;
+                            break;
+                        case 2:
+                            x_start[0] = 342;
+                            y_start[0] = 76;
+                            break;
+                        case 3:
+                            x_start[0] = 302;
+                            y_start[0] = 36;
+                            break;
+                        case 4:
+                            x_start[0] = 262;
+                            y_start[0] = 76;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    x_end[1] = 882;
+                    y_end[1] = 196;
+
+                    x_end[2] = 462;
+                    y_end[2] = 176;
+
+                    x_end[3] = 842;
+                    y_end[3] = 376;
+
+                    x_end[4] = 422;
+                    y_end[4] = 516;
+
+                    x_end[5] = 202;
+                    y_end[5] = 516;
+
+                    x_end[6] = 82;
+                    y_end[6] = 396;
+
+                    x_end[7] = 102;
+                    y_end[7] = 196;
+
+                    x_end[8] = 262;
+                    y_end[8] = 76;
+
+                    x_end[9] = 882;
+                    y_end[9] = 196;
+
+                    ChangeStart[machine] = false;
                     break;
-                case 3:
-                    x_start[0] = 162;
-                    y_start[0] = 468;
-                    break;
-                case 4:
-                    x_start[0] = 222;
-                    y_start[0] = 508;
-                    break;
-                case 5:
-                    x_start[0] = 162;
-                    y_start[0] = 528;
-                    break;
-                case 6:
-                    x_start[0] = 222;
-                    y_start[0] = 568;
-                    break;
-                default:break;
+                default: break;
             }
-
-
-
-            x_end[1] = 382;
-            y_end[1] = 68;
-
-            x_end[2] = 942;
-            y_end[2] = 388;
-
-            x_end[3] = 782;
-            y_end[3] = 388;
-
-            x_end[4] = 502;
-            y_end[4] = 328;
-
-            x_end[5] = 482;
-            y_end[5] = 448;
-
-            x_end[6] = 182;
-            y_end[6] = 508;
-
-            x_end[7] = 182;
-            y_end[7] = 368;
-
-            x_end[8] = 382;
-            y_end[8] = 68;
-
-            ChangeStart[machine] = false;
         }
 
         // "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
@@ -163,17 +216,37 @@ int A_Star::astar(int machine) {
 
                     done[machine] = true;
 
-                    if (vector_start[machine] < 7) {
-                        vector_start[machine]++;
+                    switch(circuit) {
+                        case 1:
+                            if (vector_start[machine] < 7) {
+                                vector_start[machine]++;
 
-                        x_start[vector_start[machine]] = x_end[vector_end[machine]];
-                        y_start[vector_start[machine]] = y_end[vector_end[machine]];
+                                x_start[vector_start[machine]] = x_end[vector_end[machine]];
+                                y_start[vector_start[machine]] = y_end[vector_end[machine]];
 
 
-                        vector_end[machine]++;
+                                vector_end[machine]++;
 
-                        done[machine] = false;
+                                done[machine] = false;
+                            }
+                            break;
+                        case 2:
+                            if (vector_start[machine] < 8) {
+                                vector_start[machine]++;
+
+                                x_start[vector_start[machine]] = x_end[vector_end[machine]];
+                                y_start[vector_start[machine]] = y_end[vector_end[machine]];
+
+
+                                vector_end[machine]++;
+
+                                done[machine] = false;
+                            }
+                            break;
+                        default:
+                            break;
                     }
+
 
 #if DISPLAY_SOLUTION
                     cout << "Displaying solution\n";

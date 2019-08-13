@@ -70,9 +70,26 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
            break;
         case 2:
+
             for(int i=0; i<5; i++){
                 degreeCPU[i] = 90;
             }
+
+            x_cpu[0] = 422;
+            y_cpu[0] = 76;
+
+            x_cpu[1] = 382;
+            y_cpu[1] = 36;
+
+            x_cpu[2] = 342;
+            y_cpu[2] = 76;
+
+            x_cpu[3] = 302;
+            y_cpu[3] = 36;
+
+            x_cpu[4] = 262;
+            y_cpu[4] = 76;
+
            break;
         case 3:
             for(int i=0; i<5; i++){
@@ -98,11 +115,11 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
 
 
-    for(carNumber=0; carNumber<5; carNumber++) {
-        a_star.astar(carNumber);
+    for(carNumber=0; carNumber<1; carNumber++) {
+        a_star.astar(carNumber, circuit);
         dim_trajectory[carNumber] = a_star.getTrajectory_dim(carNumber);
     }
-    for(carNumber=0; carNumber<5; carNumber++) {
+    for(carNumber=0; carNumber<1; carNumber++) {
 
         for (int i = dim_tmp[carNumber]; i < dim_trajectory[carNumber]; i++) {
 
@@ -132,7 +149,7 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
         step[4] = 31;
 
 
-    for (carNumber = 0; carNumber < 5; carNumber++ ) {
+    for (carNumber = 0; carNumber < 1; carNumber++ ) {
 
         if ((X_CPU[step[carNumber]][carNumber] != x_cpu[carNumber] || Y_CPU[step[carNumber]][carNumber] != y_cpu[carNumber]) &&
             (X_CPU[step[carNumber] + 1][carNumber] != x_cpu[carNumber] ||

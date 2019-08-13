@@ -24,17 +24,17 @@ public:
     A_Star();
 
     int machine;
-    int x_start[8];
-    int y_start[8];
-    int x_end[9];
-    int y_end[9];
-    int vector_start[7];
-    int vector_end[7];
+    int x_start[10];
+    int y_start[10];
+    int x_end[10];
+    int y_end[10];
+    int vector_start[10];
+    int vector_end[10];
     int trajectory_dim[7];
     int x_trajectory[300][7];
     int y_trajectory[300][7];
 
-    int astar(int machine);
+    int astar(int machine, int circuit);
     int getX_trajectory(int i, int machine);
     int getY_trajectory(int i, int machine);
     int getTrajectory_dim(int machine) const;
