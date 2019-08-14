@@ -115,11 +115,11 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
 
 
-    for(carNumber=0; carNumber<1; carNumber++) {
+    for(carNumber=0; carNumber<5; carNumber++) {
         a_star.astar(carNumber, circuit);
         dim_trajectory[carNumber] = a_star.getTrajectory_dim(carNumber);
     }
-    for(carNumber=0; carNumber<1; carNumber++) {
+    for(carNumber=0; carNumber<5; carNumber++) {
 
         for (int i = dim_tmp[carNumber]; i < dim_trajectory[carNumber]; i++) {
 
@@ -137,19 +137,35 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
 
 void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fanno la stessa cosa
 
-    if(step[0] == 176)
-        step[0] = 24;
-    if(step[1] == 181)
-        step[1] = 27;
-    if(step[2] == 180)
-        step[2] = 27;
-    if(step[3] == 185)
-        step[3] = 32;
-    if(step[4] == 184)
-        step[4] = 31;
+    switch(circuit) {
+        case 1:
+            if (step[0] == 176)
+                step[0] = 24;
+            if (step[1] == 181)
+                step[1] = 27;
+            if (step[2] == 180)
+                step[2] = 27;
+            if (step[3] == 185)
+                step[3] = 32;
+            if (step[4] == 184)
+                step[4] = 31;
+            break;
+        case 2:
+            if (step[0] == 222)
+                step[0] = 30;
+            if (step[1] == 226)
+                step[1] = 34;
+            if (step[2] == 226)
+                step[2] = 34;
+            if (step[3] == 230)
+                step[3] = 38;
+            if (step[4] == 230)
+                step[4] = 38;
+            break;
+        default: break;
+    }
 
-
-    for (carNumber = 0; carNumber < 1; carNumber++ ) {
+    for (carNumber = 0; carNumber < 5; carNumber++ ) {
 
         if ((X_CPU[step[carNumber]][carNumber] != x_cpu[carNumber] || Y_CPU[step[carNumber]][carNumber] != y_cpu[carNumber]) &&
             (X_CPU[step[carNumber] + 1][carNumber] != x_cpu[carNumber] ||

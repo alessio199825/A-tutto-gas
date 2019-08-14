@@ -22,7 +22,7 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) 
 
         light_time = light_clock.getElapsedTime();
 
-        if (light_time.asSeconds() > 7) {
+        if (light_time.asSeconds() > 16) {
             song.setTraffic_light(false);
             return true;
         }
@@ -81,22 +81,22 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) 
             song.music_TrafficLight(window, error);
         }
 
-        if (light_time.asSeconds() < 2)
+        if (light_time.asSeconds() > 0)
             window.draw(S_Light[0]);
 
-        if (light_time.asSeconds() > 2 && light_time.asSeconds() < 3)
+        if (light_time.asSeconds() > 11 && light_time.asSeconds() < 12)
             window.draw(S_Light[1]);
 
-        if (light_time.asSeconds() > 3 && light_time.asSeconds() < 4)
+        if (light_time.asSeconds() > 12 && light_time.asSeconds() < 13)
             window.draw(S_Light[2]);
 
-        if (light_time.asSeconds() > 4 && light_time.asSeconds() < 5)
+        if (light_time.asSeconds() > 13 && light_time.asSeconds() < 14)
             window.draw(S_Light[3]);
 
-        if (light_time.asSeconds() > 5 && light_time.asSeconds() < 6)
+        if (light_time.asSeconds() > 14 && light_time.asSeconds() < 15)
             window.draw(S_Light[4]);
 
-        if (light_time.asSeconds() > 6 && light_time.asSeconds() < 7)
+        if (light_time.asSeconds() > 15 && light_time.asSeconds() < 16)
             window.draw(S_Light[5]);
 
         return false;
