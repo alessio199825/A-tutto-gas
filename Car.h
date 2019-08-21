@@ -27,7 +27,7 @@ public:
     void Car_Player_Movement(RenderWindow &window, Error &error, int circuitrace);
     float getY_CarPlayer() const;
     float getX_CarPlayer() const;
-    bool End_Race(int giri, int &position);
+    bool End_Race(int giri, int &position, int circuitrace);
 
     int getPos() const;
 

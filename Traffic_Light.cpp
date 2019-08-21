@@ -71,6 +71,13 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) 
                 S_Light[5].setPosition(sf::Vector2f(500, 300));
                 S_Light[5].setOrigin(sf::Vector2f(176, 108));
 
+                if (!T_Light[6].loadFromFile("Semaforo/fia.png")) {
+                    throw Load_exception("Load_exception:Impossibile caricare file");
+                }
+                S_Light[6].setTexture(T_Light[6]);
+                S_Light[6].setPosition(sf::Vector2f(500, 300));
+                S_Light[6].setOrigin(sf::Vector2f(200, 150));
+
             }
 
             catch (Load_exception e) {
@@ -78,10 +85,14 @@ bool Traffic_Light::Light_On(RenderWindow &window, Error &error, int Type_race) 
                 error.Check_Image(window);
             }
 
-            song.music_TrafficLight(window, error);
+            if(light_time.asSeconds() > 9)
+                song.music_TrafficLight(window, error);
         }
 
-        if (light_time.asSeconds() > 0)
+        if (light_time.asSeconds() < 8 )
+            window.draw(S_Light[6]);
+
+        if (light_time.asSeconds() > 9 && light_time.asSeconds() < 11)
             window.draw(S_Light[0]);
 
         if (light_time.asSeconds() > 11 && light_time.asSeconds() < 12)

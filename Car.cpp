@@ -55,8 +55,8 @@ void Car::setMachinePlayer(RenderWindow &window, int circuitrace, Error &error, 
                     degreeConst = 270;
                     break;
                 case 3:
-                    x_CarPlayer = 525;
-                    y_CarPlayer = 513;
+                    x_CarPlayer = 532;
+                    y_CarPlayer = 512;
                     degreeConst = 90;
                     break;
                 default:
@@ -204,29 +204,83 @@ float Car::getX_CarPlayer() const {
     return x_CarPlayer;
 }
 
-bool Car::End_Race(int giri, int &position) {
+bool Car::End_Race(int giri, int &position, int circuitrace) {
     if(giri != 3 && giri != 5 && giri != 10){
         giri = 3;
     }
-
-    if(done){
-        return true;
-    }
-    if(y_CarPlayer >= 410 && x_CarPlayer >= 465 && y_CarPlayer <= 490 && x_CarPlayer <= 470){
-        intermediate = intermediate + 1;
-        if(intermediate > lap){
-            intermediate = lap;
-        }
-    }
-
-    if(y_CarPlayer >= 255 && y_CarPlayer <= 269 && x_CarPlayer >=143 && x_CarPlayer <= 236 && lap == intermediate){
-        lap++;
-        if(lap==giri+1){
-            done=true;
-            pos = position;
-            position++;
+switch(circuitrace) {
+    case 1:
+        if (done) {
             return true;
         }
+        if (y_CarPlayer >= 410 && x_CarPlayer >= 465 && y_CarPlayer <= 490 && x_CarPlayer <= 470) {
+            intermediate = intermediate + 1;
+            if (intermediate > lap) {
+                intermediate = lap;
+            }
+        }
+
+        if (y_CarPlayer >= 255 && y_CarPlayer <= 269 && x_CarPlayer >= 143 && x_CarPlayer <= 236 &&
+            lap == intermediate) {
+            lap++;
+            if (lap == giri + 1) {
+                done = true;
+                pos = position;
+                position++;
+                return true;
+            }
+        }
+
+        return false;
+    case 2:
+        if (done) {
+            return true;
+        }
+
+        if (y_CarPlayer >= 478 && x_CarPlayer >= 495 && y_CarPlayer <= 543 && x_CarPlayer <= 510) {
+            intermediate = intermediate + 1;
+            if (intermediate > lap) {
+                intermediate = lap;
+            }
+        }
+
+        if (y_CarPlayer >= 23 && y_CarPlayer <= 90 && x_CarPlayer >= 520 && x_CarPlayer <= 535 &&
+            lap == intermediate) {
+            lap++;
+            if (lap == giri + 1) {
+                done = true;
+                pos = position;
+                position++;
+                return true;
+            }
+        }
+
+        return false;
+    case 3:
+        if (done) {
+            return true;
+        }
+
+            if (y_CarPlayer >= 180 && x_CarPlayer >= 520 && y_CarPlayer <= 268 && x_CarPlayer <= 540) {
+            intermediate = intermediate + 1;
+            if (intermediate > lap) {
+                intermediate = lap;
+            }
+        }
+
+        if (y_CarPlayer >= 484 && y_CarPlayer <= 586 && x_CarPlayer >= 455 && x_CarPlayer <= 470 &&
+            lap == intermediate) {
+            lap++;
+            if (lap == giri + 1) {
+                done = true;
+                pos = position;
+                position++;
+                return true;
+            }
+        }
+
+        return false;
+    default: break;
     }
 
     return false;

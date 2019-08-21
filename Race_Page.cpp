@@ -58,7 +58,7 @@ void Race_Page::draw(RenderWindow &window) {
 
         if (Type_race == 1 || Type_race == 2) {
 
-            car.End_Race(giri, position);
+            car.End_Race(giri, position, 0);
             cars_cpu.getPosition(giri, position);
             cars_cpu.moveCar();
             cars_cpu.drawCpu(window);

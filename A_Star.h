@@ -23,13 +23,12 @@ public:
 
     A_Star();
 
-    int machine;
-    int x_start[10];
-    int y_start[10];
-    int x_end[10];
-    int y_end[10];
-    int vector_start[10];
-    int vector_end[10];
+    int x_start[16];
+    int y_start[16];
+    int x_end[16];
+    int y_end[16];
+    int vector_start[16];
+    int vector_end[16];
     int trajectory_dim[7];
     int x_trajectory[300][7];
     int y_trajectory[300][7];

@@ -27,8 +27,8 @@ public:
     void setControl_light(bool control_light);
 
 private:
-    Texture T_Light[6];
-    Sprite S_Light[6];
+    Texture T_Light[7];
+    Sprite S_Light[7];
     Clock light_clock;
     Time light_time;
     bool control_light=true, control_trafficlight;

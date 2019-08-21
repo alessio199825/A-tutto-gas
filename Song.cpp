@@ -169,7 +169,7 @@ void Song::setTraffic_light(bool traffic_light) {
 
 void Song::Music_Radio(RenderWindow &window, Error &error) {
 
-    srand(time(NULL));                  //potrebbe essere utile richiamarlo solo una volta e inibirne il funzionamento
+    srand(static_cast<unsigned int>(time(NULL)));                  //potrebbe essere utile richiamarlo solo una volta e inibirne il funzionamento
     timeRadio = clockRadio.getElapsedTime();
     if (timeRadio.asSeconds() > 15) {
         SelectRadio = (rand() % 19) + 1;

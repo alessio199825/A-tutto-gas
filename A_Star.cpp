@@ -70,7 +70,7 @@ int A_Star::astar(int machine, int circuit) {
                 x_end[8] = 382;
                 y_end[8] = 68;
 
-                ChangeStart[machine] = false;
+                    ChangeStart[machine] = false;
                 break;
 
                 case 2:
@@ -125,6 +125,79 @@ int A_Star::astar(int machine, int circuit) {
 
                     x_end[9] = 882;
                     y_end[9] = 196;
+
+                    ChangeStart[machine] = false;
+                    break;
+                case 3:
+                    switch (machine) {
+                        case 0:
+                            x_start[0] = 572;
+                            y_start[0] = 552;
+                            break;
+                        case 1:
+                            x_start[0] = 612;
+                            y_start[0] = 512;
+                            break;
+                        case 2:
+                            x_start[0] = 652;
+                            y_start[0] = 552;
+                            break;
+                        case 3:
+                            x_start[0] = 692;
+                            y_start[0] = 512;
+                            break;
+                        case 4:
+                            x_start[0] = 732;
+                            y_start[0] = 552;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    x_end[1] = 72;
+                    y_end[1] = 432;
+
+                    x_end[2] = 132;
+                    y_end[2] = 332;
+
+                    x_end[3] = 592;
+                    y_end[3] = 412;
+
+                    x_end[4] = 592;
+                    y_end[4] = 332;
+
+                    x_end[5] = 412;
+                    y_end[5] = 332;
+
+                    x_end[6] = 312;
+                    y_end[6] = 232;
+
+                    x_end[7] = 92;
+                    y_end[7] = 212;
+
+                    x_end[8] = 412;
+                    y_end[8] = 52;
+
+                    x_end[9] = 592;
+                    y_end[9] = 212;
+
+                    x_end[10] = 612;
+                    y_end[10] = 72;
+
+                    x_end[11] = 792;
+                    y_end[11] = 132;
+
+                    x_end[12] = 732;
+                    y_end[12] = 272;
+
+                    x_end[13] = 912;
+                    y_end[13] = 332;
+
+                    x_end[14] = 612;
+                    y_end[14] = 512;
+
+                    x_end[15] = 72;
+                    y_end[15] = 432;
 
                     ChangeStart[machine] = false;
                     break;
@@ -232,6 +305,20 @@ int A_Star::astar(int machine, int circuit) {
                             break;
                         case 2:
                             if (vector_start[machine] < 8) {
+                                vector_start[machine]++;
+
+                                x_start[vector_start[machine]] = x_end[vector_end[machine]];
+                                y_start[vector_start[machine]] = y_end[vector_end[machine]];
+
+
+                                vector_end[machine]++;
+
+                                done[machine] = false;
+                            }
+                            break;
+
+                        case 3:
+                            if (vector_start[machine] < 15) {
                                 vector_start[machine]++;
 
                                 x_start[vector_start[machine]] = x_end[vector_end[machine]];

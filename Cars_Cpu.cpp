@@ -93,9 +93,24 @@ bool Cars_Cpu::createMachine(RenderWindow &window, Error &error) {
            break;
         case 3:
             for(int i=0; i<5; i++){
-                degreeCPU[i] = -90;
+                degreeCPU[i] = 270;
             }
-            break;
+            x_cpu[0]=572;
+            y_cpu[0]=552;
+
+            x_cpu[1]=612;
+            y_cpu[1]=512;
+
+            x_cpu[2]=652;
+            y_cpu[2]=552;
+
+            x_cpu[3]=692;
+            y_cpu[3]=512;
+
+            x_cpu[4]=732;
+            y_cpu[4]=552;
+
+           break;
        default:break;
             }
 
@@ -162,6 +177,18 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
             if (step[4] == 230)
                 step[4] = 38;
             break;
+        case 3:
+            if (step[0] == 254)
+                step[0] = 32;
+            if (step[1] == 254)
+                step[1] = 34;
+            if (step[2] == 258)
+                step[2] = 36;
+            if (step[3] == 258)
+                step[3] = 36;
+            if (step[4] == 262)
+                step[4] = 38;
+            break;
         default: break;
     }
 
@@ -186,6 +213,7 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
                     if (X_CPU[step[carNumber] + 1][carNumber] > X_CPU[step[carNumber] - 1][carNumber] &&
                         step[carNumber] + 1 < dim_trajectory[carNumber]) {
 
+
                         x_cpu[carNumber] = x_cpu[carNumber] + 2;
 
                         if (degreeCPU[carNumber] < 45)
@@ -206,13 +234,15 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
 
                         if (degreeCPU[carNumber] >= 270 && degreeCPU[carNumber] < 360) {
                             degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
-                        } else if (degreeCPU[carNumber] == 360) {
-                            degreeCPU[carNumber] = 0;
-                        } else if (degreeCPU[carNumber] < 0)
-                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
 
-                        else if (degreeCPU[carNumber] > 0)
+                        } else if (degreeCPU[carNumber] == 360 ) {
+                            degreeCPU[carNumber] = 0;
+                        } else if (degreeCPU[carNumber] < 0) {
+                            degreeCPU[carNumber] = degreeCPU[carNumber] + 5;
+                        } else if (degreeCPU[carNumber] > 0) {
                             degreeCPU[carNumber] = degreeCPU[carNumber] - 5;
+
+                        }
                     }
 
                 }
@@ -287,6 +317,9 @@ void Cars_Cpu::moveCar() {        //gestire bene setCar e move Car che forse fan
                 if (X_CPU[step[carNumber]][carNumber] < X_CPU[step[carNumber] - 1][carNumber] &&
                     Y_CPU[step[carNumber]][carNumber] == Y_CPU[step[carNumber] - 1][carNumber]) {
 
+                    if(degreeCPU[carNumber]==0){
+                        degreeCPU[carNumber] = 360;
+                    }
 
                     x_cpu[carNumber] = x_cpu[carNumber] - 2;
                     step2[carNumber] = false;
@@ -368,27 +401,71 @@ int Cars_Cpu::getPosition(int giri, int &position) {
     if(giri != 3 && giri != 5 && giri != 10){
         giri = 3;
     }
+switch(circuit) {
+    case 1:
+        for (int i = 0; i < 5; i++) {
 
-    for(int i=0; i<5; i++){
+            if (y_cpu[i] >= 410 && x_cpu[i] >= 465 && y_cpu[i] <= 490 && x_cpu[i] <= 470) {
+                intermediate[i] = intermediate[i] + 1;
+                if (intermediate[i] > lap[i]) {
+                    intermediate[i] = lap[i];
+                }
+            }
 
-        if(y_cpu[i] >= 410 && x_cpu[i] >= 465 && y_cpu[i] <= 490 && x_cpu[i] <= 470){
-            intermediate[i] = intermediate[i] + 1;
-            if(intermediate[i] > lap[i]){
-                intermediate[i] = lap[i];
+            if (y_cpu[i] >= 255 && y_cpu[i] <= 269 && x_cpu[i] >= 143 && x_cpu[i] <= 236 && lap[i] == intermediate[i]) {
+                lap[i] = lap[i] + 1;
+                if (lap[i] == giri + 1) {
+                    vector_position[i] = position;
+                    position++;
+
+                }
             }
         }
+        return vector_position[5];
+    case 2:
+        for (int i = 0; i < 5; i++) {
 
-        if(y_cpu[i] >= 255 && y_cpu[i] <= 269 && x_cpu[i] >=143 && x_cpu[i] <= 236 && lap[i] == intermediate[i]) {
-            lap[i] = lap[i] + 1;
-            if (lap[i] == giri + 1) {
-                vector_position[i] = position;
-                position++;
-                cout<<position<<endl;
+            if (y_cpu[i] >= 478 && x_cpu[i] >= 495 && y_cpu[i] <= 543 && x_cpu[i] <= 510) {
+                intermediate[i] = intermediate[i] + 1;
+                if (intermediate[i] > lap[i]) {
+                    intermediate[i] = lap[i];
+                }
+            }
 
+            if (y_cpu[i] >= 23 && y_cpu[i] <= 90 && x_cpu[i] >= 520 && x_cpu[i] <= 535 && lap[i] == intermediate[i]) {
+                lap[i] = lap[i] + 1;
+                if (lap[i] == giri + 1) {
+                    vector_position[i] = position;
+                    position++;
+
+                }
             }
         }
+        return vector_position[5];
+    case 3:
+        for (int i = 0; i < 5; i++) {
+
+            if (y_cpu[i] >= 180 && x_cpu[i] >= 520 && y_cpu[i] <= 268 && x_cpu[i] <= 540) {
+                intermediate[i] = intermediate[i] + 1;
+                if (intermediate[i] > lap[i]) {
+                    intermediate[i] = lap[i];
+                }
+            }
+
+            if (y_cpu[i] >= 484 && y_cpu[i] <= 586 && x_cpu[i] >= 455 && x_cpu[i] <= 470 && lap[i] == intermediate[i]) {
+                lap[i] = lap[i] + 1;
+                if (lap[i] == giri + 1) {
+                    vector_position[i] = position;
+                    position++;
+
+                }
+            }
+        }
+        return vector_position[5];
+    default: break;
+
     }
-    return vector_position[5];
+    return 0;
 }
 
 const int Cars_Cpu::getVector_position(int i) {
