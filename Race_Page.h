@@ -16,6 +16,7 @@
 #include "Song.h"
 #include "Cars_Cpu.h"
 #include "Weather.h"
+#include "Collision.h"
 #include <fstream>
 #include <iostream>
 
@@ -37,11 +38,12 @@ public:
     Weather weath;
     Cars_Cpu cars_cpu;
     Song song;
-    Error error;
     Car car;
+    Error error;
     Race race;
     Traffic_Light traffic_light;
     Circuit circuit;
+    Collision collision;
 
     void draw(RenderWindow &window);
 
@@ -66,6 +68,8 @@ private:
     bool control_setRace=true;
     int meteo, giri;
     bool flag=false;
+    float Cpu_degree[5];
+    int X_CpuCar[5], Y_CpuCar[5];
     int position;
     int position_car, position_cpu[5];
 

@@ -16,6 +16,8 @@ Race_Page::Race_Page(RenderWindow &window, Error &error, int num_circuit, int Ra
     giri=lap;
     chooseCar = colore_macchina;
     position=1;
+    car= Car(collision);
+    cars_cpu=Cars_Cpu(collision);
 }
 
 Race_Page::~Race_Page() = default;
@@ -58,9 +60,11 @@ void Race_Page::draw(RenderWindow &window) {
 
         if (Type_race == 1 || Type_race == 2) {
 
-            car.End_Race(giri, position, 0);
+            car.End_Race(giri, position, circuitrace);
             cars_cpu.getPosition(giri, position);
+
             cars_cpu.moveCar();
+
             cars_cpu.drawCpu(window);
         }
 
@@ -77,8 +81,7 @@ void Race_Page::draw(RenderWindow &window) {
             race.KeyBreak(window, error, song, posx, posy, pageIndex, pageChanged);
             control_setRace = false;
 
-    }
-    else if(Type_race==2 || Type_race == 1) {
+    } else if (Type_race == 2 || Type_race == 1) {
 
         SaveCircuit();
         cars_cpu.setCircuit(circuitrace);
