@@ -14,4 +14,6 @@ int main() {
     Menu_Loop menu_Loop;
     Error error;
     menu_Loop.generateWindow(error);
+
+    cout<<"ciao"<<endl
 };
